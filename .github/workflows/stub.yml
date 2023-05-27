@@ -1,0 +1,11 @@
+name: "Build: Gradle (JVM)"
+
+on:
+  workflow_call: {}
+  workflow_dispatch: {}
+
+jobs:
+    hello:
+        name: "Test: Say Hello"
+        runs-on: ubuntu-latest
+        run: echo "Hello from reusable actions"
