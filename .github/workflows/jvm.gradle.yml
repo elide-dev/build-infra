@@ -16,6 +16,12 @@ on:
         required: false
         type: string
 
+      ## Runner machine to use.
+      runner:
+        description: "Runner"
+        required: false
+        type: string
+
     secrets:
       GDS_TOKEN:
         description: "GDS token"
@@ -35,7 +41,7 @@ jobs:
   ## Build JVM app with Gradle
   build-gradle:
     name: "Build: Gradle"
-    runs-on: ${{ vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
+    runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
       contents: "read"
       id-token: "write"
