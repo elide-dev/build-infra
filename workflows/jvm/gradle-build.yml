@@ -1,0 +1,94 @@
+name: "Build: Gradle (JVM)"
+
+on:
+  workflow_call:
+    inputs:
+      ## Gradle action/target to run.
+      action:
+        description: "Action to run"
+        default: "build"
+        required: true
+        type: string
+
+      ## Gradle build flags to pass.
+      flags:
+        description: "Flags"
+        required: false
+        type: string
+
+    secrets:
+      GITHUB_TOKEN:
+        description: "GitHub token"
+        required: true
+      GDS_TOKEN:
+        description: "GDS token"
+        required: false
+      SONAR_TOKEN:
+        description: "Sonar token"
+        required: false
+
+env:
+  PNPM_VERSION: ${{ vars.PNPM_VERSION || '8.5.1' }}
+  NODE_VERSION: ${{ vars.NODE_VERSION || '20.2.0' }}
+  GVM_VERSION: ${{ vars.GVM_VERSION || '22.3.1' }}
+  JVM_VERSION: ${{ vars.JVM_VERSION || '19' }}
+  JVM_DIST: ${{ vars.JVM_DIST || 'adopt-hotspot' }}
+
+jobs:
+  ## Build JVM app with Gradle
+  build-gradle:
+    name: "Build: Gradle"
+    runs-on: ${{ vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
+    permissions:
+      contents: "read"
+      id-token: "write"
+      checks: "write"
+      pull-requests: "read"
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v3
+      - uses: buildjet/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/jdks
+            ~/.gradle/nodejs
+            ~/.gradle/yarn
+            ~/.gradle/native
+            ~/.gradle/native-build-tools
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle-
+      - name: "Setup: JDK ${{ env.JVM_VERSION }}"
+        uses: buildjet/setup-java@v3
+        with:
+          distribution: ${{ env.JVM_DIST }}
+          java-version: ${{ env.JVM_VERSION }}
+      - name: "Setup: GraalVM EE ${{ env.GVM_VERSION }} (JVM ${{ env.JVM_VERSION }})"
+        uses: graalvm/setup-graalvm@v1
+        with:
+          components: "js"
+          version: ${{ env.GVM_VERSION }}
+          java-version: ${{ env.JVM_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          gds-token: ${{ secrets.GDS_TOKEN }}
+      - name: "Setup: GitHub Credentials"
+        uses: docker/login-action@40891eba8c2bcd1309b07ba8b11232f313e86779
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Build: Gradle"
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2
+        id: gradlebuild
+        env:
+          CI: true
+          TEST_EXCEPTIONS: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          cache-read-only: false
+          arguments: |
+            ${{ inputs.action }}
+            ${{ inputs.flags }}
+            -Pci=true
