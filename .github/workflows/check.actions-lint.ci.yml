@@ -39,6 +39,9 @@ on:
             - "containers/*/*.yaml"
             - "containers/*/*.yml"
 
+env:
+    GO_VERSION: '>=1.19.0'
+
 jobs:
     ## Task: Lint workflows in this respository with Actions Lint
     lint-workflow-actions:
@@ -55,7 +58,7 @@ jobs:
             - name: "Setup: Go"
               uses: actions/setup-go@v4
               with:
-                version: ${{ vars.GO_VERSION || '>=1.19.0' }}
+                go-version: ${{ vars.GO_VERSION || '' }}
             - name: "Setup: Action Linter"
               run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
             - name: "Lint: Actions"

@@ -39,8 +39,6 @@ on:
             - "containers/*/*.yaml"
             - "containers/*/*.yml"
 
-env: {}
-
 jobs:
     ## Task: Lint workflows in this respository with YAMLLint
     lint-workflows-yaml:
