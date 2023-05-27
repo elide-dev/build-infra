@@ -17,9 +17,6 @@ on:
         type: string
 
     secrets:
-      GITHUB_TOKEN:
-        description: "GitHub token"
-        required: true
       GDS_TOKEN:
         description: "GDS token"
         required: false
@@ -84,7 +81,6 @@ jobs:
         env:
           CI: true
           TEST_EXCEPTIONS: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           cache-read-only: false
