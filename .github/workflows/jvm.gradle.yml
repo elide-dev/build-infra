@@ -105,7 +105,7 @@ env:
 jobs:
   ## Build JVM app with Gradle
   build-gradle:
-    name: "Gradle (${{ inputs.action || 'build' }})"
+    name: "Gradle"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
       contents: "read"
