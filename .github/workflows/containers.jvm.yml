@@ -27,10 +27,10 @@ jobs:
     secrets: inherit
     permissions:
       checks: write
-      pull-requests: read
       id-token: write
       contents: read
       packages: write
+      pull-requests: write
     with:
       runner: ubuntu-latest
       image: elide-dev/build-infra/jvm:latest
