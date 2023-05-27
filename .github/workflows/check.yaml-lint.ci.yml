@@ -45,7 +45,7 @@ jobs:
     ## Task: Lint workflows in this respository with YAMLLint
     lint-workflows-yaml:
         name: "Lint: Workflows"
-        runs-on: ubuntu-latest
+        runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
         permissions:
             contents: "read"
             id-token: "write"
