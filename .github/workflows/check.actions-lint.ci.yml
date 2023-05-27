@@ -20,8 +20,8 @@ on:
         paths:
             - ".github/workflows/*.yaml"
             - ".github/workflows/*.yml"
-            - "workflows/*/*.yaml"
-            - "workflows/*/*.yml"
+            - ".github/workflows/pkg/*/*.yaml"
+            - ".github/workflows/pkg/*/*.yml"
             - "actions/*/*.yaml"
             - "actions/*/*.yml"
             - "containers/*/*.yaml"
@@ -32,8 +32,8 @@ on:
         paths:
             - ".github/workflows/*.yaml"
             - ".github/workflows/*.yml"
-            - "workflows/*/*.yaml"
-            - "workflows/*/*.yml"
+            - ".github/workflows/pkg/*/*.yaml"
+            - ".github/workflows/pkg/*/*.yml"
             - "actions/*/*.yaml"
             - "actions/*/*.yml"
             - "containers/*/*.yaml"
