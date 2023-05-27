@@ -26,6 +26,40 @@ For an exhaustive list of build profiles and their use, see the table further do
 In general, Dependabot and Renovate are granted access to this repo, so that update PRs may be filed when internal actions
 and workflows see updates.
 
+## Usage example
+
+In a `.github/workflows/<x>.yml`:
+
+```yaml
+# ...
+
+jobs:
+  ## Build container
+  build-a-container:
+    name: "Image"
+    uses: elide-dev/build-infra/.github/workflows/container.yml@main
+    secrets: inherit
+    permissions:
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      image: elide-dev/build-infra/gvm
+      path: containers/gvm
+      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+```
+
+The above job uses the `container.yml` "build profile" (see all profiles listed below). By using the re-usable workflow, you
+gain consistency:
+
+- Repository authentication is handled for you
+- Intelligent platform selection (with override)
+- Consistent tagging and labeling of images
+- Underlying Github Actions updates happen without repo commits
+
+
 ## Build profiles
 
 | Name             | Description                      |
