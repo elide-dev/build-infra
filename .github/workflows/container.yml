@@ -9,6 +9,12 @@ on:
         required: true
         type: string
 
+      ## Tags to apply to the image. If unspecified, standard tags are applied.
+      tags:
+        description: "Image"
+        required: false
+        type: string
+
       ## Registry to push to, prefix to use.
       registry:
         description: "Registry"
@@ -110,7 +116,7 @@ jobs:
           id: dockerpush
           with:
             push: ${{ inputs.push }}
-            tags: ${{ steps.meta.outputs.tags }}
+            tags: ${{ inputs.tags || steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
             platforms: ${{ inputs.platforms }}
             context: ${{ inputs.path }}
