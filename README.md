@@ -10,7 +10,13 @@ Each workflow profile is defined in this repository as a GitHub Workflow, using 
 with a container image which includes the tools which are used by the workflow. The image typically isn't required (unless
 noted) but may vastly speed up builds by pre-including tools.
 
-For an exhaustive list of build profiles and their use, see the table below.
+For an exhaustive list of build profiles and their use, see the table further down.
+
+- **[Actions](./actions): Custom GitHub Actions** for use in Elide codebases. Actions are used like any other GitHub Action,
+  but with references to this repository instead.
+
+- **[Workflows](./workflows): Custom YAML workflow definitions** for use in Elide codebases. Workflows are used as external
+  `workflow_call` targets.
 
 ### Pushing updates
 
