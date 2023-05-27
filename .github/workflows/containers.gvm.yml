@@ -1,0 +1,38 @@
+name: "Containers: GVM"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - containers/gvm
+      - containers/gvm/*
+      - containers/gvm/**/*
+      - .github/container.yml
+      - .github/workflows/containers.gvm.yml
+
+  pull_request:
+    paths:
+      - containers/gvm
+      - containers/gvm/*
+      - containers/gvm/**/*
+      - .github/container.yml
+      - .github/workflows/containers.gvm.yml
+
+jobs:
+  ## Build GVM Container
+  build-gvm-container:
+    name: "Image"
+    uses: ./.github/workflows/container.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      pull-requests: read
+      id-token: write
+      contents: read
+      packages: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/gvm:latest
+      path: containers/jvm
+      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

@@ -66,11 +66,11 @@ jobs:
     name: "Image Build"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
-        contents: "read"
-        id-token: "write"
-        checks: "write"
-        pull-requests: "write"
-        packages: "write"
+      contents: "read"
+      id-token: "write"
+      checks: "write"
+      pull-requests: "write"
+      packages: "write"
     outputs:
       imageid: ${{ steps.dockerpush.outputs.imageid }}
       digest: ${{ steps.dockerpush.outputs.digest }}

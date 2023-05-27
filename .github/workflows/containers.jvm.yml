@@ -1,0 +1,38 @@
+name: "Containers: JVM"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - containers/jvm
+      - containers/jvm/*
+      - containers/jvm/**/*
+      - .github/container.yml
+      - .github/workflows/containers.jvm.yml
+
+  pull_request:
+    paths:
+      - containers/jvm
+      - containers/jvm/*
+      - containers/jvm/**/*
+      - .github/container.yml
+      - .github/workflows/containers.jvm.yml
+
+jobs:
+  ## Build JVM Container
+  build-jvm-container:
+    name: "Image"
+    uses: ./.github/workflows/container.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      pull-requests: read
+      id-token: write
+      contents: read
+      packages: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/jvm:latest
+      path: containers/jvm
+      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
