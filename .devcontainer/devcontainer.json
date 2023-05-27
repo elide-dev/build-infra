@@ -37,6 +37,6 @@
 			]
 		}
 	},
-	"postCreateCommand": "pnpm i",
-    "updateContentCommand": "pnpm i"
+	"postCreateCommand": "sudo npm install -g pnpm && sudo chown -R vscode /home/node",
+    "updateContentCommand": "pnpm i || exit 0"
 }
