@@ -1,0 +1,9 @@
+actions/*/*.yaml linguist-language=YAML linguist-detectable
+actions/*/*.yml linguist-language=YAML linguist-detectable
+workflows/*/*.yaml linguist-language=YAML linguist-detectable
+workflows/*/*.yml linguist-language=YAML linguist-detectable
+*.ts linguist-language=TypeScript linguist-detectable
+**/*.ts linguist-language=TypeScript linguist-detectable
+commitlint.config.js -linguist-detectable
+*.config.js -linguist-detectable
+docs/* linguist-documentation
