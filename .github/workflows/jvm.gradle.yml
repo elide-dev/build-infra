@@ -55,6 +55,13 @@ on:
         required: false
         type: string
 
+      ## GVM components to install.
+      gvm_components:
+        description: "GVM Components"
+        required: false
+        type: string
+        default: 'native-image,js'
+
       ## Whether to cache locally.
       cache_local:
         description: "Local cache"
@@ -98,7 +105,7 @@ env:
 jobs:
   ## Build JVM app with Gradle
   build-gradle:
-    name: "Build: Gradle"
+    name: "Gradle (${{ inputs.action || 'build' }})"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
       contents: "read"
@@ -126,7 +133,7 @@ jobs:
         uses: graalvm/setup-graalvm@v1
         if: inputs.install_gvm
         with:
-          components: "js"
+          components: ${{ inputs.gvm_components }}
           version: ${{ env.GVM_VERSION }}
           java-version: ${{ env.JVM_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
