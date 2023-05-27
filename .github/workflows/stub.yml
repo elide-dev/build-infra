@@ -8,4 +8,6 @@ jobs:
     hello:
         name: "Test: Say Hello"
         runs-on: ubuntu-latest
-        run: echo "Hello from reusable actions"
+        steps:
+          - name: "Emit Message":
+            run: echo "Hello from reusable actions"
