@@ -1,0 +1,72 @@
+name: "Lint: YAML"
+
+concurrency:
+    group: lint-yaml-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+  
+on:
+    ## Check YAML on merge queue insertion
+    merge_group:
+        types: [checks_requested]
+
+    ## Check on release
+    release:
+        types: [created]
+
+    ## Check on push to `main` if modified
+    push:
+        branches:
+            - main
+        paths:
+            - ".github/workflows/*.yaml"
+            - ".github/workflows/*.yml"
+            - "workflows/*/*.yaml"
+            - "workflows/*/*.yml"
+            - "actions/*/*.yaml"
+            - "actions/*/*.yml"
+            - "containers/*/*.yaml"
+            - "containers/*/*.yml"
+
+    ## Check each PR change against `main`
+    pull_request:
+        paths:
+            - ".github/workflows/*.yaml"
+            - ".github/workflows/*.yml"
+            - "workflows/*/*.yaml"
+            - "workflows/*/*.yml"
+            - "actions/*/*.yaml"
+            - "actions/*/*.yml"
+            - "containers/*/*.yaml"
+            - "containers/*/*.yml"
+
+env: {}
+
+jobs:
+    ## Task: Lint workflows in this respository with YAMLLint
+    lint-workflows-yaml:
+        name: "Lint: Workflows"
+        runs-on: ubuntu-latest
+        permissions:
+            contents: "read"
+            id-token: "write"
+            checks: "write"
+            pull-requests: "read"
+        steps:
+            - name: "Setup: Checkout"
+              uses: actions/checkout@v3
+            - name: "Setup: PNPM"
+              uses: pnpm/action-setup@v2
+              with:
+                version: ${{ env.PNPM_VERSION }}
+            - name: "Setup: Node"
+              uses: buildjet/setup-node@v3
+              with:
+                node-version: ${{ env.NODE_VERSION }}
+                cache: "pnpm"
+
+            - name: "Setup: NPM Credentials"
+              run: |
+                echo "@buf:registry=https://buf.build/gen/npm/v1" >> ~/.npmrc;
+                echo "//npm.buf.build/:_authToken=${{ secrets.BUF_NPM_TOKEN }}" >> ~/.npmrc;
+            - name: "Setup: Install Packages"
+              run: pnpm install --frozen-lockfile
