@@ -1,0 +1,132 @@
+name: "Container"
+
+on:
+  workflow_call:
+    inputs:
+      ## Coordinates for the image.
+      image:
+        description: "Image"
+        required: true
+        type: string
+
+      ## Registry to push to, prefix to use.
+      registry:
+        description: "Registry"
+        required: false
+        default: "ghcr.io"
+        type: string
+
+      ## Whether to push the image to GHCR.
+      push:
+        description: "Push image"
+        default: false
+        required: false
+        type: boolean
+
+      ## Context path for the container build.
+      path:
+        description: "Context path"
+        default: "."
+        required: false
+        type: string
+
+      ## Dockerfile to build.
+      dockerfile:
+        description: "Dockerfile"
+        default: "Dockerfile"
+        required: false
+        type: string
+
+      ## Platforms to build for.
+      platforms:
+        description: "Platforms"
+        default: "linux/amd64,linux/arm64"
+        required: false
+        type: string
+
+      ## Runner machine to use.
+      runner:
+        description: "Runner"
+        required: false
+        type: string
+
+      ## Whether to authenticate.
+      auth:
+        description: "Authenticate"
+        required: false
+        default: true
+        type: boolean
+
+env:
+    CONTAINER_REGISTRY: ghcr.io
+
+jobs:
+  ## Build a container image.
+  build-container:
+    name: "Image Build"
+    runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
+    permissions:
+        contents: "read"
+        id-token: "write"
+        checks: "write"
+        pull-requests: "write"
+        packages: "write"
+    outputs:
+      imageid: ${{ steps.dockerpush.outputs.imageid }}
+      digest: ${{ steps.dockerpush.outputs.digest }}
+    steps:
+        - name: "Setup: Checkout"
+          uses: actions/checkout@v3
+        - name: "Setup: QEMU"
+          uses: docker/setup-qemu-action@v2
+          with:
+            platforms: "amd64,arm64,arm"
+        - name: "Setup: Docker"
+          uses: docker/setup-buildx-action@v2
+          id: buildx
+          with:
+            install: true
+        - name: "Setup: GitHub Credentials"
+          uses: docker/login-action@40891eba8c2bcd1309b07ba8b11232f313e86779
+          if: inputs.auth
+          with:
+            registry: ${{ inputs.registry }}
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+        - name: "Setup: Image Metadata"
+          id: meta
+          uses: docker/metadata-action@v4
+          with:
+            images: ${{ inputs.registry }}/${{ inputs.image }}
+            labels: |
+              org.opencontainers.image.vendor=Elide
+            tags: |
+              type=raw,value=latest,enable={{is_default_branch}}
+              type=ref,event=branch
+              type=ref,event=tag
+              type=ref,event=pr
+        - name: "Build: Container"
+          uses: docker/build-push-action@v4
+          id: dockerpush
+          with:
+            push: ${{ inputs.push }}
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+            platforms: ${{ inputs.platforms }}
+            context: ${{ inputs.path }}
+            file: ${{ inputs.dockerfile }}
+            sbom: true
+        - name: "Artifacts: Outputs"
+          if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
+          run: |
+            echo "${{ steps.dockerpush.outputs.imageid }}" > ./image_id
+            echo "${{ steps.dockerpush.outputs.digest }}" > ./digest
+        - name: "Artifacts: Release"
+          uses: actions/upload-artifact@v3
+          if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
+          with:
+            name: release-artifacts
+            path: |
+              ./image_id
+              ./digest
+  
