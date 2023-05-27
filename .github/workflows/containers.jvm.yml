@@ -8,7 +8,7 @@ on:
       - containers/jvm
       - containers/jvm/*
       - containers/jvm/**/*
-      - .github/container.yml
+      - .github/workflows/container.yml
       - .github/workflows/containers.jvm.yml
 
   pull_request:
@@ -16,7 +16,7 @@ on:
       - containers/jvm
       - containers/jvm/*
       - containers/jvm/**/*
-      - .github/container.yml
+      - .github/workflows/container.yml
       - .github/workflows/containers.jvm.yml
 
 jobs:

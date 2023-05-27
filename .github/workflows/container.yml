@@ -39,7 +39,6 @@ on:
       ## Dockerfile to build.
       dockerfile:
         description: "Dockerfile"
-        default: "Dockerfile"
         required: false
         type: string
 
