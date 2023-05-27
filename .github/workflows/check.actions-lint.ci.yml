@@ -45,7 +45,7 @@ env:
 jobs:
     ## Task: Lint workflows in this respository with Actions Lint
     lint-workflow-actions:
-        name: "Lint: Workflows"
+        name: "Workflows"
         runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
         permissions:
             contents: "read"

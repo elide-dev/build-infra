@@ -42,7 +42,7 @@ on:
 jobs:
     ## Task: Lint workflows in this respository with YAMLLint
     lint-workflows-yaml:
-        name: "Lint: Workflows"
+        name: "Workflows"
         runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
         permissions:
             contents: "read"
