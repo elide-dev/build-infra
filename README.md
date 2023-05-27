@@ -12,6 +12,9 @@ noted) but may vastly speed up builds by pre-including tools.
 
 For an exhaustive list of build profiles and their use, see the table further down.
 
+- **[Containers](./containers): Container image definitions** which are used by **actions** and **workflows**; some of
+  these can also be used directly in downstream workflows.
+
 - **[Actions](./actions): Custom GitHub Actions** for use in Elide codebases. Actions are used like any other GitHub Action,
   but with references to this repository instead.
 
