@@ -22,6 +22,39 @@ on:
         required: false
         type: string
 
+      ## Whether to install a regular JDK.
+      install_jvm:
+        description: "Install OpenJDK"
+        required: false
+        type: boolean
+        default: true
+
+      ## JVM version to use.
+      jvm:
+        description: "JVM Version"
+        required: false
+        type: string
+
+      ## JVM distribution.
+      jvm_dist:
+        description: "JVM Variant"
+        required: false
+        type: string
+        default: 'adopt-hotspot'
+
+      ## Whether to install GraalVM.
+      install_gvm:
+        description: "Install GraalVM"
+        required: false
+        type: boolean
+        default: false
+
+      ## GVM version to use.
+      gvm:
+        description: "GVM Version"
+        required: false
+        type: string
+
     secrets:
       GDS_TOKEN:
         description: "GDS token"
@@ -31,11 +64,9 @@ on:
         required: false
 
 env:
-  PNPM_VERSION: ${{ vars.PNPM_VERSION || '8.5.1' }}
-  NODE_VERSION: ${{ vars.NODE_VERSION || '20.2.0' }}
-  GVM_VERSION: ${{ vars.GVM_VERSION || '22.3.1' }}
-  JVM_VERSION: ${{ vars.JVM_VERSION || '19' }}
-  JVM_DIST: ${{ vars.JVM_DIST || 'adopt-hotspot' }}
+  GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
+  JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '20' }}
+  JVM_DIST: ${{ inputs.jvm_dist || vars.JVM_DIST || 'adopt-hotspot' }}
 
 jobs:
   ## Build JVM app with Gradle
@@ -64,23 +95,19 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: "Setup: JDK ${{ env.JVM_VERSION }}"
         uses: buildjet/setup-java@v3
+        if: inputs.install_jvm
         with:
           distribution: ${{ env.JVM_DIST }}
           java-version: ${{ env.JVM_VERSION }}
       - name: "Setup: GraalVM EE ${{ env.GVM_VERSION }} (JVM ${{ env.JVM_VERSION }})"
         uses: graalvm/setup-graalvm@v1
+        if: inputs.install_gvm
         with:
           components: "js"
           version: ${{ env.GVM_VERSION }}
           java-version: ${{ env.JVM_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           gds-token: ${{ secrets.GDS_TOKEN }}
-      - name: "Setup: GitHub Credentials"
-        uses: docker/login-action@40891eba8c2bcd1309b07ba8b11232f313e86779
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: "Build: Gradle"
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2
         id: gradlebuild
