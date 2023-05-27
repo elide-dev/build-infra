@@ -10,4 +10,7 @@ structure in the [main README](../).
 
 ### Containers provided by this repository
 
-Coming soon; none are defined yet.
+- **[`gvm`](./gvm)**: GraalVM latest, running JDK 19. Pre-installed `js` and `native-image`
+  components.
+
+- **[`jvm`](./jvm)**: HotSpot JVM latest, running JDK 19.

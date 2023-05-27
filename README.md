@@ -28,7 +28,10 @@ and workflows see updates.
 
 ## Build profiles
 
-Coming soon.
+| Name             | Description                      |
+| ---------------- | -------------------------------- |
+| `container.yml`  | Build and push a container image |
+| `jvm.gradle.yml` | Run a Gradle build targeting JVM |
 
 ## Contributing
 
