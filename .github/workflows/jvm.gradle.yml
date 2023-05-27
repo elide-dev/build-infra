@@ -55,6 +55,27 @@ on:
         required: false
         type: string
 
+      ## Whether to cache locally.
+      cache_local:
+        description: "Local cache"
+        required: false
+        type: boolean
+        default: false
+
+      ## Whether to cache remotely.
+      cache_remote:
+        description: "Remote cache"
+        required: false
+        type: boolean
+        default: true
+
+      ## Whether to cache using Actions.
+      cache_action:
+        description: "Action cache"
+        required: false
+        type: boolean
+        default: true
+
     secrets:
       GDS_TOKEN:
         description: "GDS token"
@@ -62,11 +83,17 @@ on:
       SONAR_TOKEN:
         description: "Sonar token"
         required: false
+      BUILDLESS_APIKEY:
+        description: "Buildless API key"
+        required: false
 
 env:
   GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
   JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '20' }}
   JVM_DIST: ${{ inputs.jvm_dist || vars.JVM_DIST || 'adopt-hotspot' }}
+  GRADLE_CACHE_LOCAL: ${{ inputs.cache_local }}
+  GRADLE_CACHE_REMOTE: ${{ inputs.cache_remote }}
+  BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
 
 jobs:
   ## Build JVM app with Gradle
@@ -83,17 +110,12 @@ jobs:
         uses: actions/checkout@v3
       - name: "Setup: Cache"
         uses: buildjet/cache@v3
+        if: inputs.cache_action
         with:
           path: |
-            ~/.gradle/caches
-            ~/.gradle/jdks
-            ~/.gradle/nodejs
-            ~/.gradle/yarn
-            ~/.gradle/native
-            ~/.gradle/native-build-tools
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle-
+            ./build
+          key: ${{ runner.os }}-gradlebuild-${{ hashFiles('**/*.versions.toml', 'settings.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradlebuild-
       - name: "Setup: JDK ${{ env.JVM_VERSION }}"
         uses: actions/setup-java@v3
         if: inputs.install_jvm
