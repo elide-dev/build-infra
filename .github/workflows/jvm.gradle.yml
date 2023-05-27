@@ -83,6 +83,27 @@ on:
         type: boolean
         default: true
 
+      ## Whether to apply read-only mode to the cache.
+      cache_read_only:
+        description: "Read-only cache"
+        required: false
+        type: boolean
+        default: false
+
+      ## Whether to upload built artifacts.
+      artifacts:
+        description: "Artifacts"
+        required: false
+        type: boolean
+        default: false
+
+      ## Whether to upload built reports.
+      reports:
+        description: "Reports"
+        required: false
+        type: boolean
+        default: true
+
     secrets:
       GDS_TOKEN:
         description: "GDS token"
@@ -146,7 +167,7 @@ jobs:
           TEST_EXCEPTIONS: true
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          cache-read-only: false
+          cache-read-only: ${{ inputs.cache_read_only || false }}
           arguments: |
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
