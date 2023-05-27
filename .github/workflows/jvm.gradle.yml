@@ -99,7 +99,7 @@ jobs:
         with:
           distribution: ${{ env.JVM_DIST }}
           java-version: ${{ env.JVM_VERSION }}
-      - name: "Setup: GraalVM EE ${{ env.GVM_VERSION }} (JVM ${{ env.JVM_VERSION }})"
+      - name: "Setup: GraalVM"
         uses: graalvm/setup-graalvm@v1
         if: inputs.install_gvm
         with:
