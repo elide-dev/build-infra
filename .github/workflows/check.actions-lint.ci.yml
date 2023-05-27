@@ -1,0 +1,62 @@
+name: "Lint: Actions"
+
+concurrency:
+    group: lint-actions-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+  
+on:
+    ## Check actions on merge queue insertion
+    merge_group:
+        types: [checks_requested]
+
+    ## Check on release
+    release:
+        types: [created]
+
+    ## Check on push to `main` if modified
+    push:
+        branches:
+            - main
+        paths:
+            - ".github/workflows/*.yaml"
+            - ".github/workflows/*.yml"
+            - "workflows/*/*.yaml"
+            - "workflows/*/*.yml"
+            - "actions/*/*.yaml"
+            - "actions/*/*.yml"
+            - "containers/*/*.yaml"
+            - "containers/*/*.yml"
+
+    ## Check each PR change against `main`
+    pull_request:
+        paths:
+            - ".github/workflows/*.yaml"
+            - ".github/workflows/*.yml"
+            - "workflows/*/*.yaml"
+            - "workflows/*/*.yml"
+            - "actions/*/*.yaml"
+            - "actions/*/*.yml"
+            - "containers/*/*.yaml"
+            - "containers/*/*.yml"
+
+jobs:
+    ## Task: Lint workflows in this respository with Actions Lint
+    lint-workflow-actions:
+        name: "Lint: Workflows"
+        runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
+        permissions:
+            contents: "read"
+            id-token: "write"
+            checks: "write"
+            pull-requests: "read"
+        steps:
+            - name: "Setup: Checkout"
+              uses: actions/checkout@v3
+            - name: "Setup: Go"
+              uses: actions/setup-go@v4
+              with:
+                version: ${{ vars.GO_VERSION || '>=1.19.0' }}
+            - name: "Setup: Action Linter"
+              run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
+            - name: "Lint: Actions"
+              run: actionlint
