@@ -1,0 +1,38 @@
+name: "Containers: Builder"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - containers/builder
+      - containers/builder/*
+      - containers/builder/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.builder.yml
+
+  pull_request:
+    paths:
+      - containers/builder
+      - containers/builder/*
+      - containers/builder/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.builder.yml
+
+jobs:
+  ## Build Builder Container
+  build-builder-container:
+    name: "Image"
+    uses: ./.github/workflows/container.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/builder
+      path: containers/builder
+      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
