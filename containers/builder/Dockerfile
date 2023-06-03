@@ -12,6 +12,8 @@ RUN apt-get update \
         redis-tools \
         golang \
     && curl -sL "https://deb.nodesource.com/setup_$NODE_VERSION.x" | bash - \
+    && go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest && \
+      ln -s $(go env GOPATH)/bin/protoc-gen-openapi /usr/local/bin/protoc-gen-openapi \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs \
     && npm install -g \
         "yarn@$YARN_VERSION" \
