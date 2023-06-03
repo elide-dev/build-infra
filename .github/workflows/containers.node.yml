@@ -1,0 +1,38 @@
+name: "Containers: Node"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - containers/node
+      - containers/node/*
+      - containers/node/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.node.yml
+
+  pull_request:
+    paths:
+      - containers/node
+      - containers/node/*
+      - containers/node/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.node.yml
+
+jobs:
+  ## Build Node Container
+  build-node-container:
+    name: "Image"
+    uses: ./.github/workflows/container.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/node
+      path: containers/node
+      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
