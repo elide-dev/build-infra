@@ -1,5 +1,7 @@
 FROM node:20
 
+ARG YARN_VERSION=berry
+
 RUN npm install -g \
-    "yarn@$YARN_VERSION" \
+    npm@9.6.7 \
     pnpm
