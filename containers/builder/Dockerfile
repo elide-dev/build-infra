@@ -1,4 +1,4 @@
-FROM ghcr.io/elide-dev/runtime/gvm19:latest
+FROM ghcr.io/elide-dev/build-infra/gvm:latest
 
 ARG NODE_VERSION=20
 ARG YARN_VERSION="berry"
