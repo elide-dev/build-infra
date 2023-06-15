@@ -1,0 +1,170 @@
+name: "Build: Maven (JVM)"
+
+on:
+  workflow_call:
+    inputs:
+      ## Maven goal to run.
+      action:
+        description: "Action to run"
+        default: "package"
+        required: false
+        type: string
+
+      ## Maven flags to pass.
+      flags:
+        description: "Flags"
+        required: false
+        type: string
+
+      ## Runner machine to use.
+      runner:
+        description: "Runner"
+        required: false
+        type: string
+
+      ## Whether to install a regular JDK.
+      install_jvm:
+        description: "Install OpenJDK"
+        required: false
+        type: boolean
+        default: true
+
+      ## JVM version to use.
+      jvm:
+        description: "JVM Version"
+        required: false
+        type: string
+
+      ## JVM distribution.
+      jvm_dist:
+        description: "JVM Variant"
+        required: false
+        type: string
+        default: 'adopt-hotspot'
+
+      ## Whether to install GraalVM.
+      install_gvm:
+        description: "Install GraalVM"
+        required: false
+        type: boolean
+        default: false
+
+      ## GVM version to use.
+      gvm:
+        description: "GVM Version"
+        required: false
+        type: string
+
+      ## GVM components to install.
+      gvm_components:
+        description: "GVM Components"
+        required: false
+        type: string
+        default: 'native-image,js'
+
+      ## Whether to cache locally.
+      cache_local:
+        description: "Local cache"
+        required: false
+        type: boolean
+        default: false
+
+      ## Whether to cache remotely.
+      cache_remote:
+        description: "Remote cache"
+        required: false
+        type: boolean
+        default: true
+
+      ## Whether to cache using Actions.
+      cache_action:
+        description: "Action cache"
+        required: false
+        type: boolean
+        default: true
+
+      ## Whether to apply read-only mode to the cache.
+      cache_read_only:
+        description: "Read-only cache"
+        required: false
+        type: boolean
+        default: false
+
+      ## Whether to upload built artifacts.
+      artifacts:
+        description: "Artifacts"
+        required: false
+        type: boolean
+        default: false
+
+      ## Whether to upload built reports.
+      reports:
+        description: "Reports"
+        required: false
+        type: boolean
+        default: true
+
+    secrets:
+      GDS_TOKEN:
+        description: "GDS token"
+        required: false
+      SONAR_TOKEN:
+        description: "Sonar token"
+        required: false
+      BUILDLESS_APIKEY:
+        description: "Buildless API key"
+        required: false
+
+env:
+  GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
+  JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '20' }}
+  JVM_DIST: ${{ inputs.jvm_dist || vars.JVM_DIST || 'adopt-hotspot' }}
+  MAVEN_CACHE_LOCAL: ${{ inputs.cache_local }}
+  MAVEN_CACHE_REMOTE: ${{ inputs.cache_remote }}
+  BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
+  CACHE_ENDPOINT: https://global.less.build/cache/generic/
+
+jobs:
+  ## Build JVM app with Maven
+  build-maven:
+    name: "Maven"
+    runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
+    permissions:
+      contents: "read"
+      id-token: "write"
+      checks: "write"
+      pull-requests: "read"
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v3
+      - name: "Setup: Cache"
+        uses: buildjet/cache@v3
+        if: inputs.cache_action
+        with:
+          path: |
+            ./target
+          key: ${{ runner.os }}-mavenbuild-${{ hashFiles('**/*.pom.xml') }}
+          restore-keys: ${{ runner.os }}-gradlebuild-
+      - name: "Setup: JDK ${{ env.JVM_VERSION }}"
+        uses: actions/setup-java@v3
+        if: inputs.install_jvm
+        with:
+          distribution: ${{ env.JVM_DIST }}
+          java-version: ${{ env.JVM_VERSION }}
+      - name: "Setup: GraalVM"
+        uses: graalvm/setup-graalvm@v1
+        if: inputs.install_gvm
+        with:
+          components: ${{ inputs.gvm_components }}
+          version: ${{ env.GVM_VERSION }}
+          java-version: ${{ env.JVM_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          gds-token: ${{ secrets.GDS_TOKEN }}
+      - name: "Build: Maven"
+        id: mavenbuild
+        env:
+          CI: true
+          TEST_EXCEPTIONS: true
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn ${{ inputs.goal }} ${{ inputs.flags }}
