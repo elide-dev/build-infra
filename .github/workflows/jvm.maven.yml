@@ -117,7 +117,7 @@ on:
 
 env:
   GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
-  JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '20' }}
+  JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '19' }}
   JVM_DIST: ${{ inputs.jvm_dist || vars.JVM_DIST || 'adopt-hotspot' }}
   MAVEN_CACHE_LOCAL: ${{ inputs.cache_local }}
   MAVEN_CACHE_REMOTE: ${{ inputs.cache_remote }}
