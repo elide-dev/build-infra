@@ -122,6 +122,7 @@ env:
   GRADLE_CACHE_LOCAL: ${{ inputs.cache_local }}
   GRADLE_CACHE_REMOTE: ${{ inputs.cache_remote }}
   BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
+  GRADLE_CACHE_PASSWORD: ${{ secrets.BUILDLESS_APIKEY }}
   CACHE_ENDPOINT: https://global.less.build/cache/generic/
 
 jobs:
