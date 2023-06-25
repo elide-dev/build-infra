@@ -55,6 +55,24 @@ on:
         required: false
         type: string
 
+      ## Whether to report coverage.
+      coverage:
+        description: "Report coverage"
+        required: false
+        type: boolean
+
+      ## Where to find the coverage report.
+      coverage_report:
+        description: "Coverage report file"
+        required: false
+        type: string
+
+      ## Tags/flags for coverage report.
+      coverage_flags:
+        description: "Coverage flags"
+        required: false
+        type: string
+
       ## GVM components to install.
       gvm_components:
         description: "GVM Components"
@@ -114,6 +132,9 @@ on:
       BUILDLESS_APIKEY:
         description: "Buildless API key"
         required: true
+      CODECOV_TOKEN:
+        description: "CodeCov token"
+        required: false
 
 env:
   GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
@@ -174,3 +195,10 @@ jobs:
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
             -Pci=true
+      - name: "Report: Codecov (Server)"
+        uses: codecov/codecov-action@v3
+        if: inputs.coverage
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ inputs.coverage_report }}
+          flags: ${{ inputs.coverage_flags }}
