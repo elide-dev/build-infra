@@ -110,10 +110,10 @@ on:
         required: false
       SONAR_TOKEN:
         description: "Sonar token"
-        required: false
+        required: true
       BUILDLESS_APIKEY:
         description: "Buildless API key"
-        required: false
+        required: true
 
 env:
   GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
