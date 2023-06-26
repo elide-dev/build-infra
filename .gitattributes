@@ -1,5 +1,5 @@
-actions/*/*.yaml linguist-language=YAML linguist-detectable
-actions/*/*.yml linguist-language=YAML linguist-detectable
+*.yaml linguist-language=YAML linguist-detectable
+*.yml linguist-language=YAML linguist-detectable
 .github/workflows/*.yaml linguist-language=YAML linguist-detectable
 .github/workflows/*.yml linguist-language=YAML linguist-detectable
 *.ts linguist-language=TypeScript linguist-detectable
