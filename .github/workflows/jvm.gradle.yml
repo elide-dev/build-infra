@@ -58,7 +58,7 @@ on:
       ## Whether to report coverage.
       coverage:
         description: "Report coverage"
-        required: false
+        required: true
         type: boolean
 
       ## Where to find the coverage report.
@@ -195,7 +195,7 @@ jobs:
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
             -Pci=true
-      - name: "Report: Codecov (Server)"
+      - name: "Report: Codecov"
         uses: codecov/codecov-action@v3
         if: inputs.coverage
         with:
