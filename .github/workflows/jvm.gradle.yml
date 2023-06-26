@@ -58,7 +58,8 @@ on:
       ## Whether to report coverage.
       coverage:
         description: "Report coverage"
-        required: true
+        required: false
+        default: false
         type: boolean
 
       ## Where to find the coverage report.
