@@ -22,6 +22,12 @@ on:
         required: false
         type: string
 
+      ## Build step label to use.
+      label:
+        description: "Gradle"
+        required: false
+        type: string
+
       ## Whether to install a regular JDK.
       install_jvm:
         description: "Install OpenJDK"
@@ -150,7 +156,7 @@ env:
 jobs:
   ## Build JVM app with Gradle
   build-gradle:
-    name: "Gradle"
+    name: ${{ inputs.label || "Gradle" }}
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
       contents: "read"
