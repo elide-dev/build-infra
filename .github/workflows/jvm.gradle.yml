@@ -24,7 +24,8 @@ on:
 
       ## Build step label to use.
       label:
-        description: "Gradle"
+        description: "Label"
+        default: "Gradle"
         required: false
         type: string
 
@@ -156,7 +157,7 @@ env:
 jobs:
   ## Build JVM app with Gradle
   build-gradle:
-    name: ${{ inputs.label || "Gradle" }}
+    name: ${{ inputs.label }}
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
       contents: "read"
