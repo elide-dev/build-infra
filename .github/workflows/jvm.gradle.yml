@@ -185,7 +185,7 @@ env:
 jobs:
   ## Build JVM app with Gradle
   build:
-    name: ${{ inputs.label }}
+    name: "${{ inputs.label }}: Build"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     outputs:
       hashes: ${{ steps.hash.outputs.hashes }}
@@ -236,7 +236,7 @@ jobs:
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
             -Pci=true
-      - name: "Build: Provenance"
+      - name: "Build: Provenance Subject"
         id: hash
         run: |
           echo "hashes=$(sha256sum ./build/libs/* | base64 -w0)" >> "$GITHUB_OUTPUT"
@@ -258,6 +258,7 @@ jobs:
 
   ## Report: Provenance
   provenance:
+    name: "${{ inputs.label }}: Provenance"
     needs: [build]
     if: inputs.provenance
     permissions:
