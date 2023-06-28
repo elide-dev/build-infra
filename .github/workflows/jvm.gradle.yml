@@ -137,6 +137,13 @@ on:
         type: boolean
         default: false
 
+      ## Whether to perform release/publish steps.
+      publish:
+        description: "Publish"
+        required: false
+        type: boolean
+        default: false
+
       ## Whether to upload built reports.
       reports:
         description: "Reports"
@@ -170,7 +177,7 @@ env:
 
 jobs:
   ## Build JVM app with Gradle
-  build-gradle:
+  build:
     name: ${{ inputs.label }}
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     outputs:
@@ -241,7 +248,8 @@ jobs:
 
   ## Report: Provenance
   provenance:
-    needs: [build-gradle]
+    needs: [build]
+    if: inputs.provenance
     permissions:
       actions: read
       id-token: write
@@ -249,4 +257,4 @@ jobs:
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.7.0
     with:
       base64-subjects: "${{ needs.build.outputs.hashes }}"
-      upload-assets: ${{ inputs.provenance }}
+      upload-assets: ${{ inputs.publish }}
