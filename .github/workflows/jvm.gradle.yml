@@ -258,7 +258,7 @@ jobs:
 
   ## Report: Provenance
   provenance:
-    name: "${{ inputs.label }}: Provenance"
+    name: Provenance
     needs: [build]
     if: inputs.provenance
     permissions:
