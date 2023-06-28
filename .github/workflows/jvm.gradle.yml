@@ -137,6 +137,13 @@ on:
         type: boolean
         default: false
 
+      ## Whether to run checks.
+      checks:
+        description: "Checks"
+        required: false
+        type: boolean
+        default: true
+
       ## Whether to perform release/publish steps.
       publish:
         description: "Publish"
@@ -213,6 +220,9 @@ jobs:
           java-version: ${{ env.JVM_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           gds-token: ${{ secrets.GDS_TOKEN }}
+      - name: "Check: Gradle Wrapper"
+        uses: gradle/wrapper-validation-action@v1
+        if: inputs.checks
       - name: "Build: Gradle"
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2
         id: gradlebuild
