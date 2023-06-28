@@ -123,6 +123,20 @@ on:
         type: boolean
         default: false
 
+      ## Name of the output artifact.
+      artifact:
+        description: "Artifact"
+        required: false
+        type: string
+        default: "gradle-build-output"
+
+      ## Whether to upload a provenance release.
+      provenance:
+        description: "Provenance"
+        required: false
+        type: boolean
+        default: false
+
       ## Whether to upload built reports.
       reports:
         description: "Reports"
@@ -159,6 +173,8 @@ jobs:
   build-gradle:
     name: ${{ inputs.label }}
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
+    outputs:
+      hashes: ${{ steps.hash.outputs.hashes }}
     permissions:
       contents: "read"
       id-token: "write"
@@ -203,6 +219,10 @@ jobs:
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
             -Pci=true
+      - name: "Build: Provenance"
+        id: hash
+        run: |
+          echo "hashes=$(sha256sum ./build/libs/* | base64 -w0)" >> "$GITHUB_OUTPUT"
       - name: "Report: Codecov"
         uses: codecov/codecov-action@v3
         if: inputs.coverage
@@ -210,3 +230,23 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ inputs.coverage_report }}
           flags: ${{ inputs.coverage_flags }}
+      - name: "Publish: Build Artifacts"
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # tag=v3
+        if: inputs.artifacts
+        with:
+          name: ${{ inputs.artifact }}
+          path: |
+            ./build/libs/
+            ./build/reports/
+
+  ## Report: Provenance
+  provenance:
+    needs: [build-gradle]
+    permissions:
+      actions: read
+      id-token: write
+      contents: write
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.7.0
+    with:
+      base64-subjects: "${{ needs.build.outputs.hashes }}"
+      upload-assets: ${{ inputs.provenance }}
