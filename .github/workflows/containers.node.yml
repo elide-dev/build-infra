@@ -1,6 +1,8 @@
 name: "Containers: Node"
 
 on:
+  merge_group: {}
+
   push:
     branches:
       - main
