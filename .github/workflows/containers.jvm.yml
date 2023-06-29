@@ -1,6 +1,8 @@
 name: "Containers: JVM"
 
 on:
+  merge_group: {}
+
   push:
     branches:
       - main
