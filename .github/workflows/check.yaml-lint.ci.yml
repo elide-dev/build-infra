@@ -6,8 +6,7 @@ concurrency:
   
 on:
     ## Check YAML on merge queue insertion
-    merge_group:
-        types: [checks_requested]
+    merge_group: {}
 
     ## Check on release
     release:
