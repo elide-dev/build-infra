@@ -1,6 +1,8 @@
 name: "Containers: GVM"
 
 on:
+  merge_group: {}
+
   push:
     branches:
       - main
