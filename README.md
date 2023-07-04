@@ -1,8 +1,8 @@
 # elide ci infra
 
-This repository hosts CI configurations which can be re-used across private repositories under the Elide Cloud umbrella.
-Build configurations expressed in this repository are typically used for repeated/templated repositories, such as code
-samples, plugins, and other structures which are consistent across codebases.
+This repository hosts CI configurations which can be re-used across repositories under the Elide Cloud umbrella. It isn't necessarily meant for external use, but it's open source and you are free to use these workflows in your own repos (no backward compatibility guarantee is provided at this time).
+
+Build configurations expressed in this repository are typically used for repeated/templated repositories, such as code samples, plugins, and other structures which are consistent across codebases.
 
 ### Structure
 
@@ -60,12 +60,71 @@ gain consistency:
 - Underlying Github Actions updates happen without repo commits
 
 
-## Build profiles
+# Build profiles
 
 | Name             | Description                      |
 | ---------------- | -------------------------------- |
 | `container.yml`  | Build and push a container image |
 | `jvm.gradle.yml` | Run a Gradle build targeting JVM |
+
+See below for documentation about reusable workflow inputs.
+
+## Workflow inputs
+
+See below for an exhaustive list of all inputs for each build profile. You can use these inputs in the `with: {}` block of your workflow invocation.
+
+### Containers
+
+- **Description:** Consistently build properly tagged container images in sync with source control
+- **Workflow:** `.github/workflows/container.yml`
+
+#### Inputs
+
+| Name             | Type      | Description                      | Default value               |
+| ---------------- | --------- | -------------------------------- | --------------------------- |
+| `image`*         | `string`  | Image coordinate to build        | _(None. Required.)_         |
+| `auth`           | `boolean` | Whether to authenticate          | `true`                      |
+| `dockerfile`     | `string`  | Full path to Dockerfile to build | `"Dockerfile"`              |
+| `path`           | `string`  | Docker context path for build    | `"."`                       |
+| `platforms`      | `string`  | Architectures/platforms to build | `"linux/amd64,linux/arm64"` |
+| `push`           | `boolean` | Whether to push after building   | `false`                     |
+| `registry`       | `string`  | Whether to push after building   | `"ghcr.io"`                 |
+| `runner`         | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+| `tags`           | `string`  | Tags to push to with built image | _(None.)_                   |
+
+### JVM: Gradle
+
+- **Description:** Consistently build JVM outputs using Gradle
+- **Workflow:** `.github/workflows/jvm.gradle.yml`
+
+#### Inputs
+
+| Name              | Type      | Description                      | Default value               |
+| ----------------- | --------- | -------------------------------- | --------------------------- |
+| `action`          | `string`  | Gradle task(s) to execute        | `"build"`                   |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
+| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                     |
+| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                     |
+| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                      |
+| `checks`          | `boolean` | Run checks and Sonar             | `true`                      |
+| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                     |
+| `coverage_report` | `string`  | Path to coverage report          | _(None.)_                   |
+| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_                   |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
+| `gradle`          | `string`  | Gradle version to install & use  | `"wrapper"`                 |
+| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_     |
+| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`         |
+| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                     |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
+| `label`           | `string`  | Label to show for build step     | `"Gradle"`                  |
+| `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                     |
+| `publish`         | `boolean` | Perform a publish after build    | `false`                     |
+| `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
 
 ## Contributing
 
