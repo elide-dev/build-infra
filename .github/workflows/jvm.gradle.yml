@@ -158,6 +158,13 @@ on:
         type: boolean
         default: true
 
+      ## Gradle version to use (defaults to wrapper version)
+      gradle:
+        description: "Gradle version"
+        required: false
+        type: string
+        default: 'wrapper'
+
     secrets:
       GDS_TOKEN:
         description: "GDS token"
@@ -231,6 +238,7 @@ jobs:
           TEST_EXCEPTIONS: true
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
+          gradle-version: ${{ inputs.gradle || 'wrapper' }}
           cache-read-only: ${{ inputs.cache_read_only || false }}
           arguments: |
             ${{ inputs.action || 'build' }}
