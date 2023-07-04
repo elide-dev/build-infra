@@ -2,12 +2,12 @@
     "name": "@elide-dev/infra-ci",
     "version": "1.0.0",
     "private": true,
-    "packageManager": "pnpm@8.6.5",
+    "packageManager": "pnpm@8.6.6",
     "readme": "README.md",
     "homepage": "https://less.build",
     "author": "Elide Ventures, LLC",
     "engines": {
-      "pnpm": "8.6.5"
+      "pnpm": "8.6.6"
     },
     "repository": {
       "type": "git",
