@@ -197,7 +197,7 @@ jobs:
     outputs:
       hashes: ${{ steps.hash.outputs.hashes }}
     permissions:
-      contents: "read"
+      contents: "write"
       id-token: "write"
       checks: "write"
       pull-requests: "read"
@@ -240,6 +240,7 @@ jobs:
         with:
           gradle-version: ${{ inputs.gradle || 'wrapper' }}
           cache-read-only: ${{ inputs.cache_read_only || false }}
+          dependency-graph: generate-and-submit
           arguments: |
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
