@@ -180,9 +180,10 @@ on:
         required: false
 
 env:
-  GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || '22.3.1' }}
+  GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || 'latest' }}
   JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '20' }}
   JVM_DIST: ${{ inputs.jvm_dist || vars.JVM_DIST || 'adopt-hotspot' }}
+  GVM_DIST: ${{ vars.GVM_DIST || 'graalvm' }}
   GRADLE_CACHE_LOCAL: ${{ inputs.cache_local }}
   GRADLE_CACHE_REMOTE: ${{ inputs.cache_remote }}
   BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
@@ -223,7 +224,7 @@ jobs:
         if: inputs.install_gvm
         with:
           components: ${{ inputs.gvm_components }}
-          version: ${{ env.GVM_VERSION }}
+          distribution: ${{ env.GVM_DIST || 'graalvm' }}
           java-version: ${{ env.JVM_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           gds-token: ${{ secrets.GDS_TOKEN }}
