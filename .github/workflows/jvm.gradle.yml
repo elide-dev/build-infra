@@ -29,6 +29,13 @@ on:
         required: false
         type: string
 
+      ## Whether to ignore errors.
+      labs:
+        description: "Labs"
+        required: false
+        type: boolean
+        default: false
+
       ## Whether to install a regular JDK.
       install_jvm:
         description: "Install OpenJDK"
@@ -232,6 +239,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
         if: inputs.checks
       - name: "Build: Gradle"
+        continue-on-error: ${{ inputs.labs }}
         uses: gradle/gradle-build-action@915a66c096a03101667f9df2e56c9efef558b165 # v2
         id: gradlebuild
         env:
