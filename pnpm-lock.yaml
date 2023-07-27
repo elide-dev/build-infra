@@ -45,8 +45,8 @@ devDependencies:
     specifier: ^3.0.0
     version: registry.npmjs.org/prettier@3.0.0
   ts-jest:
-    specifier: ^29.1.0
-    version: 29.1.0(@babel/core@7.22.1)(jest@29.6.1)(typescript@5.1.6)
+    specifier: ^29.1.1
+    version: registry.npmjs.org/ts-jest@29.1.1(@babel/core@7.22.1)(jest@29.6.1)(typescript@5.1.6)
   typescript:
     specifier: ^5.1.6
     version: registry.npmjs.org/typescript@5.1.6
@@ -62,33 +62,10 @@ packages:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
     dev: true
 
-  /bs-logger@0.2.6:
-    resolution: {integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==}
-    engines: {node: '>= 6'}
-    dependencies:
-      fast-json-stable-stringify: registry.npmjs.org/fast-json-stable-stringify@2.1.0
-    dev: true
-
-  /fast-json-stable-stringify@2.1.0:
-    resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
-    dev: true
-
   /husky@8.0.3:
     resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
-
-  /jest-util@29.5.0:
-    resolution: {integrity: sha512-RYMgG/MTadOr5t8KdhejfvUU82MxsCu5MF6KuDUHl+NuwzUt+Sm6jJWxTJVrDR1j5M/gJVCPKQEpWXY+yIQ6lQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/types': registry.npmjs.org/@jest/types@29.5.0
-      '@types/node': registry.npmjs.org/@types/node@20.4.4
-      chalk: registry.npmjs.org/chalk@4.1.2
-      ci-info: registry.npmjs.org/ci-info@3.8.0
-      graceful-fs: registry.npmjs.org/graceful-fs@4.2.11
-      picomatch: registry.npmjs.org/picomatch@2.3.1
     dev: true
 
   /js-yaml@4.1.0:
@@ -96,67 +73,6 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
-    dev: true
-
-  /json5@2.2.3:
-    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
-    engines: {node: '>=6'}
-    hasBin: true
-    dev: true
-
-  /lodash.memoize@4.1.2:
-    resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
-    dev: true
-
-  /make-error@1.3.6:
-    resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
-    dev: true
-
-  /semver@7.5.1:
-    resolution: {integrity: sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: registry.npmjs.org/lru-cache@6.0.0
-    dev: true
-
-  /ts-jest@29.1.0(@babel/core@7.22.1)(jest@29.6.1)(typescript@5.1.6):
-    resolution: {integrity: sha512-ZhNr7Z4PcYa+JjMl62ir+zPiNJfXJN6E8hSLnaUKhOgqcn8vb3e537cpkd0FuAfRK3sR1LSqM1MOhliXNgOFPA==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    hasBin: true
-    peerDependencies:
-      '@babel/core': '>=7.0.0-beta.0 <8'
-      '@jest/types': ^29.0.0
-      babel-jest: ^29.0.0
-      esbuild: '*'
-      jest: ^29.0.0
-      typescript: '>=4.3 <6'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@jest/types':
-        optional: true
-      babel-jest:
-        optional: true
-      esbuild:
-        optional: true
-    dependencies:
-      '@babel/core': registry.npmjs.org/@babel/core@7.22.1
-      bs-logger: 0.2.6
-      fast-json-stable-stringify: 2.1.0
-      jest: registry.npmjs.org/jest@29.6.1(@types/node@20.4.4)(ts-node@10.9.1)
-      jest-util: 29.5.0
-      json5: 2.2.3
-      lodash.memoize: 4.1.2
-      make-error: 1.3.6
-      semver: 7.5.1
-      typescript: registry.npmjs.org/typescript@5.1.6
-      yargs-parser: 21.1.1
-    dev: true
-
-  /yargs-parser@21.1.1:
-    resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
-    engines: {node: '>=12'}
     dev: true
 
   registry.npmjs.org/@aashutoshrathi/word-wrap@1.2.6:
@@ -1075,15 +991,6 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@jest/schemas@29.4.3:
-    resolution: {integrity: sha512-VLYKXQmtmuEz6IxJsrZwzG9NvtkQsWNnWMsKxqWNu3+CnfzJQhp0WDDKWLVV9hLKr0l3SLLFRqcYHjhtyuDVxg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@jest/schemas/-/schemas-29.4.3.tgz}
-    name: '@jest/schemas'
-    version: 29.4.3
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@sinclair/typebox': registry.npmjs.org/@sinclair/typebox@0.25.24
-    dev: true
-
   registry.npmjs.org/@jest/schemas@29.6.0:
     resolution: {integrity: sha512-rxLjXyJBTL4LQeJW3aKo0M/+GkCOXsO+8i9Iu7eDb6KwtP65ayoDsitrdPBtujxQ88k4wI2FNYfa6TOGwSn6cQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@jest/schemas/-/schemas-29.6.0.tgz}
     name: '@jest/schemas'
@@ -1151,20 +1058,6 @@ packages:
       write-file-atomic: registry.npmjs.org/write-file-atomic@4.0.2
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  registry.npmjs.org/@jest/types@29.5.0:
-    resolution: {integrity: sha512-qbu7kN6czmVRc3xWFQcAN03RAUamgppVUdXrvl1Wr3jlNF93o9mJbGcDWrwGB6ht44u7efB1qCFgVQmca24Uog==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@jest/types/-/types-29.5.0.tgz}
-    name: '@jest/types'
-    version: 29.5.0
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/schemas': registry.npmjs.org/@jest/schemas@29.4.3
-      '@types/istanbul-lib-coverage': registry.npmjs.org/@types/istanbul-lib-coverage@2.0.4
-      '@types/istanbul-reports': registry.npmjs.org/@types/istanbul-reports@3.0.1
-      '@types/node': registry.npmjs.org/@types/node@20.4.4
-      '@types/yargs': registry.npmjs.org/@types/yargs@17.0.24
-      chalk: registry.npmjs.org/chalk@4.1.2
     dev: true
 
   registry.npmjs.org/@jest/types@29.6.1:
@@ -1282,12 +1175,6 @@ packages:
       open: registry.npmjs.org/open@9.1.0
       picocolors: registry.npmjs.org/picocolors@1.0.0
       tslib: registry.npmjs.org/tslib@2.6.0
-    dev: true
-
-  registry.npmjs.org/@sinclair/typebox@0.25.24:
-    resolution: {integrity: sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.25.24.tgz}
-    name: '@sinclair/typebox'
-    version: 0.25.24
     dev: true
 
   registry.npmjs.org/@sinclair/typebox@0.27.8:
@@ -2150,6 +2037,15 @@ packages:
       electron-to-chromium: registry.npmjs.org/electron-to-chromium@1.4.411
       node-releases: registry.npmjs.org/node-releases@2.0.12
       update-browserslist-db: registry.npmjs.org/update-browserslist-db@1.0.11(browserslist@4.21.5)
+    dev: true
+
+  registry.npmjs.org/bs-logger@0.2.6:
+    resolution: {integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/bs-logger/-/bs-logger-0.2.6.tgz}
+    name: bs-logger
+    version: 0.2.6
+    engines: {node: '>= 6'}
+    dependencies:
+      fast-json-stable-stringify: registry.npmjs.org/fast-json-stable-stringify@2.1.0
     dev: true
 
   registry.npmjs.org/bser@2.1.1:
@@ -4886,6 +4782,12 @@ packages:
     version: 4.1.1
     dev: true
 
+  registry.npmjs.org/lodash.memoize@4.1.2:
+    resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-4.1.2.tgz}
+    name: lodash.memoize
+    version: 4.1.2
+    dev: true
+
   registry.npmjs.org/lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz}
     name: lodash.merge
@@ -6182,6 +6084,43 @@ packages:
       typescript: '>=4.2.0'
     dependencies:
       typescript: registry.npmjs.org/typescript@5.1.6
+    dev: true
+
+  registry.npmjs.org/ts-jest@29.1.1(@babel/core@7.22.1)(jest@29.6.1)(typescript@5.1.6):
+    resolution: {integrity: sha512-D6xjnnbP17cC85nliwGiL+tpoKN0StpgE0TeOjXQTU6MVCfsB4v7aW05CgQ/1OywGb0x/oy9hHFnN+sczTiRaA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/ts-jest/-/ts-jest-29.1.1.tgz}
+    id: registry.npmjs.org/ts-jest/29.1.1
+    name: ts-jest
+    version: 29.1.1
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    hasBin: true
+    peerDependencies:
+      '@babel/core': '>=7.0.0-beta.0 <8'
+      '@jest/types': ^29.0.0
+      babel-jest: ^29.0.0
+      esbuild: '*'
+      jest: ^29.0.0
+      typescript: '>=4.3 <6'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@jest/types':
+        optional: true
+      babel-jest:
+        optional: true
+      esbuild:
+        optional: true
+    dependencies:
+      '@babel/core': registry.npmjs.org/@babel/core@7.22.1
+      bs-logger: registry.npmjs.org/bs-logger@0.2.6
+      fast-json-stable-stringify: registry.npmjs.org/fast-json-stable-stringify@2.1.0
+      jest: registry.npmjs.org/jest@29.6.1(@types/node@20.4.4)(ts-node@10.9.1)
+      jest-util: registry.npmjs.org/jest-util@29.6.1
+      json5: registry.npmjs.org/json5@2.2.3
+      lodash.memoize: registry.npmjs.org/lodash.memoize@4.1.2
+      make-error: registry.npmjs.org/make-error@1.3.6
+      semver: registry.npmjs.org/semver@7.5.4
+      typescript: registry.npmjs.org/typescript@5.1.6
+      yargs-parser: registry.npmjs.org/yargs-parser@21.1.1
     dev: true
 
   registry.npmjs.org/ts-node@10.9.1(@types/node@20.4.4)(typescript@5.1.6):
