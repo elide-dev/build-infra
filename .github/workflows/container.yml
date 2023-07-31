@@ -65,6 +65,9 @@ on:
 env:
     CONTAINER_REGISTRY: ghcr.io
 
+permissions:
+  contents: read
+
 jobs:
   ## Build a container image.
   build-container:
@@ -80,14 +83,19 @@ jobs:
       imageid: ${{ steps.dockerpush.outputs.imageid }}
       digest: ${{ steps.dockerpush.outputs.digest }}
     steps:
+        - name: Harden Runner
+          uses: step-security/harden-runner@cba0d00b1fc9a034e1e642ea0f1103c282990604 # v2.5.0
+          with:
+            egress-policy: audit
+
         - name: "Setup: Checkout"
-          uses: actions/checkout@v3
+          uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         - name: "Setup: QEMU"
-          uses: docker/setup-qemu-action@v2
+          uses: docker/setup-qemu-action@2b82ce82d56a2a04d2637cd93a637ae1b359c0a7 # v2.2.0
           with:
             platforms: "amd64,arm64,arm"
         - name: "Setup: Docker"
-          uses: docker/setup-buildx-action@v2
+          uses: docker/setup-buildx-action@4c0219f9ac95b02789c1075625400b2acbff50b1 # v2.9.1
           id: buildx
           with:
             install: true
@@ -100,7 +108,7 @@ jobs:
             password: ${{ secrets.GITHUB_TOKEN }}
         - name: "Setup: Image Metadata"
           id: meta
-          uses: docker/metadata-action@v4
+          uses: docker/metadata-action@818d4b7b91585d195f67373fd9cb0332e31a7175 # v4.6.0
           with:
             images: ${{ inputs.registry }}/${{ inputs.image }}
             labels: |
@@ -111,7 +119,7 @@ jobs:
               type=ref,event=tag
               type=ref,event=pr
         - name: "Build: Container"
-          uses: docker/build-push-action@v4
+          uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825 # v4.1.1
           id: dockerpush
           with:
             push: ${{ inputs.push }}
@@ -127,7 +135,7 @@ jobs:
             echo "${{ steps.dockerpush.outputs.imageid }}" > ./image_id
             echo "${{ steps.dockerpush.outputs.digest }}" > ./digest
         - name: "Artifacts: Release"
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
           if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
           with:
             name: release-artifacts

@@ -21,6 +21,9 @@ on:
       - .github/workflows/container.yml
       - .github/workflows/containers.gvm.yml
 
+permissions:
+  contents: read
+
 jobs:
   ## Build GVM Container
   build-gvm-container:

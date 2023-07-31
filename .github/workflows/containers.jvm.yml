@@ -21,6 +21,9 @@ on:
       - .github/workflows/container.yml
       - .github/workflows/containers.jvm.yml
 
+permissions:
+  contents: read
+
 jobs:
   ## Build JVM Container
   build-jvm-container:

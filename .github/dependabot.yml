@@ -9,3 +9,23 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: docker
+    directory: /containers/builder
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/gvm
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/jvm
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/node
+    schedule:
+      interval: daily
