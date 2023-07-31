@@ -21,6 +21,9 @@ on:
       - .github/workflows/container.yml
       - .github/workflows/containers.builder.yml
 
+permissions:
+  contents: read
+
 jobs:
   ## Build Builder Container
   build-builder-container:
