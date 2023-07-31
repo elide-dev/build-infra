@@ -160,7 +160,7 @@ jobs:
           distribution: ${{ env.JVM_DIST }}
           java-version: ${{ env.JVM_VERSION }}
       - name: "Setup: GraalVM"
-        uses: graalvm/setup-graalvm@d1891786152ae96fee67f86c3a1eae596291bbed # v1.1.2
+        uses: graalvm/setup-graalvm@1478c743ed947e10f0af6ed9eea34f564dd5bf61 # v10.2.1
         if: inputs.install_gvm
         with:
           components: ${{ inputs.gvm_components }}
