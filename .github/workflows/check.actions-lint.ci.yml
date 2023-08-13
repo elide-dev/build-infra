@@ -8,6 +8,9 @@ on:
     ## Check actions on merge queue insertion
     merge_group: {}
 
+    ## Allow this workflow to be re-used
+    workflow_call: {}
+
     ## Check on release
     release:
         types: [created]
