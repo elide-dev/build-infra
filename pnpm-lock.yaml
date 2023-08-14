@@ -4,55 +4,52 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
-
-  .:
-    devDependencies:
-      '@commitlint/config-conventional':
-        specifier: 17.6.7
-        version: registry.npmjs.org/@commitlint/config-conventional@17.6.7
-      '@types/node':
-        specifier: ^20
-        version: registry.npmjs.org/@types/node@20.4.5
-      '@typescript-eslint/parser':
-        specifier: ^6.2.0
-        version: registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.46.0)(typescript@5.1.6)
-      '@vercel/ncc':
-        specifier: ^0.36.1
-        version: 0.36.1
-      commitlint:
-        specifier: 17.6.7
-        version: registry.npmjs.org/commitlint@17.6.7
-      eslint:
-        specifier: ^8.46.0
-        version: registry.npmjs.org/eslint@8.46.0
-      eslint-plugin-github:
-        specifier: ^4.9.2
-        version: registry.npmjs.org/eslint-plugin-github@4.9.2(eslint@8.46.0)(typescript@5.1.6)
-      eslint-plugin-jest:
-        specifier: ^27.2.3
-        version: registry.npmjs.org/eslint-plugin-jest@27.2.3(eslint@8.46.0)(jest@29.6.2)(typescript@5.1.6)
-      husky:
-        specifier: 8.0.3
-        version: 8.0.3
-      jest:
-        specifier: ^29.6.2
-        version: registry.npmjs.org/jest@29.6.2(@types/node@20.4.5)(ts-node@10.9.1)
-      js-yaml:
-        specifier: ^4.1.0
-        version: 4.1.0
-      lint-staged:
-        specifier: 13.2.3
-        version: registry.npmjs.org/lint-staged@13.2.3
-      prettier:
-        specifier: ^3.0.0
-        version: registry.npmjs.org/prettier@3.0.0
-      ts-jest:
-        specifier: ^29.1.1
-        version: registry.npmjs.org/ts-jest@29.1.1(@babel/core@7.22.1)(jest@29.6.2)(typescript@5.1.6)
-      typescript:
-        specifier: ^5.1.6
-        version: registry.npmjs.org/typescript@5.1.6
+devDependencies:
+  '@commitlint/config-conventional':
+    specifier: 17.6.7
+    version: registry.npmjs.org/@commitlint/config-conventional@17.6.7
+  '@types/node':
+    specifier: ^20
+    version: registry.npmjs.org/@types/node@20.4.5
+  '@typescript-eslint/parser':
+    specifier: ^6.2.0
+    version: registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.47.0)(typescript@5.1.6)
+  '@vercel/ncc':
+    specifier: ^0.36.1
+    version: 0.36.1
+  commitlint:
+    specifier: 17.6.7
+    version: registry.npmjs.org/commitlint@17.6.7
+  eslint:
+    specifier: ^8.47.0
+    version: registry.npmjs.org/eslint@8.47.0
+  eslint-plugin-github:
+    specifier: ^4.9.2
+    version: registry.npmjs.org/eslint-plugin-github@4.9.2(eslint@8.47.0)(typescript@5.1.6)
+  eslint-plugin-jest:
+    specifier: ^27.2.3
+    version: registry.npmjs.org/eslint-plugin-jest@27.2.3(eslint@8.47.0)(jest@29.6.2)(typescript@5.1.6)
+  husky:
+    specifier: 8.0.3
+    version: 8.0.3
+  jest:
+    specifier: ^29.6.2
+    version: registry.npmjs.org/jest@29.6.2(@types/node@20.4.5)(ts-node@10.9.1)
+  js-yaml:
+    specifier: ^4.1.0
+    version: 4.1.0
+  lint-staged:
+    specifier: 13.2.3
+    version: registry.npmjs.org/lint-staged@13.2.3
+  prettier:
+    specifier: ^3.0.0
+    version: registry.npmjs.org/prettier@3.0.0
+  ts-jest:
+    specifier: ^29.1.1
+    version: registry.npmjs.org/ts-jest@29.1.1(@babel/core@7.22.1)(jest@29.6.2)(typescript@5.1.6)
+  typescript:
+    specifier: ^5.1.6
+    version: registry.npmjs.org/typescript@5.1.6
 
 packages:
 
@@ -737,7 +734,7 @@ packages:
       '@jridgewell/trace-mapping': registry.npmjs.org/@jridgewell/trace-mapping@0.3.9
     dev: true
 
-  registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.46.0):
+  registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.47.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz}
     id: registry.npmjs.org/@eslint-community/eslint-utils/4.4.0
     name: '@eslint-community/eslint-utils'
@@ -746,15 +743,8 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
     dependencies:
-      eslint: registry.npmjs.org/eslint@8.46.0
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
-    dev: true
-
-  registry.npmjs.org/@eslint-community/regexpp@4.5.1:
-    resolution: {integrity: sha512-Z5ba73P98O1KUYCCJTUeVpja9RcGoMdncZ6T49FCUl2lN38JtCJ+3WgIDBv0AuY4WChU5PmtJmOCTlN6FZTFKQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@eslint-community/regexpp/-/regexpp-4.5.1.tgz}
-    name: '@eslint-community/regexpp'
-    version: 4.5.1
-    engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
+      eslint: registry.npmjs.org/eslint@8.47.0
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.3
     dev: true
 
   registry.npmjs.org/@eslint-community/regexpp@4.6.2:
@@ -764,10 +754,10 @@ packages:
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
     dev: true
 
-  registry.npmjs.org/@eslint/eslintrc@2.1.1:
-    resolution: {integrity: sha512-9t7ZA7NGGK8ckelF0PQCfcxIUzs1Md5rrO6U/c+FIQNanea5UZC0wqKXH4vHBccmu4ZJgZ2idtPeW7+Q2npOEA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-2.1.1.tgz}
+  registry.npmjs.org/@eslint/eslintrc@2.1.2:
+    resolution: {integrity: sha512-+wvgpDsrB1YqAMdEUCcnTlpfVBH7Vqn6A/NT3D8WVXFIaKMlErPIZT3oCIAVCOtarRpMtelZLqJeU3t7WY6X6g==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-2.1.2.tgz}
     name: '@eslint/eslintrc'
-    version: 2.1.1
+    version: 2.1.2
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: registry.npmjs.org/ajv@6.12.6
@@ -783,10 +773,10 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@eslint/js@8.46.0:
-    resolution: {integrity: sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@eslint/js/-/js-8.46.0.tgz}
+  registry.npmjs.org/@eslint/js@8.47.0:
+    resolution: {integrity: sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@eslint/js/-/js-8.47.0.tgz}
     name: '@eslint/js'
-    version: 8.46.0
+    version: 8.47.0
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
@@ -1358,7 +1348,7 @@ packages:
       '@types/yargs-parser': registry.npmjs.org/@types/yargs-parser@21.0.0
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/eslint-plugin@6.1.0(@typescript-eslint/parser@6.2.0)(eslint@8.46.0)(typescript@5.1.6):
+  registry.npmjs.org/@typescript-eslint/eslint-plugin@6.1.0(@typescript-eslint/parser@6.2.0)(eslint@8.47.0)(typescript@5.1.6):
     resolution: {integrity: sha512-qg7Bm5TyP/I7iilGyp6DRqqkt8na00lI6HbjWZObgk3FFSzH5ypRwAHXJhJkwiRtTcfn+xYQIMOR5kJgpo6upw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-6.1.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/eslint-plugin/6.1.0
     name: '@typescript-eslint/eslint-plugin'
@@ -1372,14 +1362,14 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@eslint-community/regexpp': registry.npmjs.org/@eslint-community/regexpp@4.5.1
-      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.46.0)(typescript@5.1.6)
+      '@eslint-community/regexpp': registry.npmjs.org/@eslint-community/regexpp@4.6.2
+      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.47.0)(typescript@5.1.6)
       '@typescript-eslint/scope-manager': registry.npmjs.org/@typescript-eslint/scope-manager@6.1.0
-      '@typescript-eslint/type-utils': registry.npmjs.org/@typescript-eslint/type-utils@6.1.0(eslint@8.46.0)(typescript@5.1.6)
-      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@6.1.0(eslint@8.46.0)(typescript@5.1.6)
+      '@typescript-eslint/type-utils': registry.npmjs.org/@typescript-eslint/type-utils@6.1.0(eslint@8.47.0)(typescript@5.1.6)
+      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@6.1.0(eslint@8.47.0)(typescript@5.1.6)
       '@typescript-eslint/visitor-keys': registry.npmjs.org/@typescript-eslint/visitor-keys@6.1.0
       debug: registry.npmjs.org/debug@4.3.4
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       graphemer: registry.npmjs.org/graphemer@1.4.0
       ignore: registry.npmjs.org/ignore@5.2.4
       natural-compare: registry.npmjs.org/natural-compare@1.4.0
@@ -1391,7 +1381,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.46.0)(typescript@5.1.6):
+  registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.47.0)(typescript@5.1.6):
     resolution: {integrity: sha512-igVYOqtiK/UsvKAmmloQAruAdUHihsOCvplJpplPZ+3h4aDkC/UKZZNKgB6h93ayuYLuEymU3h8nF1xMRbh37g==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@typescript-eslint/parser/-/parser-6.2.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/parser/6.2.0
     name: '@typescript-eslint/parser'
@@ -1409,7 +1399,7 @@ packages:
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree@6.2.0(typescript@5.1.6)
       '@typescript-eslint/visitor-keys': registry.npmjs.org/@typescript-eslint/visitor-keys@6.2.0
       debug: registry.npmjs.org/debug@4.3.4
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       typescript: registry.npmjs.org/typescript@5.1.6
     transitivePeerDependencies:
       - supports-color
@@ -1445,7 +1435,7 @@ packages:
       '@typescript-eslint/visitor-keys': registry.npmjs.org/@typescript-eslint/visitor-keys@6.2.0
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/type-utils@6.1.0(eslint@8.46.0)(typescript@5.1.6):
+  registry.npmjs.org/@typescript-eslint/type-utils@6.1.0(eslint@8.47.0)(typescript@5.1.6):
     resolution: {integrity: sha512-kFXBx6QWS1ZZ5Ni89TyT1X9Ag6RXVIVhqDs0vZE/jUeWlBv/ixq2diua6G7ece6+fXw3TvNRxP77/5mOMusx2w==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-6.1.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/type-utils/6.1.0
     name: '@typescript-eslint/type-utils'
@@ -1459,9 +1449,9 @@ packages:
         optional: true
     dependencies:
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree@6.1.0(typescript@5.1.6)
-      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@6.1.0(eslint@8.46.0)(typescript@5.1.6)
+      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@6.1.0(eslint@8.47.0)(typescript@5.1.6)
       debug: registry.npmjs.org/debug@4.3.4
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       ts-api-utils: registry.npmjs.org/ts-api-utils@1.0.1(typescript@5.1.6)
       typescript: registry.npmjs.org/typescript@5.1.6
     transitivePeerDependencies:
@@ -1561,7 +1551,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/utils@5.59.7(eslint@8.46.0)(typescript@5.1.6):
+  registry.npmjs.org/@typescript-eslint/utils@5.59.7(eslint@8.47.0)(typescript@5.1.6):
     resolution: {integrity: sha512-yCX9WpdQKaLufz5luG4aJbOpdXf/fjwGMcLFXZVPUz3QqLirG5QcwwnIHNf8cjLjxK4qtzTO8udUtMQSAToQnQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@typescript-eslint/utils/-/utils-5.59.7.tgz}
     id: registry.npmjs.org/@typescript-eslint/utils/5.59.7
     name: '@typescript-eslint/utils'
@@ -1570,13 +1560,13 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      '@eslint-community/eslint-utils': registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.46.0)
+      '@eslint-community/eslint-utils': registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.47.0)
       '@types/json-schema': registry.npmjs.org/@types/json-schema@7.0.12
       '@types/semver': registry.npmjs.org/@types/semver@7.5.0
       '@typescript-eslint/scope-manager': registry.npmjs.org/@typescript-eslint/scope-manager@5.59.7
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@5.59.7
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree@5.59.7(typescript@5.1.6)
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       eslint-scope: registry.npmjs.org/eslint-scope@5.1.1
       semver: registry.npmjs.org/semver@7.5.4
     transitivePeerDependencies:
@@ -1584,7 +1574,7 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/@typescript-eslint/utils@6.1.0(eslint@8.46.0)(typescript@5.1.6):
+  registry.npmjs.org/@typescript-eslint/utils@6.1.0(eslint@8.47.0)(typescript@5.1.6):
     resolution: {integrity: sha512-wp652EogZlKmQoMS5hAvWqRKplXvkuOnNzZSE0PVvsKjpexd/XznRVHAtrfHFYmqaJz0DFkjlDsGYC9OXw+OhQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@typescript-eslint/utils/-/utils-6.1.0.tgz}
     id: registry.npmjs.org/@typescript-eslint/utils/6.1.0
     name: '@typescript-eslint/utils'
@@ -1593,13 +1583,13 @@ packages:
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
     dependencies:
-      '@eslint-community/eslint-utils': registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.46.0)
+      '@eslint-community/eslint-utils': registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.47.0)
       '@types/json-schema': registry.npmjs.org/@types/json-schema@7.0.12
       '@types/semver': registry.npmjs.org/@types/semver@7.5.0
       '@typescript-eslint/scope-manager': registry.npmjs.org/@typescript-eslint/scope-manager@6.1.0
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@6.1.0
       '@typescript-eslint/typescript-estree': registry.npmjs.org/@typescript-eslint/typescript-estree@6.1.0(typescript@5.1.6)
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       semver: registry.npmjs.org/semver@7.5.4
     transitivePeerDependencies:
       - supports-color
@@ -1613,7 +1603,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@5.59.7
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.1
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
     dev: true
 
   registry.npmjs.org/@typescript-eslint/visitor-keys@6.1.0:
@@ -1623,7 +1613,7 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@6.1.0
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.1
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
     dev: true
 
   registry.npmjs.org/@typescript-eslint/visitor-keys@6.2.0:
@@ -1633,7 +1623,7 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@6.2.0
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.1
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
     dev: true
 
   registry.npmjs.org/JSONStream@1.3.5:
@@ -2753,7 +2743,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  registry.npmjs.org/eslint-config-prettier@8.8.0(eslint@8.46.0):
+  registry.npmjs.org/eslint-config-prettier@8.8.0(eslint@8.47.0):
     resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.8.0.tgz}
     id: registry.npmjs.org/eslint-config-prettier/8.8.0
     name: eslint-config-prettier
@@ -2762,7 +2752,7 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
     dev: true
 
   registry.npmjs.org/eslint-import-resolver-node@0.3.7:
@@ -2777,7 +2767,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/eslint-module-utils@2.8.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-node@0.3.7)(eslint@8.46.0):
+  registry.npmjs.org/eslint-module-utils@2.8.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-node@0.3.7)(eslint@8.47.0):
     resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-module-utils/-/eslint-module-utils-2.8.0.tgz}
     id: registry.npmjs.org/eslint-module-utils/2.8.0
     name: eslint-module-utils
@@ -2801,15 +2791,15 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.46.0)(typescript@5.1.6)
+      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.47.0)(typescript@5.1.6)
       debug: registry.npmjs.org/debug@3.2.7
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       eslint-import-resolver-node: registry.npmjs.org/eslint-import-resolver-node@0.3.7
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  registry.npmjs.org/eslint-plugin-escompat@3.4.0(eslint@8.46.0):
+  registry.npmjs.org/eslint-plugin-escompat@3.4.0(eslint@8.47.0):
     resolution: {integrity: sha512-ufTPv8cwCxTNoLnTZBFTQ5SxU2w7E7wiMIS7PSxsgP1eAxFjtSaoZ80LRn64hI8iYziE6kJG6gX/ZCJVxh48Bg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-escompat/-/eslint-plugin-escompat-3.4.0.tgz}
     id: registry.npmjs.org/eslint-plugin-escompat/3.4.0
     name: eslint-plugin-escompat
@@ -2818,10 +2808,10 @@ packages:
       eslint: '>=5.14.1'
     dependencies:
       browserslist: registry.npmjs.org/browserslist@4.21.5
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
     dev: true
 
-  registry.npmjs.org/eslint-plugin-eslint-comments@3.2.0(eslint@8.46.0):
+  registry.npmjs.org/eslint-plugin-eslint-comments@3.2.0(eslint@8.47.0):
     resolution: {integrity: sha512-0jkOl0hfojIHHmEHgmNdqv4fmh7300NdpA9FFpF7zaoLvB/QeXOGNLIo86oAveJFrfB1p05kC8hpEMHM8DwWVQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-eslint-comments/-/eslint-plugin-eslint-comments-3.2.0.tgz}
     id: registry.npmjs.org/eslint-plugin-eslint-comments/3.2.0
     name: eslint-plugin-eslint-comments
@@ -2831,11 +2821,11 @@ packages:
       eslint: '>=4.19.1'
     dependencies:
       escape-string-regexp: registry.npmjs.org/escape-string-regexp@1.0.5
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       ignore: registry.npmjs.org/ignore@5.2.4
     dev: true
 
-  registry.npmjs.org/eslint-plugin-filenames@1.3.2(eslint@8.46.0):
+  registry.npmjs.org/eslint-plugin-filenames@1.3.2(eslint@8.47.0):
     resolution: {integrity: sha512-tqxJTiEM5a0JmRCUYQmxw23vtTxrb2+a3Q2mMOPhFxvt7ZQQJmdiuMby9B/vUAuVMghyP7oET+nIf6EO6CBd/w==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-filenames/-/eslint-plugin-filenames-1.3.2.tgz}
     id: registry.npmjs.org/eslint-plugin-filenames/1.3.2
     name: eslint-plugin-filenames
@@ -2843,14 +2833,14 @@ packages:
     peerDependencies:
       eslint: '*'
     dependencies:
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       lodash.camelcase: registry.npmjs.org/lodash.camelcase@4.3.0
       lodash.kebabcase: registry.npmjs.org/lodash.kebabcase@4.1.1
       lodash.snakecase: registry.npmjs.org/lodash.snakecase@4.1.1
       lodash.upperfirst: registry.npmjs.org/lodash.upperfirst@4.3.1
     dev: true
 
-  registry.npmjs.org/eslint-plugin-github@4.9.2(eslint@8.46.0)(typescript@5.1.6):
+  registry.npmjs.org/eslint-plugin-github@4.9.2(eslint@8.47.0)(typescript@5.1.6):
     resolution: {integrity: sha512-osez6Sio/fLr/3QkW5HE1wbCOcmYG5030/6QIa9IcKyyfchewlecdnYcsbeUMUtdIiU9lWqhroQp2H/O7auxBA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-github/-/eslint-plugin-github-4.9.2.tgz}
     id: registry.npmjs.org/eslint-plugin-github/4.9.2
     name: eslint-plugin-github
@@ -2860,19 +2850,19 @@ packages:
       eslint: ^8.0.1
     dependencies:
       '@github/browserslist-config': registry.npmjs.org/@github/browserslist-config@1.0.0
-      '@typescript-eslint/eslint-plugin': registry.npmjs.org/@typescript-eslint/eslint-plugin@6.1.0(@typescript-eslint/parser@6.2.0)(eslint@8.46.0)(typescript@5.1.6)
-      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.46.0)(typescript@5.1.6)
+      '@typescript-eslint/eslint-plugin': registry.npmjs.org/@typescript-eslint/eslint-plugin@6.1.0(@typescript-eslint/parser@6.2.0)(eslint@8.47.0)(typescript@5.1.6)
+      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.47.0)(typescript@5.1.6)
       aria-query: registry.npmjs.org/aria-query@5.3.0
-      eslint: registry.npmjs.org/eslint@8.46.0
-      eslint-config-prettier: registry.npmjs.org/eslint-config-prettier@8.8.0(eslint@8.46.0)
-      eslint-plugin-escompat: registry.npmjs.org/eslint-plugin-escompat@3.4.0(eslint@8.46.0)
-      eslint-plugin-eslint-comments: registry.npmjs.org/eslint-plugin-eslint-comments@3.2.0(eslint@8.46.0)
-      eslint-plugin-filenames: registry.npmjs.org/eslint-plugin-filenames@1.3.2(eslint@8.46.0)
-      eslint-plugin-i18n-text: registry.npmjs.org/eslint-plugin-i18n-text@1.0.1(eslint@8.46.0)
-      eslint-plugin-import: registry.npmjs.org/eslint-plugin-import@2.27.5(@typescript-eslint/parser@6.2.0)(eslint@8.46.0)
-      eslint-plugin-jsx-a11y: registry.npmjs.org/eslint-plugin-jsx-a11y@6.7.1(eslint@8.46.0)
+      eslint: registry.npmjs.org/eslint@8.47.0
+      eslint-config-prettier: registry.npmjs.org/eslint-config-prettier@8.8.0(eslint@8.47.0)
+      eslint-plugin-escompat: registry.npmjs.org/eslint-plugin-escompat@3.4.0(eslint@8.47.0)
+      eslint-plugin-eslint-comments: registry.npmjs.org/eslint-plugin-eslint-comments@3.2.0(eslint@8.47.0)
+      eslint-plugin-filenames: registry.npmjs.org/eslint-plugin-filenames@1.3.2(eslint@8.47.0)
+      eslint-plugin-i18n-text: registry.npmjs.org/eslint-plugin-i18n-text@1.0.1(eslint@8.47.0)
+      eslint-plugin-import: registry.npmjs.org/eslint-plugin-import@2.27.5(@typescript-eslint/parser@6.2.0)(eslint@8.47.0)
+      eslint-plugin-jsx-a11y: registry.npmjs.org/eslint-plugin-jsx-a11y@6.7.1(eslint@8.47.0)
       eslint-plugin-no-only-tests: registry.npmjs.org/eslint-plugin-no-only-tests@3.1.0
-      eslint-plugin-prettier: registry.npmjs.org/eslint-plugin-prettier@5.0.0(eslint-config-prettier@8.8.0)(eslint@8.46.0)(prettier@3.0.0)
+      eslint-plugin-prettier: registry.npmjs.org/eslint-plugin-prettier@5.0.0(eslint-config-prettier@8.8.0)(eslint@8.47.0)(prettier@3.0.0)
       eslint-rule-documentation: registry.npmjs.org/eslint-rule-documentation@1.0.23
       jsx-ast-utils: registry.npmjs.org/jsx-ast-utils@3.3.3
       prettier: registry.npmjs.org/prettier@3.0.0
@@ -2885,7 +2875,7 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/eslint-plugin-i18n-text@1.0.1(eslint@8.46.0):
+  registry.npmjs.org/eslint-plugin-i18n-text@1.0.1(eslint@8.47.0):
     resolution: {integrity: sha512-3G3UetST6rdqhqW9SfcfzNYMpQXS7wNkJvp6dsXnjzGiku6Iu5hl3B0kmk6lIcFPwYjhQIY+tXVRtK9TlGT7RA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-i18n-text/-/eslint-plugin-i18n-text-1.0.1.tgz}
     id: registry.npmjs.org/eslint-plugin-i18n-text/1.0.1
     name: eslint-plugin-i18n-text
@@ -2893,10 +2883,10 @@ packages:
     peerDependencies:
       eslint: '>=5.0.0'
     dependencies:
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
     dev: true
 
-  registry.npmjs.org/eslint-plugin-import@2.27.5(@typescript-eslint/parser@6.2.0)(eslint@8.46.0):
+  registry.npmjs.org/eslint-plugin-import@2.27.5(@typescript-eslint/parser@6.2.0)(eslint@8.47.0):
     resolution: {integrity: sha512-LmEt3GVofgiGuiE+ORpnvP+kAm3h6MLZJ4Q5HCyHADofsb4VzXFsRiWj3c0OFiV+3DWFh0qg3v9gcPlfc3zRow==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.27.5.tgz}
     id: registry.npmjs.org/eslint-plugin-import/2.27.5
     name: eslint-plugin-import
@@ -2909,15 +2899,15 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.46.0)(typescript@5.1.6)
+      '@typescript-eslint/parser': registry.npmjs.org/@typescript-eslint/parser@6.2.0(eslint@8.47.0)(typescript@5.1.6)
       array-includes: registry.npmjs.org/array-includes@3.1.6
       array.prototype.flat: registry.npmjs.org/array.prototype.flat@1.3.1
       array.prototype.flatmap: registry.npmjs.org/array.prototype.flatmap@1.3.1
       debug: registry.npmjs.org/debug@3.2.7
       doctrine: registry.npmjs.org/doctrine@2.1.0
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       eslint-import-resolver-node: registry.npmjs.org/eslint-import-resolver-node@0.3.7
-      eslint-module-utils: registry.npmjs.org/eslint-module-utils@2.8.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-node@0.3.7)(eslint@8.46.0)
+      eslint-module-utils: registry.npmjs.org/eslint-module-utils@2.8.0(@typescript-eslint/parser@6.2.0)(eslint-import-resolver-node@0.3.7)(eslint@8.47.0)
       has: registry.npmjs.org/has@1.0.3
       is-core-module: registry.npmjs.org/is-core-module@2.12.1
       is-glob: registry.npmjs.org/is-glob@4.0.3
@@ -2932,7 +2922,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/eslint-plugin-jest@27.2.3(eslint@8.46.0)(jest@29.6.2)(typescript@5.1.6):
+  registry.npmjs.org/eslint-plugin-jest@27.2.3(eslint@8.47.0)(jest@29.6.2)(typescript@5.1.6):
     resolution: {integrity: sha512-sRLlSCpICzWuje66Gl9zvdF6mwD5X86I4u55hJyFBsxYOsBCmT5+kSUjf+fkFWVMMgpzNEupjW8WzUqi83hJAQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-jest/-/eslint-plugin-jest-27.2.3.tgz}
     id: registry.npmjs.org/eslint-plugin-jest/27.2.3
     name: eslint-plugin-jest
@@ -2948,15 +2938,15 @@ packages:
       jest:
         optional: true
     dependencies:
-      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@5.59.7(eslint@8.46.0)(typescript@5.1.6)
-      eslint: registry.npmjs.org/eslint@8.46.0
+      '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@5.59.7(eslint@8.47.0)(typescript@5.1.6)
+      eslint: registry.npmjs.org/eslint@8.47.0
       jest: registry.npmjs.org/jest@29.6.2(@types/node@20.4.5)(ts-node@10.9.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: true
 
-  registry.npmjs.org/eslint-plugin-jsx-a11y@6.7.1(eslint@8.46.0):
+  registry.npmjs.org/eslint-plugin-jsx-a11y@6.7.1(eslint@8.47.0):
     resolution: {integrity: sha512-63Bog4iIethyo8smBklORknVjB0T2dwB8Mr/hIC+fBS0uyHdYYpzM/Ed+YC8VxTjlXHEWFOdmgwcDn1U2L9VCA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-6.7.1.tgz}
     id: registry.npmjs.org/eslint-plugin-jsx-a11y/6.7.1
     name: eslint-plugin-jsx-a11y
@@ -2974,7 +2964,7 @@ packages:
       axobject-query: registry.npmjs.org/axobject-query@3.1.1
       damerau-levenshtein: registry.npmjs.org/damerau-levenshtein@1.0.8
       emoji-regex: registry.npmjs.org/emoji-regex@9.2.2
-      eslint: registry.npmjs.org/eslint@8.46.0
+      eslint: registry.npmjs.org/eslint@8.47.0
       has: registry.npmjs.org/has@1.0.3
       jsx-ast-utils: registry.npmjs.org/jsx-ast-utils@3.3.3
       language-tags: registry.npmjs.org/language-tags@1.0.5
@@ -2991,7 +2981,7 @@ packages:
     engines: {node: '>=5.0.0'}
     dev: true
 
-  registry.npmjs.org/eslint-plugin-prettier@5.0.0(eslint-config-prettier@8.8.0)(eslint@8.46.0)(prettier@3.0.0):
+  registry.npmjs.org/eslint-plugin-prettier@5.0.0(eslint-config-prettier@8.8.0)(eslint@8.47.0)(prettier@3.0.0):
     resolution: {integrity: sha512-AgaZCVuYDXHUGxj/ZGu1u8H8CYgDY3iG6w5kUFw4AzMVXzB7VvbKgYR4nATIN+OvUrghMbiDLeimVjVY5ilq3w==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-prettier/-/eslint-plugin-prettier-5.0.0.tgz}
     id: registry.npmjs.org/eslint-plugin-prettier/5.0.0
     name: eslint-plugin-prettier
@@ -3008,8 +2998,8 @@ packages:
       eslint-config-prettier:
         optional: true
     dependencies:
-      eslint: registry.npmjs.org/eslint@8.46.0
-      eslint-config-prettier: registry.npmjs.org/eslint-config-prettier@8.8.0(eslint@8.46.0)
+      eslint: registry.npmjs.org/eslint@8.47.0
+      eslint-config-prettier: registry.npmjs.org/eslint-config-prettier@8.8.0(eslint@8.47.0)
       prettier: registry.npmjs.org/prettier@3.0.0
       prettier-linter-helpers: registry.npmjs.org/prettier-linter-helpers@1.0.0
       synckit: registry.npmjs.org/synckit@0.8.5
@@ -3042,13 +3032,6 @@ packages:
       estraverse: registry.npmjs.org/estraverse@5.3.0
     dev: true
 
-  registry.npmjs.org/eslint-visitor-keys@3.4.1:
-    resolution: {integrity: sha512-pZnmmLwYzf+kWaM/Qgrvpen51upAktaaiI01nsJD/Yr3lMOdNtq0cxkrrg16w64VtisN6okbs7Q8AfGqj4c9fA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.4.1.tgz}
-    name: eslint-visitor-keys
-    version: 3.4.1
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dev: true
-
   registry.npmjs.org/eslint-visitor-keys@3.4.2:
     resolution: {integrity: sha512-8drBzUEyZ2llkpCA67iYrgEssKDUu68V8ChqqOfFupIaG/LCVPUT+CoGJpT77zJprs4T/W7p07LP7zAIMuweVw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.4.2.tgz}
     name: eslint-visitor-keys
@@ -3056,17 +3039,24 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  registry.npmjs.org/eslint@8.46.0:
-    resolution: {integrity: sha512-cIO74PvbW0qU8e0mIvk5IV3ToWdCq5FYG6gWPHHkx6gNdjlbAYvtfHmlCMXxjcoVaIdwy/IAt3+mDkZkfvb2Dg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint/-/eslint-8.46.0.tgz}
+  registry.npmjs.org/eslint-visitor-keys@3.4.3:
+    resolution: {integrity: sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz}
+    name: eslint-visitor-keys
+    version: 3.4.3
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  registry.npmjs.org/eslint@8.47.0:
+    resolution: {integrity: sha512-spUQWrdPt+pRVP1TTJLmfRNJJHHZryFmptzcafwSvHsceV81djHOdnEeDmkdotZyLNjDhrOasNK8nikkoG1O8Q==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint/-/eslint-8.47.0.tgz}
     name: eslint
-    version: 8.46.0
+    version: 8.47.0
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     hasBin: true
     dependencies:
-      '@eslint-community/eslint-utils': registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.46.0)
+      '@eslint-community/eslint-utils': registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.47.0)
       '@eslint-community/regexpp': registry.npmjs.org/@eslint-community/regexpp@4.6.2
-      '@eslint/eslintrc': registry.npmjs.org/@eslint/eslintrc@2.1.1
-      '@eslint/js': registry.npmjs.org/@eslint/js@8.46.0
+      '@eslint/eslintrc': registry.npmjs.org/@eslint/eslintrc@2.1.2
+      '@eslint/js': registry.npmjs.org/@eslint/js@8.47.0
       '@humanwhocodes/config-array': registry.npmjs.org/@humanwhocodes/config-array@0.11.10
       '@humanwhocodes/module-importer': registry.npmjs.org/@humanwhocodes/module-importer@1.0.1
       '@nodelib/fs.walk': registry.npmjs.org/@nodelib/fs.walk@1.2.8
@@ -3077,7 +3067,7 @@ packages:
       doctrine: registry.npmjs.org/doctrine@3.0.0
       escape-string-regexp: registry.npmjs.org/escape-string-regexp@4.0.0
       eslint-scope: registry.npmjs.org/eslint-scope@7.2.2
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.3
       espree: registry.npmjs.org/espree@9.6.1
       esquery: registry.npmjs.org/esquery@1.5.0
       esutils: registry.npmjs.org/esutils@2.0.3
@@ -3112,7 +3102,7 @@ packages:
     dependencies:
       acorn: registry.npmjs.org/acorn@8.10.0
       acorn-jsx: registry.npmjs.org/acorn-jsx@5.3.2(acorn@8.10.0)
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.3
     dev: true
 
   registry.npmjs.org/esprima@4.0.1:
