@@ -24,8 +24,8 @@ devDependencies:
     specifier: ^8.49.0
     version: registry.npmjs.org/eslint@8.49.0
   eslint-plugin-github:
-    specifier: ^4.9.2
-    version: registry.npmjs.org/eslint-plugin-github@4.9.2(eslint@8.49.0)(typescript@5.1.6)
+    specifier: ^4.10.0
+    version: registry.npmjs.org/eslint-plugin-github@4.10.0(eslint@8.49.0)(typescript@5.1.6)
   eslint-plugin-jest:
     specifier: ^27.2.3
     version: registry.npmjs.org/eslint-plugin-jest@27.2.3(eslint@8.49.0)(jest@29.6.2)(typescript@5.1.6)
@@ -1609,7 +1609,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@5.59.7
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.3
     dev: true
 
   registry.npmjs.org/@typescript-eslint/visitor-keys@6.1.0:
@@ -1619,7 +1619,7 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@6.1.0
-      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.2
+      eslint-visitor-keys: registry.npmjs.org/eslint-visitor-keys@3.4.3
     dev: true
 
   registry.npmjs.org/@typescript-eslint/visitor-keys@6.2.0:
@@ -2816,11 +2816,11 @@ packages:
       lodash.upperfirst: registry.npmjs.org/lodash.upperfirst@4.3.1
     dev: true
 
-  registry.npmjs.org/eslint-plugin-github@4.9.2(eslint@8.49.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-osez6Sio/fLr/3QkW5HE1wbCOcmYG5030/6QIa9IcKyyfchewlecdnYcsbeUMUtdIiU9lWqhroQp2H/O7auxBA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-github/-/eslint-plugin-github-4.9.2.tgz}
-    id: registry.npmjs.org/eslint-plugin-github/4.9.2
+  registry.npmjs.org/eslint-plugin-github@4.10.0(eslint@8.49.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-YKtqBtFbjih1wZNTwZjtLPEG6B/4ySMa38fgOo/rbMJpNKO3+OaKzwwOYkeKx/FapM/4MsTP9ExqUcDV+dkixA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-github/-/eslint-plugin-github-4.10.0.tgz}
+    id: registry.npmjs.org/eslint-plugin-github/4.10.0
     name: eslint-plugin-github
-    version: 4.9.2
+    version: 4.10.0
     hasBin: true
     peerDependencies:
       eslint: ^8.0.1
