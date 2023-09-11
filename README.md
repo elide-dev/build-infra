@@ -66,6 +66,8 @@ gain consistency:
 | ---------------- | -------------------------------- |
 | `container.yml`  | Build and push a container image |
 | `jvm.gradle.yml` | Run a Gradle build targeting JVM |
+| `jvm.maven.yml`  | Run a Maven build targeting JVM  |
+| `bazel.yml`      | Build targets with Bazel         |
 
 See below for documentation about reusable workflow inputs.
 
@@ -124,6 +126,68 @@ See below for an exhaustive list of all inputs for each build profile. You can u
 | `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                     |
 | `publish`         | `boolean` | Perform a publish after build    | `false`                     |
 | `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+
+### JVM: Maven
+
+- **Description:** Consistently build JVM outputs using Maven
+- **Workflow:** `.github/workflows/jvm.maven.yml`
+
+#### Inputs
+
+Inputs for the Maven workflow are nearly identical to those for the Gradle workflow (listed above):
+
+| Name              | Type      | Description                      | Default value               |
+| ----------------- | --------- | -------------------------------- | --------------------------- |
+| `action`          | `string`  | Maven goal(s) to execute         | `"package"`                 |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
+| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                     |
+| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                     |
+| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                      |
+| `checks`          | `boolean` | Run checks and Sonar             | `true`                      |
+| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                     |
+| `coverage_report` | `string`  | Path to coverage report          | _(None.)_                   |
+| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_                   |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
+| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_     |
+| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`         |
+| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                     |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
+| `label`           | `string`  | Label to show for build step     | `"Gradle"`                  |
+| `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                     |
+| `publish`         | `boolean` | Perform a publish after build    | `false`                     |
+| `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+
+### Bazel
+
+- **Description:** Run builds with Bazel
+- **Workflow:** `.github/workflows/bazel.yml`
+
+#### Inputs
+
+There are no required inputs for a Bazel build; the target specification defaults to the value
+`//...`, which builds all targets. The default `command` is `build`. The build is executed with
+Bazelisk, which will respect the `.bazelversion` present at the root of your project.
+
+| Name              | Type      | Description                      | Default value               |
+| ----------------- | --------- | -------------------------------- | --------------------------- |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
+| `command`         | `string`  | Bazel command to execute         | `"build"`                   |
+| `targets`         | `string`  | Bazel target string              | `"//..."`                   |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
+| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_     |
+| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`         |
+| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                     |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
 | `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
 
 ## Contributing
