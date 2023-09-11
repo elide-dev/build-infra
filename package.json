@@ -24,7 +24,7 @@
     },
     "devDependencies": {
       "@types/node": "^20",
-      "@typescript-eslint/parser": "^6.2.0",
+      "@typescript-eslint/parser": "^6.6.0",
       "@vercel/ncc": "^0.36.1",
       "@commitlint/config-conventional": "17.7.0",
       "commitlint": "17.7.1",
