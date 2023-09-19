@@ -1,5 +1,10 @@
 # elide ci infra
 
+[![Lint: Actions](https://github.com/elide-dev/build-infra/actions/workflows/check.actions-lint.ci.yml/badge.svg)](https://github.com/elide-dev/build-infra/actions/workflows/check.actions-lint.ci.yml)
+[![Lint: YAML](https://github.com/elide-dev/build-infra/actions/workflows/check.yaml-lint.ci.yml/badge.svg)](https://github.com/elide-dev/build-infra/actions/workflows/check.yaml-lint.ci.yml)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7693/badge)](https://www.bestpractices.dev/projects/7693)
+
+
 This repository hosts CI configurations which can be re-used across repositories under the Elide Cloud umbrella. It isn't necessarily meant for external use, but it's open source and you are free to use these workflows in your own repos (no backward compatibility guarantee is provided at this time).
 
 Build configurations expressed in this repository are typically used for repeated/templated repositories, such as code samples, plugins, and other structures which are consistent across codebases.
