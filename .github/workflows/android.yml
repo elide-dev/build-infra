@@ -1,4 +1,4 @@
-name: "Build: Gradle (JVM)"
+name: "Build: Gradle (Android)"
 
 on:
   workflow_call:
@@ -48,6 +48,7 @@ on:
         description: "JVM Version"
         required: false
         type: string
+        default: '17'
 
       ## JVM distribution.
       jvm_dist:
@@ -56,18 +57,12 @@ on:
         type: string
         default: 'adopt-hotspot'
 
-      ## Whether to install GraalVM.
-      install_gvm:
-        description: "Install GraalVM"
+      ## Whether to setup the Android SDK.
+      android:
+        description: "Install Android SDK"
         required: false
         type: boolean
-        default: false
-
-      ## GVM version to use.
-      gvm:
-        description: "GVM Version"
-        required: false
-        type: string
+        default: true
 
       ## Whether to report coverage.
       coverage:
@@ -87,13 +82,6 @@ on:
         description: "Coverage flags"
         required: false
         type: string
-
-      ## GVM components to install.
-      gvm_components:
-        description: "GVM Components"
-        required: false
-        type: string
-        default: 'native-image,js'
 
       ## Whether to cache locally.
       cache_local:
@@ -137,26 +125,12 @@ on:
         type: string
         default: "gradle-build-output"
 
-      ## Whether to upload a provenance release.
-      provenance:
-        description: "Provenance"
-        required: false
-        type: boolean
-        default: false
-
       ## Whether to run checks.
       checks:
         description: "Checks"
         required: false
         type: boolean
         default: true
-
-      ## Whether to perform release/publish steps.
-      publish:
-        description: "Publish"
-        required: false
-        type: boolean
-        default: false
 
       ## Whether to upload built reports.
       reports:
@@ -173,24 +147,19 @@ on:
         default: 'wrapper'
 
     secrets:
-      GDS_TOKEN:
-        description: "GDS token"
-        required: false
       SONAR_TOKEN:
         description: "Sonar token"
-        required: true
+        required: false
       BUILDLESS_APIKEY:
         description: "Buildless API key"
-        required: true
+        required: false
       CODECOV_TOKEN:
         description: "CodeCov token"
         required: false
 
 env:
-  GVM_VERSION: ${{ inputs.gvm || vars.GVM_VERSION || 'latest' }}
-  JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '21' }}
+  JVM_VERSION: ${{ inputs.jvm || vars.JVM_VERSION || '17' }}
   JVM_DIST: ${{ inputs.jvm_dist || vars.JVM_DIST || 'adopt-hotspot' }}
-  GVM_DIST: ${{ vars.GVM_DIST || 'graalvm' }}
   GRADLE_CACHE_LOCAL: ${{ inputs.cache_local }}
   GRADLE_CACHE_REMOTE: ${{ inputs.cache_remote }}
   BUILDLESS_APIKEY: ${{ secrets.BUILDLESS_APIKEY }}
@@ -200,12 +169,10 @@ permissions:
   contents: read
 
 jobs:
-  ## Build JVM app with Gradle
+  ## Build Android app with Gradle
   build:
     name: "${{ inputs.label }}: Build"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
-    outputs:
-      hashes: ${{ steps.hash.outputs.hashes }}
     permissions:
       contents: "write"
       id-token: "write"
@@ -234,15 +201,9 @@ jobs:
         with:
           distribution: ${{ env.JVM_DIST }}
           java-version: ${{ env.JVM_VERSION }}
-      - name: "Setup: GraalVM"
-        uses: buildless/setup-graalvm@b8dc5fccfbc65b21dd26e8341e7b21c86547f61b # v1.1.5
-        if: inputs.install_gvm
-        with:
-          components: ${{ inputs.gvm_components }}
-          distribution: ${{ env.GVM_DIST || 'graalvm' }}
-          java-version: ${{ env.JVM_VERSION }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          gds-token: ${{ secrets.GDS_TOKEN }}
+      - name: "Setup: Android SDK"
+        uses: buildless/setup-android@07976c6290703d34c16d382cb36445f98bb43b1f # v3.2.0
+        if: inputs.android
       - name: "Check: Gradle Wrapper"
         uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
         if: inputs.checks
@@ -262,10 +223,6 @@ jobs:
             ${{ inputs.action || 'build' }}
             ${{ inputs.flags }}
             -Pci=true
-      - name: "Build: Provenance Subject"
-        id: hash
-        run: |
-          echo "hashes=$(sha256sum ./build/libs/* | base64 -w0)" >> "$GITHUB_OUTPUT"
       - name: "Report: Codecov"
         uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
         if: inputs.coverage
@@ -281,17 +238,3 @@ jobs:
           path: |
             ./build/libs/
             ./build/reports/
-
-  ## Report: Provenance
-  provenance:
-    name: Provenance
-    needs: [build]
-    if: inputs.provenance
-    permissions:
-      actions: read
-      id-token: write
-      contents: write
-    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.9.0
-    with:
-      base64-subjects: "${{ needs.build.outputs.hashes }}"
-      upload-assets: ${{ inputs.publish }}
