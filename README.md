@@ -69,6 +69,7 @@ gain consistency:
 
 | Name             | Description                      |
 | ---------------- | -------------------------------- |
+| `android.yml`    | Build an Android app with Gradle |
 | `container.yml`  | Build and push a container image |
 | `jvm.gradle.yml` | Run a Gradle build targeting JVM |
 | `jvm.maven.yml`  | Run a Maven build targeting JVM  |
@@ -99,7 +100,38 @@ See below for an exhaustive list of all inputs for each build profile. You can u
 | `runner`         | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
 | `tags`           | `string`  | Tags to push to with built image | _(None.)_                   |
 
-### JVM: Gradle
+### Gradle: Android
+
+- **Description:** Consistently build JVM outputs using Gradle
+- **Workflow:** `.github/workflows/jvm.gradle.yml`
+
+#### Inputs
+
+| Name              | Type      | Description                      | Default value               |
+| ----------------- | --------- | -------------------------------- | --------------------------- |
+| `action`          | `string`  | Gradle task(s) to execute        | `"build"`                   |
+| `android`         | `boolean` | Install Android SDK              | true                        |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
+| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                     |
+| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                     |
+| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                      |
+| `checks`          | `boolean` | Run checks and Sonar             | `true`                      |
+| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                     |
+| `coverage_report` | `string`  | Path to coverage report          | _(None.)_                   |
+| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_                   |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
+| `gradle`          | `string`  | Gradle version to install & use  | `"wrapper"`                 |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
+| `label`           | `string`  | Label to show for build step     | `"Gradle"`                  |
+| `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+
+
+### Gradle: JVM
 
 - **Description:** Consistently build JVM outputs using Gradle
 - **Workflow:** `.github/workflows/jvm.gradle.yml`
