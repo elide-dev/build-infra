@@ -151,8 +151,12 @@ jobs:
           egress-policy: ${{ inputs.network || 'audit' }}
       - name: "Setup: Checkout"
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          persist-credentials: false
+      - name: "Setup: Buildless"
+        uses: buildless/setup@30e82389418c7f17046606183bc4c78b2c8913e0 # v1.0.2
       - name: "Setup: Cache"
-        uses: buildjet/cache@e376f15c6ec6dc595375c78633174c7e5f92dc0e # v3
+        uses: buildless/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         if: inputs.cache_action
         with:
           path: |
@@ -160,13 +164,13 @@ jobs:
           key: ${{ runner.os }}-mavenbuild-${{ hashFiles('**/*.pom.xml') }}
           restore-keys: ${{ runner.os }}-gradlebuild-
       - name: "Setup: JDK ${{ env.JVM_VERSION }}"
-        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
+        uses: buildless/setup-java@3232623d9c428cc5f228a01a2ae8d2d70f79775e # v4.0.0
         if: inputs.install_jvm
         with:
           distribution: ${{ env.JVM_DIST }}
           java-version: ${{ env.JVM_VERSION }}
       - name: "Setup: GraalVM"
-        uses: graalvm/setup-graalvm@2a93b69fdf86ac5a078a98c1a707744632e1da94 # v1.1.5
+        uses: buildless/setup-graalvm@b8dc5fccfbc65b21dd26e8341e7b21c86547f61b # v1.1.5
         if: inputs.install_gvm
         with:
           components: ${{ inputs.gvm_components }}

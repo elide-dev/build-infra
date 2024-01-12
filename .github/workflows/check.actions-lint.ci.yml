@@ -55,27 +55,29 @@ permissions:
   contents: read
 
 jobs:
-    ## Task: Lint workflows in this respository with Actions Lint
-    lint-workflow-actions:
-        name: "Workflows"
-        runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
-        permissions:
-            contents: "read"
-            id-token: "write"
-            checks: "write"
-            pull-requests: "read"
-        steps:
-            - name: "Setup: Harden Runner"
-              uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
-              with:
-                egress-policy: ${{ inputs.network || 'audit' }}
-            - name: "Setup: Checkout"
-              uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-            - name: "Setup: Go"
-              uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
-              with:
-                go-version: ${{ vars.GO_VERSION || '' }}
-            - name: "Setup: Action Linter"
-              run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
-            - name: "Lint: Actions"
-              run: actionlint
+  ## Task: Lint workflows in this respository with Actions Lint
+  lint-workflow-actions:
+    name: "Workflows"
+    runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
+    permissions:
+        contents: "read"
+        id-token: "write"
+        checks: "write"
+        pull-requests: "read"
+    steps:
+        - name: "Setup: Harden Runner"
+          uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+          with:
+            egress-policy: ${{ inputs.network || 'audit' }}
+        - name: "Setup: Checkout"
+          uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+          with:
+            persist-credentials: false
+        - name: "Setup: Go"
+          uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+          with:
+            go-version: ${{ vars.GO_VERSION || '' }}
+        - name: "Setup: Action Linter"
+          run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
+        - name: "Lint: Actions"
+          run: actionlint
