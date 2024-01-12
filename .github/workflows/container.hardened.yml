@@ -1,0 +1,135 @@
+name: "Container (Hardened)"
+
+on:
+  workflow_call:
+    inputs:
+      ## Coordinates for the image.
+      image:
+        description: "Image"
+        required: true
+        type: string
+
+      ## Tags to apply to the image. If unspecified, standard tags are applied.
+      tags:
+        description: "Tags"
+        required: false
+        type: string
+
+      ## Registry to push to, prefix to use.
+      registry:
+        description: "Registry"
+        required: false
+        default: "ghcr.io"
+        type: string
+
+      ## Whether to push the image to GHCR.
+      push:
+        description: "Push image"
+        default: false
+        required: false
+        type: boolean
+
+      ## Context path for the container build.
+      path:
+        description: "Context path"
+        default: "."
+        required: false
+        type: string
+
+      ## Dockerfile to build.
+      dockerfile:
+        description: "Dockerfile"
+        required: false
+        type: string
+
+      ## Platforms to build for.
+      platforms:
+        description: "Platforms"
+        default: "linux/amd64,linux/arm64"
+        required: false
+        type: string
+
+      ## Runner machine to use.
+      runner:
+        description: "Runner"
+        required: false
+        type: string
+
+      ## Whether to authenticate.
+      auth:
+        description: "Authenticate"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to generate provenance assertions and SBOMs.
+      provenance:
+        description: "Provenance"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to sign with cosign and Sigstore.
+      sigstore:
+        description: "Sigstore"
+        required: false
+        default: true
+        type: boolean
+
+    outputs:
+      ## Container image coordinate.
+      imageid:
+        description: "OCI Image ID"
+        value: ${{ jobs.build.outputs.imageid }}
+
+      ## Container image digest.
+      digest:
+        description: "OCI Image Digest"
+        value: ${{ jobs.build.outputs.digest }}
+
+env:
+    CONTAINER_REGISTRY: ghcr.io
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build a container image.
+  build:
+    name: "Build"
+    uses: ./.github/workflows/container.yml
+    permissions:
+      contents: read
+      id-token: write
+      checks: write
+      pull-requests: write
+      packages: write
+    with:
+      image: ${{ inputs.image }}
+      tags: ${{ inputs.tags }}
+      registry: ${{ inputs.registry }}
+      push: ${{ inputs.push }}
+      path: ${{ inputs.path }}
+      dockerfile: ${{ inputs.dockerfile }}
+      platforms: ${{ inputs.platforms }}
+      runner: ${{ inputs.runner }}
+      auth: ${{ inputs.auth }}
+      provenance: ${{ inputs.provenance }}
+      sigstore: ${{ inputs.sigstore }}
+
+  ## Generate and publish provenance info for SLSA Level 3.
+  provenance:
+    name: "SLSA Provenance"
+    if: inputs.provenance
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@v1.9.0
+    needs: [build]
+    permissions:
+      actions: read
+      id-token: write
+      packages: write
+    with:
+      image: ${{ needs.build.outputs.imageid }}
+      digest: ${{ needs.build.outputs.digest }}
+      registry-username: ${{ github.actor }}
+    secrets:
+      registry-password: ${{ secrets.GITHUB_TOKEN }}

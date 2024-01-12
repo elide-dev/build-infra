@@ -11,7 +11,7 @@ on:
 
       ## Tags to apply to the image. If unspecified, standard tags are applied.
       tags:
-        description: "Image"
+        description: "Tags"
         required: false
         type: string
 
@@ -62,6 +62,31 @@ on:
         default: true
         type: boolean
 
+      ## Whether to generate provenance assertions and SBOMs.
+      provenance:
+        description: "Provenance"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to sign with cosign and Sigstore.
+      sigstore:
+        description: "Sigstore"
+        required: false
+        default: true
+        type: boolean
+
+    outputs:
+      ## Container image coordinate.
+      imageid:
+        description: "OCI Image ID"
+        value: ${{ jobs.build.outputs.imageid }}
+
+      ## Container image digest.
+      digest:
+        description: "OCI Image Digest"
+        value: ${{ jobs.build.outputs.digest }}
+
 env:
     CONTAINER_REGISTRY: ghcr.io
 
@@ -70,24 +95,23 @@ permissions:
 
 jobs:
   ## Build a container image.
-  build-container:
+  build:
     name: "Build"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
-      contents: "read"
-      id-token: "write"
-      checks: "write"
-      pull-requests: "write"
-      packages: "write"
+      contents: read
+      id-token: write
+      checks: write
+      pull-requests: write
+      packages: write
     outputs:
       imageid: ${{ steps.dockerpush.outputs.imageid }}
       digest: ${{ steps.dockerpush.outputs.digest }}
     steps:
-        - name: Harden Runner
+        - name: "Setup: Harden Runner"
           uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
           with:
             egress-policy: audit
-
         - name: "Setup: Checkout"
           uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         - name: "Setup: QEMU"
@@ -106,6 +130,8 @@ jobs:
             registry: ${{ inputs.registry }}
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
+        - name: "Setup: Cosign"
+          uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.3.0
         - name: "Setup: Image Metadata"
           id: meta
           uses: docker/metadata-action@dbef88086f6cef02e264edb7dbf63250c17cef6c # v5.5.0
@@ -128,7 +154,8 @@ jobs:
             platforms: ${{ inputs.platforms }}
             context: ${{ inputs.path }}
             file: ${{ inputs.dockerfile }}
-            sbom: true
+            provenance: ${{ inputs.provenance }}
+            sbom: ${{ inputs.provenance }}
         - name: "Artifacts: Outputs"
           if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
           run: |
@@ -142,4 +169,14 @@ jobs:
             path: |
               ./image_id
               ./digest
-  
+        - name: "Artifacts: Sigstore"
+          if: inputs.sigstore
+          env:
+            DIGEST: ${{ steps.dockerpush.outputs.digest }}
+            TAGS: ${{ steps.meta.outputs.tags }}
+          run: |
+            images=""
+            for tag in ${TAGS}; do
+              images+="${tag}@${DIGEST} "
+            done
+            cosign sign --yes ${images}

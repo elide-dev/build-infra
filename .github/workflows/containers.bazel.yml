@@ -1,0 +1,43 @@
+name: "Containers: Bazel"
+
+on:
+  merge_group: {}
+
+  push:
+    branches:
+      - main
+    paths:
+      - containers/bazel
+      - containers/bazel/*
+      - containers/bazel/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.bazel.yml
+
+  pull_request:
+    paths:
+      - containers/bazel
+      - containers/bazel/*
+      - containers/bazel/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.bazel.yml
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build Bazel Container
+  build-bazel-container:
+    name: "Image"
+    uses: ./.github/workflows/container.hardened.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/bazel
+      path: containers/bazel
+      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
