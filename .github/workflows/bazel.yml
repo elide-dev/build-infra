@@ -105,10 +105,6 @@ on:
         required: false
         type: number
         default: 6
-        description: "No-outputs-found action"
-        default: "warn"
-        type: string
-        required: false
 
     secrets:
       BUILDLESS_APIKEY:
@@ -155,13 +151,13 @@ jobs:
       - name: "Setup: Bazelisk"
         uses: bazelbuild/setup-bazelisk@95c9bf48d0c570bb3e28e57108f3450cd67c1a44 # v2.0.0
       - name: "Setup: Buildless"
-        if: secrets.BUILDLESS_APIKEY != ""
+        if: secrets.BUILDLESS_APIKEY != ''
         run: echo "build --remote_cache_header=x-api-key=${{ secrets.BUILDLESS_APIKEY }}" >> local.bazelrc
       - name: "Setup: BuildBuddy"
-        if: secrets.BUILDBUDDY_APIKEY != ""
+        if: secrets.BUILDBUDDY_APIKEY != ''
         run: echo "build --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_APIKEY }}" >> local.bazelrc
       - name: "Setup: Bazel Version"
-        if: inputs.version != ""
+        if: inputs.version != ''
         run: echo "${{ inputs.version }}" > .bazelversion
       - name: "Build: Bazel"
         id: bazelbuild
