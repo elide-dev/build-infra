@@ -145,8 +145,8 @@ jobs:
       platforms: ${{ inputs.platforms }}
       runner: ${{ inputs.runner }}
       auth: ${{ inputs.auth }}
-      provenance: ${{ inputs.provenance }}
-      # we will handle sigstore publishing ourselves
+      # we will handle sigstore publishing and SLSA provenance ourselves
+      provenance: false
       sigstore: false
       cache-from: ${{ inputs.cache-from }}
       cache-to: ${{ inputs.cache-to }}
