@@ -211,7 +211,7 @@ jobs:
             load: ${{ inputs.push == false }}
             tags: ${{ inputs.tags || steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
-            platforms: ${{ inputs.push and inputs.platforms or 'linux/amd64' }}
+            platforms: ${{ inputs.push && inputs.platforms || 'linux/amd64' }}
             context: ${{ inputs.path }}
             file: ${{ inputs.dockerfile }}
             provenance: ${{ inputs.provenance }}
