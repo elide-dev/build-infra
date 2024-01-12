@@ -1,9 +1,12 @@
-FROM ubuntu:22.04@sha256:6042500cf4b44023ea1894effe7890666b0c5c7871ed83a97c36c76ae560bb9b
+# syntax=docker/dockerfile:1-labs
 
-ARG ZULU_VERSION=zulu19
+# base: ubuntu 22.04
+FROM ubuntu@sha256:6042500cf4b44023ea1894effe7890666b0c5c7871ed83a97c36c76ae560bb9b
+
+ARG ZULU_VERSION=zulu21
 ARG GRAAL_EDITION=ce
-ARG GRAAL_VERSION=22.3.0
-ARG JAVA_VERSION=java19
+ARG GRAAL_VERSION=23.1.0
+ARG JAVA_VERSION=java21
 
 LABEL org.opencontainers.image.vendor=Elide
 LABEL org.opencontainers.image.title="Elide Cloud: GVM19 Base"
@@ -13,7 +16,7 @@ LABEL org.opencontainers.image.url=https://github.com/elide-dev/build-infra
 LABEL org.opencontainers.image.base.name=elide-dev/runtime/gvm19
 LABEL org.opencontainers.image.source=https://github.com/elide-dev/build-infra/blob/main/containers/gvm/Dockerfile
 
-RUN apt-get update \
+RUN --security=sandbox apt-get update \
   && apt-get -y upgrade \
   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     ca-certificates \

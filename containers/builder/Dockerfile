@@ -1,9 +1,10 @@
+# syntax=docker/dockerfile:1-labs
 FROM ghcr.io/elide-dev/build-infra/gvm:latest
 
 ARG NODE_VERSION=20
 ARG YARN_VERSION="berry"
 
-RUN apt-get update \
+RUN --security=sandbox apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
         ca-certificates \
