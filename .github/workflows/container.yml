@@ -90,6 +90,41 @@ on:
         default: "container-image"
         type: string
 
+      ## Cache-from settings for Docker builds.
+      cache-from:
+        description: "Cache from"
+        default: "type=gha"
+        required: false
+        type: string
+
+      ## Cache-to settings for Docker builds.
+      cache-to:
+        description: "Cache to"
+        default: "type=gha,mode=max"
+        required: false
+        type: string
+
+      ## Cache-source sharing for Docker builds.
+      cache-source:
+        description: "Cache source"
+        default: ""
+        required: false
+        type: string
+
+      ## Cache key to use for GHA.
+      cache-key:
+        description: "Cache key"
+        default: ""
+        required: false
+        type: string
+
+      ## Cache restore keys to use for GHA.
+      cache-restore:
+        description: "Cache restore keys"
+        default: ""
+        required: false
+        type: string
+
     outputs:
       ## Container image coordinate.
       imageid:
@@ -156,6 +191,18 @@ jobs:
             registry: ${{ inputs.registry }}
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
+        - name: "Setup: GHA Cache"
+          id: ghacache
+          if: inputs.cache-key && inputs.cache-source != ''
+          uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3.3.3
+          with:
+            key: ${{ inputs.cache-key }}
+            restore-keys: ${{ inputs.cache-restore }}
+        - name: "Setup: Container Cache"
+          uses: reproducible-containers/buildkit-cache-dance@v2.1.2
+          if: inputs.cache-souce != '' || inputs.cache-key != ''
+          with:
+            cache-source: ${{ inputs.cache-source || inputs.cache-key }}
         - name: "Setup: Cosign"
           uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.3.0
         - name: "Setup: Image Metadata"
@@ -182,6 +229,8 @@ jobs:
             file: ${{ inputs.dockerfile }}
             provenance: ${{ inputs.provenance }}
             sbom: ${{ inputs.provenance }}
+            cache-from: ${{ inputs.cache-from }}
+            cache-to: ${{ inputs.cache-to }}
         - name: "Artifacts: Outputs"
           if: inputs.artifacts
           run: |

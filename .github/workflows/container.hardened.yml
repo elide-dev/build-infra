@@ -69,6 +69,41 @@ on:
         default: true
         type: boolean
 
+      ## Cache-from settings for Docker builds.
+      cache-from:
+        description: "Cache from"
+        default: "type=gha"
+        required: false
+        type: string
+
+      ## Cache-to settings for Docker builds.
+      cache-to:
+        description: "Cache to"
+        default: "type=gha,mode=max"
+        required: false
+        type: string
+
+      ## Cache-source sharing for Docker builds.
+      cache-source:
+        description: "Cache source"
+        default: ""
+        required: false
+        type: string
+
+      ## Cache key to use for GHA.
+      cache-key:
+        description: "Cache key"
+        default: ""
+        required: false
+        type: string
+
+      ## Cache restore keys to use for GHA.
+      cache-restore:
+        description: "Cache restore keys"
+        default: ""
+        required: false
+        type: string
+
     outputs:
       ## Container image coordinate.
       imageid:
@@ -120,6 +155,11 @@ jobs:
       provenance: ${{ inputs.provenance }}
       # we will handle sigstore publishing ourselves
       sigstore: false
+      cache-from: ${{ inputs.cache-from }}
+      cache-to: ${{ inputs.cache-to }}
+      cache-source: ${{ inputs.cache-source }}
+      cache-key: ${{ inputs.cache-key }}
+      cache-restore-keys: ${{ inputs.cache-restore-keys }}
 
   ## Generate and publish provenance info for SLSA Level 3.
   provenance:
