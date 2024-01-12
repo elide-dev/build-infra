@@ -120,6 +120,13 @@ on:
         type: string
         default: audit
 
+      ## Whether we are running against a private repository.
+      private:
+        description: "Private repo"
+        required: false
+        type: boolean
+        default: true
+
     secrets:
       BUILDLESS_APIKEY:
         description: "Buildless API key"
@@ -210,3 +217,4 @@ jobs:
     with:
       base64-subjects: "${{ needs.build.outputs.hashes }}"
       upload-assets: ${{ inputs.push }}
+      private-repository: ${{ inputs.private }}
