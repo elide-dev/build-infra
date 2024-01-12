@@ -90,13 +90,6 @@ on:
         required: false
         type: string
 
-      ## Cache key to use for GHA.
-      cache-key:
-        description: "Cache key"
-        default: ""
-        required: false
-        type: string
-
       ## Cache restore keys to use for GHA.
       cache-restore:
         description: "Cache restore keys"
@@ -158,7 +151,6 @@ jobs:
       cache-from: ${{ inputs.cache-from }}
       cache-to: ${{ inputs.cache-to }}
       cache-source: ${{ inputs.cache-source }}
-      cache-key: ${{ inputs.cache-key }}
       cache-restore: ${{ inputs.cache-restore }}
 
   ## Generate and publish provenance info for SLSA Level 3.

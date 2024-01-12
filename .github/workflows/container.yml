@@ -111,13 +111,6 @@ on:
         required: false
         type: string
 
-      ## Cache key to use for GHA.
-      cache-key:
-        description: "Cache key"
-        default: ""
-        required: false
-        type: string
-
       ## Cache restore keys to use for GHA.
       cache-restore:
         description: "Cache restore keys"
@@ -191,18 +184,11 @@ jobs:
             registry: ${{ inputs.registry }}
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
-        - name: "Setup: GHA Cache"
-          id: ghacache
-          if: inputs.cache-key != '' && inputs.cache-source == ''
-          uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3.3.3
-          with:
-            key: ${{ inputs.cache-key }}
-            restore-keys: ${{ inputs.cache-restore }}
         - name: "Setup: Container Cache"
           uses: reproducible-containers/buildkit-cache-dance@v2.1.2
-          if: inputs.cache-souce != '' || inputs.cache-key != ''
+          if: inputs.cache-souce != ''
           with:
-            cache-source: ${{ inputs.cache-source || inputs.cache-key }}
+            cache-source: ${{ inputs.cache-source }}
         - name: "Setup: Cosign"
           uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.3.0
         - name: "Setup: Image Metadata"
