@@ -6,6 +6,6 @@ RUN --security=sandbox npm install -g --ignore-scripts \
     npm@9.6.7 \
     pnpm \
     && groupadd builder \
-    && useradd --system --group builder
+    && useradd --system -g builder builder
 
 USER builder

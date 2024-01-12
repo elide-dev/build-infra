@@ -192,7 +192,7 @@ jobs:
   ## Provenance builder.
   provenance:
     needs: [build]
-    if: inputs.provenance
+    if: inputs.provenance && inputs.push
     permissions:
       actions: read
       id-token: write

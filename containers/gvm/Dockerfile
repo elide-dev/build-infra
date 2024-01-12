@@ -19,7 +19,7 @@ LABEL org.opencontainers.image.source=https://github.com/elide-dev/build-infra/b
 RUN --security=sandbox apt-get update \
   && apt-get -y upgrade \
   && groupadd builder \
-  && useradd --system --group builder \
+  && useradd --system -g builder builder \
   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     ca-certificates \
     curl \

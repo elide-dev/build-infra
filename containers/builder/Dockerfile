@@ -19,7 +19,7 @@ RUN --security=sandbox apt-get update \
         "yarn@$YARN_VERSION" \
         pnpm \
     && groupadd builder \
-    && useradd --system --group builder \
+    && useradd --system -g builder builder \
     && rm -rf /var/lib/apt/lists/*
 
 USER builder
