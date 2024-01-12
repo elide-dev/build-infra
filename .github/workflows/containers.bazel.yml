@@ -1,4 +1,4 @@
-name: "Containers: GVM"
+name: "Containers: Bazel"
 
 on:
   merge_group: {}
@@ -7,28 +7,29 @@ on:
     branches:
       - main
     paths:
-      - containers/gvm
-      - containers/gvm/*
-      - containers/gvm/**/*
+      - containers/bazel
+      - containers/bazel/*
+      - containers/bazel/**/*
       - .github/workflows/container.yml
-      - .github/workflows/containers.gvm.yml
+      - .github/workflows/containers.bazel.yml
 
   pull_request:
     paths:
-      - containers/gvm
-      - containers/gvm/*
-      - containers/gvm/**/*
+      - containers/bazel
+      - containers/bazel/*
+      - containers/bazel/**/*
       - .github/workflows/container.yml
-      - .github/workflows/containers.gvm.yml
+      - .github/workflows/containers.bazel.yml
 
 permissions:
   contents: read
 
 jobs:
-  ## Build GVM Container
-  build-gvm-container:
-    name: "GVM21 Image"
+  ## Build Bazel Container
+  build-bazel-container:
+    name: "Bazel Image"
     uses: ./.github/workflows/container.hardened.yml
+    secrets: inherit
     permissions:
       actions: read
       checks: write
@@ -38,5 +39,5 @@ jobs:
       pull-requests: write
     with:
       runner: ubuntu-latest
-      image: elide-dev/build-infra/gvm
-      path: containers/gvm
+      image: elide-dev/build-infra/bazel
+      path: containers/bazel

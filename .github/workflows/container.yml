@@ -11,7 +11,7 @@ on:
 
       ## Tags to apply to the image. If unspecified, standard tags are applied.
       tags:
-        description: "Image"
+        description: "Tags"
         required: false
         type: string
 
@@ -62,6 +62,83 @@ on:
         default: true
         type: boolean
 
+      ## Whether to generate provenance assertions and SBOMs.
+      provenance:
+        description: "Provenance"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to sign with cosign and Sigstore.
+      sigstore:
+        description: "Sigstore"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to push artifacts.
+      artifacts:
+        description: "Artifacts"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to push artifacts.
+      artifact:
+        description: "Artifact Name"
+        required: false
+        default: "container-image"
+        type: string
+
+      ## Cache-from settings for Docker builds.
+      cache_from:
+        description: "Cache from"
+        default: "type=gha"
+        required: false
+        type: string
+
+      ## Cache-to settings for Docker builds.
+      cache_to:
+        description: "Cache to"
+        default: "type=gha,mode=max"
+        required: false
+        type: string
+
+      ## Cache-source sharing for Docker builds.
+      cache_source:
+        description: "Cache source"
+        default: ""
+        required: false
+        type: string
+
+      ## Network mode to apply.
+      network:
+        description: "Network"
+        required: false
+        type: string
+        default: audit
+
+    outputs:
+      ## Container image coordinate.
+      imageid:
+        description: "OCI Image ID"
+        value: ${{ jobs.build.outputs.imageid }}
+
+      ## Container image digest.
+      digest:
+        description: "OCI Image Digest"
+        value: ${{ jobs.build.outputs.digest }}
+
+      ## Container tags.
+      tags:
+        description: "Image Tags"
+        value: ${{ jobs.build.outputs.tags }}
+
+      ## Container labels.
+      labels:
+        description: "Image Labels"
+        value: ${{ jobs.build.outputs.labels }}
+
 env:
     CONTAINER_REGISTRY: ghcr.io
 
@@ -70,24 +147,25 @@ permissions:
 
 jobs:
   ## Build a container image.
-  build-container:
-    name: "Build"
+  build:
+    name: "Container"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
-      contents: "read"
-      id-token: "write"
-      checks: "write"
-      pull-requests: "write"
-      packages: "write"
+      contents: read
+      id-token: write
+      checks: write
+      pull-requests: write
+      packages: write
     outputs:
       imageid: ${{ steps.dockerpush.outputs.imageid }}
       digest: ${{ steps.dockerpush.outputs.digest }}
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
     steps:
-        - name: Harden Runner
+        - name: "Setup: Harden Runner"
           uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
           with:
-            egress-policy: audit
-
+            egress-policy: ${{ inputs.network || 'audit' }}
         - name: "Setup: Checkout"
           uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         - name: "Setup: QEMU"
@@ -106,6 +184,13 @@ jobs:
             registry: ${{ inputs.registry }}
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
+        - name: "Setup: Container Cache"
+          uses: reproducible-containers/buildkit-cache-dance@v2.1.2
+          if: inputs.cache_source != ''
+          with:
+            cache-source: ${{ inputs.cache_source }}
+        - name: "Setup: Cosign"
+          uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.3.0
         - name: "Setup: Image Metadata"
           id: meta
           uses: docker/metadata-action@dbef88086f6cef02e264edb7dbf63250c17cef6c # v5.5.0
@@ -123,23 +208,37 @@ jobs:
           id: dockerpush
           with:
             push: ${{ inputs.push }}
+            load: ${{ inputs.push == false }}
             tags: ${{ inputs.tags || steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
-            platforms: ${{ inputs.platforms }}
+            platforms: ${{ inputs.push && inputs.platforms || 'linux/amd64' }}
             context: ${{ inputs.path }}
             file: ${{ inputs.dockerfile }}
-            sbom: true
+            provenance: ${{ inputs.provenance }}
+            sbom: ${{ inputs.provenance }}
+            cache-from: ${{ inputs.cache_from }}
+            cache-to: ${{ inputs.cache_to }}
         - name: "Artifacts: Outputs"
-          if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
+          if: inputs.artifacts
           run: |
             echo "${{ steps.dockerpush.outputs.imageid }}" > ./image_id
             echo "${{ steps.dockerpush.outputs.digest }}" > ./digest
         - name: "Artifacts: Release"
           uses: actions/upload-artifact@c7d193f32edcb7bfad88892161225aeda64e9392 # v4.0.0
-          if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
+          if: inputs.artifacts
           with:
-            name: release-artifacts
+            name: ${{ inputs.artifact }}
             path: |
               ./image_id
               ./digest
-  
+        - name: "Artifacts: Sigstore"
+          if: inputs.sigstore && steps.dockerpush.outputs.digest != ''
+          env:
+            DIGEST: ${{ steps.dockerpush.outputs.digest }}
+            TAGS: ${{ steps.meta.outputs.tags }}
+          run: |
+            images=""
+            for tag in ${TAGS}; do
+              images+="${tag}@${DIGEST} "
+            done
+            cosign sign --yes "${images}"

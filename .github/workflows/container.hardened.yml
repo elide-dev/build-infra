@@ -1,0 +1,171 @@
+name: "Container (Hardened)"
+
+on:
+  workflow_call:
+    inputs:
+      ## Coordinates for the image.
+      image:
+        description: "Image"
+        required: true
+        type: string
+
+      ## Tags to apply to the image. If unspecified, standard tags are applied.
+      tags:
+        description: "Tags"
+        required: false
+        type: string
+
+      ## Registry to push to, prefix to use.
+      registry:
+        description: "Registry"
+        required: false
+        default: "ghcr.io"
+        type: string
+
+      ## Whether to push the image to GHCR.
+      push:
+        description: "Push image"
+        default: true
+        required: false
+        type: boolean
+
+      ## Context path for the container build.
+      path:
+        description: "Context path"
+        default: "."
+        required: false
+        type: string
+
+      ## Dockerfile to build.
+      dockerfile:
+        description: "Dockerfile"
+        required: false
+        type: string
+
+      ## Platforms to build for.
+      platforms:
+        description: "Platforms"
+        default: "linux/amd64,linux/arm64"
+        required: false
+        type: string
+
+      ## Runner machine to use.
+      runner:
+        description: "Runner"
+        required: false
+        type: string
+
+      ## Whether to authenticate.
+      auth:
+        description: "Authenticate"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to generate provenance assertions and SBOMs.
+      provenance:
+        description: "Provenance"
+        required: false
+        default: true
+        type: boolean
+
+      ## Cache-from settings for Docker builds.
+      cache_from:
+        description: "Cache from"
+        default: "type=gha"
+        required: false
+        type: string
+
+      ## Cache-to settings for Docker builds.
+      cache_to:
+        description: "Cache to"
+        default: "type=gha,mode=max"
+        required: false
+        type: string
+
+      ## Cache-source sharing for Docker builds.
+      cache_source:
+        description: "Cache source"
+        default: ""
+        required: false
+        type: string
+
+      ## Network mode to apply.
+      network:
+        description: "Network"
+        required: false
+        type: string
+        default: audit
+
+    outputs:
+      ## Container image coordinate.
+      imageid:
+        description: "OCI Image ID"
+        value: ${{ jobs.build.outputs.imageid }}
+
+      ## Container image digest.
+      digest:
+        description: "OCI Image Digest"
+        value: ${{ jobs.build.outputs.digest }}
+
+      ## Container tags.
+      tags:
+        description: "Image Tags"
+        value: ${{ jobs.build.outputs.tags }}
+
+      ## Container labels.
+      labels:
+        description: "Image Labels"
+        value: ${{ jobs.build.outputs.labels }}
+
+env:
+    CONTAINER_REGISTRY: ghcr.io
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build a container image.
+  build:
+    name: "Hardened"
+    uses: ./.github/workflows/container.yml
+    permissions:
+      contents: read
+      id-token: write
+      checks: write
+      pull-requests: write
+      packages: write
+    with:
+      image: ${{ inputs.image }}
+      tags: ${{ inputs.tags }}
+      registry: ${{ inputs.registry }}
+      push: ${{ inputs.push }}
+      path: ${{ inputs.path }}
+      dockerfile: ${{ inputs.dockerfile }}
+      platforms: ${{ inputs.platforms }}
+      runner: ${{ inputs.runner }}
+      auth: ${{ inputs.auth }}
+      # we will handle sigstore publishing and SLSA provenance ourselves
+      provenance: false
+      sigstore: false
+      cache_from: ${{ inputs.cache_from }}
+      cache_to: ${{ inputs.cache_to }}
+      cache_source: ${{ inputs.cache_source }}
+      network: ${{ inputs.network }}
+
+  ## Generate and publish provenance info for SLSA Level 3.
+  provenance:
+    name: "SLSA Provenance"
+    if: inputs.provenance
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@v1.9.0
+    needs: [build]
+    permissions:
+      actions: read
+      id-token: write
+      packages: write
+    with:
+      image: ${{ inputs.registry }}/${{ inputs.image }}
+      digest: ${{ needs.build.outputs.digest }}
+      registry-username: ${{ github.actor }}
+    secrets:
+      registry-password: ${{ secrets.GITHUB_TOKEN }}
