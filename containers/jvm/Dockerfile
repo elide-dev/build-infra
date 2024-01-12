@@ -15,6 +15,7 @@ LABEL org.opencontainers.image.source=https://github.com/elide-dev/build-infra/b
 
 RUN --security=sandbox apt-get update \
   && apt-get -y upgrade \
+  && useradd --system --group builder \
   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     ca-certificates \
     curl \
@@ -30,5 +31,6 @@ RUN --security=sandbox apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && echo "JDK image ready."
 
+USER builder
 ENV JAVA_HOME="/usr/lib/jvm/${JAVA_VERSION}" \
   PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin

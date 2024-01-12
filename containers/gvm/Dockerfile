@@ -18,6 +18,7 @@ LABEL org.opencontainers.image.source=https://github.com/elide-dev/build-infra/b
 
 RUN --security=sandbox apt-get update \
   && apt-get -y upgrade \
+  && useradd --system --group builder \
   && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
     ca-certificates \
     curl \
@@ -57,6 +58,8 @@ RUN --security=sandbox apt-get update \
     wget \
     tar \
   && rm -rf /var/lib/apt/lists/*
+
+USER builder
 
 ENV GRAALVM_HOME=/usr/lib/gvm \
   PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/lib/gvm/bin:/sbin:/bin
