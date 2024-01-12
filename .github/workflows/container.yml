@@ -231,7 +231,7 @@ jobs:
               ./image_id
               ./digest
         - name: "Artifacts: Sigstore"
-          if: inputs.sigstore
+          if: inputs.sigstore && steps.dockerpush.outputs.digest != ''
           env:
             DIGEST: ${{ steps.dockerpush.outputs.digest }}
             TAGS: ${{ steps.meta.outputs.tags }}

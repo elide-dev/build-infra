@@ -27,10 +27,10 @@ permissions:
 jobs:
   ## Build JVM Container
   build-jvm-container:
-    name: "Image"
-    uses: ./.github/workflows/container.yml
-    secrets: inherit
+    name: "JVM Image"
+    uses: ./.github/workflows/container.hardened.yml
     permissions:
+      actions: read
       checks: write
       id-token: write
       contents: read

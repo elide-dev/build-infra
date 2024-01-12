@@ -27,10 +27,10 @@ permissions:
 jobs:
   ## Build GVM Container
   build-gvm-container:
-    name: "Image"
-    uses: ./.github/workflows/container.yml
-    secrets: inherit
+    name: "GVM Image"
+    uses: ./.github/workflows/container.hardened.yml
     permissions:
+      actions: read
       checks: write
       id-token: write
       contents: read
