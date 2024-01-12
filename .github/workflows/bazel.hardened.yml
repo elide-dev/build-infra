@@ -37,14 +37,14 @@ on:
         type: string
 
       ## Whether to cache using Actions.
-      cache_action:
+      cache-action:
         description: "Action cache"
         required: false
         type: boolean
         default: true
 
       ## Whether to apply read-only mode to the cache.
-      cache_read_only:
+      cache-read-only:
         description: "Read-only cache"
         required: false
         type: boolean
@@ -106,6 +106,13 @@ on:
         type: number
         default: 6
 
+      ## Whether to push artifacts and caches.
+      push:
+        description: "Push"
+        required: false
+        type: boolean
+        default: false
+
     secrets:
       BUILDLESS_APIKEY:
         description: "Buildless API key"
@@ -119,7 +126,7 @@ permissions:
 
 jobs:
   ## Build with Bazel
-  build-bazel:
+  build:
     name: ${{ inputs.label }}
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
@@ -180,11 +187,11 @@ jobs:
         run: |
           set -euo pipefail
           sha256sum ${{ inputs.outputs }} > checksums
-          echo "hashes=$(cat checksums | base64 -w0)" >> "$GITHUB_OUTPUT"
+          echo "hashes=$(base64 -w0 < checksums)" >> "$GITHUB_OUTPUT"
 
   ## Provenance builder.
   provenance:
-    needs: [build-bazel]
+    needs: [build]
     if: inputs.provenance
     permissions:
       actions: read

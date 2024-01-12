@@ -18,6 +18,7 @@ RUN --security=sandbox apt-get update \
     && npm install -g \
         "yarn@$YARN_VERSION" \
         pnpm \
+    && groupadd builder \
     && useradd --system --group builder \
     && rm -rf /var/lib/apt/lists/*
 

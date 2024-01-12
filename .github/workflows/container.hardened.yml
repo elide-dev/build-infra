@@ -70,29 +70,22 @@ on:
         type: boolean
 
       ## Cache-from settings for Docker builds.
-      cache-from:
+      cache_from:
         description: "Cache from"
         default: "type=gha"
         required: false
         type: string
 
       ## Cache-to settings for Docker builds.
-      cache-to:
+      cache_to:
         description: "Cache to"
         default: "type=gha,mode=max"
         required: false
         type: string
 
       ## Cache-source sharing for Docker builds.
-      cache-source:
+      cache_source:
         description: "Cache source"
-        default: ""
-        required: false
-        type: string
-
-      ## Cache restore keys to use for GHA.
-      cache-restore:
-        description: "Cache restore keys"
         default: ""
         required: false
         type: string
@@ -148,10 +141,10 @@ jobs:
       # we will handle sigstore publishing and SLSA provenance ourselves
       provenance: false
       sigstore: false
-      cache-from: ${{ inputs.cache-from }}
-      cache-to: ${{ inputs.cache-to }}
-      cache-source: ${{ inputs.cache-source }}
-      cache-restore: ${{ inputs.cache-restore }}
+      cache_from: ${{ inputs.cache_from }}
+      cache_to: ${{ inputs.cache_to }}
+      cache_source: ${{ inputs.cache_source }}
+      cache_restore: ${{ inputs.cache_restore }}
 
   ## Generate and publish provenance info for SLSA Level 3.
   provenance:
