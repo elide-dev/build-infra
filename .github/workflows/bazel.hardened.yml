@@ -1,4 +1,4 @@
-name: "Bazel"
+name: "Bazel (Hardened)"
 
 on:
   workflow_call:
@@ -64,6 +64,13 @@ on:
         type: boolean
         default: true
 
+      ## Whether to generate and publish provenance info.
+      provenance:
+        description: "Provenance"
+        required: false
+        type: boolean
+        default: false
+
       ## Bazel version to force
       version:
         description: "Bazel version"
@@ -71,7 +78,7 @@ on:
         type: string
         default: ""
 
-      ## Artifact outputs
+      ## Bazel outputs for provenance and artifacts
       outputs:
         description: "Outputs list"
         required: false
@@ -167,3 +174,23 @@ jobs:
           retention-days: ${{ inputs.retention }}
           compression-level: ${{ inputs.compression }}
           if-no-files-found: warn
+      - name: "Build: Provenance Subjects"
+        id: hash
+        if: inputs.provenance && inputs.outputs != ''
+        run: |
+          set -euo pipefail
+          sha256sum ${{ inputs.outputs }} > checksums
+          echo "hashes=$(cat checksums | base64 -w0)" >> "$GITHUB_OUTPUT"
+
+  ## Provenance builder.
+  provenance:
+    needs: [build-bazel]
+    if: inputs.provenance
+    permissions:
+      actions: read
+      id-token: write
+      contents: write
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.9.0
+    with:
+      base64-subjects: "${{ needs.build.outputs.hashes }}"
+      upload-assets: ${{ inputs.push }}
