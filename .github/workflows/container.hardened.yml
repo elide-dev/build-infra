@@ -69,13 +69,6 @@ on:
         default: true
         type: boolean
 
-      ## Whether to sign with cosign and Sigstore.
-      sigstore:
-        description: "Sigstore"
-        required: false
-        default: true
-        type: boolean
-
     outputs:
       ## Container image coordinate.
       imageid:
@@ -115,7 +108,8 @@ jobs:
       runner: ${{ inputs.runner }}
       auth: ${{ inputs.auth }}
       provenance: ${{ inputs.provenance }}
-      sigstore: ${{ inputs.sigstore && inputs.push }}
+      # we will handle sigstore publishing ourselves
+      sigstore: false
 
   ## Generate and publish provenance info for SLSA Level 3.
   provenance:

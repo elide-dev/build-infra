@@ -76,6 +76,20 @@ on:
         default: true
         type: boolean
 
+      ## Whether to push artifacts.
+      artifacts:
+        description: "Artifacts"
+        required: false
+        default: true
+        type: boolean
+
+      ## Whether to push artifacts.
+      artifact:
+        description: "Artifact Name"
+        required: false
+        default: "container-image"
+        type: string
+
     outputs:
       ## Container image coordinate.
       imageid:
@@ -157,15 +171,14 @@ jobs:
             provenance: ${{ inputs.provenance }}
             sbom: ${{ inputs.provenance }}
         - name: "Artifacts: Outputs"
-          if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
           run: |
             echo "${{ steps.dockerpush.outputs.imageid }}" > ./image_id
             echo "${{ steps.dockerpush.outputs.digest }}" > ./digest
         - name: "Artifacts: Release"
           uses: actions/upload-artifact@c7d193f32edcb7bfad88892161225aeda64e9392 # v4.0.0
-          if: ${{ github.ref == 'refs/heads/main' || (inputs && inputs.push) }}
+          if: inputs.artifacts
           with:
-            name: release-artifacts
+            name: ${{ inputs.artifact }}
             path: |
               ./image_id
               ./digest
