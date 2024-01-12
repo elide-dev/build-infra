@@ -25,7 +25,7 @@ on:
       ## Whether to push the image to GHCR.
       push:
         description: "Push image"
-        default: false
+        default: true
         required: false
         type: boolean
 
@@ -115,7 +115,7 @@ jobs:
       runner: ${{ inputs.runner }}
       auth: ${{ inputs.auth }}
       provenance: ${{ inputs.provenance }}
-      sigstore: ${{ inputs.sigstore }}
+      sigstore: ${{ inputs.sigstore && inputs.push }}
 
   ## Generate and publish provenance info for SLSA Level 3.
   provenance:

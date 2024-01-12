@@ -27,7 +27,7 @@ permissions:
 jobs:
   ## Build Bazel Container
   build-bazel-container:
-    name: "Image"
+    name: "Bazel Image"
     uses: ./.github/workflows/container.hardened.yml
     secrets: inherit
     permissions:
@@ -41,4 +41,3 @@ jobs:
       runner: ubuntu-latest
       image: elide-dev/build-infra/bazel
       path: containers/bazel
-      push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
