@@ -41,3 +41,4 @@ jobs:
       runner: ubuntu-latest
       image: elide-dev/build-infra/bazel
       path: containers/bazel
+      cache-key: containers-bazel

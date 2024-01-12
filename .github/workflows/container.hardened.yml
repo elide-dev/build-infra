@@ -159,7 +159,7 @@ jobs:
       cache-to: ${{ inputs.cache-to }}
       cache-source: ${{ inputs.cache-source }}
       cache-key: ${{ inputs.cache-key }}
-      cache-restore-keys: ${{ inputs.cache-restore-keys }}
+      cache-restore: ${{ inputs.cache-restore }}
 
   ## Generate and publish provenance info for SLSA Level 3.
   provenance:
