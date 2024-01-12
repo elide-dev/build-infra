@@ -99,6 +99,13 @@ on:
         type: number
         default: 6
 
+      ## Network mode to apply.
+      network:
+        description: "Network"
+        required: false
+        type: string
+        default: audit
+
     secrets:
       BUILDLESS_APIKEY:
         description: "Buildless API key"
@@ -129,7 +136,7 @@ jobs:
       - name: "Setup: Harden Runner"
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
         with:
-          egress-policy: audit
+          egress-policy: ${{ inputs.network }}
       - name: "Setup: Checkout"
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: "Setup: Cache"
@@ -167,3 +174,10 @@ jobs:
           retention-days: ${{ inputs.retention }}
           compression-level: ${{ inputs.compression }}
           if-no-files-found: warn
+      - name: "Build: Output Subjects"
+        id: hash
+        if: inputs.outputs != ''
+        run: |
+          set -euo pipefail
+          sha256sum ${{ inputs.outputs }} > checksums
+          echo "hashes=$(base64 -w0 < checksums)" >> "$GITHUB_OUTPUT"

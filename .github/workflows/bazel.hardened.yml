@@ -37,14 +37,14 @@ on:
         type: string
 
       ## Whether to cache using Actions.
-      cache-action:
+      cache_action:
         description: "Action cache"
         required: false
         type: boolean
         default: true
 
       ## Whether to apply read-only mode to the cache.
-      cache-read-only:
+      cache_read_only:
         description: "Read-only cache"
         required: false
         type: boolean
@@ -113,6 +113,13 @@ on:
         type: boolean
         default: false
 
+      ## Network mode to apply.
+      network:
+        description: "Network"
+        required: false
+        type: string
+        default: audit
+
     secrets:
       BUILDLESS_APIKEY:
         description: "Buildless API key"
@@ -143,7 +150,7 @@ jobs:
       - name: "Setup: Harden Runner"
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
         with:
-          egress-policy: audit
+          egress-policy: ${{ inputs.network }}
       - name: "Setup: Checkout"
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: "Setup: Cache"

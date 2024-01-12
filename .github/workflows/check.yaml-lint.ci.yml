@@ -12,6 +12,15 @@ on:
     release:
         types: [created]
 
+    ## Allow this workflow to be reused.
+    workflow_call:
+      inputs:
+        network:
+          description: "Network"
+          required: false
+          type: string
+          default: audit
+
     ## Check on push to `main` if modified
     push:
         branches:
@@ -52,11 +61,10 @@ jobs:
             checks: "write"
             pull-requests: "read"
         steps:
-            - name: Harden Runner
+            - name: "Setup: Harden Runner"
               uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
               with:
-                egress-policy: audit
-
+                egress-policy: ${{ inputs.network }}
             - name: "Setup: Checkout"
               uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
             - name: "Setup: PNPM"
@@ -68,7 +76,6 @@ jobs:
               with:
                 node-version: ${{ env.NODE_VERSION }}
                 cache: "pnpm"
-
             - name: "Setup: NPM Credentials"
               run: |
                 echo "@buf:registry=https://buf.build/gen/npm/v1" >> ~/.npmrc;
