@@ -101,6 +101,16 @@ on:
         description: "OCI Image Digest"
         value: ${{ jobs.build.outputs.digest }}
 
+      ## Container tags.
+      tags:
+        description: "Image Tags"
+        value: ${{ jobs.build.outputs.tags }}
+
+      ## Container labels.
+      labels:
+        description: "Image Labels"
+        value: ${{ jobs.build.outputs.labels }}
+
 env:
     CONTAINER_REGISTRY: ghcr.io
 
@@ -121,6 +131,8 @@ jobs:
     outputs:
       imageid: ${{ steps.dockerpush.outputs.imageid }}
       digest: ${{ steps.dockerpush.outputs.digest }}
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
     steps:
         - name: "Setup: Harden Runner"
           uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
@@ -171,6 +183,7 @@ jobs:
             provenance: ${{ inputs.provenance }}
             sbom: ${{ inputs.provenance }}
         - name: "Artifacts: Outputs"
+          if: inputs.artifacts
           run: |
             echo "${{ steps.dockerpush.outputs.imageid }}" > ./image_id
             echo "${{ steps.dockerpush.outputs.digest }}" > ./digest
