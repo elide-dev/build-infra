@@ -193,7 +193,7 @@ jobs:
             password: ${{ secrets.GITHUB_TOKEN }}
         - name: "Setup: GHA Cache"
           id: ghacache
-          if: inputs.cache-key && inputs.cache-source != ''
+          if: inputs.cache-key != '' && inputs.cache-source == ''
           uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3.3.3
           with:
             key: ${{ inputs.cache-key }}
