@@ -127,7 +127,7 @@ permissions:
 jobs:
   ## Build a container image.
   build:
-    name: "Build"
+    name: "Hardened"
     uses: ./.github/workflows/container.yml
     permissions:
       contents: read

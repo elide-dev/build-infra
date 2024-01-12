@@ -27,7 +27,7 @@ permissions:
 jobs:
   ## Build Node Container
   build-node-container:
-    name: "Node Image"
+    name: "Node v21 Image"
     uses: ./.github/workflows/container.hardened.yml
     permissions:
       actions: read

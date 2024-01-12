@@ -27,7 +27,7 @@ permissions:
 jobs:
   ## Build GVM Container
   build-gvm-container:
-    name: "GVM Image"
+    name: "GVM21 Image"
     uses: ./.github/workflows/container.hardened.yml
     permissions:
       actions: read

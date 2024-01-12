@@ -148,7 +148,7 @@ permissions:
 jobs:
   ## Build a container image.
   build:
-    name: "Build"
+    name: "Container"
     runs-on: ${{ inputs.runner || vars.RUNNER || vars.RUNNER_AMD64 || vars.RUNNER_DEFAULT || 'ubuntu-latest' }}
     permissions:
       contents: read
