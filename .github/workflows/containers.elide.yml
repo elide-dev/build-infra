@@ -40,3 +40,4 @@ jobs:
       runner: ubuntu-latest
       image: elide-dev/build-infra/elide
       path: containers/elide
+      platforms: "linux/amd64"
