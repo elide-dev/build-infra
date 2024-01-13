@@ -2,6 +2,10 @@
 
 # mantic
 ARG BASE_VERSION="@sha256:8d093e0651575a6437cc4a3d561f892a345d263aeac6156ef378fe6a4ccabd4c"
+ARG LLVM_VERSION=16
+ARG NODEJS_VERSION=v20.10.0
+ARG NODE_PACKAGE=node-${NODEJS_VERSION}-linux-x64
+ARG NODE_HOME=/opt/$NODE_PACKAGE
 
 FROM --platform=linux/amd64 ubuntu${BASE_VERSION}
 
@@ -57,6 +61,8 @@ RUN --security=sandbox echo "Installing packages..." \
     && ln -s /bin/bazelisk /bin/bazel \
     && /bin/bazel version \
     && echo "Bazel is ready." \
+    && echo "Installing Node..." \
+    && curl https://nodejs.org/dist/${NODEJS_VERSION}/${NODE_PACKAGE}.tar.xz | tar xvfJ - -C /opt \
     && echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
@@ -70,4 +76,6 @@ COPY bazel.rc /etc/bazel.bazelrc
 
 ENV CC=clang \
     JAVA_HOME=/usr/lib/jvm \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive \
+    NODE_PATH ${NODE_HOME}/lib/node_modules \
+    PATH ${NODE_HOME}/bin:$PATH
