@@ -36,7 +36,7 @@ RUN --security=sandbox echo "Installing packages..." \
       linux-headers-6.5.0-10-generic \
       libc++-dev \
       llvm-16 \
-    && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16.0.0 200 \
+    && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16 200 \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
