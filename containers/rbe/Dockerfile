@@ -48,6 +48,12 @@ RUN --security=sandbox echo "Installing Bazelisk..." \
     && /bin/bazel version \
     && echo "Bazel is ready."
 
+RUN --security=sandbox echo "Preparing user..." \
+    && groupadd bazel \
+    && useradd --system -g bazel bazel
+
+USER bazel
+
 RUN echo "Preloading Bazel..." \
     && bazel version \
     && echo "Bazel RBE base image ready."
