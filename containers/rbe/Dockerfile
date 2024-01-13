@@ -30,10 +30,10 @@ RUN --security=sandbox echo "Installing packages..." \
     && echo "Installing packages..." \
     && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
-      libncurses5 \
+      libncurses-dev \
       tclsh \
       build-essential \
-      linux-headers-$(uname -r) \
+      linux-headers \
       libc++-dev \
       llvm-16 \
     && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16.0.0 200 \
