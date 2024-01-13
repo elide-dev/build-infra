@@ -51,7 +51,9 @@ RUN --security=sandbox echo "Installing Bazelisk..." \
 RUN --security=sandbox echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
-    && chown bazel:bazel -R /home/bazel
+    && chown bazel:bazel -R /home/bazel \
+    && mkdir -p /bazel/workdir \
+    && chown bazel:bazel -R /bazel
 
 USER bazel
 
