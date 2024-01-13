@@ -38,5 +38,5 @@ jobs:
       pull-requests: write
     with:
       runner: ubuntu-latest
-      image: elide-dev/build-infra/bazel/rbe
+      image: elide-dev/build-infra/rbe
       path: containers/rbe
