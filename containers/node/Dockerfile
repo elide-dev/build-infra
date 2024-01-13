@@ -1,9 +1,11 @@
 # syntax=docker/dockerfile:1-labs
-FROM node:21@sha256:ca1e0e5a87da404c488223e35dc7203c331e4c49c583616cc75a86ec13a43f3c
+
+# base=node 21
+FROM cgr.dev/chainguard/node@sha256:f067a2587f6af9de292ffada8d633d664ec6391c733a7e75ca2c385294d7cebc
 
 ARG YARN_VERSION=berry
 RUN --security=sandbox npm install -g --ignore-scripts \
-    npm@9.6.7 \
+    yarn \
     pnpm \
     && groupadd builder \
     && useradd --system -g builder builder

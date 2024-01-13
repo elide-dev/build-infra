@@ -1,0 +1,42 @@
+name: "Containers: Deno"
+
+on:
+  merge_group: {}
+
+  push:
+    branches:
+      - main
+    paths:
+      - containers/deno
+      - containers/deno/*
+      - containers/deno/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.deno.yml
+
+  pull_request:
+    paths:
+      - containers/deno
+      - containers/deno/*
+      - containers/deno/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.deno.yml
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build Bun Container
+  build-bun-container:
+    name: "Deno Image"
+    uses: ./.github/workflows/container.hardened.yml
+    permissions:
+      actions: read
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/deno
+      path: containers/deno
