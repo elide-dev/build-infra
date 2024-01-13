@@ -24,6 +24,7 @@ RUN --security=sandbox echo "Installing packages..." \
       tclsh \
       build-essential \
       linux-headers-$(uname -r) \
+      libc++-dev \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
