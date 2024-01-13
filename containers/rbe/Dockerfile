@@ -32,7 +32,7 @@ RUN --security=sandbox echo "Installing JVM21..." \
     && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm
 
 RUN --security=sandbox echo "Installing clang..." \
-    && wget https://apt.llvm.org/llvm.sh \
+    && wget --max-redirect 0 https://apt.llvm.org/llvm.sh \
     && chmod +x llvm.sh \
     && ./llvm.sh 16 \
     && rm -f llvm.sh \
