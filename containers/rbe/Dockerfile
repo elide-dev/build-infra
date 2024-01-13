@@ -53,7 +53,8 @@ RUN --security=sandbox echo "Preparing user..." \
     && useradd --system -m -g bazel bazel \
     && chown bazel:bazel -R /home/bazel \
     && mkdir -p /bazel/workdir \
-    && chown bazel:bazel -R /bazel
+    && chown bazel:bazel -R /bazel \
+    && chmod 777 -R /bazel
 
 USER bazel
 
