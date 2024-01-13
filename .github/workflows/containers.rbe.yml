@@ -1,0 +1,42 @@
+name: "Containers: RBE"
+
+on:
+  merge_group: {}
+
+  push:
+    branches:
+      - main
+    paths:
+      - containers/rbe
+      - containers/rbe/*
+      - containers/rbe/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.rbe.yml
+
+  pull_request:
+    paths:
+      - containers/rbe
+      - containers/rbe/*
+      - containers/rbe/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.rbe.yml
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build Bazel RBE Container
+  build-rbe-container:
+    name: "Bazel RBE Image"
+    uses: ./.github/workflows/container.hardened.yml
+    permissions:
+      actions: read
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/rbe
+      path: containers/rbe
