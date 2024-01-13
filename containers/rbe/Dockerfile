@@ -54,7 +54,7 @@ RUN --security=sandbox echo "Preparing user..." \
     && chown bazel:bazel -R /home/bazel \
     && mkdir -p /bazel/workdir \
     && chown bazel:bazel -R /bazel \
-    && chmod 777 -R /bazel
+    && chmod 077 -R /bazel
 
 USER bazel
 
