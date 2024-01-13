@@ -21,6 +21,7 @@ RUN --security=sandbox echo "Installing packages..." \
       libc6 \
       zlib1g \
       libncurses5 \
+      tclsh \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
