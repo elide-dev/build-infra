@@ -52,7 +52,7 @@ RUN --security=sandbox echo "Installing packages..." \
     && chmod 555 /bin/bazelisk \
     && ln -s /bin/bazelisk /bin/bazel \
     && /bin/bazel version \
-    && echo "Bazel is ready."
+    && echo "Bazel is ready." \
     && echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
