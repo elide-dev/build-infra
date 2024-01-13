@@ -34,17 +34,21 @@ RUN --security=sandbox echo "Installing packages..." \
       tclsh \
       build-essential \
       linux-headers-6.5.0-10-generic \
-      libc++-dev \
-      llvm-16 \
+      libunwind-16 \
+      libc++abi1-16 \
+      libc++1-16 \
+      libc++-16-dev \
+      libclang-rt-16-dev \
+      -o DPkg::options::="--force-overwrite" \
     && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16 200 \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "Installing JVM21..." \
-    && wget -O jdk.deb "https://dl.less.build/toolchains/azul/zing/zing23.12.0.0-4-jdk21.0.1-linux_amd64.deb" \
-    && dpkg -i jdk.deb \
-    && rm -f jdk.deb \
-    && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm \
+    && mkdir -p /usr/lib/gvm \
+    && curl -fsSL "https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz" | tar xzvf - --strip-components=1 -C /usr/lib/gvm \
+    && ln -s /usr/lib/gvm /usr/lib/jvm \
+    && export JAVA_HOME="/usr/lib/jvm" \
     && echo "Installing Bazelisk..." \
     && wget -O bazelisk "https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64" \
     && mv bazelisk /bin/bazelisk \
@@ -53,6 +57,8 @@ RUN --security=sandbox echo "Installing packages..." \
     && ln -s /bin/bazelisk /bin/bazel \
     && /bin/bazel version \
     && echo "Bazel is ready." \
+    && echo "Installing Node..." \
+    && curl "https://nodejs.org/dist/v20.10.0/node-v20.10.0-linux-x64.tar.xz" | tar xvfJ - -C /opt \
     && echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
@@ -66,4 +72,6 @@ COPY bazel.rc /etc/bazel.bazelrc
 
 ENV CC=clang \
     JAVA_HOME=/usr/lib/jvm \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive \
+    NODE_PATH=/opt/node-v20.10.0-linux-x64/lib/node_modules \
+    PATH=/usr/lib/jvm/bin:/opt/node-v20.10.0-linux-x64/bin:$PATH
