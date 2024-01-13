@@ -52,11 +52,7 @@ RUN --security=sandbox echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
     && chown bazel:bazel -R /home/bazel \
-    && mkdir -p /bazel/workdir \
-    && chown bazel:bazel -R /bazel \
-    && chmod 077 -R /bazel
-
-USER bazel
+    && mkdir -p /bazel/workdir
 
 RUN echo "Preloading Bazel..." \
     && bazel version \
