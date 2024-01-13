@@ -34,6 +34,7 @@ RUN --security=sandbox echo "Installing packages..." \
       tclsh \
       build-essential \
       linux-headers-6.5.0-10-generic \
+      libc++abi-dev \
       libunwind-16 \
       libc++abi1-16 \
       libc++1-16 \
