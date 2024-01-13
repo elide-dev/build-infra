@@ -58,7 +58,7 @@ RUN --security=sandbox echo "Installing packages..." \
     && /bin/bazel version \
     && echo "Bazel is ready." \
     && echo "Installing Node..." \
-    && curl "https://nodejs.org/dist/v20.10.0/node-20.10.0-linux-x64.tar.xz" | tar xvfJ - -C /opt \
+    && curl "https://nodejs.org/dist/v20.10.0/node-v20.10.0-linux-x64.tar.xz" | tar xvfJ - -C /opt \
     && echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
