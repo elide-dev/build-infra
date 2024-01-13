@@ -6,6 +6,7 @@ ARG LLVM_VERSION=16
 ARG NODEJS_VERSION=v20.10.0
 ARG NODE_PACKAGE=node-${NODEJS_VERSION}-linux-x64
 ARG NODE_HOME=/opt/$NODE_PACKAGE
+ARG JAVA_HOME=/usr/lib/jvm
 
 FROM --platform=linux/amd64 ubuntu${BASE_VERSION}
 
@@ -49,10 +50,9 @@ RUN --security=sandbox echo "Installing packages..." \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "Installing JVM21..." \
-    && wget -O jdk.deb "https://dl.less.build/toolchains/azul/zing/zing23.12.0.0-4-jdk21.0.1-linux_amd64.deb" \
-    && dpkg -i jdk.deb \
-    && rm -f jdk.deb \
-    && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm \
+    && curl "https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz" | tar xvfJ --strip-components=1 - -C /usr/lib/gvm \
+    && ln -s /usr/lib/gvm /usr/lib/jvm \
+    && export JAVA_HOME="/usr/lib/jvm" \
     && echo "Installing Bazelisk..." \
     && wget -O bazelisk "https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64" \
     && mv bazelisk /bin/bazelisk \
@@ -75,7 +75,7 @@ RUN --security=sandbox echo "Installing packages..." \
 COPY bazel.rc /etc/bazel.bazelrc
 
 ENV CC=clang \
-    JAVA_HOME=/usr/lib/jvm \
+    JAVA_HOME=${JAVA_HOME} \
     DEBIAN_FRONTEND=noninteractive \
-    NODE_PATH ${NODE_HOME}/lib/node_modules \
-    PATH ${NODE_HOME}/bin:$PATH
+    NODE_PATH=${NODE_HOME}/lib/node_modules \
+    PATH=${JAVA_HOME}/bin:${NODE_HOME}/bin:$PATH
