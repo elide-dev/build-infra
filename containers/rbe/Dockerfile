@@ -1,12 +1,21 @@
 # syntax=docker/dockerfile:1-labs
 
-ARG BASE_VERSION="@sha256:bbf3d1baa208b7649d1d0264ef7d522e1dc0deeeaaf6085bf8e4618867f03494"
+# mantic
+ARG BASE_VERSION="@sha256:8d093e0651575a6437cc4a3d561f892a345d263aeac6156ef378fe6a4ccabd4c"
 
 FROM --platform=linux/amd64 ubuntu${BASE_VERSION}
 
 LABEL org.opencontainers.image.vendor=Elide
 LABEL org.opencontainers.image.title="Elide RBE"
 LABEL org.opencontainers.image.description="Base image for remote build execution"
+
+RUN --security=sandbox echo "Installing clang..." \
+    && wget --max-redirect 0 https://apt.llvm.org/llvm.sh \
+    && chmod +x llvm.sh \
+    && ./llvm.sh 16 \
+    && rm -f llvm.sh \
+    && ln -s `which clang-16` /usr/bin/clang++ \
+    && ln -s `which clang-16` /usr/bin/clang
 
 RUN --security=sandbox echo "Installing packages..." \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
@@ -25,7 +34,9 @@ RUN --security=sandbox echo "Installing packages..." \
       build-essential \
       linux-headers-$(uname -r) \
       libc++-dev \
+      llvm-16 \
     && apt-get autoremove \
+    && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16.0.0 200 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -34,14 +45,6 @@ RUN --security=sandbox echo "Installing JVM21..." \
     && dpkg -i jdk.deb \
     && rm -f jdk.deb \
     && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm
-
-RUN --security=sandbox echo "Installing clang..." \
-    && wget --max-redirect 0 https://apt.llvm.org/llvm.sh \
-    && chmod +x llvm.sh \
-    && ./llvm.sh 16 \
-    && rm -f llvm.sh \
-    && ln -s `which clang-16` /usr/bin/clang++ \
-    && ln -s `which clang-16` /usr/bin/clang
 
 RUN --security=sandbox echo "Installing Bazelisk..." \
     && wget -O bazelisk "https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64" \
