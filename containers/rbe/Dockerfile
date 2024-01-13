@@ -49,7 +49,7 @@ RUN --security=sandbox echo "Installing packages..." \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "Installing JVM21..." \
-    && curl "https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz" | tar xvfJ --strip-components=1 - -C /usr/lib/gvm \
+    && curl -fsSL "https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_linux-x64_bin.tar.gz" | tar xzvf - --strip-components=1 -C /usr/lib/gvm \
     && ln -s /usr/lib/gvm /usr/lib/jvm \
     && export JAVA_HOME="/usr/lib/jvm" \
     && echo "Installing Bazelisk..." \
