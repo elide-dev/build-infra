@@ -9,17 +9,8 @@ LABEL org.opencontainers.image.vendor=Elide
 LABEL org.opencontainers.image.title="Elide RBE"
 LABEL org.opencontainers.image.description="Base image for remote build execution"
 
-RUN --security=sandbox echo "Installing clang..." \
-    && wget --max-redirect 0 https://apt.llvm.org/llvm.sh \
-    && chmod +x llvm.sh \
-    && ./llvm.sh 16 \
-    && rm -f llvm.sh \
-    && ln -s `which clang-16` /usr/bin/clang++ \
-    && ln -s `which clang-16` /usr/bin/clang
-
 RUN --security=sandbox echo "Installing packages..." \
     && DEBIAN_FRONTEND=noninteractive apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
       wget \
       lsb-release \
@@ -29,24 +20,32 @@ RUN --security=sandbox echo "Installing packages..." \
       curl \
       libc6 \
       zlib1g \
+    && echo "Installing clang..." \
+    && wget --max-redirect 0 https://apt.llvm.org/llvm.sh \
+    && chmod +x llvm.sh \
+    && ./llvm.sh 16 \
+    && rm -f llvm.sh \
+    && ln -s `which clang-16` /usr/bin/clang++ \
+    && ln -s `which clang-16` /usr/bin/clang \
+    && echo "Installing packages..." \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \
+    && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
       libncurses5 \
       tclsh \
       build-essential \
       linux-headers-$(uname -r) \
       libc++-dev \
       llvm-16 \
-    && apt-get autoremove \
     && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16.0.0 200 \
+    && apt-get autoremove \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN --security=sandbox echo "Installing JVM21..." \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "Installing JVM21..." \
     && wget -O jdk.deb "https://dl.less.build/toolchains/azul/zing/zing23.12.0.0-4-jdk21.0.1-linux_amd64.deb" \
     && dpkg -i jdk.deb \
     && rm -f jdk.deb \
     && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm
-
-RUN --security=sandbox echo "Installing Bazelisk..." \
+    && echo "Installing Bazelisk..." \
     && wget -O bazelisk "https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64" \
     && mv bazelisk /bin/bazelisk \
     && chmod +x /bin/bazelisk \
@@ -54,14 +53,12 @@ RUN --security=sandbox echo "Installing Bazelisk..." \
     && ln -s /bin/bazelisk /bin/bazel \
     && /bin/bazel version \
     && echo "Bazel is ready."
-
-RUN --security=sandbox echo "Preparing user..." \
+    && echo "Preparing user..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
     && chown bazel:bazel -R /home/bazel \
     && mkdir -p /bazel/workdir
-
-RUN echo "Preloading Bazel..." \
+    && echo "Preloading Bazel..." \
     && bazel version \
     && echo "Bazel RBE base image ready."
 
