@@ -34,8 +34,12 @@ RUN --security=sandbox echo "Installing packages..." \
       tclsh \
       build-essential \
       linux-headers-6.5.0-10-generic \
-      libc++-dev \
-      llvm-16 \
+      libunwind-${LLVM_VERSION} \
+      libc++abi1-${LLVM_VERSION} \
+      libc++1-${LLVM_VERSION} \
+      libc++-${LLVM_VERSION}-dev \
+      libclang-rt-${LLVM_VERSION}-dev \
+      -o DPkg::options::="--force-overwrite" \
     && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16 200 \
     && apt-get autoremove \
     && apt-get clean \
