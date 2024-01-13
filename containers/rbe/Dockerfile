@@ -50,7 +50,8 @@ RUN --security=sandbox echo "Installing Bazelisk..." \
 
 RUN --security=sandbox echo "Preparing user..." \
     && groupadd bazel \
-    && useradd --system -g bazel bazel
+    && useradd --system -m -g bazel bazel \
+    && chown bazel:bazel -R /home/bazel
 
 USER bazel
 
@@ -59,6 +60,7 @@ RUN echo "Preloading Bazel..." \
     && echo "Bazel RBE base image ready."
 
 COPY bazel.rc /etc/bazel.bazelrc
+
 ENV CC=clang \
     JAVA_HOME=/usr/lib/jvm \
     DEBIAN_FRONTEND=noninteractive
