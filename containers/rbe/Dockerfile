@@ -44,7 +44,7 @@ RUN --security=sandbox echo "Installing packages..." \
     && wget -O jdk.deb "https://dl.less.build/toolchains/azul/zing/zing23.12.0.0-4-jdk21.0.1-linux_amd64.deb" \
     && dpkg -i jdk.deb \
     && rm -f jdk.deb \
-    && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm
+    && ln -s /opt/zing/zing-jdk21 /usr/lib/jvm \
     && echo "Installing Bazelisk..." \
     && wget -O bazelisk "https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64" \
     && mv bazelisk /bin/bazelisk \
