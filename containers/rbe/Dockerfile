@@ -57,7 +57,7 @@ RUN --security=sandbox echo "Installing packages..." \
     && groupadd bazel \
     && useradd --system -m -g bazel bazel \
     && chown bazel:bazel -R /home/bazel \
-    && mkdir -p /bazel/workdir
+    && mkdir -p /bazel/workdir \
     && echo "Preloading Bazel..." \
     && bazel version \
     && echo "Bazel RBE base image ready."
