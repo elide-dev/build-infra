@@ -9,9 +9,9 @@ LABEL org.opencontainers.image.title="Elide RBE"
 LABEL org.opencontainers.image.description="Base image for remote build execution"
 
 RUN --security=sandbox echo "Installing packages..." \
-    && apt-get update \
-    && apt-get -y upgrade \
-    && apt-get install --no-install-recommends -y \
+    && DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade \
+    && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
       wget \
       lsb-release \
       software-properties-common \
