@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.description="Base image for remote build executio
 RUN --security=sandbox echo "Installing packages..." \
     && apt-get update \
     && apt-get -y upgrade \
-    && apt-get install -y \
+    && apt-get install --no-install-recommends -y \
       wget \
       lsb-release \
       software-properties-common \
