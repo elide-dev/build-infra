@@ -2,7 +2,6 @@
 
 # mantic
 ARG BASE_VERSION="@sha256:8d093e0651575a6437cc4a3d561f892a345d263aeac6156ef378fe6a4ccabd4c"
-ARG LLVM_VERSION=16
 ARG NODEJS_VERSION=v20.10.0
 ARG NODE_PACKAGE=node-${NODEJS_VERSION}-linux-x64
 ARG NODE_HOME=/opt/$NODE_PACKAGE
@@ -39,11 +38,11 @@ RUN --security=sandbox echo "Installing packages..." \
       tclsh \
       build-essential \
       linux-headers-6.5.0-10-generic \
-      libunwind-${LLVM_VERSION} \
-      libc++abi1-${LLVM_VERSION} \
-      libc++1-${LLVM_VERSION} \
-      libc++-${LLVM_VERSION}-dev \
-      libclang-rt-${LLVM_VERSION}-dev \
+      libunwind-16 \
+      libc++abi1-16 \
+      libc++1-16 \
+      libc++-16-dev \
+      libclang-rt-16-dev \
       -o DPkg::options::="--force-overwrite" \
     && update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-16 200 \
     && apt-get autoremove \
