@@ -2,6 +2,4 @@
 
 # base=bun dev
 FROM cgr.dev/chainguard/bun@sha256:69802da9ee5300801050505ade0989a764a9adecc05ceb31b99e6cce925e9253
-
-RUN --security=sandbox groupadd builder && useradd --system -g builder builder
-USER builder
+USER nonroot
