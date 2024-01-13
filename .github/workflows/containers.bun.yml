@@ -1,0 +1,42 @@
+name: "Containers: Bun"
+
+on:
+  merge_group: {}
+
+  push:
+    branches:
+      - main
+    paths:
+      - containers/bun
+      - containers/bun/*
+      - containers/bun/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.bun.yml
+
+  pull_request:
+    paths:
+      - containers/bun
+      - containers/bun/*
+      - containers/bun/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.bun.yml
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build Bun Container
+  build-bun-container:
+    name: "Bun Image"
+    uses: ./.github/workflows/container.hardened.yml
+    permissions:
+      actions: read
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/bun
+      path: containers/bun

@@ -1,0 +1,43 @@
+name: "Containers: Elide"
+
+on:
+  merge_group: {}
+
+  push:
+    branches:
+      - main
+    paths:
+      - containers/elide
+      - containers/elide/*
+      - containers/elide/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.elide.yml
+
+  pull_request:
+    paths:
+      - containers/elide
+      - containers/elide/*
+      - containers/elide/**/*
+      - .github/workflows/container.yml
+      - .github/workflows/containers.elide.yml
+
+permissions:
+  contents: read
+
+jobs:
+  ## Build Elide Container
+  build-elide-container:
+    name: "Elide Image"
+    uses: ./.github/workflows/container.hardened.yml
+    permissions:
+      actions: read
+      checks: write
+      id-token: write
+      contents: read
+      packages: write
+      pull-requests: write
+    with:
+      runner: ubuntu-latest
+      image: elide-dev/build-infra/elide
+      path: containers/elide
+      platforms: "linux/amd64"
