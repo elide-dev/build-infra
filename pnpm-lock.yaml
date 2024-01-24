@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@commitlint/config-conventional':
-    specifier: 18.4.4
-    version: registry.npmjs.org/@commitlint/config-conventional@18.4.4
+    specifier: 18.5.0
+    version: registry.npmjs.org/@commitlint/config-conventional@18.5.0
   '@types/node':
     specifier: ^20
     version: registry.npmjs.org/@types/node@20.11.5
@@ -541,10 +541,10 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/@commitlint/config-conventional@18.4.4:
-    resolution: {integrity: sha512-Bz3sPQSboBN+Et/KyZrR+OJ3z9PrHDw7Bls0/hv94PmuHBtMq1dCGxS9XzTGzxeMNlytCC4kxF083tbhPljl3Q==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-18.4.4.tgz}
+  registry.npmjs.org/@commitlint/config-conventional@18.5.0:
+    resolution: {integrity: sha512-XGmU4u3Z7bCn0H0nTEG9LUn6hMDUIPP4P6dun7PKFhtnt/wwiKAqmPj+QRmFiqWjkOWcmrh7w7xRiDL32cWS5g==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-18.5.0.tgz}
     name: '@commitlint/config-conventional'
-    version: 18.4.4
+    version: 18.5.0
     engines: {node: '>=v18'}
     dependencies:
       conventional-changelog-conventionalcommits: registry.npmjs.org/conventional-changelog-conventionalcommits@7.0.2
