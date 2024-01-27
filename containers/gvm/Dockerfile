@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.title="Elide Cloud: GVM21 Base"
 LABEL org.opencontainers.image.description="GraalVM JDK21 tools for use with Elide Cloud apps"
 LABEL org.opencontainers.image.version=alpha1
 LABEL org.opencontainers.image.url=https://github.com/elide-dev/build-infra
-LABEL org.opencontainers.image.base.name=elide-dev/runtime/gvm19
+LABEL org.opencontainers.image.base.name=elide-dev/runtime/gvm21
 LABEL org.opencontainers.image.source=https://github.com/elide-dev/build-infra/blob/main/containers/gvm/Dockerfile
 
 RUN --security=sandbox apt-get update \
@@ -30,7 +30,7 @@ RUN --security=sandbox apt-get update \
   && echo "GraalVM Download URL: $GRAAL_DOWNLOAD_URL" \
   && curl --progress-bar -SL "$GRAAL_DOWNLOAD_URL" > ./graalvm.tar.gz \
   && tar -xzvf ./graalvm.tar.gz \
-  && mv "./graalvm-jdk-21.0.1+12.1" /usr/lib/gvm \
+  && mv "./graalvm-jdk-21.0.2+13.1" /usr/lib/gvm \
   && rm -f ./graalvm.tar.gz \
   && cd / \
   && rm -fr /tmp/gvm \
