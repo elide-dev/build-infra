@@ -249,6 +249,10 @@ jobs:
         with:
           path: |
             ./build
+            ~/.konan
+            ~/.gradle/caches
+            ~/.gradle/notifications
+            ~/.gradle/jdks
           key: ${{ runner.os }}-gradlebuild-${{ hashFiles('**/*.versions.toml', 'settings.gradle.kts') }}
           restore-keys: ${{ runner.os }}-gradlebuild-
       - name: "Setup: JDK ${{ env.JVM_VERSION }}"
