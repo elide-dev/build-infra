@@ -179,6 +179,20 @@ on:
         type: string
         default: audit
 
+      ## Outputs to include in assertions.
+      outputs:
+        description: "Outputs"
+        required: false
+        type: string
+        default: "./build/libs/*"
+
+      ## Path where reports are expected.
+      reports_path:
+        description: "Reports Path"
+        required: false
+        type: string
+        default: "./build/reports/"
+
     secrets:
       GDS_TOKEN:
         description: "GDS token"
@@ -274,7 +288,7 @@ jobs:
       - name: "Build: Provenance Subject"
         id: hash
         run: |
-          echo "hashes=$(sha256sum ./build/libs/* | base64 -w0)" >> "$GITHUB_OUTPUT"
+          echo "hashes=$(sha256sum ${{ inputs.outputs }} | base64 -w0)" >> "$GITHUB_OUTPUT"
       - name: "Report: Codecov"
         uses: codecov/codecov-action@4fe8c5f003fae66aa5ebb77cfd3e7bfbbda0b6b0 # v3.1.5
         if: inputs.coverage
@@ -288,8 +302,8 @@ jobs:
         with:
           name: ${{ inputs.artifact }}
           path: |
-            ./build/libs/
-            ./build/reports/
+            ${{ inputs.outputs }}
+            ${{ inputs.reports_path }}
 
   ## Report: Provenance
   provenance:
