@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1-labs
 
 # base=node 21
-FROM cgr.dev/chainguard/node@sha256:84fb48f8a3536e85903306485925c62b85fe759819ba4975186e14157f234037
+FROM cgr.dev/chainguard/node@sha256:6e2b674033fcd43ac39699c62636d49375f84d7d2cda31f80c295b88bd62dbc3
 USER node
