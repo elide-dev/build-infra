@@ -39,8 +39,8 @@ devDependencies:
     specifier: ^4.1.0
     version: 4.1.0
   lint-staged:
-    specifier: 15.2.0
-    version: registry.npmjs.org/lint-staged@15.2.0
+    specifier: 15.2.2
+    version: registry.npmjs.org/lint-staged@15.2.2
   prettier:
     specifier: ^3.2.5
     version: registry.npmjs.org/prettier@3.2.5
@@ -4684,10 +4684,10 @@ packages:
     version: 1.2.4
     dev: true
 
-  registry.npmjs.org/lint-staged@15.2.0:
-    resolution: {integrity: sha512-TFZzUEV00f+2YLaVPWBWGAMq7So6yQx+GG8YRMDeOEIf95Zn5RyiLMsEiX4KTNl9vq/w+NqRJkLA1kPIo15ufQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/lint-staged/-/lint-staged-15.2.0.tgz}
+  registry.npmjs.org/lint-staged@15.2.2:
+    resolution: {integrity: sha512-TiTt93OPh1OZOsb5B7k96A/ATl2AjIZo+vnzFZ6oHK5FuTk63ByDtxGQpHm+kFETjEWqgkF95M8FRXKR/LEBcw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/lint-staged/-/lint-staged-15.2.2.tgz}
     name: lint-staged
-    version: 15.2.0
+    version: 15.2.2
     engines: {node: '>=18.12.0'}
     hasBin: true
     dependencies:
@@ -4696,7 +4696,7 @@ packages:
       debug: registry.npmjs.org/debug@4.3.4
       execa: registry.npmjs.org/execa@8.0.1
       lilconfig: registry.npmjs.org/lilconfig@3.0.0
-      listr2: registry.npmjs.org/listr2@8.0.0
+      listr2: registry.npmjs.org/listr2@8.0.1
       micromatch: registry.npmjs.org/micromatch@4.0.5
       pidtree: registry.npmjs.org/pidtree@0.6.0
       string-argv: registry.npmjs.org/string-argv@0.3.2
@@ -4705,10 +4705,10 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/listr2@8.0.0:
-    resolution: {integrity: sha512-u8cusxAcyqAiQ2RhYvV7kRKNLgUvtObIbhOX2NCXqvp1UU32xIg5CT22ykS2TPKJXZWJwtK3IKLiqAGlGNE+Zg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/listr2/-/listr2-8.0.0.tgz}
+  registry.npmjs.org/listr2@8.0.1:
+    resolution: {integrity: sha512-ovJXBXkKGfq+CwmKTjluEqFi3p4h8xvkxGQQAQan22YCgef4KZ1mKGjzfGh6PL6AW5Csw0QiQPNuQyH+6Xk3hA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/listr2/-/listr2-8.0.1.tgz}
     name: listr2
-    version: 8.0.0
+    version: 8.0.1
     engines: {node: '>=18.0.0'}
     dependencies:
       cli-truncate: registry.npmjs.org/cli-truncate@4.0.0
