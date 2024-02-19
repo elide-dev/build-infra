@@ -173,9 +173,9 @@ jobs:
             bazelbuild-${{ github.ref }}
             bazelbuild-
       - name: "Setup: Bazel"
-        uses: bazelbuild/setup-bazelisk@95c9bf48d0c570bb3e28e57108f3450cd67c1a44 # v2.0.0
+        uses: bazelbuild/setup-bazelisk@b39c379c82683a5f25d34f0d062761f62693e0b2 # v3.0.0
       - name: "Setup: Bazelisk"
-        uses: bazelbuild/setup-bazelisk@95c9bf48d0c570bb3e28e57108f3450cd67c1a44 # v2.0.0
+        uses: bazelbuild/setup-bazelisk@b39c379c82683a5f25d34f0d062761f62693e0b2 # v3.0.0
       - name: "Setup: Buildless"
         if: env.BUILDLESS_APIKEY != ''
         run: echo "build --remote_cache_header=x-api-key=${{ secrets.BUILDLESS_APIKEY }}" >> local.bazelrc
