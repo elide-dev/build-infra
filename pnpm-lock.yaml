@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@commitlint/config-conventional':
-    specifier: 18.6.1
-    version: registry.npmjs.org/@commitlint/config-conventional@18.6.1
+    specifier: 19.0.0
+    version: registry.npmjs.org/@commitlint/config-conventional@19.0.0
   '@types/node':
     specifier: ^20
     version: registry.npmjs.org/@types/node@20.11.19
@@ -535,13 +535,13 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/@commitlint/config-conventional@18.6.1:
-    resolution: {integrity: sha512-ftpfAOQyI+IHvut0cRF4EFM39PWCqde+uOXCjH9NpK6FpqfhncAbEvP0E7OIpFsrDX0aS7k81tzH5Yz7prcNxA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-18.6.1.tgz}
+  registry.npmjs.org/@commitlint/config-conventional@19.0.0:
+    resolution: {integrity: sha512-d8lPm+slPUdA8Zof2Y36RqAm/MmAYx/QQIEd2gKbpfLThQK1oYLs+0C3sMPD+4LIq2kh4cnbV9WnPA0P5sN8Ig==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-19.0.0.tgz}
     name: '@commitlint/config-conventional'
-    version: 18.6.1
+    version: 19.0.0
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@18.6.1
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.0
       conventional-changelog-conventionalcommits: registry.npmjs.org/conventional-changelog-conventionalcommits@7.0.2
     dev: true
 
@@ -711,6 +711,15 @@ packages:
     engines: {node: '>=v18'}
     dependencies:
       chalk: registry.npmjs.org/chalk@4.1.2
+    dev: true
+
+  registry.npmjs.org/@commitlint/types@19.0.0:
+    resolution: {integrity: sha512-qLjLUdYXKi0TIavONrjBkxrElp7KguqDbvzIRbqTdJBV/cAAr8QEhHe1qUq8OcCM3gFWTlUrDz3ISZbkRoGsAg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/types/-/types-19.0.0.tgz}
+    name: '@commitlint/types'
+    version: 19.0.0
+    engines: {node: '>=v18'}
+    dependencies:
+      chalk: registry.npmjs.org/chalk@5.3.0
     dev: true
 
   registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.56.0):
