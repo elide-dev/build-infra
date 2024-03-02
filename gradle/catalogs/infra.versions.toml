@@ -1,0 +1,29 @@
+[versions]
+buildless = "1.0.0-rc2"
+gradle-common = "1.12.1"
+gradle-enterprise = "3.16.2"
+gradle-toolchains = "0.8.0"
+micronaut-platform = "4.3.4"
+
+[plugins]
+buildless = { id = "build.less", version.ref = "buildless" }
+gradle-common = { id = "com.gradle.common-custom-user-data-gradle-plugin", version.ref = "gradle-common" }
+gradle-enterprise = { id = "com.gradle.enterprise", version.ref = "gradle-enterprise" }
+gradle-toolchains = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "gradle-toolchains" }
+micronaut-catalog = { id = "io.micronaut.platform.catalog", version.ref = "micronaut-platform" }
+
+[libraries]
+plugin-buildless = { module = "build.less:buildless-plugin-gradle", version.ref = "buildless" }
+plugin-gradle-common = { module = "com.gradle:common-custom-user-data-gradle-plugin", version.ref = "gradle-common" }
+plugin-gradle-enterprise = { module = "com.gradle:gradle-enterprise-gradle-plugin", version.ref = "gradle-enterprise" }
+plugin-gradle-toolchains = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchains" }
+plugin-micronaut-catalog = { module = "io.micronaut.gradle:micronaut-platform-catalog-plugin", version.ref = "micronaut-platform" }
+
+[bundles]
+plugins = [
+    "plugin-buildless",
+    "plugin-gradle-common",
+    "plugin-gradle-enterprise",
+    "plugin-gradle-toolchains",
+    "plugin-micronaut-catalog"
+]
