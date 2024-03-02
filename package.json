@@ -5,10 +5,7 @@
     "packageManager": "pnpm@8.8.0",
     "readme": "README.md",
     "homepage": "https://less.build",
-    "author": "Elide Ventures, LLC",
-    "engines": {
-      "pnpm": "8.8.0"
-    },
+    "author": "Elide Technologies, Inc.",
     "repository": {
       "type": "git",
       "url": "git+https://github.com/elide-dev/buildless.git"

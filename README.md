@@ -26,12 +26,15 @@ For an exhaustive list of build profiles and their use, see the table further do
 - **[Workflows](./.github/workflows/pkg): Custom YAML workflow definitions** for use in Elide codebases. Workflows are used as external
   `workflow_call` targets.
 
+- **[Gradle](./gradle): Gradle build conventions** which are re-usable across projects, as a suite of easily applicable build convention
+  plugins and version catalogs.
+
 ### Pushing updates
 
 In general, Dependabot and Renovate are granted access to this repo, so that update PRs may be filed when internal actions
 and workflows see updates.
 
-## Usage example
+## Workflows
 
 In a `.github/workflows/<x>.yml`:
 
@@ -68,7 +71,7 @@ gain consistency:
 # Build profiles
 
 | Name             | Description                      |
-| ---------------- | -------------------------------- |
+|------------------|----------------------------------|
 | `android.yml`    | Build an Android app with Gradle |
 | `container.yml`  | Build and push a container image |
 | `jvm.gradle.yml` | Run a Gradle build targeting JVM |
@@ -88,17 +91,17 @@ See below for an exhaustive list of all inputs for each build profile. You can u
 
 #### Inputs
 
-| Name             | Type      | Description                      | Default value               |
-| ---------------- | --------- | -------------------------------- | --------------------------- |
-| `image`*         | `string`  | Image coordinate to build        | _(None. Required.)_         |
-| `auth`           | `boolean` | Whether to authenticate          | `true`                      |
-| `dockerfile`     | `string`  | Full path to Dockerfile to build | `"Dockerfile"`              |
-| `path`           | `string`  | Docker context path for build    | `"."`                       |
-| `platforms`      | `string`  | Architectures/platforms to build | `"linux/amd64,linux/arm64"` |
-| `push`           | `boolean` | Whether to push after building   | `false`                     |
-| `registry`       | `string`  | Whether to push after building   | `"ghcr.io"`                 |
-| `runner`         | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
-| `tags`           | `string`  | Tags to push to with built image | _(None.)_                   |
+| Name         | Type      | Description                      | Default value               |
+|--------------|-----------|----------------------------------|-----------------------------|
+| `image`*     | `string`  | Image coordinate to build        | _(None. Required.)_         |
+| `auth`       | `boolean` | Whether to authenticate          | `true`                      |
+| `dockerfile` | `string`  | Full path to Dockerfile to build | `"Dockerfile"`              |
+| `path`       | `string`  | Docker context path for build    | `"."`                       |
+| `platforms`  | `string`  | Architectures/platforms to build | `"linux/amd64,linux/arm64"` |
+| `push`       | `boolean` | Whether to push after building   | `false`                     |
+| `registry`   | `string`  | Whether to push after building   | `"ghcr.io"`                 |
+| `runner`     | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+| `tags`       | `string`  | Tags to push to with built image | _(None.)_                   |
 
 ### Gradle: Android
 
@@ -107,28 +110,28 @@ See below for an exhaustive list of all inputs for each build profile. You can u
 
 #### Inputs
 
-| Name              | Type      | Description                      | Default value               |
-| ----------------- | --------- | -------------------------------- | --------------------------- |
-| `action`          | `string`  | Gradle task(s) to execute        | `"build"`                   |
-| `android`         | `boolean` | Install Android SDK              | true                        |
-| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
-| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
-| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
-| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                     |
-| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                     |
-| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                      |
-| `checks`          | `boolean` | Run checks and Sonar             | `true`                      |
-| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                     |
-| `coverage_report` | `string`  | Path to coverage report          | _(None.)_                   |
-| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_                   |
-| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
-| `gradle`          | `string`  | Gradle version to install & use  | `"wrapper"`                 |
-| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
-| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
-| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
-| `label`           | `string`  | Label to show for build step     | `"Gradle"`                  |
-| `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
-| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+| Name              | Type      | Description                      | Default value           |
+|-------------------|-----------|----------------------------------|-------------------------|
+| `action`          | `string`  | Gradle task(s) to execute        | `"build"`               |
+| `android`         | `boolean` | Install Android SDK              | true                    |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_               |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                 |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                  |
+| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                 |
+| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                 |
+| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                  |
+| `checks`          | `boolean` | Run checks and Sonar             | `true`                  |
+| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                 |
+| `coverage_report` | `string`  | Path to coverage report          | _(None.)_               |
+| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_               |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_               |
+| `gradle`          | `string`  | Gradle version to install & use  | `"wrapper"`             |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                  |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_ |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`       |
+| `label`           | `string`  | Label to show for build step     | `"Gradle"`              |
+| `reports`         | `boolean` | Whether to upload built reports  | `true`                  |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_     |
 
 
 ### Gradle: JVM
@@ -138,32 +141,32 @@ See below for an exhaustive list of all inputs for each build profile. You can u
 
 #### Inputs
 
-| Name              | Type      | Description                      | Default value               |
-| ----------------- | --------- | -------------------------------- | --------------------------- |
-| `action`          | `string`  | Gradle task(s) to execute        | `"build"`                   |
-| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
-| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
-| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
-| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                     |
-| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                     |
-| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                      |
-| `checks`          | `boolean` | Run checks and Sonar             | `true`                      |
-| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                     |
-| `coverage_report` | `string`  | Path to coverage report          | _(None.)_                   |
-| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_                   |
-| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
-| `gradle`          | `string`  | Gradle version to install & use  | `"wrapper"`                 |
-| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_     |
-| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`         |
-| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                     |
-| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
-| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
-| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
-| `label`           | `string`  | Label to show for build step     | `"Gradle"`                  |
-| `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                     |
-| `publish`         | `boolean` | Perform a publish after build    | `false`                     |
-| `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
-| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+| Name              | Type      | Description                      | Default value           |
+|-------------------|-----------|----------------------------------|-------------------------|
+| `action`          | `string`  | Gradle task(s) to execute        | `"build"`               |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_               |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                 |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                  |
+| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                 |
+| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                 |
+| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                  |
+| `checks`          | `boolean` | Run checks and Sonar             | `true`                  |
+| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                 |
+| `coverage_report` | `string`  | Path to coverage report          | _(None.)_               |
+| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_               |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_               |
+| `gradle`          | `string`  | Gradle version to install & use  | `"wrapper"`             |
+| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_ |
+| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`     |
+| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                 |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                  |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_ |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`       |
+| `label`           | `string`  | Label to show for build step     | `"Gradle"`              |
+| `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                 |
+| `publish`         | `boolean` | Perform a publish after build    | `false`                 |
+| `reports`         | `boolean` | Whether to upload built reports  | `true`                  |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_     |
 
 ### JVM: Maven
 
@@ -174,31 +177,31 @@ See below for an exhaustive list of all inputs for each build profile. You can u
 
 Inputs for the Maven workflow are nearly identical to those for the Gradle workflow (listed above):
 
-| Name              | Type      | Description                      | Default value               |
-| ----------------- | --------- | -------------------------------- | --------------------------- |
-| `action`          | `string`  | Maven goal(s) to execute         | `"package"`                 |
-| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
-| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
-| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
-| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                     |
-| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                     |
-| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                      |
-| `checks`          | `boolean` | Run checks and Sonar             | `true`                      |
-| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                     |
-| `coverage_report` | `string`  | Path to coverage report          | _(None.)_                   |
-| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_                   |
-| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
-| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_     |
-| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`         |
-| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                     |
-| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
-| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
-| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
-| `label`           | `string`  | Label to show for build step     | `"Gradle"`                  |
-| `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                     |
-| `publish`         | `boolean` | Perform a publish after build    | `false`                     |
-| `reports`         | `boolean` | Whether to upload built reports  | `true`                      |
-| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+| Name              | Type      | Description                      | Default value           |
+|-------------------|-----------|----------------------------------|-------------------------|
+| `action`          | `string`  | Maven goal(s) to execute         | `"package"`             |
+| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_               |
+| `artifacts`       | `boolean` | Upload built artifacts           | `false`                 |
+| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                  |
+| `cache_local`     | `boolean` | Turn local caching on/off        | `false`                 |
+| `cache_read_only` | `boolean` | GHA cache read-only status       | `false`                 |
+| `cache_remote`    | `boolean` | Turn remote caching on/off       | `true`                  |
+| `checks`          | `boolean` | Run checks and Sonar             | `true`                  |
+| `coverage`        | `boolean` | Upload → Codecov after build     | `false`                 |
+| `coverage_report` | `string`  | Path to coverage report          | _(None.)_               |
+| `coverage_flags`  | `string`  | Extra flags to pass to Codecov   | _(None.)_               |
+| `flags`           | `string`  | Extra flags to append            | _(None.)_               |
+| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_ |
+| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`     |
+| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                 |
+| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                  |
+| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_ |
+| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`       |
+| `label`           | `string`  | Label to show for build step     | `"Gradle"`              |
+| `provenance`      | `boolean` | Stamp for SLSA provenance        | `false`                 |
+| `publish`         | `boolean` | Perform a publish after build    | `false`                 |
+| `reports`         | `boolean` | Whether to upload built reports  | `true`                  |
+| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_     |
 
 ### Bazel
 
@@ -211,26 +214,49 @@ There are no required inputs for a Bazel build; the target specification default
 `//...`, which builds all targets. The default `command` is `build`. The build is executed with
 Bazelisk, which will respect the `.bazelversion` present at the root of your project.
 
-| Name              | Type      | Description                      | Default value               |
-| ----------------- | --------- | -------------------------------- | --------------------------- |
-| `artifact`        | `string`  | Name of output artifact to use   | _(None.)_                   |
-| `artifacts`       | `boolean` | Upload built artifacts           | `false`                     |
-| `cache_action`    | `boolean` | Turn GHA cache on/off            | `true`                      |
-| `command`         | `string`  | Bazel command to execute         | `"build"`                   |
-| `targets`         | `string`  | Bazel target string              | `"//..."`                   |
-| `flags`           | `string`  | Extra flags to append            | _(None.)_                   |
-| `gvm`             | `string`  | GraalVM version to use           | _(See JVM notes below)_     |
-| `gvm_components`  | `string`  | GraalVM components to install    | `"native-image,js"`         |
-| `install_gvm`     | `boolean` | Setup a distribution of GraalVM  | `false`                     |
-| `install_jvm`     | `boolean` | Setup a regular JVM before build | `true`                      |
-| `jvm`             | `string`  | JVM version to install/target    | _(See JVM notes below)_     |
-| `jvm_dist`        | `string`  | JVM distribution to use          | `"adopt-hotspot"`           |
-| `runner`          | `string`  | Runner to use for all tasks      | _(See runner docs)_         |
+| Name             | Type      | Description                      | Default value           |
+|------------------|-----------|----------------------------------|-------------------------|
+| `artifact`       | `string`  | Name of output artifact to use   | _(None.)_               |
+| `artifacts`      | `boolean` | Upload built artifacts           | `false`                 |
+| `cache_action`   | `boolean` | Turn GHA cache on/off            | `true`                  |
+| `command`        | `string`  | Bazel command to execute         | `"build"`               |
+| `targets`        | `string`  | Bazel target string              | `"//..."`               |
+| `flags`          | `string`  | Extra flags to append            | _(None.)_               |
+| `gvm`            | `string`  | GraalVM version to use           | _(See JVM notes below)_ |
+| `gvm_components` | `string`  | GraalVM components to install    | `"native-image,js"`     |
+| `install_gvm`    | `boolean` | Setup a distribution of GraalVM  | `false`                 |
+| `install_jvm`    | `boolean` | Setup a regular JVM before build | `true`                  |
+| `jvm`            | `string`  | JVM version to install/target    | _(See JVM notes below)_ |
+| `jvm_dist`       | `string`  | JVM distribution to use          | `"adopt-hotspot"`       |
+| `runner`         | `string`  | Runner to use for all tasks      | _(See runner docs)_     |
+
+## Gradle Conventions
+
+The Gradle conventions provided by this project are generic in nature and can be used in nearly any Gradle 8.x+ project.
+Conventions are applied in a cascading fashion, with relevant plugins being applied first, which then provide strong
+baseline settings.
+
+### Plugins
+
+- **[`dev.elide.jmod`][0]:** Build [`jmod`][1] artifacts in Gradle JVM projects with Java 9+. `jmod` artifacts are
+  compatible with [`jlink`][2] and make for great optimized build artifacts in modular projects.
+
+- **[`dev.elide.jpms`][3]:** Toolkit plugin for Gradle builds enabled with modular Java (Java Platform Module System, or
+  JPMS). Provides a `modulepath` configuration and modular builds for Java, Kotlin, and GraalVM.
+
+- **[`dev.elide.mrjar`][4]:** Plugin for easily building multi-target MRJAR artifacts. This plugin goes above and beyond
+  by building the entire project at each bytecode tier, so that modern Java runtimes can leverage the latest bytecode.
+
+- **[`dev.elide.jlink`][5]:** Plugin for using `jmod` and `jpms` to build optimized, self-contained modular Java apps
+  using [`jlink`][2].
+
+- **[`dev.elide.graalvm`][6]:** Plugin for using `jmod` and `jpms` to build optimized, native AOT Java apps using
+  [`native-image`][7].
 
 ## Contributing
 
 Follow the YAML and action convention within the repository; the multi-workspace expressed here for actions uses the
-[Actions Toolkit](https://github.com/actions/toolkit) and [`pnpm`](https://pnpm.io/) [workspaces](https://pnpm.io/workspaces).
+[GitHub Actions Toolkit](https://github.com/actions/toolkit) and [`pnpm`](https://pnpm.io/) [workspaces](https://pnpm.io/workspaces).
 
 Build configurations are validated on each push, and actions are built and tested to the extent possible. Once a PR is merged,
 it is expected to be deployed to private package storage, where update tools can pick it up.
@@ -240,3 +266,12 @@ it is expected to be deployed to private package storage, where update tools can
 Buildless, Elide Cloud, and related code, is privately licensed, and this repository is not meant for public consumption.
 Access implies that you accept the terms of the Elide Ventures LLC _Non-Disclosure Agreement_. All rights are reserved by
 Elide Ventures, LLC.
+
+[0]: ./gradle/plugins/jmod
+[1]: https://docs.oracle.com/en/java/javase/11/tools/jmod.html
+[2]: https://docs.oracle.com/en/java/javase/11/tools/jlink.html
+[3]: ./gradle/plugins/jpms
+[4]: ./gradle/plugins/mrjar
+[5]: ./gradle/plugins/jlink
+[6]: ./gradle/plugins/graalvm
+[7]: https://www.graalvm.org/latest/reference-manual/native-image/
