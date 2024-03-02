@@ -1,0 +1,59 @@
+name: "Gradle Conventions"
+
+concurrency:
+  group: build-conventions-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+on:
+  ## Check actions on merge queue insertion
+  merge_group: {}
+
+  ## Check on push to `main` if modified
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/conventions.yaml"
+      - "gradle/catalogs"
+      - "gradle/plugins"
+      - "gradle/"
+      - "gradle/*/*.*"
+      - "build.gradle.kts"
+      - "settings.gradle.kts"
+      - "*.lockfile"
+      - "*.gradle.kts"
+
+  ## Check each PR change against `main`
+  pull_request:
+    paths:
+      - ".github/workflows/*.yaml"
+      - ".github/workflows/*.yml"
+      - ".github/workflows/pkg/*/*.yaml"
+      - ".github/workflows/pkg/*/*.yml"
+      - "actions/*/*.yaml"
+      - "actions/*/*.yml"
+      - "containers/*/*.yaml"
+      - "containers/*/*.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  ## Task: Build convention plugins with re-usable Gradle workflow
+  build-conventions:
+    name: "Build"
+    uses: ./.github/workflows/jvm.gradle.yml
+    permissions:
+      actions: read
+      checks: write
+      contents: write
+      pull-requests: read
+      id-token: write
+    with:
+      action: "build test check"
+      jvm: "21"
+      checks: false
+      cache_local: true
+      flags: "--no-configuration-cache --stacktrace -Porg.gradle.unsafe.isolated-projects=false -Dorg.gradle.unsafe.isolated-projects=false"
+      graph: "disabled"
+      scan: true
