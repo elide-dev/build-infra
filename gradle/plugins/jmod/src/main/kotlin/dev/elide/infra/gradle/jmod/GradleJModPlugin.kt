@@ -6,7 +6,6 @@ import dev.elide.infra.gradle.projectRelative
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaApplication
-import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.named
@@ -49,18 +48,26 @@ public abstract class GradleJModPlugin : Plugin<Project> {
     if (!target.plugins.hasPlugin(GradleJpmsPlugin::class.java))
       target.pluginManager.apply(GradleJpmsPlugin::class.java)
 
-    // --- Java: Module build task.
-    target.tasks.register("jmod", Exec::class.java) {
-      val modulepath = target.configurations.named("modulepath").get()
-      val tasks = project.tasks
-      val jmodOut = project.layout.buildDirectory.file("libs/${project.name}.jmod").get().asFile
-      val jmodOutPath = project.projectRelative(jmodOut.toPath())
-      val application = project.extensions.findByType(JavaApplication::class.java)
+    // register jmod task
+    val modulepath = requireNotNull(target.configurations.named("modulepath").get()).asPath
+    target.tasks.register("jmod", JModTask::class.java) {
+      group = "build"
+      description = "Build a jmod artifact from this JVM project"
 
-      val javac = tasks.named("compileJava", JavaCompile::class).get()
-      val kotlinc = tasks.findByName("compileKotlinJvm")
-      val jar = when (val jvmJar = tasks.findByName("jvmJar")) {
-        null -> tasks.named("jar", Jar::class).get()
+      val dirOut = project.layout.buildDirectory.dir("jmod")
+      val jmodOut = project.layout.buildDirectory.file("jmod/${project.name}.jmod").get().asFile
+      val jmodOutPath = project.projectRelative(jmodOut.toPath())
+
+      destinationDirectory.set(dirOut)
+      outFile.set(jmodOut)
+      outputs.file(jmodOut)
+      executable(project.javaHomeFile("bin", "jmod"))
+
+      val application = target.extensions.findByType(JavaApplication::class.java)
+      val javac = target.tasks.named("compileJava", JavaCompile::class).get()
+      val kotlinc = target.tasks.findByName("compileKotlinJvm")
+      val jar = when (val jvmJar = target.tasks.findByName("jvmJar")) {
+        null -> target.tasks.named("jar", Jar::class).get()
         else -> jvmJar as Jar
       }
 
@@ -69,21 +76,19 @@ public abstract class GradleJModPlugin : Plugin<Project> {
         javac,
         jar,
         kotlinc,
-        tasks.findByName("classes"),
-        tasks.findByName("jvmMainClasses"),
+        target.tasks.findByName("classes"),
+        target.tasks.findByName("jvmMainClasses"),
       ).let {
         dependsOn(it)
         mustRunAfter(it)
       }
 
-      // we will be running jmod today; it's part of the jdk, and we will be outputting a jmod file.
-      executable(project.javaHomeFile("bin", "jmod"))
-      outputs.file(jmodOut)
-
       // output classes from java and kotlin compile jobs are inputs
       val outputClasses = listOfNotNull(
         javac.destinationDirectory,
-        kotlinc?.let { tasks.named("compileKotlinJvm", KotlinJvmCompile::class).get().destinationDirectory },
+        kotlinc?.let {
+          target.tasks.named("compileKotlinJvm", KotlinJvmCompile::class).get().destinationDirectory
+        },
       )
 
       // the JAR is an input to force Gradle to write outputs, including `module-info.class`. the `module-info.class` file
@@ -105,11 +110,11 @@ public abstract class GradleJModPlugin : Plugin<Project> {
       // start building arguments
       argumentProviders.add(CommandLineArgumentProvider {
         mutableListOf(
-          "create",
+          action.get().action,
           "--class-path",
           outputClasses.joinToString(":") { project.projectRelative(it.get().asFile.toPath()) },
           "--module-path",
-          modulepath.asPath,
+          modulepath,
         ).apply {
           application?.let { app ->
             addAll(listOf("--main-class=${app.mainClass}"))

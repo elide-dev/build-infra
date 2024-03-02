@@ -30,6 +30,33 @@ public object BuildConstants {
 
     /** Kotlin power-assert plugin */
     public const val KOTLIN_POWER_ASSERT: String = "com.bnorm.power.kotlin-power-assert"
+
+    /** Infra plug-in: base */
+    public const val INFRA_BASE: String = "dev.elide.base"
+
+    /** Infra plug-in: JPMS */
+    public const val INFRA_JPMS: String = "dev.elide.jpms"
+
+    /** Infra plug-in: jmod */
+    public const val INFRA_JMOD: String = "dev.elide.jmod"
+
+    /** Infra plug-in: jlink */
+    public const val INFRA_JLINK: String = "dev.elide.jlink"
+
+    /** Infra plug-in: multi-release JARs */
+    public const val INFRA_MRJAR: String = "dev.elide.mrjar"
+
+    /** Infra plug-in: GraalVM */
+    public const val INFRA_GRAALVM: String = "dev.elide.graalvm"
+  }
+
+  /** Common/known plugin names. */
+  public object Extensions {
+    /** Extension name to use for actual build settings */
+    public const val INFRA: String = "buildInfra"
+
+    /** Extension name to use for meta-build-settings */
+    public const val META: String = "infraPlugin"
   }
 
   /** Plug-in IDs for conventions */
@@ -52,6 +79,8 @@ public object BuildConstants {
 
   /** Properties which configure the build */
   public object Properties {
+    // ---- Build Properties ------------------------------------------------------------------------------------------
+
     /** Property which allows overriding the JVM bytecode target */
     public const val JVM_TARGET: String = "conventions.jvm.target"
 
@@ -69,6 +98,14 @@ public object BuildConstants {
 
     /** Kotlin JVM bytecode target version override */
     public const val KOTLIN_JVM_TARGET: String = "conventions.kotlin.jvm.target"
+
+    /** JPMS kill-switch */
+    public const val JPMS_DISABLED: String = "conventions.jvm.disableJpms"
+
+    // ---- System Properties -----------------------------------------------------------------------------------------
+
+    /** Property hint for an IDEA sync */
+    public const val IDEA_SYNC: String = "idea.active"
   }
 
   /** Environment variables which influence the build */

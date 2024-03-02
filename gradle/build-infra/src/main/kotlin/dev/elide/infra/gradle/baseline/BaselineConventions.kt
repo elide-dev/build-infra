@@ -1,5 +1,6 @@
 package dev.elide.infra.gradle.baseline
 
+import dev.elide.infra.gradle.BuildConstants
 import dev.elide.infra.gradle.api.ElideBuild
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -20,7 +21,7 @@ public class BaselineConventions : Plugin<Project> {
     }
 
     // create the baseline settings-time extension
-    if (target.extensions.findByName("infra") == null)
-      target.extensions.create("infra", ElideBuild.ElideBuildDsl::class.java)
+    if (target.extensions.findByName(BuildConstants.Extensions.META) == null)
+      target.extensions.create(BuildConstants.Extensions.META, ElideBuild.ElideBuildDsl::class.java)
   }
 }
