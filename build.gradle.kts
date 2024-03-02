@@ -29,7 +29,7 @@ buildInfra {
 }
 
 private fun Task.taskInAllBuilds(name: String) {
-  dependsOn(gradle.includedBuilds.map { it.task(":$name") })
+  dependsOn(gradle.includedBuilds.filter { "sample" !in it.name }.map { it.task(":$name") })
 }
 
 // Top-level tasks.
