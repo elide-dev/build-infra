@@ -60,4 +60,7 @@ includeBuild("gradle/plugins/mrjar") {
   }
 }
 
+// Add samples, which test the embedded plugins.
+includeBuild("gradle/samples")
+
 rootProject.name = "build-commons"

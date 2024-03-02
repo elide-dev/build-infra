@@ -1,6 +1,9 @@
 plugins {
   id(core.plugins.kotlin.multiplatform.get().pluginId) apply false
+  id("dev.elide.base")
 }
+
+description = "Shared conventions and plugins for modern Gradle builds"
 
 buildscript {
   dependencies {
@@ -19,8 +22,10 @@ buildscript {
   }
 }
 
-dependencyLocking {
-  lockAllConfigurations()
+buildInfra {
+  baselines = true
+  dependencies.locking.enabled = true
+  dependencies.verification.enabled = true
 }
 
 private fun Task.taskInAllBuilds(name: String) {

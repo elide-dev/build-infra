@@ -2,6 +2,7 @@
 
 package dev.elide.infra.gradle.settings
 
+import dev.elide.infra.gradle.BuildConstants
 import dev.elide.infra.gradle.api.ElideSettings
 import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
@@ -23,16 +24,16 @@ public class BaselineBuildSettings : Plugin<Settings> {
     }
 
     // create the baseline settings-time extension
-    target.extensions.create("infra", ElideSettings.ElideSettingsDsl::class.java)
+    target.extensions.create(BuildConstants.Extensions.META, ElideSettings.ElideSettingsDsl::class.java)
     target.extensions.configure(ElideSettings.ElideSettingsDsl::class.java) {
       repositories.pkgst.convention(true)
       buildCaching.local.enabled.convention(true)
     }
 
-    val catalogPath = if (target.rootDir.toPath().toString().contains("gradle/plugins/")) {
-      "../../catalogs"
-    } else {
-      "gradle/catalogs"
+    val catalogPath = when {
+      target.rootDir.toPath().toString().contains("gradle/plugins/") -> "../../catalogs"
+      target.rootDir.toPath().toString().contains("samples") -> "../catalogs"
+      else -> "gradle/catalogs"
     }
 
     target.dependencyResolutionManagement {
