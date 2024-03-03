@@ -17,9 +17,19 @@ import dev.elide.infra.gradle.BuildConstants
 import dev.elide.infra.gradle.api.ElideBuild
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.tasks.bundling.Tar
+import org.gradle.api.tasks.bundling.Zip
+import org.gradle.kotlin.dsl.configure
 
-private fun allProjectsPlugins(): List<String> = listOf(
+public fun allProjectsPlugins(): List<String> = listOf(
   // None yet.
+)
+
+public val projectBaselines: List<Project.(ElideBuild) -> Unit> = listOf(
+  { configureArchiveTasks(it) },
+  { configureDependencyLocking(it) },
 )
 
 /**
@@ -36,5 +46,76 @@ public class BaselineConventions : Plugin<Project> {
     // create the baseline settings-time extension
     if (target.extensions.findByName(BuildConstants.Extensions.META) == null)
       target.extensions.create(BuildConstants.Extensions.META, ElideBuild.ElideBuildDsl::class.java)
+
+    // install configuration extension
+    if (target.extensions.findByName(BuildConstants.Extensions.META) == null)
+      target.extensions.create(BuildConstants.Extensions.INFRA, ElideBuild.ElideBuildDsl::class.java)
+
+    // configure all project baselines
+    target.configureElideBaselines()
+  }
+}
+
+// Configure all project baselines.
+public fun Project.configureElideBaselines() {
+  extensions.configure<ElideBuild.ElideBuildDsl> {
+    // dispatch baselines
+    projectBaselines.forEach { it.invoke(this@configureElideBaselines, this@configure) }
+
+    // apply configuration hooks
+    configurations.all {
+      configureDependencyVerification(this@configure)
+      filterDisableDependencyLocking(this@configure)
+      filterDisableDependencyVerification(this@configure)
+    }
+  }
+}
+
+// Configure archives for better reproducibility.
+public fun Project.configureArchiveTasks(conventions: ElideBuild) {
+  if (conventions.baselines.get()) listOf(Tar::class, Zip::class, Jar::class).forEach {
+    tasks.withType(it.java).configureEach {
+      isPreserveFileTimestamps = false
+      isReproducibleFileOrder = true
+      if (this is Zip) isZip64 = true
+    }
+  }
+}
+
+// Configure dependency locking features.
+public fun Project.configureDependencyLocking(conventions: ElideBuild) {
+  conventions.dependencies.locking.let { locking ->
+    // apply dependency locking
+    if (locking.enabled.get()) dependencyLocking {
+      lockAllConfigurations()
+    }
+  }
+}
+
+// Apply dependency locking filters.
+public fun Configuration.filterDisableDependencyLocking(conventions: ElideBuild) {
+  if (conventions.dependencies.locking.ignored.get().any {
+      it == this.name || this.name.lowercase().trim().contains(it)
+    }) {
+    resolutionStrategy.deactivateDependencyLocking()
+  }
+}
+
+// Configure dependency verification features.
+public fun Configuration.configureDependencyVerification(conventions: ElideBuild) {
+  conventions.dependencies.verification.let { verification ->
+    // apply dependency locking
+    if (verification.enabled.get()) resolutionStrategy {
+      enableDependencyVerification()
+    }
+  }
+}
+
+// Apply dependency verification filters.
+public fun Configuration.filterDisableDependencyVerification(conventions: ElideBuild) {
+  if (conventions.dependencies.verification.ignored.get().any {
+      it == this.name || this.name.lowercase().trim().contains(it)
+    }) {
+    resolutionStrategy.disableDependencyVerification()
   }
 }

@@ -23,6 +23,9 @@ plugins {
 // All JVM platform targets provided by this project.
 val allPlatforms = listOf(
   "platform-baseline",
+  "platform-jvm-edge",
+  "platform-kotlin-edge",
+  "platform-kotlin-stable",
 )
 
 allPlatforms.forEach {

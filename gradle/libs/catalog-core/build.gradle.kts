@@ -12,12 +12,9 @@
  */
 
 plugins {
-  base
   `version-catalog`
   `maven-publish`
-
-  id("infra.root")
-  id("infra.library")
+  id("infra.catalog")
 }
 
 description = "Core version catalog"
@@ -25,6 +22,7 @@ group = "dev.elide.infra"
 
 catalog {
   versionCatalog {
+    description = "Core version catalog for Build Infra and downstream projects"
     from(files("../../catalogs/core.versions.toml"))
   }
 }
@@ -36,5 +34,3 @@ publishing {
     }
   }
 }
-
-val test by tasks.registering { /* Nothing yet. */ }

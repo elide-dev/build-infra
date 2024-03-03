@@ -11,22 +11,17 @@
  * License for the specific language governing permissions and limitations under the License.
  */
 
-package dev.elide.infra.gradle
+plugins {
+  `java-platform`
+}
 
-import dev.elide.infra.gradle.api.ElideBuild
-import dev.elide.infra.gradle.baseline.*
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-
-/**
- * # Gradle Baseline Plugin
- */
-public abstract class GradleBaselinePlugin : Plugin<Project> {
-  override fun apply(target: Project) {
-    // install configuration extension
-    target.extensions.create(BuildConstants.Extensions.INFRA, ElideBuild.ElideBuildDsl::class.java)
-
-    // configure all project baselines
-    target.configureElideBaselines()
+dependencies {
+  constraints {
+    // Enforce a uniform version of the Kotlin Standard Library.
+    api(core.kotlin.stdlib)
+    api(core.kotlin.stdlib.common)
+    api(core.kotlin.stdlib.jdk8)
   }
 }
+
+val test by tasks.registering { /* Nothing yet. */ }

@@ -15,4 +15,17 @@ plugins {
   `java-platform`
 }
 
+dependencies {
+  constraints {
+    // Enforce the latest version of Guava; in general, Guava has excellent backward compatibility, but often
+    // experiences version mismatches which result in missing symbols.
+    api(libs.guava)
+
+    // Enforce
+    api(core.kotlin.stdlib)
+    api(core.kotlin.stdlib.common)
+    api(core.kotlin.stdlib.jdk8)
+  }
+}
+
 val test by tasks.registering { /* Nothing yet. */ }

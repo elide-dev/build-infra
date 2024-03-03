@@ -11,16 +11,14 @@
  * License for the specific language governing permissions and limitations under the License.
  */
 
-package dev.elide.infra.gradle.baseline
+plugins {
+  `java-platform`
+}
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-
-/**
- * # Conventions: Dependencies
- */
-public class DependencyConventions : Plugin<Project> {
-  override fun apply(target: Project) {
-    //
+dependencies {
+  constraints {
+    // Nothing yet.
   }
 }
+
+val test by tasks.registering { /* Nothing yet. */ }
