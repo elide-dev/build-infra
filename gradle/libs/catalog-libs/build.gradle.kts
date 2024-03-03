@@ -36,3 +36,5 @@ publishing {
     }
   }
 }
+
+val test by tasks.registering { /* Nothing yet. */ }
