@@ -13,15 +13,25 @@
 
 [versions]
 buildless = "1.0.0-rc2"
+cyclonedx = "1.8.2"
+detekt = "1.23.5"
+docker-plugin = "9.4.0"
 gradle-common = "1.12.1"
 gradle-enterprise = "3.16.2"
 gradle-kotlin-dsl = "4.3.0"
 gradle-publish = "1.2.1"
 gradle-toolchains = "0.8.0"
+kotlinx-abiValidator = "0.14.0"
+kotlinx-benchmark = "0.4.10"
+kover = "0.7.5"
+kover-plugin = "0.7.5"
 micronaut-platform = "4.3.4"
 
 [plugins]
 buildless = { id = "build.less", version.ref = "buildless" }
+cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+docker = { id = "com.bmuschko.docker-java-application", version.ref = "docker-plugin" }
 gradle-common = { id = "com.gradle.common-custom-user-data-gradle-plugin", version.ref = "gradle-common" }
 gradle-enterprise = { id = "com.gradle.enterprise", version.ref = "gradle-enterprise" }
 gradle-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version.ref = "gradle-kotlin-dsl" }
@@ -32,6 +42,9 @@ micronaut-catalog = { id = "io.micronaut.platform.catalog", version.ref = "micro
 
 [libraries]
 plugin-buildless = { module = "build.less:buildless-plugin-gradle", version.ref = "buildless" }
+plugin-cyclonedx = { module = "org.cyclonedx:cyclonedx-gradle-plugin", version.ref = "cyclonedx" }
+plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+plugin-docker = { module = "com.bmuschko:gradle-docker-plugin", version.ref = "docker-plugin" }
 plugin-gradle-common = { module = "com.gradle:common-custom-user-data-gradle-plugin", version.ref = "gradle-common" }
 plugin-gradle-enterprise = { module = "com.gradle:gradle-enterprise-gradle-plugin", version.ref = "gradle-enterprise" }
 plugin-gradle-kotlin-dsl = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins", version.ref = "gradle-kotlin-dsl" }

@@ -14,7 +14,6 @@
 package dev.elide.infra.gradle
 
 import dev.elide.infra.gradle.baseline.BaselineConventions
-import dev.elide.infra.gradle.baseline.DependencyConventions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -23,7 +22,6 @@ import kotlin.reflect.KClass
 // Provide the list of installed baseline conventions.
 internal fun baselineConventions(): List<KClass<out Plugin<Project>>> = listOf(
   BaselineConventions::class,
-  DependencyConventions::class,
 )
 
 /**

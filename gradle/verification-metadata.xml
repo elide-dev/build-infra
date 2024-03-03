@@ -19,6 +19,7 @@
       </trusted-artifacts>
       <trusted-keys>
          <trusted-key id="0400C98336119B50D51106DE831EE9CA8C4D7525" group="build.less" name="buildless-plugin-gradle" version="1.0.0-rc2"/>
+         <trusted-key id="052BABB2EAE3A8C08061DE37E6545B725829AF71" group="com.moandjiezana.toml" name="toml4j" version="0.7.1"/>
          <trusted-key id="0F07D1201BDDAB67CFB84EB479752DB6C966F0B8" group="com.google.android" name="annotations" version="4.1.1.4"/>
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
          <trusted-key id="1A55F091AD28C07F831FA44D7905DE25C78AD456" group="com.google.protobuf"/>
@@ -27,8 +28,10 @@
             <trusting group="^org[.]gradle($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="2E3A1AFFE42B5F53AF19F780BCF4173966770193" group="org.jetbrains" name="annotations" version="13.0"/>
+         <trusted-key id="343F63EE46A689EA812DF9C2007B7A178C7833F9" group="com.google.code.gson" name="gson" version="2.3.1"/>
          <trusted-key id="34D3C74983CAEBEAF7116354D1AF992375BFF8E7" group="build.buf" name="connect-kotlin" version="0.1.10"/>
          <trusted-key id="47504B76CF89C15C0512D9AFE16AB52D79FD224F" group="^com[.]google($|([.].*))" regex="true"/>
+         <trusted-key id="4DB1A49729B053CAF015CEE9A6ADFC93EF34893E" group="org.hamcrest"/>
          <trusted-key id="4F7E32D440EF90A83011A8FC6425559C47CC79C4" group="javax.annotation" name="javax.annotation-api" version="1.3.2"/>
          <trusted-key id="50A628FFAF58480736B1079FD1031D14464180E0" group="org.reactivestreams" name="reactive-streams" version="1.0.4"/>
          <trusted-key id="5719E50EAC5A4B1DD390B72C2A742740E08E7F8D" group="org.antlr"/>
@@ -61,6 +64,7 @@
          <trusted-key id="EE0CA873074092F806F59B65D364ABAA39A47320" group="com.google.errorprone"/>
          <trusted-key id="FA77DCFEF2EE6EB2DEBEDD2C012579464D01C06A" group="^org[.]apache($|([.].*))" regex="true"/>
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
+            <trusting group="junit" name="junit" version="4.13.2"/>
             <trusting group="org.apiguardian" name="apiguardian-api" version="1.1.2"/>
             <trusting group="org.junit" name="junit-bom"/>
             <trusting group="org.opentest4j"/>
@@ -140,6 +144,11 @@
       <component group="com.gradle.publish" name="plugin-publish-plugin" version="1.2.1">
          <artifact name="plugin-publish-plugin-1.2.1.module">
             <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+         </artifact>
+      </component>
+      <component group="com.moandjiezana.toml" name="toml4j" version="0.7.1">
+         <artifact name="toml4j-0.7.1.pom">
+            <pgp value="052BABB2EAE3A8C08061DE37E6545B725829AF71"/>
          </artifact>
       </component>
       <component group="com.osacky.doctor" name="com.osacky.doctor.gradle.plugin" version="0.9.2">

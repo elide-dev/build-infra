@@ -1,7 +1,10 @@
 *.yaml linguist-language=YAML linguist-detectable
 *.yml linguist-language=YAML linguist-detectable
+*.toml linguist-language=TOML linguist-detectable
 .github/workflows/*.yaml linguist-language=YAML linguist-detectable
 .github/workflows/*.yml linguist-language=YAML linguist-detectable
+*.kts linguist-language=Gradle linguist-detectable
+*.kt linguist-language=Kotlin linguist-detectable
 *.ts linguist-language=TypeScript linguist-detectable
 **/*.ts linguist-language=TypeScript linguist-detectable
 commitlint.config.js -linguist-detectable

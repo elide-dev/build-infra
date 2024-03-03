@@ -1,30 +1,31 @@
-#
-# Copyright (c) 2024 Elide Technologies, Inc.
-#
-# Licensed under the MIT license (the "License"); you may not use this file except in compliance
-# with the License. You may obtain a copy of the License at
-#
-# https://opensource.org/license/mit/
-#
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
-# an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations under the License.
-#
-
 [versions]
 atomicfu = "0.23.2"
 buildconfig = "5.3.5"
+buildless = "1.0.0-rc2"
+cyclonedx = "1.8.2"
+detekt = "1.23.5"
+docker-plugin = "9.4.0"
 gradle-checksum = "1.4.0"
+gradle-common = "1.12.1"
 gradle-doctor = "0.9.2"
+gradle-enterprise = "3.16.2"
+gradle-kotlin-dsl = "4.3.0"
+gradle-publish = "1.2.1"
+gradle-toolchains = "0.8.0"
 idea-ext = "1.1.7"
 kotlin-stable = "1.9.22"
+kotlinx-abiValidator = "0.14.0"
+kotlinx-benchmark = "0.4.10"
 kotlinx-collections = "0.3.7"
 kotlinx-coroutines = "1.8.0"
 kotlinx-datetime = "0.5.0"
 kotlinx-html = "0.11.0"
 kotlinx-io = "0.3.1"
 kotlinx-serialization = "1.6.3"
+kover = "0.7.5"
+kover-plugin = "0.7.5"
 ksp = "1.9.22-1.0.17"
+micronaut-platform = "4.3.4"
 owasp = "9.0.9"
 powerassert = "0.13.0"
 testlogger = "4.0.0"
@@ -33,12 +34,23 @@ version-check = "0.51.0"
 
 [plugins]
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
+buildless = { id = "build.less", version.ref = "buildless" }
+cyclonedx = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+docker = { id = "com.bmuschko.docker-java-application", version.ref = "docker-plugin" }
 gradle-checksum = { id = "org.gradle.crypto.checksum", version.ref = "gradle-checksum" }
+gradle-common = { id = "com.gradle.common-custom-user-data-gradle-plugin", version.ref = "gradle-common" }
 gradle-doctor = { id = "com.osacky.doctor", version.ref = "gradle-doctor" }
+gradle-enterprise = { id = "com.gradle.enterprise", version.ref = "gradle-enterprise" }
+gradle-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version.ref = "gradle-kotlin-dsl" }
+gradle-precompiled = { id = "org.gradle.kotlin.kotlin-dsl.precompiled-script-plugins", version.ref = "gradle-kotlin-dsl" }
+gradle-publish = { id = "com.gradle.plugin-publish", version.ref = "gradle-publish" }
+gradle-toolchains = { id = "org.gradle.toolchains.foojay-resolver-convention", version.ref = "gradle-toolchains" }
 idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ext" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-stable" }
 kotlin-powerassert = { id = "com.bnorm.power.kotlin-power-assert", version.ref = "powerassert" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-stable" }
+micronaut-catalog = { id = "io.micronaut.platform.catalog", version.ref = "micronaut-platform" }
 testlogger = { id = "com.adarshr.test-logger", version.ref = "testlogger" }
 versions = { id = "com.github.ben-manes.versions", version.ref = "version-check" }
 
@@ -87,19 +99,29 @@ kotlinx-serialization-protobuf = { group = "org.jetbrains.kotlinx", name = "kotl
 kotlinx-serialization-protobuf-js = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf-js", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-protobuf-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf-jvm", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-protobuf-wasm = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf-wasm", version.ref = "kotlinx-serialization" }
-tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
-
-## Plugin Bindings
 plugin-buildconfig = { module = "com.github.gmazzo.buildconfig:plugin", version.ref = "buildconfig" }
+plugin-buildless = { module = "build.less:buildless-plugin-gradle", version.ref = "buildless" }
+plugin-cyclonedx = { module = "org.cyclonedx:cyclonedx-gradle-plugin", version.ref = "cyclonedx" }
+plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+plugin-docker = { module = "com.bmuschko:gradle-docker-plugin", version.ref = "docker-plugin" }
 plugin-gradle-checksum = { module = "gradle.plugin.org.gradle.crypto:checksum", version.ref = "gradle-checksum" }
+plugin-gradle-common = { module = "com.gradle:common-custom-user-data-gradle-plugin", version.ref = "gradle-common" }
 plugin-gradle-doctor = { module = "com.osacky.doctor:doctor-plugin", version.ref = "gradle-doctor" }
+plugin-gradle-enterprise = { module = "com.gradle:gradle-enterprise-gradle-plugin", version.ref = "gradle-enterprise" }
+plugin-gradle-kotlin-dsl = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins", version.ref = "gradle-kotlin-dsl" }
+plugin-gradle-precompiled = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins", version.ref = "gradle-kotlin-dsl" }
+plugin-gradle-publish = { module = "com.gradle.publish:plugin-publish-plugin", version.ref = "gradle-publish" }
+plugin-gradle-toolchains = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "gradle-toolchains" }
 plugin-idea-ext = { module = "gradle.plugin.org.jetbrains.gradle.plugin.idea-ext:gradle-idea-ext", version.ref = "idea-ext" }
 plugin-kotlin-multiplatform = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-stable" }
 plugin-kotlin-powerassert = { module = "com.bnorm.power:kotlin-power-assert-gradle", version.ref = "powerassert" }
 plugin-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin-stable" }
+plugin-micronaut-catalog = { module = "io.micronaut.gradle:micronaut-platform-catalog-plugin", version.ref = "micronaut-platform" }
 plugin-testlogger = { module = "com.adarshr:gradle-test-logger-plugin", version.ref = "testlogger" }
 plugin-versions = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "version-check" }
+tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 
 [bundles]
 kotlin-stdlib = ["kotlin-stdlib", "kotlin-stdlib-common"]
 kotlin-stdlib-jvm = ["kotlin-stdlib", "kotlin-stdlib-common", "kotlin-stdlib-jdk8"]
+plugins = ["plugin-buildless", "plugin-gradle-common", "plugin-gradle-enterprise", "plugin-gradle-toolchains", "plugin-micronaut-catalog"]

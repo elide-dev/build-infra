@@ -1,3 +1,5 @@
+import dev.elide.infra.gradle.catalogs.VersionCatalogMergeTask
+
 /*
  * Copyright (c) 2024 Elide Technologies, Inc.
  *
@@ -12,20 +14,26 @@
  */
 
 plugins {
-  base
   `version-catalog`
   `maven-publish`
 
-  id("infra.root")
-  id("infra.library")
+  id("infra.catalog")
 }
 
 description = "Infra version catalog"
 group = "dev.elide.infra"
 
+infraCatalog {
+  catalogs.from(
+    "../../catalogs/core.versions.toml",
+    "../../catalogs/infra.versions.toml",
+  )
+}
+
 catalog {
   versionCatalog {
-    from(files("../../catalogs/infra.versions.toml"))
+    description = "Vetted and security-hardened build tooling for Gradle"
+    from(files("mergedCatalog/catalog.versions.toml"))
   }
 }
 
@@ -36,5 +44,3 @@ publishing {
     }
   }
 }
-
-val test by tasks.registering { /* Nothing yet. */ }

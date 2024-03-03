@@ -17,6 +17,9 @@ package dev.elide.infra.gradle
 public object BuildConstants {
   /** Common/known plugin names. */
   public object KnownPlugins {
+    /** Built-in Gradle base plugin */
+    public const val BASE: String = "base"
+
     /** Main Java plugin */
     public const val JAVA: String = "java"
 
@@ -100,6 +103,9 @@ public object BuildConstants {
 
     /** Extension name to use for meta-build-settings */
     public const val META: String = "infraPlugin"
+
+    /** Extension for customizing catalogs */
+    public const val CATALOG: String = "infraCatalog"
   }
 
   /** Plug-in IDs for conventions */

@@ -44,6 +44,8 @@ listOf(Jar::class, Zip::class, Tar::class).forEach {
 dependencies {
   implementation(infra.bundles.plugins)
   implementation(infra.plugin.gradle.publish)
+  implementation(core.tomlj)
+  implementation(core.kotlinx.collections.immutable)
   implementation(core.plugin.testlogger)
   implementation(core.plugin.kotlin.multiplatform)
   implementation(files(core.javaClass.superclass.protectionDomain.codeSource.location))
@@ -51,6 +53,7 @@ dependencies {
   implementation(files(infra.javaClass.superclass.protectionDomain.codeSource.location))
 
   testImplementation(gradleTestKit())
+  testImplementation(core.kotlin.test)
   testImplementation(libs.testing.junit.jupiter)
   testImplementation(libs.testing.junit.jupiter.engine)
   testImplementation(libs.testing.junit.jupiter.params)
@@ -82,6 +85,10 @@ gradlePlugin {
     create("infra.library") {
       id = "infra.library"
       implementationClass = "dev.elide.infra.gradle.ElideLibraryConvention"
+    }
+    create("infra.catalog") {
+      id = "infra.catalog"
+      implementationClass = "dev.elide.infra.gradle.InfraCatalogConvention"
     }
   }
 }
