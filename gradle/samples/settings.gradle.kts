@@ -14,6 +14,7 @@ plugins {
   id("infra.settings")
 }
 
+include(":jmod-kotlin")
 include(":jmod-library")
 
 rootProject.name = "samples"
