@@ -19,6 +19,7 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class GradleJModPluginTest : AbstractPluginTest() {
@@ -87,5 +88,8 @@ class GradleJModPluginTest : AbstractPluginTest() {
     assertEquals(TaskOutcome.SUCCESS, jar?.outcome)
     val jmod = result.task(":jmod")
     assertEquals(TaskOutcome.SUCCESS, jmod?.outcome)
+
+    val target = outputPath("jmod/hello-world.jmod").toFile()
+    assertTrue(target.exists(), "output jmod should exist at '${target.path}'")
   }
 }
