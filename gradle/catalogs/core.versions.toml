@@ -1,11 +1,23 @@
 [versions]
+buildconfig = "5.3.5"
+gradle-checksum = "1.4.0"
+gradle-doctor = "0.9.2"
+idea-ext = "1.1.7"
 kotlin-sdk = "1.9.22"
 powerassert = "0.13.0"
+testlogger = "4.0.0"
+version-check = "0.51.0"
 
 [plugins]
+buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
+gradle-checksum = { id = "org.gradle.crypto.checksum", version.ref = "gradle-checksum" }
+gradle-doctor = { id = "com.osacky.doctor", version.ref = "gradle-doctor" }
+idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ext" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-sdk" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-sdk" }
 kotlin-powerassert = { id = "com.bnorm.power.kotlin-power-assert", version.ref = "powerassert" }
+testlogger = { id = "com.adarshr.test-logger", version.ref = "testlogger" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "version-check" }
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-sdk" }
@@ -13,9 +25,15 @@ kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", v
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-sdk" }
 
 ## Plugin Bindings
+plugin-buildconfig = { module = "com.github.gmazzo.buildconfig:plugin", version.ref = "buildconfig" }
+plugin-gradle-checksum = { module = "gradle.plugin.org.gradle.crypto:checksum", version.ref = "gradle-checksum" }
+plugin-gradle-doctor = { module = "com.osacky.doctor:doctor-plugin", version.ref = "gradle-doctor" }
+plugin-idea-ext = { module = "gradle.plugin.org.jetbrains.gradle.plugin.idea-ext:gradle-idea-ext", version.ref = "idea-ext" }
 plugin-kotlin-multiplatform = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-sdk" }
 plugin-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin-sdk" }
 plugin-kotlin-powerassert = { module = "com.bnorm.power:kotlin-power-assert-gradle", version.ref = "powerassert" }
+plugin-testlogger = { module = "com.adarshr:gradle-test-logger-plugin", version.ref = "testlogger" }
+plugin-versions = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "version-check" }
 
 [bundles]
 kotlin-stdlib = ["kotlin-stdlib", "kotlin-stdlib-common"]

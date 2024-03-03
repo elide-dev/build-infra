@@ -31,6 +31,18 @@ public object BuildConstants {
     /** Kotlin power-assert plugin */
     public const val KOTLIN_POWER_ASSERT: String = "com.bnorm.power.kotlin-power-assert"
 
+    /** Plugin for creating Gradle plugins */
+    public const val JAVA_GRADLE_PLUGIN: String = "java-gradle-plugin"
+
+    /** Plugin for publishing Gradle plugins */
+    public const val GRADLE_PLUGIN_PUBLISH: String = "com.gradle.plugin-publish"
+
+    /** Built-in Kotlin DSL plugin */
+    public const val KOTLIN_DSL: String = "kotlin-dsl"
+
+    /** Built-in Kotlin DSL precompiled scripts plugin */
+    public const val KOTLIN_PRECOMPILED_SCRIPTS: String = "kotlin-dsl-precompiled-script-plugins"
+
     /** Infra plug-in: base */
     public const val INFRA_BASE: String = "dev.elide.base"
 
@@ -48,6 +60,21 @@ public object BuildConstants {
 
     /** Infra plug-in: GraalVM */
     public const val INFRA_GRAALVM: String = "dev.elide.graalvm"
+
+    /** Settings plug-in: Gradle Enterprise */
+    public const val SETTINGS_GRADLE_ENTERPRISE: String = "com.gradle.enterprise"
+
+    /** Settings plug-in: Buildless */
+    public const val SETTINGS_BUILDLESS: String = "build.less"
+
+    /** Settings plug-in: Foojay Toolchains resolver */
+    public const val SETTINGS_FOOJAY_TOOLCHAINS: String = "org.gradle.toolchains.foojay-resolver-convention"
+
+    /** Settings plug-in: Gradle common user settings */
+    public const val SETTINGS_GRADLE_COMMON: String = "com.gradle.common-custom-user-data-gradle-plugin"
+
+    /** Settings plug-in: Micronaut Catalog plugin */
+    public const val SETTINGS_MICRONAUT_CATALOG: String = "io.micronaut.platform.catalog"
   }
 
   /** Common/known plugin names. */

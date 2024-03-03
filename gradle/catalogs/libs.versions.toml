@@ -1,9 +1,21 @@
 [versions]
+arrow = "1.2.0"
+bouncycastle = "1.77"
 guava = "33.0.0-jre"
+junit-jupiter = "5.10.2"
+junit-platform = "1.10.2"
 
 [plugins]
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
+
+## Testing
+testing-junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+testing-junit-jupiter-bom = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
+testing-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+testing-junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit-jupiter" }
+testing-junit-platform-console = { module = "org.junit.platform:junit-platform-console", version.ref = "junit-platform" }
+testing-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
 
 [bundles]

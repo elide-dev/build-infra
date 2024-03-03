@@ -12,6 +12,14 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import kotlin.reflect.KClass
 
+// Provide the list of installed settings plugins.
+internal fun settingsPlugins(): List<String> = listOf(
+  BuildConstants.KnownPlugins.SETTINGS_GRADLE_ENTERPRISE,
+  BuildConstants.KnownPlugins.SETTINGS_FOOJAY_TOOLCHAINS,
+  BuildConstants.KnownPlugins.SETTINGS_GRADLE_COMMON,
+  BuildConstants.KnownPlugins.SETTINGS_BUILDLESS,
+)
+
 // Provide the list of installed settings conventions.
 internal fun settingsConventions(): List<KClass<out Plugin<Settings>>> = listOf(
   BaselineBuildSettings::class,
@@ -29,6 +37,10 @@ public class SettingsUmbrella : Plugin<Settings> {
   override fun apply(target: Settings) {
     // apply all plugins
     target.pluginManager.apply {
+      settingsPlugins().forEach {
+        apply(it)
+      }
+
       settingsConventions().forEach {
         apply(it)
       }

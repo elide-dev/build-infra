@@ -1,7 +1,7 @@
 plugins {
-  `java-gradle-plugin`
   `kotlin-dsl`
   id("infra.root")
+  id("infra.gradle.plugin")
 }
 
 description = "Gradle Plugin for using 'jlink' to create modular self-contained JVM applications"

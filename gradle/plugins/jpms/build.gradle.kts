@@ -1,7 +1,7 @@
 plugins {
-  `java-gradle-plugin`
   `kotlin-dsl`
   id("infra.root")
+  id("infra.gradle.plugin")
 }
 
 description = "Gradle Plugin for integration with the Java Platform Module System (JPMS)"
