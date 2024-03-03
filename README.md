@@ -232,9 +232,17 @@ Bazelisk, which will respect the `.bazelversion` present at the root of your pro
 
 ## Gradle Conventions
 
-The Gradle conventions provided by this project are generic in nature and can be used in nearly any Gradle 8.x+ project.
+The Gradle conventions provided by this project are generic in nature and can be used in nearly any Gradle 8+ project.
 Conventions are applied in a cascading fashion, with relevant plugins being applied first, which then provide strong
 baseline settings.
+
+**Gradle infra:**
+
+- **[Plugins](./gradle/plugins)** for common build tasks, especially around [JPMS][8]. See the plugins list below.
+- **[Catalogs](./gradle/catalogs)** defining security-hardened library catalogs
+- **[Platforms](./gradle/platforms)** which enforce different profiles of dependency constraints
+
+Read more about the Gradle build infra [here](./gradle). There are [samples](./gradle/samples).
 
 ### Plugins
 
@@ -275,3 +283,4 @@ Elide Ventures, LLC.
 [5]: ./gradle/plugins/jlink
 [6]: ./gradle/plugins/graalvm
 [7]: https://www.graalvm.org/latest/reference-manual/native-image/
+[8]: https://www.oracle.com/corporate/features/understanding-java-9-modules.html

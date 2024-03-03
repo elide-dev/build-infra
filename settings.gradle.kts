@@ -13,6 +13,11 @@
 
 pluginManagement {
   includeBuild("gradle/build-infra")
+
+  // see `gradle.properties` for list of plugins
+  (extra["build-infra.plugins"] as String).split(",").forEach {
+    includeBuild("gradle/plugins/$it")
+  }
 }
 
 plugins {
@@ -20,14 +25,20 @@ plugins {
   id("infra.settings")
 }
 
-listOf(
-  "base",
-  "graalvm",
-  "jlink",
-  "jmod",
-  "jpms",
-  "mrjar",
-).forEach {
+// Plugins provided by this project; these live under `gradle/plugins/<name>`.
+val allPlugins = (extra["build-infra.plugins"] as String).split(",")
+
+// Add libraries, which supplement plug-ins with catalogs and logic.
+includeBuild("gradle/libs")
+
+// Add platforms, which provide Gradle JVM platform target definitions.
+includeBuild("gradle/platforms")
+
+// Add samples, which test the embedded plugins.
+includeBuild("gradle/samples")
+
+// Load each plug-in project.
+allPlugins.forEach {
   includeBuild("gradle/plugins/$it") {
     dependencySubstitution {
       // map `dev.elide.infra:<plugin>` → `:<plugin`
@@ -35,9 +46,6 @@ listOf(
     }
   }
 }
-
-// Add samples, which test the embedded plugins.
-includeBuild("gradle/samples")
 
 // Map the outer `dev.elide.infra:build-infra` project → `build-infra`.
 includeBuild("gradle/build-infra") {
