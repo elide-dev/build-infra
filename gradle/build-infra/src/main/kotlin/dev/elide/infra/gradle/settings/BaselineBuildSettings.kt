@@ -21,10 +21,10 @@ import org.gradle.api.Plugin
 import org.gradle.api.initialization.Settings
 
 private fun settingsPlugins(): List<String> = listOf(
-  "build.less",
-  "com.gradle.enterprise",
-  "com.gradle.common-custom-user-data-gradle-plugin",
-  "org.gradle.toolchains.foojay-resolver-convention",
+  BuildConstants.KnownPlugins.SETTINGS_BUILDLESS,
+  BuildConstants.KnownPlugins.SETTINGS_GRADLE_ENTERPRISE,
+  BuildConstants.KnownPlugins.SETTINGS_GRADLE_COMMON,
+  BuildConstants.KnownPlugins.SETTINGS_FOOJAY_TOOLCHAINS,
 )
 
 /**
@@ -43,9 +43,17 @@ public class BaselineBuildSettings : Plugin<Settings> {
       buildCaching.local.enabled.convention(true)
     }
 
+    val pathString = target.rootDir.toPath().toString()
     val catalogPath = when {
-      target.rootDir.toPath().toString().contains("gradle/plugins/") -> "../../catalogs"
-      target.rootDir.toPath().toString().contains("samples") -> "../catalogs"
+      // plugins folder is double-nested
+      pathString.contains("gradle/plugins/") -> "../../catalogs"
+
+      // samples, libs, and platforms are top-level
+      pathString.contains("samples") ||
+      pathString.contains("libs") ||
+      pathString.contains("platforms") -> "../catalogs"
+
+      // otherwise, it's the root project
       else -> "gradle/catalogs"
     }
 
