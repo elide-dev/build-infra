@@ -14,3 +14,5 @@
 plugins {
   `java-platform`
 }
+
+val test by tasks.registering { /* Nothing yet. */ }

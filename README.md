@@ -4,11 +4,6 @@
 [![Lint: YAML](https://github.com/elide-dev/build-infra/actions/workflows/check.yaml-lint.ci.yml/badge.svg)](https://github.com/elide-dev/build-infra/actions/workflows/check.yaml-lint.ci.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7693/badge)](https://www.bestpractices.dev/projects/7693)
 
-
-This repository hosts CI configurations which can be re-used across repositories under the Elide Cloud umbrella. It isn't necessarily meant for external use, but it's open source and you are free to use these workflows in your own repos (no backward compatibility guarantee is provided at this time).
-
-Build configurations expressed in this repository are typically used for repeated/templated repositories, such as code samples, plugins, and other structures which are consistent across codebases.
-
 ### Structure
 
 Each workflow profile is defined in this repository as a GitHub Workflow, using YAML. In some cases, workflows are paired
@@ -28,11 +23,6 @@ For an exhaustive list of build profiles and their use, see the table further do
 
 - **[Gradle](./gradle): Gradle build conventions** which are re-usable across projects, as a suite of easily applicable build convention
   plugins and version catalogs.
-
-### Pushing updates
-
-In general, Dependabot and Renovate are granted access to this repo, so that update PRs may be filed when internal actions
-and workflows see updates.
 
 ## Workflows
 
