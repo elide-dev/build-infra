@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2024 Elide Technologies, Inc.
+ *
+ * Licensed under the MIT license (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ *   https://opensource.org/license/mit/
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under the License.
+ */
+
 package dev.elide.infra.gradle
 
 /** Constants used throughout build infra tools. */
@@ -60,6 +73,9 @@ public object BuildConstants {
 
     /** Infra plug-in: GraalVM */
     public const val INFRA_GRAALVM: String = "dev.elide.graalvm"
+
+    /** Scala compiler plugin */
+    public const val TEST_LOGGER: String = "com.adarshr.test-logger"
 
     /** Settings plug-in: Gradle Enterprise */
     public const val SETTINGS_GRADLE_ENTERPRISE: String = "com.gradle.enterprise"
@@ -129,6 +145,15 @@ public object BuildConstants {
     /** JPMS kill-switch */
     public const val JPMS_DISABLED: String = "conventions.jvm.disableJpms"
 
+    /** Enables test exception printing */
+    public const val TEST_EXCEPTIONS: String = "conventions.testing.logger.exceptions"
+
+    /** Enables test stdout */
+    public const val TEST_LOGS: String = "conventions.testing.logger.logs"
+
+    /** Controls how test names are shown; use `simple` or `full` (default: `simple`) */
+    public const val TEST_NAMES: String = "conventions.testing.logger.names"
+
     // ---- System Properties -----------------------------------------------------------------------------------------
 
     /** Property hint for an IDEA sync */
@@ -137,6 +162,13 @@ public object BuildConstants {
 
   /** Environment variables which influence the build */
   public object Environment {
-    // Nothing yet.
+    /** Variable which enables test exception printing */
+    public const val TEST_EXCEPTIONS: String = "TEST_EXCEPTIONS"
+
+    /** Variable which enables test stdout */
+    public const val TEST_LOGS: String = "TEST_LOGS"
+
+    /** Variable controlling how test names are shown; use `simple` or `full` (default: `simple`) */
+    public const val TEST_NAMES: String = "TEST_NAMES"
   }
 }

@@ -11,8 +11,6 @@ kotlin {
 }
 
 dependencies {
-  api(gradleApi())
-  api("dev.elide.infra:build-infra")
   api("dev.elide.infra:base")
   api("dev.elide.infra:jpms")
   api("dev.elide.infra:jmod")

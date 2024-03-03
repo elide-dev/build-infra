@@ -5,6 +5,7 @@ plugins {
   `embedded-kotlin`
   `kotlin-dsl`
   `kotlin-dsl-precompiled-script-plugins`
+  `maven-publish`
 }
 
 group = "dev.elide.infra"
@@ -43,6 +44,7 @@ listOf(Jar::class, Zip::class, Tar::class).forEach {
 dependencies {
   implementation(infra.bundles.plugins)
   implementation(infra.plugin.gradle.publish)
+  implementation(core.plugin.testlogger)
   implementation(core.plugin.kotlin.multiplatform)
   implementation(files(core.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
@@ -76,6 +78,10 @@ gradlePlugin {
     create("infra.gradle.plugin") {
       id = "infra.gradle.plugin"
       implementationClass = "dev.elide.infra.gradle.ElideGradlePlugin"
+    }
+    create("infra.library") {
+      id = "infra.library"
+      implementationClass = "dev.elide.infra.gradle.ElideLibraryConvention"
     }
   }
 }
