@@ -20,6 +20,7 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
+import java.nio.file.Path
 
 enum class TestSourceFileLanguage {
   JAVA,
@@ -32,6 +33,10 @@ enum class TestSourceFileLanguage {
   protected lateinit var sourcesRootKotlin: File
   protected lateinit var settingsFile: File
   protected lateinit var buildFile: File
+
+  protected fun outputPath(path: String): Path {
+    return testProjectDir.toPath().resolve("build").resolve(path)
+  }
 
   protected fun writeSourceFile(language: TestSourceFileLanguage, path: String, contents: StringBuilder) {
     val sourceRoot = when (language) {
