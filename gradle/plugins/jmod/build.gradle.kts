@@ -1,7 +1,7 @@
 plugins {
-  `java-gradle-plugin`
   `kotlin-dsl`
   id("infra.root")
+  id("infra.gradle.plugin")
 }
 
 description = "Gradle Plugin for building modular 'jmod' artifacts alongside JARs"
@@ -15,6 +15,12 @@ dependencies {
   api("dev.elide.infra:build-infra")
   api("dev.elide.infra:base")
   api("dev.elide.infra:jpms")
+
+  testImplementation(gradleTestKit())
+  testImplementation(libs.testing.junit.jupiter)
+  testImplementation(libs.testing.junit.jupiter.engine)
+  testImplementation(libs.testing.junit.jupiter.params)
+  testRuntimeOnly(libs.testing.junit.platform.console)
 }
 
 gradlePlugin {

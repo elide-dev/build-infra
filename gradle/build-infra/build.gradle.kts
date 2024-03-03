@@ -42,10 +42,17 @@ listOf(Jar::class, Zip::class, Tar::class).forEach {
 
 dependencies {
   implementation(infra.bundles.plugins)
+  implementation(infra.plugin.gradle.publish)
   implementation(core.plugin.kotlin.multiplatform)
   implementation(files(core.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(infra.javaClass.superclass.protectionDomain.codeSource.location))
+
+  testImplementation(gradleTestKit())
+  testImplementation(libs.testing.junit.jupiter)
+  testImplementation(libs.testing.junit.jupiter.engine)
+  testImplementation(libs.testing.junit.jupiter.params)
+  testRuntimeOnly(libs.testing.junit.platform.console)
 }
 
 gradlePlugin {
@@ -66,5 +73,22 @@ gradlePlugin {
       id = "infra.kotlin.jvm"
       implementationClass = "dev.elide.infra.gradle.ElideKotlinJvm"
     }
+    create("infra.gradle.plugin") {
+      id = "infra.gradle.plugin"
+      implementationClass = "dev.elide.infra.gradle.ElideGradlePlugin"
+    }
   }
+}
+
+val testing: Configuration by configurations.creating {
+  extendsFrom(configurations.testApi.get())
+}
+
+val testJar by tasks.registering(Jar::class) {
+  archiveClassifier = "test"
+  from(sourceSets.test.get().output)
+}
+
+artifacts {
+  add(testing.name, testJar)
 }
