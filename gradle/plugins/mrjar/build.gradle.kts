@@ -27,3 +27,12 @@ dependencies {
   api("dev.elide.infra:base")
   api("dev.elide.infra:jpms")
 }
+
+gradlePlugin {
+  plugins {
+    create("mrjar") {
+      id = "dev.elide.mrjar"
+      implementationClass = "dev.elide.infra.gradle.mrjar.GradleMultiReleaseJarPlugin"
+    }
+  }
+}
