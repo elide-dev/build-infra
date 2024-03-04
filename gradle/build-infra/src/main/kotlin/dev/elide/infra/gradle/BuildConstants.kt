@@ -41,6 +41,9 @@ public object BuildConstants {
     /** Kotlin multiplatform plugin */
     public const val KOTLIN_MULTIPLATFORM: String = "org.jetbrains.kotlin.multiplatform"
 
+    /** Kotlin JVM plugin */
+    public const val KOTLIN_JVM: String = "org.jetbrains.kotlin.jvm"
+
     /** Kotlin serialization plugin */
     public const val KOTLIN_SERIALIZATION: String = "org.jetbrains.kotlin.plugin.serialization"
 
@@ -130,8 +133,11 @@ public object BuildConstants {
   public object Properties {
     // ---- Build Properties ------------------------------------------------------------------------------------------
 
-    /** Property which allows overriding the JVM bytecode target */
+    /** Property which allows overriding the JVM maximum bytecode target */
     public const val JVM_TARGET: String = "conventions.jvm.target"
+
+    /** Property which allows overriding the JVM minimum bytecode target */
+    public const val JVM_MINIMUM: String = "conventions.jvm.minimum"
 
     /** Property which allows overriding the JVM toolchain target */
     public const val JVM_TOOLCHAIN: String = "conventions.jvm.toolchain"
@@ -164,6 +170,45 @@ public object BuildConstants {
 
     /** Property hint for an IDEA sync */
     public const val IDEA_SYNC: String = "idea.active"
+  }
+
+  /** Well-known names of important source sets */
+  public object SourceSets {
+    /** JVM main source set (Kotlin JVM, or pure Java). */
+    public const val MAIN: String = "main"
+
+    /** JVM test source set (Kotlin JVM, or pure Java). */
+    public const val TEST: String = "test"
+
+    /** JVM main source set (Kotlin Multiplatform). */
+    public const val JVM_MAIN: String = "jvmMain"
+
+    /** JVM test source set (Kotlin Multiplatform). */
+    public const val JVM_TEST: String = "jvmTest"
+  }
+
+  /** Well-known names of important Gradle configurations */
+  public object Configurations {
+    /** Traditional compilation classpath */
+    public const val COMPILE_CLASSPATH: String = "compileClasspath"
+
+    /** Traditional runtime classpath */
+    public const val RUNTIME_CLASSPATH: String = "runtimeClasspath"
+
+    /** Java 9+ JPMS module path */
+    public const val MODULEPATH: String = "modulepath"
+  }
+
+  /** Well-known names of important tasks */
+  public object TaskName {
+    /** General Java compile task */
+    public const val COMPILE_JAVA: String = "compileJava"
+
+    /** General Kotlin compile task */
+    public const val COMPILE_KOTLIN: String = "compileKotlin"
+
+    /** Kotlin multiplatform JVM compile task */
+    public const val COMPILE_KOTLIN_JVM: String = "compileKotlinJvm"
   }
 
   /** Environment variables which influence the build */

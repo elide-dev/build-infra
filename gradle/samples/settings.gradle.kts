@@ -27,7 +27,12 @@ plugins {
   id("infra.settings")
 }
 
-include(":jmod-kotlin")
-include(":jmod-library")
+listOf(
+  "jmod-kotlin",
+  "jmod-library",
+  "mrjar-purejava",
+).forEach {
+  include(":$it")
+}
 
 rootProject.name = "samples"

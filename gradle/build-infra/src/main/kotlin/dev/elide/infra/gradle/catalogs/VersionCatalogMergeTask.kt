@@ -4,10 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputFile
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
 import org.tomlj.Toml
 import org.tomlj.TomlArray
 import org.tomlj.TomlParseResult
@@ -324,7 +321,7 @@ public abstract class VersionCatalogMergeTask @Inject constructor () : DefaultTa
    *
    * Version catalogs to use as inputs to the merge operation
    */
-  @get:InputFiles public abstract val catalogs: ConfigurableFileCollection
+  @get:InputFiles @get:PathSensitive(PathSensitivity.RELATIVE) public abstract val catalogs: ConfigurableFileCollection
 
   /**
    * ## Destination File

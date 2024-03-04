@@ -12,27 +12,24 @@
  */
 
 plugins {
-  `kotlin-dsl`
-  id("infra.root")
-  id("infra.gradle.plugin")
+  java
+  `java-library`
+  application
+  id("dev.elide.mrjar")
 }
 
-description = "Gradle Plugin for integration with the Java Platform Module System (JPMS)"
+description = "Builds a super MRJAR artifact from a pure Java library"
 
-kotlin {
-  explicitApi()
+application {
+  mainModule = "sample.supermrjar"
+  mainClass = "dev.elide.infra.samples.supermrjar.Entrypoint"
 }
 
-dependencies {
-  api(core.plugin.kotlin.multiplatform)
-  api("dev.elide.infra:base")
-}
+java {
+  withSourcesJar()
+  withJavadocJar()
 
-gradlePlugin {
-  plugins {
-    create("jpms") {
-      id = "dev.elide.jpms"
-      implementationClass = "dev.elide.infra.gradle.jpms.GradleJpmsPlugin"
-    }
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
   }
 }

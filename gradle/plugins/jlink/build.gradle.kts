@@ -15,3 +15,12 @@ dependencies {
   api("dev.elide.infra:jpms")
   api("dev.elide.infra:jmod")
 }
+
+gradlePlugin {
+  plugins {
+    create("jlink") {
+      id = "dev.elide.jlink"
+      implementationClass = "dev.elide.infra.gradle.jlink.GradleJLinkPlugin"
+    }
+  }
+}
