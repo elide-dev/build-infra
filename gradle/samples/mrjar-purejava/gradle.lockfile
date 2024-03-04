@@ -1,0 +1,4 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+empty=annotationProcessor,compileClasspath,jvm11AnnotationProcessor,jvm11CompileClasspath,jvm11RuntimeClasspath,jvm17AnnotationProcessor,jvm17CompileClasspath,jvm17RuntimeClasspath,jvm21AnnotationProcessor,jvm21CompileClasspath,jvm21RuntimeClasspath,modulepath,runtimeClasspath,testAnnotationProcessor,testCompileClasspath,testRuntimeClasspath

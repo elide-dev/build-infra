@@ -12,11 +12,14 @@
 #
 
 [versions]
+asm = "9.6"
 atomicfu = "0.23.2"
 buildconfig = "5.3.5"
 gradle-checksum = "1.4.0"
 gradle-doctor = "0.9.2"
 idea-ext = "1.1.7"
+javapoet = "1.13.0"
+kotlinpoet = "1.16.0"
 kotlin-stable = "1.9.22"
 kotlinx-collections = "0.3.7"
 kotlinx-coroutines = "1.8.0"
@@ -43,6 +46,12 @@ testlogger = { id = "com.adarshr.test-logger", version.ref = "testlogger" }
 versions = { id = "com.github.ben-manes.versions", version.ref = "version-check" }
 
 [libraries]
+asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
+asm-analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
+asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
+asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
+kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-stable" }
 kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin-stable" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-stable" }
@@ -101,5 +110,6 @@ plugin-testlogger = { module = "com.adarshr:gradle-test-logger-plugin", version.
 plugin-versions = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "version-check" }
 
 [bundles]
+asm = ["asm", "asm-analysis", "asm-commons", "asm-util"]
 kotlin-stdlib = ["kotlin-stdlib", "kotlin-stdlib-common"]
 kotlin-stdlib-jvm = ["kotlin-stdlib", "kotlin-stdlib-common", "kotlin-stdlib-jdk8"]

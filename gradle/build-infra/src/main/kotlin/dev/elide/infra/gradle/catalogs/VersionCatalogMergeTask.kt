@@ -16,7 +16,6 @@ import java.util.SortedSet
 import java.util.TreeMap
 import java.util.TreeSet
 import java.util.function.Supplier
-import java.util.stream.Collectors
 import javax.inject.Inject
 
 // Retrieve a top-level catalog table.
@@ -345,7 +344,7 @@ public abstract class VersionCatalogMergeTask @Inject constructor () : DefaultTa
 
     files.map {
       try {
-        logger.lifecycle("Parsing catalog '${it.toPath()}'")
+        logger.info("Parsing catalog '${it.toPath()}'")
         VersionCatalog.parseFrom(it.toPath())
       } catch (err: Throwable) {
         parseErrors.add(err)
@@ -366,7 +365,7 @@ public abstract class VersionCatalogMergeTask @Inject constructor () : DefaultTa
     // with no parse errors, we can begin merging
     val merged = MergedVersionCatalog()
     catalogs.forEach {
-      logger.lifecycle("Merging catalog '${it.path ?: "in_memory"}'")
+      logger.info("Merging catalog '${it.path ?: "in_memory"}'")
       merged += it
     }
 

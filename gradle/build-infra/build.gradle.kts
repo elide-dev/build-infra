@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2024 Elide Technologies, Inc.
+ *
+ * Licensed under the MIT license (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ *   https://opensource.org/license/mit/
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under the License.
+ */
+
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
@@ -42,21 +55,27 @@ listOf(Jar::class, Zip::class, Tar::class).forEach {
 }
 
 dependencies {
+  implementation(core.kotlinx.collections.immutable)
+  implementation(core.plugin.buildconfig)
+  implementation(core.plugin.idea.ext)
+  implementation(core.plugin.kotlin.multiplatform)
+  implementation(core.plugin.kotlin.powerassert)
+  implementation(core.plugin.testlogger)
+  implementation(core.tomlj)
   implementation(infra.bundles.plugins)
   implementation(infra.plugin.gradle.publish)
-  implementation(core.tomlj)
-  implementation(core.kotlinx.collections.immutable)
-  implementation(core.plugin.testlogger)
-  implementation(core.plugin.kotlin.multiplatform)
   implementation(files(core.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(infra.javaClass.superclass.protectionDomain.codeSource.location))
 
   testImplementation(gradleTestKit())
-  testImplementation(core.kotlin.test)
+  testImplementation(core.bundles.asm)
+  testImplementation(core.javapoet)
+  testImplementation(core.kotlinpoet)
   testImplementation(libs.testing.junit.jupiter)
   testImplementation(libs.testing.junit.jupiter.engine)
   testImplementation(libs.testing.junit.jupiter.params)
+  testImplementation(core.kotlin.test)
   testRuntimeOnly(libs.testing.junit.platform.console)
 }
 
