@@ -1,4 +1,5 @@
 [versions]
+asm = "9.6"
 atomicfu = "0.23.2"
 buildconfig = "5.3.5"
 buildless = "1.0.0-rc2"
@@ -13,7 +14,9 @@ gradle-kotlin-dsl = "4.3.0"
 gradle-publish = "1.2.1"
 gradle-toolchains = "0.8.0"
 idea-ext = "1.1.7"
+javapoet = "1.13.0"
 kotlin-stable = "1.9.22"
+kotlinpoet = "1.16.0"
 kotlinx-abiValidator = "0.14.0"
 kotlinx-benchmark = "0.4.10"
 kotlinx-collections = "0.3.7"
@@ -55,10 +58,16 @@ testlogger = { id = "com.adarshr.test-logger", version.ref = "testlogger" }
 versions = { id = "com.github.ben-manes.versions", version.ref = "version-check" }
 
 [libraries]
+asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
+asm-analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
+asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
+asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-stable" }
 kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin-stable" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-stable" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-stable" }
+kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
 kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "atomicfu" }
 kotlinx-atomicfu-linux-x64 = { group = "org.jetbrains.kotlinx", name = "atomicfu-linuxx64", version.ref = "atomicfu" }
 kotlinx-atomicfu-macos-x64 = { group = "org.jetbrains.kotlinx", name = "atomicfu-macosx64", version.ref = "atomicfu" }
@@ -122,6 +131,7 @@ plugin-versions = { module = "com.github.ben-manes:gradle-versions-plugin", vers
 tomlj = { module = "org.tomlj:tomlj", version.ref = "tomlj" }
 
 [bundles]
+asm = ["asm", "asm-analysis", "asm-commons", "asm-util"]
 kotlin-stdlib = ["kotlin-stdlib", "kotlin-stdlib-common"]
 kotlin-stdlib-jvm = ["kotlin-stdlib", "kotlin-stdlib-common", "kotlin-stdlib-jdk8"]
 plugins = ["plugin-buildless", "plugin-gradle-common", "plugin-gradle-enterprise", "plugin-gradle-toolchains", "plugin-micronaut-catalog"]

@@ -221,9 +221,10 @@ public object Java9Modularity {
 
     // resolve a base source set to inherit from
     val mainSourceSet: Any = resolveBaseSourceSet(java, kotlin)
-    val toolchainVersion = toolchain.languageVersion.get().toString()
-    logger.info("Configuring project as non-modular MRJAR (toolchain: Java ${toolchainVersion})")
-    TODO("not yet implemented: non-modular MR JARs")
+
+    logger.info("Configuring project as non-modular MRJAR")
+
+    // @TODO(sgammon): non-modular MRJARs are not implemented yet
   }
 
   /**
@@ -290,7 +291,6 @@ public object Java9Modularity {
       mainSourceSet,
       range,
       applicable,
-      modulepath,
       sourceSets,
       compileTasks,
       config,
@@ -340,16 +340,13 @@ public object Java9Modularity {
 
   // Check the Java toolchain for support at a sufficient tier for a target.
   @JvmStatic internal fun checkJavaToolchain(toolchain: JavaToolchainSpec, target: JvmTarget) {
-    (toolchain.languageVersion.orNull ?: error(
-      "Toolchain version undeclared; support cannot be guaranteed for target '$target'. " +
-        "Please either set a Java toolchain level, or declare a maximum JVM target."
-    )).also {
+    (toolchain.languageVersion.orNull?.let {
       require(JvmTarget.fromTarget(it.asInt().toString()) >= target) {
         "Effective JVM target candidate '$target' not supported by toolchain version at Java ${it.asInt()}. " +
           "Please either set a Java toolchain equal or greater to your maximum JVM target, or let the Build Infra " +
           "plugins select a toolchain for you."
       }
-    }
+    })
   }
 
   // Resolve the Java or Kotlin base source set to inherit from, with regard to module builds.
@@ -481,13 +478,12 @@ public object Java9Modularity {
     mainSourceSet: Any,
     range: TargetRange,
     applicable: List<JvmTarget>,
-    modulepath: Configuration,
     sourceSetMap: Map<JvmTarget, Any>,
     taskMap: Map<JvmTarget, Task>,
     config: ModularityConfig,
   ) {
     // resolve kotlin jvm targets and java project extension
-    val buildDependencies = LinkedList<Any>()
+    val buildDependencies = LinkedList<Task>()
     val java = extensions.findByType<JavaPluginExtension>()
     val kotlin = if (!config.enableKotlin) null else extensions.findByType<KotlinProjectExtension>()
 
@@ -518,11 +514,11 @@ public object Java9Modularity {
     }
 
     // resolve the compile task for the main source set
-    val baseSourceSetCompileTask: TaskProvider<Task> = when {
+    val baseSourceSetCompileTask: Task = when {
       isKotlinMultiplatform -> tasks.named(BuildConstants.TaskName.COMPILE_KOTLIN_JVM)
       isKotlin -> tasks.named(BuildConstants.TaskName.COMPILE_KOTLIN)
       else -> tasks.named(BuildConstants.TaskName.COMPILE_JAVA)
-    }
+    }.get()
     buildDependencies.add(baseSourceSetCompileTask)
 
     // resolve main source set name
@@ -543,7 +539,7 @@ public object Java9Modularity {
         isZip64 = true
         entryCompression = ZipEntryCompression.STORED
         dependsOn(baseSourceSetCompileTask, classesTask)
-        val outs = baseSourceSetCompileTask.get().outputs.files.files
+        val outs = baseSourceSetCompileTask.outputs.files.files
         inputs.files(outs)
         from(outs) {
           exclude("previous-compilation-data.bin")
@@ -581,7 +577,7 @@ public object Java9Modularity {
         tasks.named(if (sourceSetName == "main") "classes" else "${sourceSetName}Classes").get()
       ) { "No compilation for applicable target '$target'" }
 
-      target to tasks.register(jarThinAtTargetName, Jar::class) {
+      target to tasks.create(jarThinAtTargetName, Jar::class) {
         group = "build"
         description = "Thin JAR built specifically for JVM ${target.target}"
         archiveClassifier = classifier
@@ -607,7 +603,7 @@ public object Java9Modularity {
         Constants.TaskName.MERGED_MR_JAR
 
       // build a merged jar with all classes at all levels
-      val multiReleaseFatJar = tasks.register(multiReleaseJarName, Jar::class) {
+      val multiReleaseFatJar = tasks.create(multiReleaseJarName, Jar::class) {
         // we are going to merge from each of the thin jar tasks
         archiveClassifier = Constants.Classifier.MULTI_RELEASE_FAT
         entryCompression = ZipEntryCompression.STORED
@@ -619,8 +615,8 @@ public object Java9Modularity {
           // root of the jar, instead of a versioned path).
           !(config.preferModern && it.first == range.maximum || (!config.preferModern && it.first == range.minimum))
         }.map { (target, task) ->
-          val files = task.get().outputs.files
-          Triple(target, files.files, zipTree(task.get().outputs.files.singleFile))
+          val files = task.outputs.files
+          Triple(target, files.files, zipTree(task.outputs.files.singleFile))
         }
 
         inputs.files(
@@ -644,11 +640,11 @@ public object Java9Modularity {
         Constants.TaskName.OPTIMIZED_MR_JAR
 
       // optimize the fat merged jar with compression, and by dropping identical classes from higher levels of support
-      tasks.register(optimizedMultiReleaseJarName, Jar::class) {
+      tasks.create(optimizedMultiReleaseJarName, Jar::class) {
         group = "build"
         description = "Build merged MRJAR, optimized for all target JVMs"
         entryCompression = ZipEntryCompression.DEFLATED
-        inputs.files(multiReleaseFatJar.get().outputs.files)
+        inputs.files(multiReleaseFatJar.outputs.files)
         dependsOn(multiReleaseFatJar, baseJar)
 
         // if we aren't replacing the main jar, we should use the multi-release classifier
@@ -665,13 +661,13 @@ public object Java9Modularity {
 
         val minimalTarget = jarThinTasks.first().second
         val maximalTarget = jarThinTasks.last().second
-        val multiReleaseJarZip = zipTree(multiReleaseFatJar.get().outputs.files.singleFile)
+        val multiReleaseJarZip = zipTree(multiReleaseFatJar.outputs.files.singleFile)
         val baseJarZip = zipTree(baseJar.outputs.files.singleFile)
         val primaryJarZip =
           if (!config.preferModern)
-            zipTree(minimalTarget.get().outputs.files.singleFile)
+            zipTree(minimalTarget.outputs.files.singleFile)
           else
-            zipTree(maximalTarget.get().outputs.files.singleFile)
+            zipTree(maximalTarget.outputs.files.singleFile)
 
         // from the primary jar (either the most or least modern tier thin jar), merge the classes into the root of the
         // jar as these should be the default compiled set. this time, we should be excluding everything under
@@ -722,18 +718,24 @@ public object Java9Modularity {
 
     // begin working with each kotlin target; if we have no kotlin targets, or kotlin integration is disabled, we can
     // exit early.
-    if (!config.enableKotlin || kotlin == null) return
-
+    if (config.enableKotlin && kotlin != null) {
 //    kotlinJvmTargets.forEach { target ->
 //      configureKotlinModularity(target, config.multiRelease, kotlin)
 //    }
+    }
+
+    tasks.named("build").get().let { build ->
+      buildDependencies.forEach {
+        build.dependsOn(it)
+      }
+    }
   }
 
   /**
    * Configure Java 9+ JPMS build tasks; this is the original implementation of the method, as provided in JetBrains
    * KotlinX projects.
    *
-   * It is provided here so it may be used downstream where needed.
+   * It is provided here so that it may be used downstream where needed.
    *
    * @param multiRelease Whether to build a multi-release JAR
    */

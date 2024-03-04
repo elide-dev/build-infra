@@ -204,12 +204,10 @@ public interface ElideJvmSettings : Convention<ElideJvmSettings, Project> {
     // Main target for JVM bytecode.
     override val target: Property<JvmTarget> = factory
       .property(JvmTarget::class.java)
-      .convention(JvmTarget.DEFAULT)
 
     // Minimum target for JVM bytecode.
     override val minimum: Property<JvmTarget> = factory
       .property(JvmTarget::class.java)
-      .convention(JvmTarget.DEFAULT)
 
     // Toolchain language version.
     override val toolchain: Property<JavaVersion> = factory

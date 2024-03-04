@@ -24,7 +24,11 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaApplication
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.jvm.toolchain.JavaToolchainService
+import org.gradle.jvm.toolchain.JavaToolchainSpec
 import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.support.serviceOf
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import java.nio.charset.StandardCharsets
@@ -170,9 +174,12 @@ private fun Project.configureModularityPlugin() {
   }
   val kotlin = extensions.findByType<KotlinProjectExtension>()
 
+  // resolve toolchain service
+  val toolchain = project.extensions.getByType<JavaPluginExtension>().toolchain
+
   val conventions = extensions.getByType(ElideBuildDsl::class.java)
-  val bytecodeTarget = resolveJavaBytecodeTarget(java, conventions)
-  val bytecodeMinimum = resolveJavaBytecodeMinimum(conventions)
+  val bytecodeTarget = resolveJavaBytecodeTarget(toolchain, java, conventions)
+  val bytecodeMinimum = resolveJavaBytecodeMinimum(conventions) ?: bytecodeTarget
   val (modular, moduleName) = determineModularity(java, kotlin)
   val modulepath = requireNotNull(configurations.named(BuildConstants.Configurations.MODULEPATH).get()) {
     "Failed to resolve `modulepath` configuration; was the JPMS plugin applied?"
@@ -261,18 +268,24 @@ private fun Project.determineModularity(
 
 // Resolve the configured Java bytecode target.
 private fun Project.resolveJavaBytecodeTarget(
+  toolchain: JavaToolchainSpec,
   java: JavaPluginExtension?,
   conventions: ElideBuildDsl,
 ): JvmTarget {
+  // regular java target compatibility
+  val javaTarget = java?.targetCompatibility?.majorVersion?.let { JvmTarget.fromTarget(it) }
+
   // resolve the maximum bytecode level
   val target = (findProperty(BuildConstants.Properties.JVM_TARGET) as? String)
     ?.ifBlank { null }
     ?.toIntOrNull()
     ?.let { JvmTarget.fromTarget(it.toString()) }
-    ?: conventions.jvm.target.get()
+    ?: conventions.jvm.target.orNull
+    ?: javaTarget?.let { JvmTarget.fromTarget(it.target) }
+    ?: toolchain.languageVersion.orNull?.let { JvmTarget.fromTarget(it.asInt().toString()) }
+    ?: Runtime.version().version().first().let { JvmTarget.fromTarget(it.toString()) }
 
   // make sure java target aligns
-  val javaTarget = java?.targetCompatibility?.majorVersion?.let { JvmTarget.fromTarget(it) }
   if (javaTarget != null) require(target == javaTarget) {
     "Please align JVM target between `java.targetCompatiblity` and Build Infra. Got: " +
       "'$target' for Build Infra, '$javaTarget' for the Java plugin."
@@ -281,11 +294,11 @@ private fun Project.resolveJavaBytecodeTarget(
 }
 
 // Resolve the configured Java bytecode minimum.
-private fun Project.resolveJavaBytecodeMinimum(conventions: ElideBuildDsl): JvmTarget {
+private fun Project.resolveJavaBytecodeMinimum(conventions: ElideBuildDsl): JvmTarget? {
   // resolve the minimum bytecode level
   return (findProperty(BuildConstants.Properties.JVM_MINIMUM) as? String)
     ?.ifBlank { null }
     ?.toIntOrNull()
     ?.let { JvmTarget.fromTarget(it.toString()) }
-    ?: conventions.jvm.minimum.get()
+    ?: conventions.jvm.minimum.orNull
 }
