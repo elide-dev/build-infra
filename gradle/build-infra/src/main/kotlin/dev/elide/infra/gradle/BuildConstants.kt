@@ -209,6 +209,12 @@ public object BuildConstants {
 
     /** Kotlin multiplatform JVM compile task */
     public const val COMPILE_KOTLIN_JVM: String = "compileKotlinJvm"
+
+    /** General Java/Kotlin test task */
+    public const val TEST: String = "test"
+
+    /** JVM Java/Kotlin test task in a Kotlin Multiplatform project */
+    public const val TEST_JVM: String = "jvmTest"
   }
 
   /** Environment variables which influence the build */

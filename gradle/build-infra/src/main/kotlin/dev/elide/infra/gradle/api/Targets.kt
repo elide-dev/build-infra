@@ -11,11 +11,40 @@
  * License for the specific language governing permissions and limitations under the License.
  */
 
-package dev.elide.infra.gradle.jpms
+package dev.elide.infra.gradle.api
 
+import org.jetbrains.annotations.VisibleForTesting
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.SortedSet
 import java.util.stream.Stream
+
+// Ordinal identity of JVM targets.
+public val jvmOrdinalIdentity: Map<Int, JvmTarget> = listOf(
+  JvmTarget.JVM_1_8,
+  JvmTarget.JVM_9,
+  JvmTarget.JVM_10,
+  JvmTarget.JVM_11,
+  JvmTarget.JVM_12,
+  JvmTarget.JVM_13,
+  JvmTarget.JVM_14,
+  JvmTarget.JVM_15,
+  JvmTarget.JVM_16,
+  JvmTarget.JVM_17,
+  JvmTarget.JVM_18,
+  JvmTarget.JVM_19,
+  JvmTarget.JVM_20,
+  JvmTarget.JVM_21,
+).associateBy {
+  it.ordinal
+}
+
+// LTS releases which are included when building a range.
+public val jvmLtsReleases: SortedSet<JvmTarget> = sortedSetOf(
+  JvmTarget.JVM_1_8,
+  JvmTarget.JVM_11,
+  JvmTarget.JVM_17,
+  JvmTarget.JVM_21,
+)
 
 /**
  * ## Target Range
@@ -64,4 +93,37 @@ public interface TargetRange {
    * @return Whether the range supports this target
    */
   public operator fun contains(target: JvmTarget): Boolean
+}
+
+/**
+ * Build a range of JVM targets.
+ *
+ * @receiver Base target
+ * @param to Ultimate target
+ * @return Target range
+ */
+public infix fun JvmTarget.until(to: JvmTarget): TargetRange {
+  return JvmTargetRange((ordinal until (to.ordinal + 1)).map {
+    requireNotNull(jvmOrdinalIdentity[it])
+  }.toSortedSet())
+}
+
+// Holds a range of JVM targets, from a minimum to a maximum.
+@JvmInline internal value class JvmTargetRange(private val range: SortedSet<JvmTarget>): TargetRange {
+  // Minimum supported JVM target.
+  override val minimum: JvmTarget get() = range.first()
+
+  // Maximum supported JVM target.
+  override val maximum: JvmTarget get() = range.last()
+
+  // Contains check.
+  override operator fun contains(target: JvmTarget): Boolean = target in range
+
+  // Stream of all supported JVM targets within the range.
+  override val all: Stream<JvmTarget> get() = range.stream()
+
+  // Stream of supported JVM targets within the range, without ignorable targets.
+  override fun applicable(ignore: SortedSet<JvmTarget>): Stream<JvmTarget> = range.stream().filter {
+    it !in ignore
+  }
 }

@@ -14,7 +14,10 @@
 package dev.elide.infra.gradle.jpms
 
 import dev.elide.infra.gradle.BuildConstants
-import dev.elide.infra.gradle.jpms.Java9Modularity.until
+import dev.elide.infra.gradle.api.TargetRange
+import dev.elide.infra.gradle.api.jvmLtsReleases
+import dev.elide.infra.gradle.api.jvmOrdinalIdentity
+import dev.elide.infra.gradle.api.until
 import org.gradle.api.*
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.file.*
@@ -29,7 +32,6 @@ import org.gradle.kotlin.dsl.*
 import org.gradle.kotlin.dsl.support.serviceOf
 import org.gradle.language.base.plugins.LifecycleBasePlugin.*
 import org.gradle.process.*
-import org.jetbrains.annotations.VisibleForTesting
 import org.jetbrains.kotlin.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
@@ -42,37 +44,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 import org.jetbrains.kotlin.tooling.core.*
 import java.io.*
 import java.util.*
-import java.util.stream.Stream
 import kotlin.reflect.*
 import kotlin.reflect.full.*
-
-// Ordinal identity of JVM targets.
-private val jvmOrdinalIdentity: Map<Int, JvmTarget> = listOf(
-  JvmTarget.JVM_1_8,
-  JvmTarget.JVM_9,
-  JvmTarget.JVM_10,
-  JvmTarget.JVM_11,
-  JvmTarget.JVM_12,
-  JvmTarget.JVM_13,
-  JvmTarget.JVM_14,
-  JvmTarget.JVM_15,
-  JvmTarget.JVM_16,
-  JvmTarget.JVM_17,
-  JvmTarget.JVM_18,
-  JvmTarget.JVM_19,
-  JvmTarget.JVM_20,
-  JvmTarget.JVM_21,
-).associateBy {
-  it.ordinal
-}
-
-// LTS releases which are included when building a range.
-private val jvmLtsReleases: SortedSet<JvmTarget> = sortedSetOf(
-  JvmTarget.JVM_1_8,
-  JvmTarget.JVM_11,
-  JvmTarget.JVM_17,
-  JvmTarget.JVM_21,
-)
 
 // Resolve a source set name from either a Kotlin or Java source set.
 private fun sourceSetName(subject: Any) = when (subject) {
@@ -295,33 +268,6 @@ public object Java9Modularity {
       compileTasks,
       config,
     )
-  }
-
-  // Build a range of JVM targets.
-  @VisibleForTesting internal infix fun JvmTarget.until(to: JvmTarget): TargetRange {
-    return JvmTargetRange((ordinal until (to.ordinal + 1)).map {
-      requireNotNull(jvmOrdinalIdentity[it])
-    }.toSortedSet())
-  }
-
-  // Holds a range of JVM targets, from a minimum to a maximum.
-  @JvmInline internal value class JvmTargetRange(private val range: SortedSet<JvmTarget>): TargetRange {
-    // Minimum supported JVM target.
-    override val minimum: JvmTarget get() = range.first()
-
-    // Maximum supported JVM target.
-    override val maximum: JvmTarget get() = range.last()
-
-    // Contains check.
-    override operator fun contains(target: JvmTarget): Boolean = target in range
-
-    // Stream of all supported JVM targets within the range.
-    override val all: Stream<JvmTarget> get() = range.stream()
-
-    // Stream of supported JVM targets within the range, without ignorable targets.
-    override fun applicable(ignore: SortedSet<JvmTarget>): Stream<JvmTarget> = range.stream().filter {
-      it !in ignore
-    }
   }
 
   // Resolve the project's Java toolchain and compiler.

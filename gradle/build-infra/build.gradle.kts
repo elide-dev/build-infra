@@ -109,6 +109,10 @@ gradlePlugin {
       id = "infra.catalog"
       implementationClass = "dev.elide.infra.gradle.InfraCatalogConvention"
     }
+    create("infra.multi-jvm-testing") {
+      id = "infra.multi-jvm-testing"
+      implementationClass = "dev.elide.infra.gradle.testing.ElideMultiJvmTestingConventions"
+    }
   }
 }
 

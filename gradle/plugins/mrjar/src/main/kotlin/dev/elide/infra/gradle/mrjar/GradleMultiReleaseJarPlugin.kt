@@ -15,6 +15,8 @@ package dev.elide.infra.gradle.mrjar
 
 import dev.elide.infra.gradle.BuildConstants
 import dev.elide.infra.gradle.api.ElideBuild.ElideBuildDsl
+import dev.elide.infra.gradle.api.resolveJavaBytecodeMinimum
+import dev.elide.infra.gradle.api.resolveJavaBytecodeTarget
 import dev.elide.infra.gradle.jpms.GradleJpmsPlugin
 import dev.elide.infra.gradle.jpms.Java9Modularity
 import dev.elide.infra.gradle.jpms.Java9Modularity.configureModularity
@@ -24,11 +26,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaApplication
 import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.jvm.toolchain.JavaToolchainService
-import org.gradle.jvm.toolchain.JavaToolchainSpec
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.support.serviceOf
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import java.nio.charset.StandardCharsets
@@ -264,41 +263,4 @@ private fun Project.determineModularity(
       true to moduleName
     }
   }
-}
-
-// Resolve the configured Java bytecode target.
-private fun Project.resolveJavaBytecodeTarget(
-  toolchain: JavaToolchainSpec,
-  java: JavaPluginExtension?,
-  conventions: ElideBuildDsl,
-): JvmTarget {
-  // regular java target compatibility
-  val javaTarget = java?.targetCompatibility?.majorVersion?.let { JvmTarget.fromTarget(it) }
-
-  // resolve the maximum bytecode level
-  val target = (findProperty(BuildConstants.Properties.JVM_TARGET) as? String)
-    ?.ifBlank { null }
-    ?.toIntOrNull()
-    ?.let { JvmTarget.fromTarget(it.toString()) }
-    ?: conventions.jvm.target.orNull
-    ?: javaTarget?.let { JvmTarget.fromTarget(it.target) }
-    ?: toolchain.languageVersion.orNull?.let { JvmTarget.fromTarget(it.asInt().toString()) }
-    ?: Runtime.version().version().first().let { JvmTarget.fromTarget(it.toString()) }
-
-  // make sure java target aligns
-  if (javaTarget != null) require(target == javaTarget) {
-    "Please align JVM target between `java.targetCompatiblity` and Build Infra. Got: " +
-      "'$target' for Build Infra, '$javaTarget' for the Java plugin."
-  }
-  return target
-}
-
-// Resolve the configured Java bytecode minimum.
-private fun Project.resolveJavaBytecodeMinimum(conventions: ElideBuildDsl): JvmTarget? {
-  // resolve the minimum bytecode level
-  return (findProperty(BuildConstants.Properties.JVM_MINIMUM) as? String)
-    ?.ifBlank { null }
-    ?.toIntOrNull()
-    ?.let { JvmTarget.fromTarget(it.toString()) }
-    ?: conventions.jvm.minimum.orNull
 }

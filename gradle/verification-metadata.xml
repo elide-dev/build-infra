@@ -70,6 +70,7 @@
          <trusted-key id="FA77DCFEF2EE6EB2DEBEDD2C012579464D01C06A" group="^org[.]apache($|([.].*))" regex="true"/>
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
             <trusting group="junit" name="junit" version="4.13.2"/>
+            <trusting group="org.apiguardian" name="apiguardian-api" version="1.1.0"/>
             <trusting group="org.apiguardian" name="apiguardian-api" version="1.1.2"/>
             <trusting group="org.junit" name="junit-bom"/>
             <trusting group="org.opentest4j"/>

@@ -13,9 +13,9 @@
 
 package dev.elide.infra.gradle.jmod
 
-import dev.elide.infra.gradle.javaHomeFile
+import dev.elide.infra.gradle.api.javaHomeFile
+import dev.elide.infra.gradle.api.projectRelative
 import dev.elide.infra.gradle.jpms.GradleJpmsPlugin
-import dev.elide.infra.gradle.projectRelative
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaApplication
