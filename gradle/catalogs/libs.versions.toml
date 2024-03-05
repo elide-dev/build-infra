@@ -13,7 +13,11 @@
 
 [versions]
 arrow = "1.2.0"
+github-api = "1.318"
+google-java-format = "1.20.0"
+gr8 = "0.10"
 guava = "33.0.0-jre"
+jgit = "6.8.0.202311291450-r"
 junit-jupiter = "5.10.2"
 junit-platform = "1.10.2"
 kotlin-edge = "2.0.0-Beta4"
@@ -32,7 +36,7 @@ commons-pool = "2.11.1"
 confundus = "1.0.0"
 conscrypt = "2.5.2"
 dekorate = "3.1.1"
-dependencyAnalysis = "1.29.0"
+dependencyAnalysis = "1.30.0"
 elide = "1.0.0-alpha8"
 elide-uuid = "2.0.0-Beta3-0.20.0-rc1"
 errorprone = "2.24.1"
@@ -40,10 +44,8 @@ faker = "1.15.0"
 gax = "2.31.1"
 gcloud-native = "0.14.1"
 gcloud-sdk = "26.1.2"
-github-api = "1.318"
 google-api-common = "2.16.0"
 google-html-types = "1.0.8"
-gr8 = "0.10"
 graalvm = "23.1.2"
 graalvm-metadata = "0.3.6"
 grpc-java = "1.61.1"
@@ -167,16 +169,21 @@ zstd = "1.5.5-11"
 
 [plugins]
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
+gr8 = { id = "com.gradleup.gr8", version.ref = "gr8" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-edge" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-edge" }
 
 [libraries]
+github-api = { group = "org.kohsuke", name = "github-api", version.ref = "github-api" }
+google-java-format = { module = "com.google.googlejavaformat:google-java-format", version.ref = "google-java-format" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
+jgit = { module = "org.eclipse.jgit:org.eclipse.jgit", version.ref = "jgit" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-edge" }
 kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin-edge" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-edge" }
 
 ## Testing
+testing-jgit-junit = { module = "org.eclipse.jgit:org.eclipse.jgit.junit", version.ref = "jgit" }
 testing-junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 testing-junit-jupiter-bom = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
 testing-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
@@ -185,6 +192,7 @@ testing-junit-platform-console = { module = "org.junit.platform:junit-platform-c
 testing-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
 
 ## Plugin Bindings
+plugin-gr8 = { module = "com.gradleup:gr8-plugin", version.ref = "gr8" }
 plugin-kotlin-multiplatform = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-edge" }
 plugin-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin-edge" }
 

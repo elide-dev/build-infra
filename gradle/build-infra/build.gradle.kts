@@ -11,39 +11,83 @@
  * License for the specific language governing permissions and limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
+import com.adarshr.gradle.testlogger.theme.ThemeType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
+  pmd
   `embedded-kotlin`
   `kotlin-dsl`
   `kotlin-dsl-precompiled-script-plugins`
   `maven-publish`
+  `jvm-test-suite`
+  `project-reports`
+  `build-dashboard`
+
+  alias(core.plugins.idea.ext)
+  alias(core.plugins.kotlin.powerassert)
+  alias(core.plugins.kotlin.serialization)
+  alias(core.plugins.owasp)
+  alias(core.plugins.sigstore)
+  alias(core.plugins.spdx.sbom)
+  alias(core.plugins.testlogger)
+  alias(core.plugins.versions)
+  alias(infra.plugins.cyclonedx)
+  alias(infra.plugins.detekt)
+  alias(infra.plugins.dokka)
+  alias(infra.plugins.kover)
+  alias(infra.plugins.spotless)
+  alias(libs.plugins.dependencyAnalysis)
 }
 
 group = "dev.elide.infra"
 
+// Build infra targets; does not apply to shipped/published targets.
+val buildTimeJvmTarget = JvmTarget.JVM_21
+val buildTimeJavaTarget = JavaVersion.VERSION_21
+val buildTimeKotlinTarget = KotlinVersion.KOTLIN_1_9
+
 java {
-  sourceCompatibility = JavaVersion.VERSION_21
-  targetCompatibility = JavaVersion.VERSION_21
+  sourceCompatibility = buildTimeJavaTarget
+  targetCompatibility = buildTimeJavaTarget
 
   toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
+    languageVersion = JavaLanguageVersion.of(buildTimeJavaTarget.majorVersion)
   }
+}
+
+private fun KotlinJvmCompilerOptions.setupKotlinc() {
+  apiVersion = buildTimeKotlinTarget
+  languageVersion = buildTimeKotlinTarget
+  jvmTarget = buildTimeJvmTarget
+  allWarningsAsErrors = true
+  progressiveMode = true
+  javaParameters = true
 }
 
 kotlin {
   explicitApi()
+  compilerOptions { setupKotlinc() }
+}
 
-  compilerOptions {
-    apiVersion = KotlinVersion.KOTLIN_1_9
-    languageVersion = KotlinVersion.KOTLIN_1_9
-    jvmTarget = JvmTarget.JVM_21
-  }
+tasks.withType(KotlinJvmCompile::class.java).configureEach {
+  compilerOptions { setupKotlinc() }
 }
 
 dependencyLocking {
   lockAllConfigurations()
+}
+
+configurations.all {
+  resolutionStrategy {
+    activateDependencyLocking()
+    enableDependencyVerification()
+  }
 }
 
 listOf(Jar::class, Zip::class, Tar::class).forEach {
@@ -60,10 +104,21 @@ dependencies {
   implementation(core.plugin.idea.ext)
   implementation(core.plugin.kotlin.multiplatform)
   implementation(core.plugin.kotlin.powerassert)
+  implementation(core.plugin.owasp)
+  implementation(core.plugin.proguard)
+  implementation(core.plugin.sigstore)
+  implementation(core.plugin.spdx.sbom)
   implementation(core.plugin.testlogger)
   implementation(core.tomlj)
   implementation(infra.bundles.plugins)
+  implementation(infra.plugin.cyclonedx)
+  implementation(infra.plugin.detekt)
+  implementation(infra.plugin.dokka)
+  implementation(infra.plugin.dokka.base)
   implementation(infra.plugin.gradle.publish)
+  implementation(infra.plugin.kover)
+  implementation(infra.plugin.spotless)
+  implementation(libs.plugin.gr8)
   implementation(files(core.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(files(infra.javaClass.superclass.protectionDomain.codeSource.location))
@@ -72,10 +127,10 @@ dependencies {
   testImplementation(core.bundles.asm)
   testImplementation(core.javapoet)
   testImplementation(core.kotlinpoet)
+  testImplementation(core.kotlin.test)
   testImplementation(libs.testing.junit.jupiter)
   testImplementation(libs.testing.junit.jupiter.engine)
   testImplementation(libs.testing.junit.jupiter.params)
-  testImplementation(core.kotlin.test)
   testRuntimeOnly(libs.testing.junit.platform.console)
 }
 
@@ -116,8 +171,36 @@ gradlePlugin {
   }
 }
 
+testlogger {
+  theme = ThemeType.MOCHA_PARALLEL
+  showPassed = true
+  showFailed = true
+  showSkipped = true
+  slowThreshold = 30_000L
+  isShowCauses = false
+  isShowSimpleNames = true
+  showStackTraces = false
+  showExceptions = false
+  showStandardStreams = false
+}
+
+dependencyCheck {
+  System.getenv("NVD_API_KEY")?.ifBlank { null }?.let {
+    nvd.apiKey = it
+  }
+}
+
 val testing: Configuration by configurations.creating {
   extendsFrom(configurations.testApi.get())
+}
+
+testing {
+  suites {
+    val test by getting(JvmTestSuite::class) {
+      useJUnitJupiter(requireNotNull(libs.testing.junit.jupiter.asProvider().get().version))
+      useKotlinTest(requireNotNull(core.kotlin.test.get().version))
+    }
+  }
 }
 
 val testJar by tasks.registering(Jar::class) {
@@ -127,4 +210,27 @@ val testJar by tasks.registering(Jar::class) {
 
 artifacts {
   add(testing.name, testJar)
+}
+
+val build: Task by tasks.getting {
+  // Nothing at this time.
+}
+
+val check: Task by tasks.getting {
+  dependsOn(
+    tasks.koverVerify,
+    tasks.detekt,
+    tasks.pmdMain,
+  )
+}
+
+val reports by tasks.registering {
+  group = "reporting"
+  description = "General all reports in all projects"
+
+  dependsOn(
+    tasks.named("projectReport"),
+    tasks.named("koverXmlReport"),
+    tasks.named("koverBinaryReport"),
+  )
 }

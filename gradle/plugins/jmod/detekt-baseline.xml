@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>EmptyKtFile:jmod.kt$.jmod.kt</ID>
+    <ID>LongMethod:GradleJModPlugin.kt$GradleJModPlugin$override fun apply(target: Project)</ID>
+    <ID>MaxLineLength:GradleJModPlugin.kt$GradleJModPlugin$// before running, delete any previous output, otherwise jmod will complain. it does not appear that jmod provides</ID>
+    <ID>MaxLineLength:GradleJModPlugin.kt$GradleJModPlugin$// the JAR is an input to force Gradle to write outputs, including `module-info.class`. the `module-info.class` file</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -32,6 +32,18 @@ public object BuildConstants {
     /** JVM test suite plugin */
     public const val JVM_TEST_SUITE: String = "jvm-test-suite"
 
+    /** Build Dashboard plugin */
+    public const val BUILD_DASHBOARD: String = "build-dashboard"
+
+    /** Project Reports plugin */
+    public const val PROJECT_REPORTS: String = "project-reports"
+
+    /** Test report aggregation */
+    public const val TEST_REPORT_AGGREGATION: String = "test-report-aggregation"
+
+    /** JaCoCo report aggregation */
+    public const val JACOCO_REPORT_AGGREGATION: String = "jacoco-report-aggregation"
+
     /** Groovy compiler plugin */
     public const val GROOVY: String = "groovy"
 
@@ -215,6 +227,12 @@ public object BuildConstants {
 
     /** JVM Java/Kotlin test task in a Kotlin Multiplatform project */
     public const val TEST_JVM: String = "jvmTest"
+
+    /** Detekt merge task for SARIF reporting */
+    public const val DETEKT_MERGE_SARIF: String = "detektMergeSarif"
+
+    /** Detekt merge task for XML reporting */
+    public const val DETEKT_MERGE_XML: String = "detektMergeXml"
   }
 
   /** Environment variables which influence the build */

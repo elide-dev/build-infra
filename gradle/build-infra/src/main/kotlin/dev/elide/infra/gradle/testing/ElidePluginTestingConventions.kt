@@ -11,19 +11,27 @@
  * License for the specific language governing permissions and limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
 package dev.elide.infra.gradle.testing
 
+import com.adarshr.gradle.testlogger.TestLoggerExtension
 import com.bnorm.power.PowerAssertGradleExtension
 import dev.elide.infra.gradle.BuildConstants
+import dev.elide.infra.gradle.baseline.AggregateTargetPlugin
+import dev.elide.infra.gradle.baseline.AggregateTargetService
+import dev.elide.infra.gradle.baseline.AggregateTargetService.StandardTargetType
 import org.gradle.accessors.dm.LibrariesForCore
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
+import org.gradle.api.plugins.jvm.JvmTestSuite
 import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.the
+import org.gradle.testing.base.TestingExtension
 
 /**
  * # Elide: Build Infra Plugin Testing
@@ -59,6 +67,23 @@ public class ElidePluginTestingConventions : Plugin<Project> {
     target.pluginManager.withPlugin(BuildConstants.KnownPlugins.KOTLIN_POWER_ASSERT) {
       target.configure<PowerAssertGradleExtension> {
         functions = powerAssertDefaultFunctions.toList()
+      }
+    }
+
+    target.extensions.configure<TestLoggerExtension> {
+      slowThreshold = 120_000L
+    }
+
+    target.plugins.withType(AggregateTargetPlugin::class.java) {
+      target.afterEvaluate {
+        val suites = the<TestingExtension>().suites.withType(JvmTestSuite::class.java)
+
+        gradle.sharedServices.registrations.named(AggregateTargetPlugin.SERVICE_NAME).get().service.get().apply {
+          this as AggregateTargetService
+          suites.forEach {
+            register(StandardTargetType.JVM_TEST_SUITE, it.name, it)
+          }
+        }
       }
     }
   }

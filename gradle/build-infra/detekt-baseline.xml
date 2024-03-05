@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:Bytecode.kt$Bytecode$@JvmStatic public fun JvmTarget.Companion.fromBytecodeLevel(version: Int): JvmTarget?</ID>
+    <ID>CyclomaticComplexMethod:Targets.kt$public fun JvmTarget.toJavaVersion(): JavaVersion</ID>
+    <ID>EmptyClassBlock:ElideBuild.kt$ElideBuild.ElideTestingSettings${ }</ID>
+    <ID>EmptyClassBlock:ElideJvmSettings.kt$ElideJvmSettings.ElideJLinkSettings${ }</ID>
+    <ID>EmptyClassBlock:ElideJvmSettings.kt$ElideJvmSettings.ElideJModSettings${ }</ID>
+    <ID>EmptyClassBlock:ElideJvmSettings.kt$ElideJvmSettings.ElideJModSettingsDsl${ }</ID>
+    <ID>MagicNumber:BuildCaching.kt$BuildCaching$14</ID>
+    <ID>MagicNumber:ElideBaselineTestingConventions.kt$30_000L</ID>
+    <ID>MagicNumber:ElidePluginTestingConventions.kt$ElidePluginTestingConventions$120_000L</ID>
+    <ID>NewLineAtEndOfFile:AbstractPluginTest.kt$dev.elide.infra.gradle.AbstractPluginTest.kt</ID>
+    <ID>NewLineAtEndOfFile:BuildApiTests.kt$dev.elide.infra.gradle.BuildApiTests.kt</ID>
+    <ID>SwallowedException:AbstractPluginTest.kt$AbstractPluginTest$err: Throwable</ID>
+    <ID>SwallowedException:AbstractPluginTest.kt$AbstractPluginTest.JarAssertionsDsl$thr: Throwable</ID>
+    <ID>TooGenericExceptionCaught:VersionCatalogMergeTask.kt$VersionCatalogMergeTask$err: Throwable</ID>
+    <ID>TooManyFunctions:Utils.kt$dev.elide.infra.gradle.api.Utils.kt</ID>
+    <ID>TopLevelPropertyNaming:DetektConvention.kt$// Merged reporting kill-switch. private const val mergedReportingByDefault = false</ID>
+    <ID>TopLevelPropertyNaming:DetektConvention.kt$// Reporting kill-switch. private const val enableReportingByDefault = false</ID>
+    <ID>TopLevelPropertyNaming:DetektConvention.kt$// Root-relative path to the Detekt configuration file. private const val detektConfig = "config/detekt/detekt.yml"</ID>
+    <ID>TopLevelPropertyNaming:DetektConvention.kt$// Root-relative path to the main Detekt report file, in SARIF format. private const val mergedReportSarif = "reports/detekt/detekt.sarif"</ID>
+    <ID>TopLevelPropertyNaming:DetektConvention.kt$// Root-relative path to the main Detekt report file, in XML format. private const val mergedReportXml = "reports/detekt/detekt.xml"</ID>
+    <ID>TopLevelPropertyNaming:ElideGradlePlugin.kt$// Settings which apply to all plugins private const val kotlinStrict = false</ID>
+    <ID>UnusedPrivateProperty:InfraCatalogConvention.kt$InfraCatalogConvention$val test by target.tasks.register("test") { /* Nothing yet. */ }</ID>
+    <ID>WildcardImport:AbstractPluginTest.kt$import java.io.*</ID>
+    <ID>WildcardImport:AbstractPluginTest.kt$import kotlin.test.*</ID>
+    <ID>WildcardImport:BuildApiTests.kt$import kotlin.test.*</ID>
+    <ID>WildcardImport:Bytecode.kt$import org.jetbrains.kotlin.gradle.dsl.JvmTarget.*</ID>
+    <ID>WildcardImport:ElideMultiJvmTestingConventions.kt$import dev.elide.infra.gradle.api.*</ID>
+    <ID>WildcardImport:InfraCatalogConvention.kt$import org.gradle.kotlin.dsl.*</ID>
+    <ID>WildcardImport:Utils.kt$import org.gradle.jvm.toolchain.*</ID>
+    <ID>WildcardImport:VersionCatalogMergeTask.kt$import org.gradle.api.tasks.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

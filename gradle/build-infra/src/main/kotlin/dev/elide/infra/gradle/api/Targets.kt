@@ -13,7 +13,8 @@
 
 package dev.elide.infra.gradle.api
 
-import org.jetbrains.annotations.VisibleForTesting
+import org.gradle.api.JavaVersion
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.SortedSet
 import java.util.stream.Stream
@@ -106,6 +107,66 @@ public infix fun JvmTarget.until(to: JvmTarget): TargetRange {
   return JvmTargetRange((ordinal until (to.ordinal + 1)).map {
     requireNotNull(jvmOrdinalIdentity[it])
   }.toSortedSet())
+}
+
+/**
+ * Build a range of JVM targets, only including LTS releases.
+ *
+ * @receiver Base target
+ * @param to Ultimate target
+ * @return Target range between the two, including LTS releases only
+ */
+public infix fun JvmTarget.ltsUntil(to: JvmTarget): TargetRange {
+  return JvmTargetRange((ordinal until (to.ordinal + 1)).map {
+    requireNotNull(jvmOrdinalIdentity[it])
+  }.filter {
+    it in jvmLtsReleases
+  }.toSortedSet())
+}
+
+/**
+ * ## Target to Language Version
+ *
+ * Convert a [JvmTarget] to a corresponding and equivalent [JavaLanguageVersion].
+ *
+ * @receiver JVM target
+ * @return Java language version
+ */
+public fun JvmTarget.toJavaLanguageVersion(): JavaLanguageVersion = JavaLanguageVersion.of(target)
+
+/**
+ * ## Target to Kotlin JVM Target
+ *
+ * Convert a [JvmTarget] to a corresponding and equivalent Kotlin JVM target.
+ *
+ * @receiver JVM target
+ * @return Kotlin JVM target
+ */
+public fun JvmTarget.toKotlinJvmTarget(): String = TODO("")
+
+/**
+ * ## Target to Kotlin JVM Target
+ *
+ * Convert a [JvmTarget] to a corresponding and equivalent Kotlin JVM target.
+ *
+ * @receiver JVM target
+ * @return Kotlin JVM target
+ */
+public fun JvmTarget.toJavaVersion(): JavaVersion = when (this) {
+  JvmTarget.JVM_1_8 -> JavaVersion.VERSION_1_8
+  JvmTarget.JVM_9 -> JavaVersion.VERSION_1_9
+  JvmTarget.JVM_10 -> JavaVersion.VERSION_1_10
+  JvmTarget.JVM_11 -> JavaVersion.VERSION_11
+  JvmTarget.JVM_12 -> JavaVersion.VERSION_12
+  JvmTarget.JVM_13 -> JavaVersion.VERSION_13
+  JvmTarget.JVM_14 -> JavaVersion.VERSION_14
+  JvmTarget.JVM_15 -> JavaVersion.VERSION_15
+  JvmTarget.JVM_16 -> JavaVersion.VERSION_16
+  JvmTarget.JVM_17 -> JavaVersion.VERSION_17
+  JvmTarget.JVM_18 -> JavaVersion.VERSION_18
+  JvmTarget.JVM_19 -> JavaVersion.VERSION_19
+  JvmTarget.JVM_20 -> JavaVersion.VERSION_20
+  JvmTarget.JVM_21 -> JavaVersion.VERSION_21
 }
 
 // Holds a range of JVM targets, from a minimum to a maximum.

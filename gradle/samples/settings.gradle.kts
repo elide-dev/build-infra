@@ -16,6 +16,7 @@
 pluginManagement {
   includeBuild("../build-infra")
   includeBuild("../plugins/base")
+  includeBuild("../plugins/gha")
   includeBuild("../plugins/graalvm")
   includeBuild("../plugins/jlink")
   includeBuild("../plugins/jmod")

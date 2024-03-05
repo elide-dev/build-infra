@@ -25,6 +25,9 @@ directory or the [Gradle build-infra README](..).
 - **[`dev.elide.graalvm`][6]:** Plugin for using `jmod` and `jpms` to build optimized, native AOT Java apps using
   [`native-image`][9].
 
+- **[`dev.elide.gha`][10]:** Integrate your Gradle build with GitHub Actions. Enables enhanced logging and reporting
+  features, PR integrations, and other features supported by the workflows in this repo.
+
 [1]: ./base
 [2]: ./jmod
 [3]: ./jpms
@@ -34,3 +37,4 @@ directory or the [Gradle build-infra README](..).
 [7]: https://www.oracle.com/corporate/features/understanding-java-9-modules.html
 [8]: https://docs.oracle.com/en/java/javase/11/tools/jlink.html
 [9]: https://www.graalvm.org/latest/reference-manual/native-image/
+[10]: ./gha
