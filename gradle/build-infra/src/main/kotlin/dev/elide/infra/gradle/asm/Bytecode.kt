@@ -59,24 +59,4 @@ public object Bytecode {
    * @return Whether this target is compatible with the provided one (greater than or equal to)
    */
   public fun JvmTarget.compatibleWith(other: JvmTarget): Boolean = this >= other
-
-  /**
-   * ## Target to Language Version
-   *
-   * Convert a [JvmTarget] to a corresponding and equivalent [JavaLanguageVersion].
-   *
-   * @receiver JVM target
-   * @return Java language version
-   */
-  public fun JvmTarget.toJavaLanguageVersion(): JavaLanguageVersion = JavaLanguageVersion.of(target)
-
-  /**
-   * ## Target to Kotlin JVM Target
-   *
-   * Convert a [JvmTarget] to a corresponding and equivalent Kotlin JVM target.
-   *
-   * @receiver JVM target
-   * @return Kotlin JVM target
-   */
-  public fun JvmTarget.toKotlinJvmTarget(): String = TODO("")
 }

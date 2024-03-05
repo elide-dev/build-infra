@@ -236,6 +236,9 @@ Read more about the Gradle build infra [here](./gradle). There are [samples](./g
 
 ### Plugins
 
+- **[`dev.elide.gha`][9]:** Integrate your Gradle build with GitHub Actions. Enables enhanced logging and reporting
+  features, PR integrations, and other features supported by the workflows in this repo.
+
 - **[`dev.elide.jmod`][0]:** Build [`jmod`][1] artifacts in Gradle JVM projects with Java 9+. `jmod` artifacts are
   compatible with [`jlink`][2] and make for great optimized build artifacts in modular projects.
 
@@ -274,3 +277,4 @@ Elide Ventures, LLC.
 [6]: ./gradle/plugins/graalvm
 [7]: https://www.graalvm.org/latest/reference-manual/native-image/
 [8]: https://www.oracle.com/corporate/features/understanding-java-9-modules.html
+[9]: ./gradle/plugins/gha

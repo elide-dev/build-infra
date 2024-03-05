@@ -29,6 +29,32 @@ import org.gradle.api.provider.Property
  */
 public sealed interface ElideBuild : ElideExtension<ElideBuild, Project> {
   /**
+   * # Build: Checks
+   *
+   * Controls settings for checks like Detekt, PMD, and so on
+   */
+  public interface ElideCheckSettings : Convention<ElideCheckSettings, Project> {
+    /**
+     * Whether checks are enabled for this project
+     */
+    public val enabled: Property<Boolean>
+
+    /**
+     * Whether to ignore failures during check tasks
+     */
+    public val ignoreFailures: Property<Boolean>
+  }
+
+  /**
+   * # Build: Testing
+   *
+   * Controls settings for testing, coverage, and other verification tasks
+   */
+  public interface ElideTestingSettings : Convention<ElideTestingSettings, Project> {
+
+  }
+
+  /**
    * # Build: Dependency Locking
    *
    * Controls dependency locking settings
@@ -97,11 +123,25 @@ public sealed interface ElideBuild : ElideExtension<ElideBuild, Project> {
   public val baselines: Property<Boolean>
 
   /**
+   * ## Checks
+   *
+   * Settings to apply to code and structural checks and verification tasks
+   */
+  public val checks: ElideCheckSettings
+
+  /**
    * ## JVM Settings
    *
    * Provides control over JVM targeting, toolchains, and other related settings.
    */
   public val jvm: ElideJvmSettings
+
+  /**
+   * ## Testing Settings
+   *
+   * Provides control over JVM testing and related settings
+   */
+  public val testing: ElideTestingSettings
 
   /**
    * ## Kotlin Settings
@@ -116,6 +156,24 @@ public sealed interface ElideBuild : ElideExtension<ElideBuild, Project> {
    * Provides control over dependency resolution, locking, and verification settings
    */
   public val dependencies: ElideDependencySettings
+
+  // Check settings DSL.
+  public class ElideCheckSettingsDsl(factory: ObjectFactory) :
+    ElideCheckSettings,
+    ProjectConvention<ElideCheckSettings>(ElideCheckSettings::class, factory) {
+    // Whether to enable checks.
+    override val enabled: Property<Boolean> = factory.property(Boolean::class.java).convention(true)
+
+    // Whether to ignore check failures.
+    override val ignoreFailures: Property<Boolean> = factory.property(Boolean::class.java).convention(false)
+  }
+
+  // Testing settings DSL.
+  public class ElideTestingSettingsDsl(factory: ObjectFactory) :
+    ElideTestingSettings,
+    ProjectConvention<ElideTestingSettings>(ElideTestingSettings::class, factory) {
+    //
+  }
 
   // Dependency locking settings DSL.
   public class ElideDependencyLockingSettingsDsl(factory: ObjectFactory) :
@@ -181,6 +239,12 @@ public sealed interface ElideBuild : ElideExtension<ElideBuild, Project> {
 
     // Kotlin feature conventions.
     override val kotlin: ElideKotlinSettings = ElideKotlinSettings.ElideKotlinSettingsDsl(factory)
+
+    // Checks and analysis.
+    override val checks: ElideCheckSettings = ElideCheckSettingsDsl(factory)
+
+    // Testing.
+    override val testing: ElideTestingSettings = ElideTestingSettingsDsl(factory)
 
     // Dependency feature conventions.
     override val dependencies: ElideDependencySettings = ElideDependencySettingsDsl(factory)

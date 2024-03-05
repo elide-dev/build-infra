@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:Java9Modularity.kt$Java9Modularity$private fun Project.configureModularJvmTargets( application: JavaApplication?, mainSourceSet: Any, range: TargetRange, applicable: List&lt;JvmTarget>, sourceSetMap: Map&lt;JvmTarget, Any>, taskMap: Map&lt;JvmTarget, Task>, config: ModularityConfig, )</ID>
+    <ID>LongMethod:Java9Modularity.kt$Java9Modularity$private fun Project.configureModularJvmTargets( application: JavaApplication?, mainSourceSet: Any, range: TargetRange, applicable: List&lt;JvmTarget>, sourceSetMap: Map&lt;JvmTarget, Any>, taskMap: Map&lt;JvmTarget, Task>, config: ModularityConfig, )</ID>
+    <ID>LongMethod:Java9Modularity.kt$Java9Modularity$private fun Project.registerKotlinVerifyModuleTask( compileTask: KotlinCompile, sourceFile: File ): TaskProvider&lt;out KotlinJvmCompile></ID>
+    <ID>LongParameterList:Java9Modularity.kt$Java9Modularity$( application: JavaApplication?, mainSourceSet: Any, range: TargetRange, applicable: List&lt;JvmTarget>, sourceSetMap: Map&lt;JvmTarget, Any>, taskMap: Map&lt;JvmTarget, Task>, config: ModularityConfig, )</ID>
+    <ID>LongParameterList:Java9Modularity.kt$Java9Modularity$( base: KotlinSourceSet, java: JavaPluginExtension, kotlin: KotlinProjectExtension, modulepath: Configuration, config: ModularityConfig, target: JvmTarget, )</ID>
+    <ID>LongParameterList:Java9Modularity.kt$Java9Modularity$( base: SourceSet, java: JavaPluginExtension, modulepath: Configuration, config: ModularityConfig, range: TargetRange, target: JvmTarget, )</ID>
+    <ID>LongParameterList:Java9Modularity.kt$ModularityConfig.Companion$( minimum: JvmTarget, maximum: JvmTarget, multiRelease: Boolean = true, recompileBytecode: Boolean = true, allReleases: Boolean = false, enableKotlin: Boolean = true, sourceSetPrefix: String = "jvm", sourceSetCategory: String = "main", replaceMainJar: Boolean = false, preferModern: Boolean = false )</ID>
+    <ID>MagicNumber:Java9Modularity.kt$Java9Modularity$11</ID>
+    <ID>MagicNumber:Java9Modularity.kt$Java9Modularity$9</ID>
+    <ID>MaxLineLength:Java9Modularity.kt$Java9Modularity$val</ID>
+    <ID>ReturnCount:Java9Modularity.kt$Java9Modularity$@JvmStatic @JvmOverloads public fun Project.configureJava9ModuleInfo(multiRelease: Boolean = true)</ID>
+    <ID>SpreadOperator:Java9Modularity.kt$Java9Modularity$(layout.projectDirectory.dir("src/$category/$sourceSetName"), *baseDirs)</ID>
+    <ID>TooManyFunctions:Java9Modularity.kt$Java9Modularity</ID>
+    <ID>UnusedParameter:Java9Modularity.kt$Java9Modularity$base: KotlinSourceSet</ID>
+    <ID>UnusedParameter:Java9Modularity.kt$Java9Modularity$java: JavaPluginExtension</ID>
+    <ID>UnusedParameter:Java9Modularity.kt$Java9Modularity$modulepath: Configuration</ID>
+    <ID>UnusedParameter:Java9Modularity.kt$Java9Modularity$range: TargetRange</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import java.io.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import kotlin.reflect.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import kotlin.reflect.full.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.api.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.api.file.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.api.provider.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.api.tasks.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.api.tasks.bundling.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.api.tasks.compile.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.jvm.toolchain.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.kotlin.dsl.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.language.base.plugins.LifecycleBasePlugin.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.gradle.process.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.dsl.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.plugin.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.plugin.mpp.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.targets.jvm.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.gradle.tasks.*</ID>
+    <ID>WildcardImport:Java9Modularity.kt$import org.jetbrains.kotlin.tooling.core.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

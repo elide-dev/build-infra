@@ -19,8 +19,8 @@ gradle-checksum = "1.4.0"
 gradle-doctor = "0.9.2"
 idea-ext = "1.1.7"
 javapoet = "1.13.0"
-kotlinpoet = "1.16.0"
 kotlin-stable = "1.9.22"
+kotlinpoet = "1.16.0"
 kotlinx-collections = "0.3.7"
 kotlinx-coroutines = "1.8.0"
 kotlinx-datetime = "0.5.0"
@@ -30,6 +30,9 @@ kotlinx-serialization = "1.6.3"
 ksp = "1.9.22-1.0.17"
 owasp = "9.0.9"
 powerassert = "0.13.0"
+proguard = "7.4.2"
+sigstore = "0.7.0"
+spdx-sbom = "0.7.0"
 testlogger = "4.0.0"
 tomlj = "1.1.1"
 version-check = "0.51.0"
@@ -42,6 +45,10 @@ idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ex
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-stable" }
 kotlin-powerassert = { id = "com.bnorm.power.kotlin-power-assert", version.ref = "powerassert" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-stable" }
+owasp = { id = "org.owasp.dependencycheck", version.ref = "owasp" }
+sigstore = { id = "dev.sigstore.sign", version.ref = "sigstore" }
+sigstore-base = { id = "dev.sigstore.sign-base", version.ref = "sigstore" }
+spdx-sbom = { id = "org.spdx.sbom", version.ref = "spdx-sbom" }
 testlogger = { id = "com.adarshr.test-logger", version.ref = "testlogger" }
 versions = { id = "com.github.ben-manes.versions", version.ref = "version-check" }
 
@@ -51,11 +58,11 @@ asm-analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
 asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
-kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-stable" }
 kotlin-stdlib-common = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin-stable" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-stable" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-stable" }
+kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
 kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "atomicfu" }
 kotlinx-atomicfu-linux-x64 = { group = "org.jetbrains.kotlinx", name = "atomicfu-linuxx64", version.ref = "atomicfu" }
 kotlinx-atomicfu-macos-x64 = { group = "org.jetbrains.kotlinx", name = "atomicfu-macosx64", version.ref = "atomicfu" }
@@ -106,6 +113,11 @@ plugin-idea-ext = { module = "gradle.plugin.org.jetbrains.gradle.plugin.idea-ext
 plugin-kotlin-multiplatform = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-stable" }
 plugin-kotlin-powerassert = { module = "com.bnorm.power:kotlin-power-assert-gradle", version.ref = "powerassert" }
 plugin-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin-stable" }
+plugin-owasp = { module = "org.owasp:dependency-check-gradle", version.ref = "owasp" }
+plugin-proguard = { module = "com.guardsquare:proguard-gradle", version.ref = "proguard" }
+plugin-sigstore = { module = "dev.sigstore:sigstore-gradle-sign-plugin", version.ref = "sigstore" }
+plugin-sigstore-base = { module = "dev.sigstore:sigstore-gradle-sign-base-plugin", version.ref = "sigstore" }
+plugin-spdx-sbom = { module = "org.spdx:spdx-gradle-plugin", version.ref = "spdx-sbom" }
 plugin-testlogger = { module = "com.adarshr:gradle-test-logger-plugin", version.ref = "testlogger" }
 plugin-versions = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "version-check" }
 

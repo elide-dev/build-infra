@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>EmptyFunctionBlock:GradleMultiReleasePluginTest.kt$GradleMultiReleasePluginTest${ }</ID>
+    <ID>LongMethod:GradleMultiReleasePluginTest.kt$GradleMultiReleasePluginTest$@Test @Ignore fun `build merged mrjar with mrjar plugin (modular)`()</ID>
+    <ID>LongMethod:GradleMultiReleasePluginTest.kt$GradleMultiReleasePluginTest$@Test fun `build modular mrjar with jvm minimum target via properties`()</ID>
+    <ID>LongMethod:GradleMultiReleasePluginTest.kt$GradleMultiReleasePluginTest$@Test fun `build thin jars with mrjar plugin applied (modular)`()</ID>
+    <ID>WildcardImport:GradleMultiReleasePluginTest.kt$import kotlin.test.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

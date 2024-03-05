@@ -42,6 +42,9 @@ On top of the above functionality, there are feature plugins:
 - **[`dev.elide.graalvm`][9]:** Plugin for using `jmod` and `jpms` to build optimized, native AOT Java apps using
   [`native-image`][10].
 
+- **[`dev.elide.gha`][12]:** Integrate your Gradle build with GitHub Actions. Enables enhanced logging and reporting
+  features, PR integrations, and other features supported by the workflows in this repo.
+
 [0]: https://www.oracle.com/corporate/features/understanding-java-9-modules.html
 [1]: https://docs.gradle.org/current/userguide/dependency_locking.html
 [2]: https://docs.gradle.org/current/userguide/dependency_verification.html
@@ -54,3 +57,4 @@ On top of the above functionality, there are feature plugins:
 [9]: ./plugins/graalvm
 [10]: https://www.graalvm.org/latest/reference-manual/native-image/
 [11]: ./plugins/base
+[11]: ./plugins/gha
