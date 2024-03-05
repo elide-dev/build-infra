@@ -51,6 +51,7 @@ public class BaselineBuildSettings : Plugin<Settings> {
       // samples, libs, and platforms are top-level
       pathString.contains("samples") ||
       pathString.contains("libs") ||
+      pathString.contains("prepack") ||
       pathString.contains("platforms") -> "../catalogs"
 
       // otherwise, it's the root project
