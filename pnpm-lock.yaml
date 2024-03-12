@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@commitlint/config-conventional':
-    specifier: 18.6.1
-    version: registry.npmjs.org/@commitlint/config-conventional@18.6.1
+    specifier: 19.1.0
+    version: registry.npmjs.org/@commitlint/config-conventional@19.1.0
   '@types/node':
     specifier: ^20
     version: registry.npmjs.org/@types/node@20.11.19
@@ -535,13 +535,13 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/@commitlint/config-conventional@18.6.1:
-    resolution: {integrity: sha512-ftpfAOQyI+IHvut0cRF4EFM39PWCqde+uOXCjH9NpK6FpqfhncAbEvP0E7OIpFsrDX0aS7k81tzH5Yz7prcNxA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-18.6.1.tgz}
+  registry.npmjs.org/@commitlint/config-conventional@19.1.0:
+    resolution: {integrity: sha512-KIKD2xrp6Uuk+dcZVj3++MlzIr/Su6zLE8crEDQCZNvWHNQSeeGbzOlNtsR32TUy6H3JbP7nWgduAHCaiGQ6EA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-19.1.0.tgz}
     name: '@commitlint/config-conventional'
-    version: 18.6.1
+    version: 19.1.0
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@18.6.1
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
       conventional-changelog-conventionalcommits: registry.npmjs.org/conventional-changelog-conventionalcommits@7.0.2
     dev: true
 
@@ -711,6 +711,16 @@ packages:
     engines: {node: '>=v18'}
     dependencies:
       chalk: registry.npmjs.org/chalk@4.1.2
+    dev: true
+
+  registry.npmjs.org/@commitlint/types@19.0.3:
+    resolution: {integrity: sha512-tpyc+7i6bPG9mvaBbtKUeghfyZSDgWquIDfMgqYtTbmZ9Y9VzEm2je9EYcQ0aoz5o7NvGS+rcDec93yO08MHYA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/types/-/types-19.0.3.tgz}
+    name: '@commitlint/types'
+    version: 19.0.3
+    engines: {node: '>=v18'}
+    dependencies:
+      '@types/conventional-commits-parser': registry.npmjs.org/@types/conventional-commits-parser@5.0.0
+      chalk: registry.npmjs.org/chalk@5.3.0
     dev: true
 
   registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.56.0):
@@ -1198,6 +1208,14 @@ packages:
     version: 7.20.0
     dependencies:
       '@babel/types': registry.npmjs.org/@babel/types@7.22.0
+    dev: true
+
+  registry.npmjs.org/@types/conventional-commits-parser@5.0.0:
+    resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@types/conventional-commits-parser/-/conventional-commits-parser-5.0.0.tgz}
+    name: '@types/conventional-commits-parser'
+    version: 5.0.0
+    dependencies:
+      '@types/node': registry.npmjs.org/@types/node@20.11.19
     dev: true
 
   registry.npmjs.org/@types/graceful-fs@4.1.6:
