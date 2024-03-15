@@ -4,52 +4,55 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-devDependencies:
-  '@commitlint/config-conventional':
-    specifier: 19.1.0
-    version: registry.npmjs.org/@commitlint/config-conventional@19.1.0
-  '@types/node':
-    specifier: ^20
-    version: registry.npmjs.org/@types/node@20.11.19
-  '@typescript-eslint/parser':
-    specifier: ^7.2.0
-    version: registry.npmjs.org/@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.2)
-  '@vercel/ncc':
-    specifier: ^0.38.1
-    version: registry.npmjs.org/@vercel/ncc@0.38.1
-  commitlint:
-    specifier: 19.1.0
-    version: registry.npmjs.org/commitlint@19.1.0(@types/node@20.11.19)(typescript@5.4.2)
-  eslint:
-    specifier: ^8.57.0
-    version: registry.npmjs.org/eslint@8.57.0
-  eslint-plugin-github:
-    specifier: ^4.10.1
-    version: registry.npmjs.org/eslint-plugin-github@4.10.1(eslint@8.57.0)(typescript@5.4.2)
-  eslint-plugin-jest:
-    specifier: ^27.9.0
-    version: registry.npmjs.org/eslint-plugin-jest@27.9.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.2)
-  husky:
-    specifier: 9.0.11
-    version: registry.npmjs.org/husky@9.0.11
-  jest:
-    specifier: ^29.7.0
-    version: registry.npmjs.org/jest@29.7.0(@types/node@20.11.19)
-  js-yaml:
-    specifier: ^4.1.0
-    version: 4.1.0
-  lint-staged:
-    specifier: 15.2.2
-    version: registry.npmjs.org/lint-staged@15.2.2
-  prettier:
-    specifier: ^3.2.5
-    version: registry.npmjs.org/prettier@3.2.5
-  ts-jest:
-    specifier: ^29.1.2
-    version: registry.npmjs.org/ts-jest@29.1.2(@babel/core@7.22.1)(jest@29.7.0)(typescript@5.4.2)
-  typescript:
-    specifier: ^5.4.2
-    version: registry.npmjs.org/typescript@5.4.2
+importers:
+
+  .:
+    devDependencies:
+      '@commitlint/config-conventional':
+        specifier: 19.1.0
+        version: registry.npmjs.org/@commitlint/config-conventional@19.1.0
+      '@types/node':
+        specifier: ^20
+        version: registry.npmjs.org/@types/node@20.11.28
+      '@typescript-eslint/parser':
+        specifier: ^7.2.0
+        version: registry.npmjs.org/@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.2)
+      '@vercel/ncc':
+        specifier: ^0.38.1
+        version: registry.npmjs.org/@vercel/ncc@0.38.1
+      commitlint:
+        specifier: 19.1.0
+        version: registry.npmjs.org/commitlint@19.1.0(@types/node@20.11.28)(typescript@5.4.2)
+      eslint:
+        specifier: ^8.57.0
+        version: registry.npmjs.org/eslint@8.57.0
+      eslint-plugin-github:
+        specifier: ^4.10.1
+        version: registry.npmjs.org/eslint-plugin-github@4.10.1(eslint@8.57.0)(typescript@5.4.2)
+      eslint-plugin-jest:
+        specifier: ^27.9.0
+        version: registry.npmjs.org/eslint-plugin-jest@27.9.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.2)
+      husky:
+        specifier: 9.0.11
+        version: registry.npmjs.org/husky@9.0.11
+      jest:
+        specifier: ^29.7.0
+        version: registry.npmjs.org/jest@29.7.0(@types/node@20.11.28)
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
+      lint-staged:
+        specifier: 15.2.2
+        version: registry.npmjs.org/lint-staged@15.2.2
+      prettier:
+        specifier: ^3.2.5
+        version: registry.npmjs.org/prettier@3.2.5
+      ts-jest:
+        specifier: ^29.1.2
+        version: registry.npmjs.org/ts-jest@29.1.2(@babel/core@7.22.1)(jest@29.7.0)(typescript@5.4.2)
+      typescript:
+        specifier: ^5.4.2
+        version: registry.npmjs.org/typescript@5.4.2
 
 packages:
 
@@ -512,7 +515,7 @@ packages:
     version: 0.2.3
     dev: true
 
-  registry.npmjs.org/@commitlint/cli@19.1.0(@types/node@20.11.19)(typescript@5.4.2):
+  registry.npmjs.org/@commitlint/cli@19.1.0(@types/node@20.11.28)(typescript@5.4.2):
     resolution: {integrity: sha512-SYGm8HGbVzrlSYeB6oo6pG1Ec6bOMJcDsXgNGa4vgZQsPj6nJkcbTWlIRmtmIk0tHi0d5sCljGuQ+g/0NCPv7w==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/cli/-/cli-19.1.0.tgz}
     id: registry.npmjs.org/@commitlint/cli/19.1.0
     name: '@commitlint/cli'
@@ -522,7 +525,7 @@ packages:
     dependencies:
       '@commitlint/format': registry.npmjs.org/@commitlint/format@19.0.3
       '@commitlint/lint': registry.npmjs.org/@commitlint/lint@19.1.0
-      '@commitlint/load': registry.npmjs.org/@commitlint/load@19.1.0(@types/node@20.11.19)(typescript@5.4.2)
+      '@commitlint/load': registry.npmjs.org/@commitlint/load@19.1.0(@types/node@20.11.28)(typescript@5.4.2)
       '@commitlint/read': registry.npmjs.org/@commitlint/read@19.0.3
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
       execa: registry.npmjs.org/execa@8.0.1
@@ -605,7 +608,7 @@ packages:
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
     dev: true
 
-  registry.npmjs.org/@commitlint/load@19.1.0(@types/node@20.11.19)(typescript@5.4.2):
+  registry.npmjs.org/@commitlint/load@19.1.0(@types/node@20.11.28)(typescript@5.4.2):
     resolution: {integrity: sha512-rWqnvNDpeshX8JfUC/qjpDkQB78qF+4uHcJmIRJMwvlj6zWce08SP/TPKN3GlNKgXhAawwcAPxXL9qOTTdiOBA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/load/-/load-19.1.0.tgz}
     id: registry.npmjs.org/@commitlint/load/19.1.0
     name: '@commitlint/load'
@@ -618,7 +621,7 @@ packages:
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
       chalk: registry.npmjs.org/chalk@5.3.0
       cosmiconfig: registry.npmjs.org/cosmiconfig@8.3.6(typescript@5.4.2)
-      cosmiconfig-typescript-loader: registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.19)(cosmiconfig@8.3.6)(typescript@5.4.2)
+      cosmiconfig-typescript-loader: registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.28)(cosmiconfig@8.3.6)(typescript@5.4.2)
       lodash.isplainobject: registry.npmjs.org/lodash.isplainobject@4.0.6
       lodash.merge: registry.npmjs.org/lodash.merge@4.6.2
       lodash.uniq: registry.npmjs.org/lodash.uniq@4.5.0
@@ -815,7 +818,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       chalk: registry.npmjs.org/chalk@4.1.2
       jest-message-util: registry.npmjs.org/jest-message-util@29.7.0
       jest-util: registry.npmjs.org/jest-util@29.7.0
@@ -838,14 +841,14 @@ packages:
       '@jest/test-result': registry.npmjs.org/@jest/test-result@29.7.0
       '@jest/transform': registry.npmjs.org/@jest/transform@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       ansi-escapes: registry.npmjs.org/ansi-escapes@4.3.2
       chalk: registry.npmjs.org/chalk@4.1.2
       ci-info: registry.npmjs.org/ci-info@3.8.0
       exit: registry.npmjs.org/exit@0.1.2
       graceful-fs: registry.npmjs.org/graceful-fs@4.2.11
       jest-changed-files: registry.npmjs.org/jest-changed-files@29.7.0
-      jest-config: registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.19)
+      jest-config: registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.28)
       jest-haste-map: registry.npmjs.org/jest-haste-map@29.7.0
       jest-message-util: registry.npmjs.org/jest-message-util@29.7.0
       jest-regex-util: registry.npmjs.org/jest-regex-util@29.6.3
@@ -875,7 +878,7 @@ packages:
     dependencies:
       '@jest/fake-timers': registry.npmjs.org/@jest/fake-timers@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       jest-mock: registry.npmjs.org/jest-mock@29.7.0
     dev: true
 
@@ -908,7 +911,7 @@ packages:
     dependencies:
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
       '@sinonjs/fake-timers': registry.npmjs.org/@sinonjs/fake-timers@10.2.0
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       jest-message-util: registry.npmjs.org/jest-message-util@29.7.0
       jest-mock: registry.npmjs.org/jest-mock@29.7.0
       jest-util: registry.npmjs.org/jest-util@29.7.0
@@ -945,7 +948,7 @@ packages:
       '@jest/transform': registry.npmjs.org/@jest/transform@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
       '@jridgewell/trace-mapping': registry.npmjs.org/@jridgewell/trace-mapping@0.3.18
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       chalk: registry.npmjs.org/chalk@4.1.2
       collect-v8-coverage: registry.npmjs.org/collect-v8-coverage@1.0.1
       exit: registry.npmjs.org/exit@0.1.2
@@ -1045,7 +1048,7 @@ packages:
       '@jest/schemas': registry.npmjs.org/@jest/schemas@29.6.3
       '@types/istanbul-lib-coverage': registry.npmjs.org/@types/istanbul-lib-coverage@2.0.4
       '@types/istanbul-reports': registry.npmjs.org/@types/istanbul-reports@3.0.1
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       '@types/yargs': registry.npmjs.org/@types/yargs@17.0.24
       chalk: registry.npmjs.org/chalk@4.1.2
     dev: true
@@ -1202,7 +1205,7 @@ packages:
     name: '@types/conventional-commits-parser'
     version: 5.0.0
     dependencies:
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
     dev: true
 
   registry.npmjs.org/@types/graceful-fs@4.1.6:
@@ -1210,7 +1213,7 @@ packages:
     name: '@types/graceful-fs'
     version: 4.1.6
     dependencies:
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
     dev: true
 
   registry.npmjs.org/@types/istanbul-lib-coverage@2.0.4:
@@ -1247,10 +1250,10 @@ packages:
     version: 0.0.29
     dev: true
 
-  registry.npmjs.org/@types/node@20.11.19:
-    resolution: {integrity: sha512-7xMnVEcZFu0DikYjWOlRq7NTPETrm7teqUT2WkQjrTIkEgUyyGdWsj/Zg8bEJt5TNklzbPD1X3fqfsHw3SpapQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@types/node/-/node-20.11.19.tgz}
+  registry.npmjs.org/@types/node@20.11.28:
+    resolution: {integrity: sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@types/node/-/node-20.11.28.tgz}
     name: '@types/node'
-    version: 20.11.19
+    version: 20.11.28
     dependencies:
       undici-types: registry.npmjs.org/undici-types@5.26.5
     dev: true
@@ -2230,7 +2233,7 @@ packages:
     engines: {node: '>=16'}
     dev: true
 
-  registry.npmjs.org/commitlint@19.1.0(@types/node@20.11.19)(typescript@5.4.2):
+  registry.npmjs.org/commitlint@19.1.0(@types/node@20.11.28)(typescript@5.4.2):
     resolution: {integrity: sha512-dy8P0q6CQmnnFSfh4pnPfy9h1HfofV5lsOd7b2xibEn/mbzx2bTN9owyFBzNZN4RhBUymYQHTLNcg/sOabfU/A==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/commitlint/-/commitlint-19.1.0.tgz}
     id: registry.npmjs.org/commitlint/19.1.0
     name: commitlint
@@ -2238,7 +2241,7 @@ packages:
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
-      '@commitlint/cli': registry.npmjs.org/@commitlint/cli@19.1.0(@types/node@20.11.19)(typescript@5.4.2)
+      '@commitlint/cli': registry.npmjs.org/@commitlint/cli@19.1.0(@types/node@20.11.28)(typescript@5.4.2)
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
     transitivePeerDependencies:
       - '@types/node'
@@ -2303,7 +2306,7 @@ packages:
     version: 2.0.0
     dev: true
 
-  registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.19)(cosmiconfig@8.3.6)(typescript@5.4.2):
+  registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.28)(cosmiconfig@8.3.6)(typescript@5.4.2):
     resolution: {integrity: sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-5.0.0.tgz}
     id: registry.npmjs.org/cosmiconfig-typescript-loader/5.0.0
     name: cosmiconfig-typescript-loader
@@ -2314,7 +2317,7 @@ packages:
       cosmiconfig: '>=8.2'
       typescript: '>=4'
     dependencies:
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       cosmiconfig: registry.npmjs.org/cosmiconfig@8.3.6(typescript@5.4.2)
       jiti: registry.npmjs.org/jiti@1.21.0
       typescript: registry.npmjs.org/typescript@5.4.2
@@ -2339,7 +2342,7 @@ packages:
       typescript: registry.npmjs.org/typescript@5.4.2
     dev: true
 
-  registry.npmjs.org/create-jest@29.7.0(@types/node@20.11.19):
+  registry.npmjs.org/create-jest@29.7.0(@types/node@20.11.28):
     resolution: {integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/create-jest/-/create-jest-29.7.0.tgz}
     id: registry.npmjs.org/create-jest/29.7.0
     name: create-jest
@@ -2351,7 +2354,7 @@ packages:
       chalk: registry.npmjs.org/chalk@4.1.2
       exit: registry.npmjs.org/exit@0.1.2
       graceful-fs: registry.npmjs.org/graceful-fs@4.2.11
-      jest-config: registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.19)
+      jest-config: registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.28)
       jest-util: registry.npmjs.org/jest-util@29.7.0
       prompts: registry.npmjs.org/prompts@2.4.2
     transitivePeerDependencies:
@@ -2909,7 +2912,7 @@ packages:
     dependencies:
       '@typescript-eslint/utils': registry.npmjs.org/@typescript-eslint/utils@5.59.7(eslint@8.57.0)(typescript@5.4.2)
       eslint: registry.npmjs.org/eslint@8.57.0
-      jest: registry.npmjs.org/jest@29.7.0(@types/node@20.11.19)
+      jest: registry.npmjs.org/jest@29.7.0(@types/node@20.11.28)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4098,7 +4101,7 @@ packages:
       '@jest/expect': registry.npmjs.org/@jest/expect@29.7.0
       '@jest/test-result': registry.npmjs.org/@jest/test-result@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       chalk: registry.npmjs.org/chalk@4.1.2
       co: registry.npmjs.org/co@4.6.0
       dedent: registry.npmjs.org/dedent@1.5.0
@@ -4119,7 +4122,7 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/jest-cli@29.7.0(@types/node@20.11.19):
+  registry.npmjs.org/jest-cli@29.7.0(@types/node@20.11.28):
     resolution: {integrity: sha512-OVVobw2IubN/GSYsxETi+gOe7Ka59EFMR/twOU3Jb2GnKKeMGJB5SGUUrEz3SFVmJASUdZUzy83sLNNQ2gZslg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/jest-cli/-/jest-cli-29.7.0.tgz}
     id: registry.npmjs.org/jest-cli/29.7.0
     name: jest-cli
@@ -4136,10 +4139,10 @@ packages:
       '@jest/test-result': registry.npmjs.org/@jest/test-result@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
       chalk: registry.npmjs.org/chalk@4.1.2
-      create-jest: registry.npmjs.org/create-jest@29.7.0(@types/node@20.11.19)
+      create-jest: registry.npmjs.org/create-jest@29.7.0(@types/node@20.11.28)
       exit: registry.npmjs.org/exit@0.1.2
       import-local: registry.npmjs.org/import-local@3.1.0
-      jest-config: registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.19)
+      jest-config: registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.28)
       jest-util: registry.npmjs.org/jest-util@29.7.0
       jest-validate: registry.npmjs.org/jest-validate@29.7.0
       yargs: registry.npmjs.org/yargs@17.7.2
@@ -4150,7 +4153,7 @@ packages:
       - ts-node
     dev: true
 
-  registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.19):
+  registry.npmjs.org/jest-config@29.7.0(@types/node@20.11.28):
     resolution: {integrity: sha512-uXbpfeQ7R6TZBqI3/TxCU4q4ttk3u0PJeC+E0zbfSoSjq6bJ7buBPxzQPL0ifrkY4DNu4JUdk0ImlBUYi840eQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/jest-config/-/jest-config-29.7.0.tgz}
     id: registry.npmjs.org/jest-config/29.7.0
     name: jest-config
@@ -4168,7 +4171,7 @@ packages:
       '@babel/core': registry.npmjs.org/@babel/core@7.22.1
       '@jest/test-sequencer': registry.npmjs.org/@jest/test-sequencer@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       babel-jest: registry.npmjs.org/babel-jest@29.7.0(@babel/core@7.22.1)
       chalk: registry.npmjs.org/chalk@4.1.2
       ci-info: registry.npmjs.org/ci-info@3.8.0
@@ -4236,7 +4239,7 @@ packages:
       '@jest/environment': registry.npmjs.org/@jest/environment@29.7.0
       '@jest/fake-timers': registry.npmjs.org/@jest/fake-timers@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       jest-mock: registry.npmjs.org/jest-mock@29.7.0
       jest-util: registry.npmjs.org/jest-util@29.7.0
     dev: true
@@ -4256,7 +4259,7 @@ packages:
     dependencies:
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
       '@types/graceful-fs': registry.npmjs.org/@types/graceful-fs@4.1.6
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       anymatch: registry.npmjs.org/anymatch@3.1.3
       fb-watchman: registry.npmjs.org/fb-watchman@2.0.2
       graceful-fs: registry.npmjs.org/graceful-fs@4.2.11
@@ -4315,7 +4318,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       jest-util: registry.npmjs.org/jest-util@29.7.0
     dev: true
 
@@ -4381,7 +4384,7 @@ packages:
       '@jest/test-result': registry.npmjs.org/@jest/test-result@29.7.0
       '@jest/transform': registry.npmjs.org/@jest/transform@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       chalk: registry.npmjs.org/chalk@4.1.2
       emittery: registry.npmjs.org/emittery@0.13.1
       graceful-fs: registry.npmjs.org/graceful-fs@4.2.11
@@ -4414,7 +4417,7 @@ packages:
       '@jest/test-result': registry.npmjs.org/@jest/test-result@29.7.0
       '@jest/transform': registry.npmjs.org/@jest/transform@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       chalk: registry.npmjs.org/chalk@4.1.2
       cjs-module-lexer: registry.npmjs.org/cjs-module-lexer@1.2.2
       collect-v8-coverage: registry.npmjs.org/collect-v8-coverage@1.0.1
@@ -4470,7 +4473,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       chalk: registry.npmjs.org/chalk@4.1.2
       ci-info: registry.npmjs.org/ci-info@3.8.0
       graceful-fs: registry.npmjs.org/graceful-fs@4.2.11
@@ -4499,7 +4502,7 @@ packages:
     dependencies:
       '@jest/test-result': registry.npmjs.org/@jest/test-result@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       ansi-escapes: registry.npmjs.org/ansi-escapes@4.3.2
       chalk: registry.npmjs.org/chalk@4.1.2
       emittery: registry.npmjs.org/emittery@0.13.1
@@ -4513,13 +4516,13 @@ packages:
     version: 29.7.0
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      '@types/node': registry.npmjs.org/@types/node@20.11.19
+      '@types/node': registry.npmjs.org/@types/node@20.11.28
       jest-util: registry.npmjs.org/jest-util@29.7.0
       merge-stream: registry.npmjs.org/merge-stream@2.0.0
       supports-color: registry.npmjs.org/supports-color@8.1.1
     dev: true
 
-  registry.npmjs.org/jest@29.7.0(@types/node@20.11.19):
+  registry.npmjs.org/jest@29.7.0(@types/node@20.11.28):
     resolution: {integrity: sha512-NIy3oAFp9shda19hy4HK0HRTWKtPJmGdnvywu01nOqNC2vZg+Z+fvJDxpMQA88eb2I9EcafcdjYgsDthnYTvGw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/jest/-/jest-29.7.0.tgz}
     id: registry.npmjs.org/jest/29.7.0
     name: jest
@@ -4535,7 +4538,7 @@ packages:
       '@jest/core': registry.npmjs.org/@jest/core@29.7.0
       '@jest/types': registry.npmjs.org/@jest/types@29.6.3
       import-local: registry.npmjs.org/import-local@3.1.0
-      jest-cli: registry.npmjs.org/jest-cli@29.7.0(@types/node@20.11.19)
+      jest-cli: registry.npmjs.org/jest-cli@29.7.0(@types/node@20.11.28)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -5900,7 +5903,7 @@ packages:
       '@babel/core': registry.npmjs.org/@babel/core@7.22.1
       bs-logger: registry.npmjs.org/bs-logger@0.2.6
       fast-json-stable-stringify: registry.npmjs.org/fast-json-stable-stringify@2.1.0
-      jest: registry.npmjs.org/jest@29.7.0(@types/node@20.11.19)
+      jest: registry.npmjs.org/jest@29.7.0(@types/node@20.11.28)
       jest-util: registry.npmjs.org/jest-util@29.7.0
       json5: registry.npmjs.org/json5@2.2.3
       lodash.memoize: registry.npmjs.org/lodash.memoize@4.1.2
