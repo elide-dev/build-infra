@@ -4,55 +4,52 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
-
-  .:
-    devDependencies:
-      '@commitlint/config-conventional':
-        specifier: 19.1.0
-        version: registry.npmjs.org/@commitlint/config-conventional@19.1.0
-      '@types/node':
-        specifier: ^20
-        version: registry.npmjs.org/@types/node@20.11.28
-      '@typescript-eslint/parser':
-        specifier: ^7.2.0
-        version: registry.npmjs.org/@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.2)
-      '@vercel/ncc':
-        specifier: ^0.38.1
-        version: registry.npmjs.org/@vercel/ncc@0.38.1
-      commitlint:
-        specifier: 19.1.0
-        version: registry.npmjs.org/commitlint@19.1.0(@types/node@20.11.28)(typescript@5.4.2)
-      eslint:
-        specifier: ^8.57.0
-        version: registry.npmjs.org/eslint@8.57.0
-      eslint-plugin-github:
-        specifier: ^4.10.1
-        version: registry.npmjs.org/eslint-plugin-github@4.10.1(eslint@8.57.0)(typescript@5.4.2)
-      eslint-plugin-jest:
-        specifier: ^27.9.0
-        version: registry.npmjs.org/eslint-plugin-jest@27.9.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.2)
-      husky:
-        specifier: 9.0.11
-        version: registry.npmjs.org/husky@9.0.11
-      jest:
-        specifier: ^29.7.0
-        version: registry.npmjs.org/jest@29.7.0(@types/node@20.11.28)
-      js-yaml:
-        specifier: ^4.1.0
-        version: 4.1.0
-      lint-staged:
-        specifier: 15.2.2
-        version: registry.npmjs.org/lint-staged@15.2.2
-      prettier:
-        specifier: ^3.2.5
-        version: registry.npmjs.org/prettier@3.2.5
-      ts-jest:
-        specifier: ^29.1.2
-        version: registry.npmjs.org/ts-jest@29.1.2(@babel/core@7.22.1)(jest@29.7.0)(typescript@5.4.2)
-      typescript:
-        specifier: ^5.4.2
-        version: registry.npmjs.org/typescript@5.4.2
+devDependencies:
+  '@commitlint/config-conventional':
+    specifier: 19.1.0
+    version: registry.npmjs.org/@commitlint/config-conventional@19.1.0
+  '@types/node':
+    specifier: ^20
+    version: registry.npmjs.org/@types/node@20.11.28
+  '@typescript-eslint/parser':
+    specifier: ^7.2.0
+    version: registry.npmjs.org/@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.2)
+  '@vercel/ncc':
+    specifier: ^0.38.1
+    version: registry.npmjs.org/@vercel/ncc@0.38.1
+  commitlint:
+    specifier: 19.2.0
+    version: registry.npmjs.org/commitlint@19.2.0(@types/node@20.11.28)(typescript@5.4.2)
+  eslint:
+    specifier: ^8.57.0
+    version: registry.npmjs.org/eslint@8.57.0
+  eslint-plugin-github:
+    specifier: ^4.10.1
+    version: registry.npmjs.org/eslint-plugin-github@4.10.1(eslint@8.57.0)(typescript@5.4.2)
+  eslint-plugin-jest:
+    specifier: ^27.9.0
+    version: registry.npmjs.org/eslint-plugin-jest@27.9.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.2)
+  husky:
+    specifier: 9.0.11
+    version: registry.npmjs.org/husky@9.0.11
+  jest:
+    specifier: ^29.7.0
+    version: registry.npmjs.org/jest@29.7.0(@types/node@20.11.28)
+  js-yaml:
+    specifier: ^4.1.0
+    version: 4.1.0
+  lint-staged:
+    specifier: 15.2.2
+    version: registry.npmjs.org/lint-staged@15.2.2
+  prettier:
+    specifier: ^3.2.5
+    version: registry.npmjs.org/prettier@3.2.5
+  ts-jest:
+    specifier: ^29.1.2
+    version: registry.npmjs.org/ts-jest@29.1.2(@babel/core@7.22.1)(jest@29.7.0)(typescript@5.4.2)
+  typescript:
+    specifier: ^5.4.2
+    version: registry.npmjs.org/typescript@5.4.2
 
 packages:
 
@@ -515,18 +512,18 @@ packages:
     version: 0.2.3
     dev: true
 
-  registry.npmjs.org/@commitlint/cli@19.1.0(@types/node@20.11.28)(typescript@5.4.2):
-    resolution: {integrity: sha512-SYGm8HGbVzrlSYeB6oo6pG1Ec6bOMJcDsXgNGa4vgZQsPj6nJkcbTWlIRmtmIk0tHi0d5sCljGuQ+g/0NCPv7w==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/cli/-/cli-19.1.0.tgz}
-    id: registry.npmjs.org/@commitlint/cli/19.1.0
+  registry.npmjs.org/@commitlint/cli@19.2.0(@types/node@20.11.28)(typescript@5.4.2):
+    resolution: {integrity: sha512-8XnQDMyQR+1/ldbmIyhonvnDS2enEw48Wompo/967fsEvy9Vj5/JbDutzmSBKxANWDVeEbR9QQm0yHpw6ArrFw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/cli/-/cli-19.2.0.tgz}
+    id: registry.npmjs.org/@commitlint/cli/19.2.0
     name: '@commitlint/cli'
-    version: 19.1.0
+    version: 19.2.0
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
       '@commitlint/format': registry.npmjs.org/@commitlint/format@19.0.3
       '@commitlint/lint': registry.npmjs.org/@commitlint/lint@19.1.0
-      '@commitlint/load': registry.npmjs.org/@commitlint/load@19.1.0(@types/node@20.11.28)(typescript@5.4.2)
-      '@commitlint/read': registry.npmjs.org/@commitlint/read@19.0.3
+      '@commitlint/load': registry.npmjs.org/@commitlint/load@19.2.0(@types/node@20.11.28)(typescript@5.4.2)
+      '@commitlint/read': registry.npmjs.org/@commitlint/read@19.2.0
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
       execa: registry.npmjs.org/execa@8.0.1
       yargs: registry.npmjs.org/yargs@17.7.2
@@ -608,11 +605,11 @@ packages:
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
     dev: true
 
-  registry.npmjs.org/@commitlint/load@19.1.0(@types/node@20.11.28)(typescript@5.4.2):
-    resolution: {integrity: sha512-rWqnvNDpeshX8JfUC/qjpDkQB78qF+4uHcJmIRJMwvlj6zWce08SP/TPKN3GlNKgXhAawwcAPxXL9qOTTdiOBA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/load/-/load-19.1.0.tgz}
-    id: registry.npmjs.org/@commitlint/load/19.1.0
+  registry.npmjs.org/@commitlint/load@19.2.0(@types/node@20.11.28)(typescript@5.4.2):
+    resolution: {integrity: sha512-XvxxLJTKqZojCxaBQ7u92qQLFMMZc4+p9qrIq/9kJDy8DOrEa7P1yx7Tjdc2u2JxIalqT4KOGraVgCE7eCYJyQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/load/-/load-19.2.0.tgz}
+    id: registry.npmjs.org/@commitlint/load/19.2.0
     name: '@commitlint/load'
-    version: 19.1.0
+    version: 19.2.0
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/config-validator': registry.npmjs.org/@commitlint/config-validator@19.0.3
@@ -620,8 +617,8 @@ packages:
       '@commitlint/resolve-extends': registry.npmjs.org/@commitlint/resolve-extends@19.1.0
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
       chalk: registry.npmjs.org/chalk@5.3.0
-      cosmiconfig: registry.npmjs.org/cosmiconfig@8.3.6(typescript@5.4.2)
-      cosmiconfig-typescript-loader: registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.28)(cosmiconfig@8.3.6)(typescript@5.4.2)
+      cosmiconfig: registry.npmjs.org/cosmiconfig@9.0.0(typescript@5.4.2)
+      cosmiconfig-typescript-loader: registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.28)(cosmiconfig@9.0.0)(typescript@5.4.2)
       lodash.isplainobject: registry.npmjs.org/lodash.isplainobject@4.0.6
       lodash.merge: registry.npmjs.org/lodash.merge@4.6.2
       lodash.uniq: registry.npmjs.org/lodash.uniq@4.5.0
@@ -648,14 +645,15 @@ packages:
       conventional-commits-parser: registry.npmjs.org/conventional-commits-parser@5.0.0
     dev: true
 
-  registry.npmjs.org/@commitlint/read@19.0.3:
-    resolution: {integrity: sha512-b5AflTyAXkUx5qKw4TkjjcOccXZHql3JqMi522knTQktq2AubKXFz60Sws+K4FsefwPws6fGz9mqiI/NvsvxFA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/read/-/read-19.0.3.tgz}
+  registry.npmjs.org/@commitlint/read@19.2.0:
+    resolution: {integrity: sha512-HlGeEd/jyp2a5Fb9mvtsaDm5hFCmj80dJYjLQkpG3DzWneWBc37YU3kM8Za1D1HUazZaTkdsWq73M3XDE4CvCA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/read/-/read-19.2.0.tgz}
     name: '@commitlint/read'
-    version: 19.0.3
+    version: 19.2.0
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/top-level': registry.npmjs.org/@commitlint/top-level@19.0.0
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      execa: registry.npmjs.org/execa@8.0.1
       git-raw-commits: registry.npmjs.org/git-raw-commits@4.0.0
       minimist: registry.npmjs.org/minimist@1.2.8
     dev: true
@@ -2233,15 +2231,15 @@ packages:
     engines: {node: '>=16'}
     dev: true
 
-  registry.npmjs.org/commitlint@19.1.0(@types/node@20.11.28)(typescript@5.4.2):
-    resolution: {integrity: sha512-dy8P0q6CQmnnFSfh4pnPfy9h1HfofV5lsOd7b2xibEn/mbzx2bTN9owyFBzNZN4RhBUymYQHTLNcg/sOabfU/A==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/commitlint/-/commitlint-19.1.0.tgz}
-    id: registry.npmjs.org/commitlint/19.1.0
+  registry.npmjs.org/commitlint@19.2.0(@types/node@20.11.28)(typescript@5.4.2):
+    resolution: {integrity: sha512-gZkAkODO4meW5VHQ325MQBo+rMmtuVbrCo8Nbb9wqsGDJEXPC8RIXPLm5NNJSMqeuGMJzG7GMuoNayCPP/X9lA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/commitlint/-/commitlint-19.2.0.tgz}
+    id: registry.npmjs.org/commitlint/19.2.0
     name: commitlint
-    version: 19.1.0
+    version: 19.2.0
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
-      '@commitlint/cli': registry.npmjs.org/@commitlint/cli@19.1.0(@types/node@20.11.28)(typescript@5.4.2)
+      '@commitlint/cli': registry.npmjs.org/@commitlint/cli@19.2.0(@types/node@20.11.28)(typescript@5.4.2)
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
     transitivePeerDependencies:
       - '@types/node'
@@ -2306,7 +2304,7 @@ packages:
     version: 2.0.0
     dev: true
 
-  registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.28)(cosmiconfig@8.3.6)(typescript@5.4.2):
+  registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.28)(cosmiconfig@9.0.0)(typescript@5.4.2):
     resolution: {integrity: sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-5.0.0.tgz}
     id: registry.npmjs.org/cosmiconfig-typescript-loader/5.0.0
     name: cosmiconfig-typescript-loader
@@ -2318,16 +2316,16 @@ packages:
       typescript: '>=4'
     dependencies:
       '@types/node': registry.npmjs.org/@types/node@20.11.28
-      cosmiconfig: registry.npmjs.org/cosmiconfig@8.3.6(typescript@5.4.2)
+      cosmiconfig: registry.npmjs.org/cosmiconfig@9.0.0(typescript@5.4.2)
       jiti: registry.npmjs.org/jiti@1.21.0
       typescript: registry.npmjs.org/typescript@5.4.2
     dev: true
 
-  registry.npmjs.org/cosmiconfig@8.3.6(typescript@5.4.2):
-    resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-8.3.6.tgz}
-    id: registry.npmjs.org/cosmiconfig/8.3.6
+  registry.npmjs.org/cosmiconfig@9.0.0(typescript@5.4.2):
+    resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-9.0.0.tgz}
+    id: registry.npmjs.org/cosmiconfig/9.0.0
     name: cosmiconfig
-    version: 8.3.6
+    version: 9.0.0
     engines: {node: '>=14'}
     peerDependencies:
       typescript: '>=4.9.5'
@@ -2335,10 +2333,10 @@ packages:
       typescript:
         optional: true
     dependencies:
+      env-paths: registry.npmjs.org/env-paths@2.2.1
       import-fresh: registry.npmjs.org/import-fresh@3.3.0
       js-yaml: registry.npmjs.org/js-yaml@4.1.0
       parse-json: registry.npmjs.org/parse-json@5.2.0
-      path-type: registry.npmjs.org/path-type@4.0.0
       typescript: registry.npmjs.org/typescript@5.4.2
     dev: true
 
@@ -2589,6 +2587,13 @@ packages:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz}
     name: emoji-regex
     version: 9.2.2
+    dev: true
+
+  registry.npmjs.org/env-paths@2.2.1:
+    resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/env-paths/-/env-paths-2.2.1.tgz}
+    name: env-paths
+    version: 2.2.1
+    engines: {node: '>=6'}
     dev: true
 
   registry.npmjs.org/error-ex@1.3.2:
