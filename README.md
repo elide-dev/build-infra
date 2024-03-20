@@ -264,9 +264,7 @@ it is expected to be deployed to private package storage, where update tools can
 
 ## License
 
-Buildless, Elide Cloud, and related code, is privately licensed, and this repository is not meant for public consumption.
-Access implies that you accept the terms of the Elide Ventures LLC _Non-Disclosure Agreement_. All rights are reserved by
-Elide Ventures, LLC.
+This repository is shared openly for OSS use. It is licensed as MIT.
 
 [0]: ./gradle/plugins/jmod
 [1]: https://docs.oracle.com/en/java/javase/11/tools/jmod.html
