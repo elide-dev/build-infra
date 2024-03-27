@@ -195,7 +195,7 @@ jobs:
           uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.3.0
         - name: "Setup: Image Metadata"
           id: meta
-          uses: docker/metadata-action@dbef88086f6cef02e264edb7dbf63250c17cef6c # v5.5.0
+          uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
           with:
             images: ${{ inputs.registry }}/${{ inputs.image }}
             labels: |
