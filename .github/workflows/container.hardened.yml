@@ -157,7 +157,7 @@ jobs:
   provenance:
     name: "SLSA Provenance"
     if: inputs.provenance
-    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@v1.9.0
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@v1.10.0
     needs: [build]
     permissions:
       actions: read
