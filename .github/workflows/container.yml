@@ -187,7 +187,7 @@ jobs:
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
         - name: "Setup: Container Cache"
-          uses: reproducible-containers/buildkit-cache-dance@v2.1.2
+          uses: reproducible-containers/buildkit-cache-dance@v3.0.0
           if: inputs.cache_source != ''
           with:
             cache-source: ${{ inputs.cache_source }}
