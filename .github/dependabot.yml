@@ -29,3 +29,28 @@ updates:
     directory: /containers/node
     schedule:
       interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/bazel
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/bun
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/deno
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/elide
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /containers/rbe
+    schedule:
+      interval: daily
