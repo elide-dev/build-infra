@@ -18,8 +18,8 @@ devDependencies:
     specifier: ^0.38.1
     version: registry.npmjs.org/@vercel/ncc@0.38.1
   commitlint:
-    specifier: 19.2.2
-    version: registry.npmjs.org/commitlint@19.2.2(@types/node@20.12.7)(typescript@5.4.5)
+    specifier: 19.3.0
+    version: registry.npmjs.org/commitlint@19.3.0(@types/node@20.12.7)(typescript@5.4.5)
   eslint:
     specifier: ^8.57.0
     version: registry.npmjs.org/eslint@8.57.0
@@ -512,15 +512,15 @@ packages:
     version: 0.2.3
     dev: true
 
-  registry.npmjs.org/@commitlint/cli@19.2.2(@types/node@20.12.7)(typescript@5.4.5):
-    resolution: {integrity: sha512-P8cbOHfg2PQRzfICLSrzUVOCVMqjEZ8Hlth6mtJ4yOEjT47Q5PbIGymgX3rLVylNw+3IAT2Djn9IJ2wHbXFzBg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/cli/-/cli-19.2.2.tgz}
-    id: registry.npmjs.org/@commitlint/cli/19.2.2
+  registry.npmjs.org/@commitlint/cli@19.3.0(@types/node@20.12.7)(typescript@5.4.5):
+    resolution: {integrity: sha512-LgYWOwuDR7BSTQ9OLZ12m7F/qhNY+NpAyPBgo4YNMkACE7lGuUnuQq1yi9hz1KA4+3VqpOYl8H1rY/LYK43v7g==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/cli/-/cli-19.3.0.tgz}
+    id: registry.npmjs.org/@commitlint/cli/19.3.0
     name: '@commitlint/cli'
-    version: 19.2.2
+    version: 19.3.0
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
-      '@commitlint/format': registry.npmjs.org/@commitlint/format@19.0.3
+      '@commitlint/format': registry.npmjs.org/@commitlint/format@19.3.0
       '@commitlint/lint': registry.npmjs.org/@commitlint/lint@19.2.2
       '@commitlint/load': registry.npmjs.org/@commitlint/load@19.2.0(@types/node@20.12.7)(typescript@5.4.5)
       '@commitlint/read': registry.npmjs.org/@commitlint/read@19.2.1
@@ -573,10 +573,10 @@ packages:
     engines: {node: '>=v18'}
     dev: true
 
-  registry.npmjs.org/@commitlint/format@19.0.3:
-    resolution: {integrity: sha512-QjjyGyoiVWzx1f5xOteKHNLFyhyweVifMgopozSgx1fGNrGV8+wp7k6n1t6StHdJ6maQJ+UUtO2TcEiBFRyR6Q==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/format/-/format-19.0.3.tgz}
+  registry.npmjs.org/@commitlint/format@19.3.0:
+    resolution: {integrity: sha512-luguk5/aF68HiF4H23ACAfk8qS8AHxl4LLN5oxPc24H+2+JRPsNr1OS3Gaea0CrH7PKhArBMKBz5RX9sA5NtTg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/format/-/format-19.3.0.tgz}
     name: '@commitlint/format'
-    version: 19.0.3
+    version: 19.3.0
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
@@ -2081,15 +2081,15 @@ packages:
     engines: {node: '>=16'}
     dev: true
 
-  registry.npmjs.org/commitlint@19.2.2(@types/node@20.12.7)(typescript@5.4.5):
-    resolution: {integrity: sha512-Q4g9addkfQzdDW46v5ylp2g95RceIXOwO9AnH31twQGTOZfAL8GyPZ66ucmwenoJUgC2gb/EPLv9orWIGldXMQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/commitlint/-/commitlint-19.2.2.tgz}
-    id: registry.npmjs.org/commitlint/19.2.2
+  registry.npmjs.org/commitlint@19.3.0(@types/node@20.12.7)(typescript@5.4.5):
+    resolution: {integrity: sha512-B8eUVQCjz+1ZAjR3LC3+vzKg7c4/qN4QhSxkjp0u0v7Pi79t9CsnGAluvveKmFh56e885zgToPL5ax+l8BHTPg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/commitlint/-/commitlint-19.3.0.tgz}
+    id: registry.npmjs.org/commitlint/19.3.0
     name: commitlint
-    version: 19.2.2
+    version: 19.3.0
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
-      '@commitlint/cli': registry.npmjs.org/@commitlint/cli@19.2.2(@types/node@20.12.7)(typescript@5.4.5)
+      '@commitlint/cli': registry.npmjs.org/@commitlint/cli@19.3.0(@types/node@20.12.7)(typescript@5.4.5)
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
     transitivePeerDependencies:
       - '@types/node'
