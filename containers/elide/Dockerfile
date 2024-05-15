@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1-labs
 
 # base=elide alpha v7
-FROM ghcr.io/elide-dev/elide@sha256:2a7cbc25ecb484aa1f41222a50d621e61527cdfc4d5c7d8131bfd42dba689974
+FROM ghcr.io/elide-dev/elide@sha256:0a41f3effd8bb5279e0b4e21cc5d12082b7819cc4a5eb4a65acd449f63c24741
 USER elide
