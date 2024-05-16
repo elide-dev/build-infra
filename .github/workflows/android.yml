@@ -218,7 +218,7 @@ jobs:
         if: inputs.checks
       - name: "Build: Gradle"
         continue-on-error: ${{ inputs.labs }}
-        uses: gradle/gradle-build-action@8baac4c8ef753599f92eeb509c246d09d6250fa6 # v2
+        uses: gradle/gradle-build-action@4c39dd82cd5e1ec7c6fa0173bb41b4b6bb3b86ff # v2
         id: gradlebuild
         env:
           CI: true
