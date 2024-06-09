@@ -3,7 +3,7 @@ FROM ghcr.io/elide-dev/build-infra/gvm:latest
 
 ARG NODE_VERSION=20
 ARG YARN_VERSION="berry"
-RUN --security=sandbox apt-get update \
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
         ca-certificates \
