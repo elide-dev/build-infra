@@ -28,7 +28,7 @@ jobs:
   ## Build Builder Container
   build-builder-container:
     name: "Builder Image"
-    uses: ./.github/workflows/container.hardened.yml
+    uses: ./.github/workflows/container.yml
     permissions:
       actions: read
       checks: write
