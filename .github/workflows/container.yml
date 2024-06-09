@@ -210,7 +210,6 @@ jobs:
           id: dockerpush
           with:
             push: ${{ inputs.push }}
-            load: ${{ inputs.push == false }}
             tags: ${{ inputs.tags || steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
             platforms: ${{ inputs.push && inputs.platforms || 'linux/amd64' }}
