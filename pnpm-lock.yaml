@@ -39,8 +39,8 @@ devDependencies:
     specifier: ^4.1.0
     version: 4.1.0
   lint-staged:
-    specifier: 15.2.5
-    version: registry.npmjs.org/lint-staged@15.2.5
+    specifier: 15.2.7
+    version: registry.npmjs.org/lint-staged@15.2.7
   prettier:
     specifier: ^3.3.1
     version: registry.npmjs.org/prettier@3.3.1
@@ -858,7 +858,7 @@ packages:
       jest-util: registry.npmjs.org/jest-util@29.7.0
       jest-validate: registry.npmjs.org/jest-validate@29.7.0
       jest-watcher: registry.npmjs.org/jest-watcher@29.7.0
-      micromatch: registry.npmjs.org/micromatch@4.0.5
+      micromatch: registry.npmjs.org/micromatch@4.0.7
       pretty-format: registry.npmjs.org/pretty-format@29.7.0
       slash: registry.npmjs.org/slash@3.0.0
       strip-ansi: registry.npmjs.org/strip-ansi@6.0.1
@@ -1856,15 +1856,6 @@ packages:
     version: 2.0.1
     dependencies:
       balanced-match: registry.npmjs.org/balanced-match@1.0.2
-    dev: true
-
-  registry.npmjs.org/braces@3.0.2:
-    resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/braces/-/braces-3.0.2.tgz}
-    name: braces
-    version: 3.0.2
-    engines: {node: '>=8'}
-    dependencies:
-      fill-range: registry.npmjs.org/fill-range@7.0.1
     dev: true
 
   registry.npmjs.org/braces@3.0.3:
@@ -3102,15 +3093,6 @@ packages:
     engines: {node: ^10.12.0 || >=12.0.0}
     dependencies:
       flat-cache: registry.npmjs.org/flat-cache@3.0.4
-    dev: true
-
-  registry.npmjs.org/fill-range@7.0.1:
-    resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/fill-range/-/fill-range-7.0.1.tgz}
-    name: fill-range
-    version: 7.0.1
-    engines: {node: '>=8'}
-    dependencies:
-      to-regex-range: registry.npmjs.org/to-regex-range@5.0.1
     dev: true
 
   registry.npmjs.org/fill-range@7.1.1:
@@ -4551,10 +4533,10 @@ packages:
     version: 1.2.4
     dev: true
 
-  registry.npmjs.org/lint-staged@15.2.5:
-    resolution: {integrity: sha512-j+DfX7W9YUvdzEZl3Rk47FhDF6xwDBV5wwsCPw6BwWZVPYJemusQmvb9bRsW23Sqsaa+vRloAWogbK4BUuU2zA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/lint-staged/-/lint-staged-15.2.5.tgz}
+  registry.npmjs.org/lint-staged@15.2.7:
+    resolution: {integrity: sha512-+FdVbbCZ+yoh7E/RosSdqKJyUM2OEjTciH0TFNkawKgvFp1zbGlEC39RADg+xKBG1R4mhoH2j85myBQZ5wR+lw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/lint-staged/-/lint-staged-15.2.7.tgz}
     name: lint-staged
-    version: 15.2.5
+    version: 15.2.7
     engines: {node: '>=18.12.0'}
     hasBin: true
     dependencies:
@@ -4744,16 +4726,6 @@ packages:
     name: merge2
     version: 1.4.1
     engines: {node: '>= 8'}
-    dev: true
-
-  registry.npmjs.org/micromatch@4.0.5:
-    resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/micromatch/-/micromatch-4.0.5.tgz}
-    name: micromatch
-    version: 4.0.5
-    engines: {node: '>=8.6'}
-    dependencies:
-      braces: registry.npmjs.org/braces@3.0.2
-      picomatch: registry.npmjs.org/picomatch@2.3.1
     dev: true
 
   registry.npmjs.org/micromatch@4.0.7:
