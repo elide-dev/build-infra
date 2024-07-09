@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1-labs
 
 # base=deno 1.37
-FROM cgr.dev/chainguard/deno@sha256:1260281355c621accfd246855a68574a2ed737b1d9a447ef36a4a1c9c4005723
+FROM cgr.dev/chainguard/deno@sha256:9a1de70cc3337d9f2e01bc0700b6dd480383e2f2491c94e6c44ffd7f840c042b
 USER deno
