@@ -20,7 +20,7 @@
       "lint": "eslint src/**/*.ts"
     },
     "devDependencies": {
-      "@types/node": "^20",
+      "@types/node": "^22",
       "@typescript-eslint/parser": "^7.13.1",
       "@vercel/ncc": "^0.38.1",
       "@commitlint/config-conventional": "19.2.2",
