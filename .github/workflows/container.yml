@@ -180,7 +180,7 @@ jobs:
           with:
             install: true
         - name: "Setup: GitHub Credentials"
-          uses: docker/login-action@3d58c274f17dffee475a5520cbe67f0a882c4dbb
+          uses: docker/login-action@1f36f5b7a2d2f7bfd524795fc966e6d88c37baa9
           if: inputs.auth
           with:
             registry: ${{ inputs.registry }}
