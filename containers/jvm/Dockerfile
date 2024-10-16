@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1-labs
 
 # base: ubuntu 22.04
-FROM ubuntu@sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
+FROM ubuntu@sha256:d4f6f70979d0758d7a6f81e34a61195677f4f4fa576eaf808b79f17499fd93d1
 
 ARG JAVA_VERSION=zulu21
 
