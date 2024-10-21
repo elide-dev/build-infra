@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1-labs
 
 # base: ubuntu 22.04
-FROM ubuntu@sha256:dfc10878be8d8fc9c61cbff33166cb1d1fe44391539243703c72766894fa834a
+FROM ubuntu@sha256:99c35190e22d294cdace2783ac55effc69d32896daaa265f0bbedbcde4fbe3e5
 
 LABEL org.opencontainers.image.vendor=Elide
 LABEL org.opencontainers.image.title="Elide Cloud: GVM21 Base"
