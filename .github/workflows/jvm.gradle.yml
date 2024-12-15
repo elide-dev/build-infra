@@ -277,7 +277,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           gds-token: ${{ secrets.GDS_TOKEN }}
       - name: "Check: Gradle Wrapper"
-        uses: gradle/wrapper-validation-action@460a3ca55fc5d559238a0efc7fa9f7465df8585d # v3.3.0
+        uses: gradle/wrapper-validation-action@f9c9c575b8b21b6485636a91ffecd10e558c62f6 # v3.5.0
         if: inputs.checks
       - name: "Build: Gradle"
         continue-on-error: ${{ inputs.labs || false }}
