@@ -27,8 +27,8 @@ devDependencies:
     specifier: ^5.0.1
     version: registry.npmjs.org/eslint-plugin-github@5.0.1(eslint@8.57.0)(typescript@5.7.2)
   eslint-plugin-jest:
-    specifier: ^28.6.0
-    version: registry.npmjs.org/eslint-plugin-jest@28.6.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.7.2)
+    specifier: ^28.9.0
+    version: registry.npmjs.org/eslint-plugin-jest@28.9.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.7.2)
   husky:
     specifier: 9.1.6
     version: registry.npmjs.org/husky@9.1.6
@@ -489,7 +489,7 @@ packages:
       '@babel/helper-split-export-declaration': registry.npmjs.org/@babel/helper-split-export-declaration@7.18.6
       '@babel/parser': registry.npmjs.org/@babel/parser@7.22.0
       '@babel/types': registry.npmjs.org/@babel/types@7.22.0
-      debug: registry.npmjs.org/debug@4.3.4
+      debug: registry.npmjs.org/debug@4.4.0
       globals: registry.npmjs.org/globals@11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -1434,7 +1434,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': registry.npmjs.org/@typescript-eslint/types@7.3.1
       '@typescript-eslint/visitor-keys': registry.npmjs.org/@typescript-eslint/visitor-keys@7.3.1
-      debug: registry.npmjs.org/debug@4.3.4
+      debug: registry.npmjs.org/debug@4.4.0
       globby: registry.npmjs.org/globby@11.1.0
       is-glob: registry.npmjs.org/is-glob@4.0.3
       minimatch: registry.npmjs.org/minimatch@9.0.3
@@ -2770,14 +2770,14 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmjs.org/eslint-plugin-jest@28.6.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.7.2):
-    resolution: {integrity: sha512-YG28E1/MIKwnz+e2H7VwYPzHUYU4aMa19w0yGcwXnnmJH6EfgHahTJ2un3IyraUxNfnz/KUhJAFXNNwWPo12tg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-jest/-/eslint-plugin-jest-28.6.0.tgz}
-    id: registry.npmjs.org/eslint-plugin-jest/28.6.0
+  registry.npmjs.org/eslint-plugin-jest@28.9.0(eslint@8.57.0)(jest@29.7.0)(typescript@5.7.2):
+    resolution: {integrity: sha512-rLu1s1Wf96TgUUxSw6loVIkNtUjq1Re7A9QdCCHSohnvXEBAjuL420h0T/fMmkQlNsQP2GhQzEUpYHPfxBkvYQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/eslint-plugin-jest/-/eslint-plugin-jest-28.9.0.tgz}
+    id: registry.npmjs.org/eslint-plugin-jest/28.9.0
     name: eslint-plugin-jest
-    version: 28.6.0
+    version: 28.9.0
     engines: {node: ^16.10.0 || ^18.12.0 || >=20.0.0}
     peerDependencies:
-      '@typescript-eslint/eslint-plugin': ^6.0.0 || ^7.0.0
+      '@typescript-eslint/eslint-plugin': ^6.0.0 || ^7.0.0 || ^8.0.0
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
       jest: '*'
     peerDependenciesMeta:
@@ -3922,7 +3922,7 @@ packages:
     version: 4.0.1
     engines: {node: '>=10'}
     dependencies:
-      debug: registry.npmjs.org/debug@4.3.4
+      debug: registry.npmjs.org/debug@4.4.0
       istanbul-lib-coverage: registry.npmjs.org/istanbul-lib-coverage@3.2.0
       source-map: registry.npmjs.org/source-map@0.6.1
     transitivePeerDependencies:
