@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@commitlint/config-conventional':
-    specifier: 19.2.2
-    version: registry.npmjs.org/@commitlint/config-conventional@19.2.2
+    specifier: 19.6.0
+    version: registry.npmjs.org/@commitlint/config-conventional@19.6.0
   '@types/node':
     specifier: ^22
     version: registry.npmjs.org/@types/node@22.5.5
@@ -532,13 +532,13 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/@commitlint/config-conventional@19.2.2:
-    resolution: {integrity: sha512-mLXjsxUVLYEGgzbxbxicGPggDuyWNkf25Ht23owXIH+zV2pv1eJuzLK3t1gDY5Gp6pxdE60jZnWUY5cvgL3ufw==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-19.2.2.tgz}
+  registry.npmjs.org/@commitlint/config-conventional@19.6.0:
+    resolution: {integrity: sha512-DJT40iMnTYtBtUfw9ApbsLZFke1zKh6llITVJ+x9mtpHD08gsNXaIRqHTmwTZL3dNX5+WoyK7pCN/5zswvkBCQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-19.6.0.tgz}
     name: '@commitlint/config-conventional'
-    version: 19.2.2
+    version: 19.6.0
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       conventional-changelog-conventionalcommits: registry.npmjs.org/conventional-changelog-conventionalcommits@7.0.2
     dev: true
 
@@ -705,6 +705,16 @@ packages:
     resolution: {integrity: sha512-tpyc+7i6bPG9mvaBbtKUeghfyZSDgWquIDfMgqYtTbmZ9Y9VzEm2je9EYcQ0aoz5o7NvGS+rcDec93yO08MHYA==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/types/-/types-19.0.3.tgz}
     name: '@commitlint/types'
     version: 19.0.3
+    engines: {node: '>=v18'}
+    dependencies:
+      '@types/conventional-commits-parser': registry.npmjs.org/@types/conventional-commits-parser@5.0.0
+      chalk: registry.npmjs.org/chalk@5.3.0
+    dev: true
+
+  registry.npmjs.org/@commitlint/types@19.5.0:
+    resolution: {integrity: sha512-DSHae2obMSMkAtTBSOulg5X7/z+rGLxcXQIkg3OmWvY6wifojge5uVMydfhUvs7yQj+V7jNmRZ2Xzl8GJyqRgg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/types/-/types-19.5.0.tgz}
+    name: '@commitlint/types'
+    version: 19.5.0
     engines: {node: '>=v18'}
     dependencies:
       '@types/conventional-commits-parser': registry.npmjs.org/@types/conventional-commits-parser@5.0.0
