@@ -23,7 +23,7 @@
       "@types/node": "^22",
       "@typescript-eslint/parser": "^7.13.1",
       "@vercel/ncc": "^0.38.1",
-      "@commitlint/config-conventional": "19.2.2",
+      "@commitlint/config-conventional": "19.6.0",
       "commitlint": "19.3.0",
       "eslint": "^8.57.0",
       "eslint-plugin-github": "^5.0.1",
