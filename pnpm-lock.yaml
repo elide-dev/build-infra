@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@commitlint/config-conventional':
-        specifier: 19.6.0
-        version: registry.npmjs.org/@commitlint/config-conventional@19.6.0
+        specifier: 19.7.1
+        version: registry.npmjs.org/@commitlint/config-conventional@19.7.1
       '@types/node':
         specifier: ^22
         version: registry.npmjs.org/@types/node@22.10.10
@@ -527,7 +527,7 @@ packages:
       '@commitlint/lint': registry.npmjs.org/@commitlint/lint@19.2.2
       '@commitlint/load': registry.npmjs.org/@commitlint/load@19.2.0(@types/node@22.10.10)(typescript@5.7.2)
       '@commitlint/read': registry.npmjs.org/@commitlint/read@19.2.1
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       execa: registry.npmjs.org/execa@8.0.1
       yargs: registry.npmjs.org/yargs@17.7.2
     transitivePeerDependencies:
@@ -535,10 +535,10 @@ packages:
       - typescript
     dev: true
 
-  registry.npmjs.org/@commitlint/config-conventional@19.6.0:
-    resolution: {integrity: sha512-DJT40iMnTYtBtUfw9ApbsLZFke1zKh6llITVJ+x9mtpHD08gsNXaIRqHTmwTZL3dNX5+WoyK7pCN/5zswvkBCQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-19.6.0.tgz}
+  registry.npmjs.org/@commitlint/config-conventional@19.7.1:
+    resolution: {integrity: sha512-fsEIF8zgiI/FIWSnykdQNj/0JE4av08MudLTyYHm4FlLWemKoQvPNUYU2M/3tktWcCEyq7aOkDDgtjrmgWFbvg==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-19.7.1.tgz}
     name: '@commitlint/config-conventional'
-    version: 19.6.0
+    version: 19.7.1
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
@@ -551,7 +551,7 @@ packages:
     version: 19.0.3
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       ajv: registry.npmjs.org/ajv@8.12.0
     dev: true
 
@@ -561,7 +561,7 @@ packages:
     version: 19.0.3
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       lodash.camelcase: registry.npmjs.org/lodash.camelcase@4.3.0
       lodash.kebabcase: registry.npmjs.org/lodash.kebabcase@4.1.1
       lodash.snakecase: registry.npmjs.org/lodash.snakecase@4.1.1
@@ -582,7 +582,7 @@ packages:
     version: 19.3.0
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       chalk: registry.npmjs.org/chalk@5.4.1
     dev: true
 
@@ -592,7 +592,7 @@ packages:
     version: 19.2.2
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       semver: registry.npmjs.org/semver@7.6.3
     dev: true
 
@@ -605,7 +605,7 @@ packages:
       '@commitlint/is-ignored': registry.npmjs.org/@commitlint/is-ignored@19.2.2
       '@commitlint/parse': registry.npmjs.org/@commitlint/parse@19.0.3
       '@commitlint/rules': registry.npmjs.org/@commitlint/rules@19.0.3
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
     dev: true
 
   registry.npmjs.org/@commitlint/load@19.2.0(@types/node@22.10.10)(typescript@5.7.2):
@@ -618,7 +618,7 @@ packages:
       '@commitlint/config-validator': registry.npmjs.org/@commitlint/config-validator@19.0.3
       '@commitlint/execute-rule': registry.npmjs.org/@commitlint/execute-rule@19.0.0
       '@commitlint/resolve-extends': registry.npmjs.org/@commitlint/resolve-extends@19.1.0
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       chalk: registry.npmjs.org/chalk@5.4.1
       cosmiconfig: registry.npmjs.org/cosmiconfig@9.0.0(typescript@5.7.2)
       cosmiconfig-typescript-loader: registry.npmjs.org/cosmiconfig-typescript-loader@5.0.0(@types/node@22.10.10)(cosmiconfig@9.0.0)(typescript@5.7.2)
@@ -643,7 +643,7 @@ packages:
     version: 19.0.3
     engines: {node: '>=v18'}
     dependencies:
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       conventional-changelog-angular: registry.npmjs.org/conventional-changelog-angular@7.0.0
       conventional-commits-parser: registry.npmjs.org/conventional-commits-parser@5.0.0
     dev: true
@@ -655,7 +655,7 @@ packages:
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/top-level': registry.npmjs.org/@commitlint/top-level@19.0.0
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       execa: registry.npmjs.org/execa@8.0.1
       git-raw-commits: registry.npmjs.org/git-raw-commits@4.0.0
       minimist: registry.npmjs.org/minimist@1.2.8
@@ -668,7 +668,7 @@ packages:
     engines: {node: '>=v18'}
     dependencies:
       '@commitlint/config-validator': registry.npmjs.org/@commitlint/config-validator@19.0.3
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       global-directory: registry.npmjs.org/global-directory@4.0.1
       import-meta-resolve: registry.npmjs.org/import-meta-resolve@4.0.0
       lodash.mergewith: registry.npmjs.org/lodash.mergewith@4.6.2
@@ -684,7 +684,7 @@ packages:
       '@commitlint/ensure': registry.npmjs.org/@commitlint/ensure@19.0.3
       '@commitlint/message': registry.npmjs.org/@commitlint/message@19.0.0
       '@commitlint/to-lines': registry.npmjs.org/@commitlint/to-lines@19.0.0
-      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.0.3
+      '@commitlint/types': registry.npmjs.org/@commitlint/types@19.5.0
       execa: registry.npmjs.org/execa@8.0.1
     dev: true
 
@@ -720,8 +720,8 @@ packages:
     version: 19.5.0
     engines: {node: '>=v18'}
     dependencies:
-      '@types/conventional-commits-parser': registry.npmjs.org/@types/conventional-commits-parser@5.0.0
-      chalk: registry.npmjs.org/chalk@5.3.0
+      '@types/conventional-commits-parser': registry.npmjs.org/@types/conventional-commits-parser@5.0.1
+      chalk: registry.npmjs.org/chalk@5.4.1
     dev: true
 
   registry.npmjs.org/@eslint-community/eslint-utils@4.4.0(eslint@8.57.0):
@@ -1215,6 +1215,14 @@ packages:
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@types/conventional-commits-parser/-/conventional-commits-parser-5.0.0.tgz}
     name: '@types/conventional-commits-parser'
     version: 5.0.0
+    dependencies:
+      '@types/node': registry.npmjs.org/@types/node@22.10.10
+    dev: true
+
+  registry.npmjs.org/@types/conventional-commits-parser@5.0.1:
+    resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==, registry: https://npm.pkg.st/, tarball: https://registry.npmjs.org/@types/conventional-commits-parser/-/conventional-commits-parser-5.0.1.tgz}
+    name: '@types/conventional-commits-parser'
+    version: 5.0.1
     dependencies:
       '@types/node': registry.npmjs.org/@types/node@22.10.10
     dev: true
