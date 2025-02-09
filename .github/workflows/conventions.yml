@@ -1,4 +1,4 @@
-name: "Gradle Conventions"
+name: "Gradle"
 
 concurrency:
   group: build-conventions-${{ github.head_ref || github.run_id }}
@@ -13,7 +13,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/conventions.yaml"
+      - ".github/workflows/conventions.yml"
       - "gradle/catalogs"
       - "gradle/plugins"
       - "gradle/"
@@ -34,14 +34,15 @@ on:
       - "actions/*/*.yml"
       - "containers/*/*.yaml"
       - "containers/*/*.yml"
+      - "gradle/*"
 
 permissions:
   contents: read
 
 jobs:
   ## Task: Build convention plugins with re-usable Gradle workflow
-  build-conventions:
-    name: "Build"
+  build-plugins:
+    name: "Plugins"
     uses: ./.github/workflows/jvm.gradle.yml
     permissions:
       actions: read
@@ -50,10 +51,10 @@ jobs:
       pull-requests: read
       id-token: write
     with:
-      action: "build test check"
+      action: check
       jvm: "21"
-      checks: false
+      checks: true
       cache_local: true
-      flags: "--no-configuration-cache --stacktrace -Porg.gradle.unsafe.isolated-projects=false -Dorg.gradle.unsafe.isolated-projects=false"
-      graph: "disabled"
+      flags: "--no-configuration-cache --stacktrace"
+      graph: disabled
       scan: true
