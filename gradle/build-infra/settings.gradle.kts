@@ -15,14 +15,6 @@
 
 pluginManagement {
     repositories {
-        maven {
-            name = "pkgst-gradle"
-            url = uri("https://gradle.pkg.st")
-        }
-        maven {
-            name = "pkgst-maven"
-            url = uri("https://maven.pkg.st")
-        }
         mavenCentral {
             name = "maven-central"
         }
@@ -41,14 +33,6 @@ dependencyResolutionManagement {
     repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 
     repositories {
-        maven {
-            name = "pkgst-maven"
-            url = uri("https://maven.pkg.st")
-        }
-        maven {
-            name = "pkgst-gradle"
-            url = uri("https://gradle.pkg.st")
-        }
         mavenCentral {
             name = "maven-central"
         }

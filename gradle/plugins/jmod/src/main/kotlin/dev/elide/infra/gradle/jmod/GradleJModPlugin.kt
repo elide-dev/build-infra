@@ -104,13 +104,13 @@ public abstract class GradleJModPlugin : Plugin<Project> {
         },
       )
 
-      // the JAR is an input to force Gradle to write outputs, including `module-info.class`. the `module-info.class` file
-      // is always required for a jmod build.
+      // the JAR is an input to force Gradle to write outputs, including `module-info.class`. the `module-info.class`
+      // file is always required for a jmod build.
       inputs.files(outputClasses, jar.outputs.files, javac.destinationDirectory.get().file("module-info.class"))
 
       doFirst {
-        // before running, delete any previous output, otherwise jmod will complain. it does not appear that jmod provides
-        // any `--force` or `--overwrite` flag.
+        // before running, delete any previous output, otherwise jmod will complain. it does not appear that jmod
+        // provides any `--force` or `--overwrite` flag.
         if (jmodOut.exists()) jmodOut.delete()
 
         // additionally, jmod will complain if anything specified on the classpath is a non-existent directory; in rare

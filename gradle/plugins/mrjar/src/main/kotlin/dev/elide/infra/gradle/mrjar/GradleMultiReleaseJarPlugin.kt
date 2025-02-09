@@ -24,13 +24,17 @@ import dev.elide.infra.gradle.jpms.Java9Modularity.configureMultiReleaseJar
 import dev.elide.infra.gradle.jpms.ModularityConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.JavaApplication
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.property
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import java.nio.charset.StandardCharsets
+import javax.inject.Inject
 
 // Regex for detecting `module-info` module names.
 private val moduleNameRegex = Regex(
@@ -151,30 +155,75 @@ private val moduleNameRegex = Regex(
  * @see Java9Modularity Modularity tools for Kotlin and Java builds
  */
 public abstract class GradleMultiReleaseJarPlugin : Plugin<Project> {
+  // Implements the `GradleMultiReleaseExtension` DSL block.
+  internal abstract class ConfiguredMultiReleaseExtension @Inject constructor (factory: ObjectFactory)
+    : GradleMultiReleaseExtension {
+
+    // Defaults to active mode when applied to a project.
+    override var enabled: Property<Boolean> = factory.property(Boolean::class).convention(true)
+
+    // Whether to prefer modern JVMs by omitting some bytecode tiers; defaults to `true`.
+    override val preferModern: Property<Boolean> = factory.property(Boolean::class).convention(true)
+
+    // Whether to include all JDK releases, even non-LTS versions; defaults to `false`.
+    override val allReleases: Property<Boolean> = factory.property(Boolean::class).convention(false)
+
+    // Whether to optimize final JARs by dropping superfluous classes; defaults to `true`.
+    override val optimize: Property<Boolean> = factory.property(Boolean::class).convention(true)
+  }
+
   override fun apply(target: Project) {
     // always apply the baseline jpms plugin
     if (!target.plugins.hasPlugin(GradleJpmsPlugin::class.java))
       target.pluginManager.apply(GradleJpmsPlugin::class.java)
 
+    target.extensions.create(
+      GradleMultiReleaseExtension::class.java,
+      GradleMultiReleaseExtension.NAME,
+      ConfiguredMultiReleaseExtension::class.java,
+    )
+
     // resolve the modulepath configuration, added by the JPMS plugin
     target.pluginManager.withPlugin(BuildConstants.KnownPlugins.INFRA_JPMS) {
-      target.afterEvaluate {
-        configureModularityPlugin()
+      target.pluginManager.withPlugin(BuildConstants.KnownPlugins.JAVA) {
+        target.configureModularityPlugin((
+          target.pluginManager.hasPlugin(BuildConstants.KnownPlugins.KOTLIN_JVM) ||
+          target.pluginManager.hasPlugin(BuildConstants.KnownPlugins.KOTLIN_MULTIPLATFORM)
+        ))
       }
     }
   }
 }
 
 // Configure modularity plugin features.
-private fun Project.configureModularityPlugin() {
+private fun Project.configureModularityPlugin(enableKotlin: Boolean) {
   // determine current target bytecode version
   val java = requireNotNull(extensions.findByType<JavaPluginExtension>()) {
     "Failed to locate Java extension, which is required to call `configureModularity`. Please add the `java` plugin."
   }
-  val kotlin = extensions.findByType<KotlinProjectExtension>()
+  val kotlin = if (!enableKotlin) null else extensions.findByType<KotlinProjectExtension>()
 
+  if (kotlin != null) {
+    // force the jvm or multiplatform plugin to apply first
+    val desiredPluginId = when {
+      pluginManager.hasPlugin(BuildConstants.KnownPlugins.KOTLIN_MULTIPLATFORM) ->
+        BuildConstants.KnownPlugins.KOTLIN_MULTIPLATFORM
+      else -> BuildConstants.KnownPlugins.KOTLIN_JVM
+    }
+    pluginManager.withPlugin(desiredPluginId) {
+      configureModularityInner(java, kotlin)
+    }
+  } else {
+    configureModularityInner(java, null)
+  }
+}
+
+private fun Project.configureModularityInner(
+  java: JavaPluginExtension,
+  kotlin: KotlinProjectExtension?,
+) {
   // resolve toolchain service
-  val toolchain = project.extensions.getByType<JavaPluginExtension>().toolchain
+  val toolchain = java.toolchain
 
   val conventions = extensions.getByType(ElideBuildDsl::class.java)
   val bytecodeTarget = resolveJavaBytecodeTarget(toolchain, java, conventions)
@@ -214,7 +263,7 @@ private fun Project.configureModularityPlugin() {
       )
     }
 
-    // otherwise, we have no modularity needs and can simply build the supported bytecode tiers.
+    // otherwise, we have no special modularity needs, and can simply build the supported bytecode tiers.
     else -> configureModularity(
       java,
       kotlin,

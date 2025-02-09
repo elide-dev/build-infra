@@ -50,7 +50,7 @@ group = "dev.elide.infra"
 // Build infra targets; does not apply to shipped/published targets.
 val buildTimeJvmTarget = JvmTarget.JVM_21
 val buildTimeJavaTarget = JavaVersion.VERSION_21
-val buildTimeKotlinTarget = KotlinVersion.KOTLIN_1_9
+val buildTimeKotlinTarget = KotlinVersion.KOTLIN_2_0
 
 java {
   sourceCompatibility = buildTimeJavaTarget

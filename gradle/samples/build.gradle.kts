@@ -15,7 +15,9 @@ description = "Samples for testing embedded build infra plugins"
 
 private fun Task.taskInAllSamples(name: String) {
   listOf(
+    projects.samples.jmodKotlin,
     projects.samples.jmodLibrary,
+    projects.samples.mrjarPurejava,
   ).forEach {
     dependsOn(project(":${it.name}").tasks.named(name))
   }

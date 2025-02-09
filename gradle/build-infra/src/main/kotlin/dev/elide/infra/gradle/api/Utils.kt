@@ -26,6 +26,32 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.pathString
 
+private const val MINIMUM_JVM_TARGET: Int = 9
+private const val MINIMUM_INFERRED_JVM_TARGET: Int = 17
+
+// Resolve the major JVM target version to use from the provided integer, or fail. If the version is not supported by
+// Kotlin, use the maximally supported version closest to the provided version.
+@Suppress("SwallowedException") private fun Project.assignedOrMaximalTarget(major: Int): JvmTarget {
+  require(major > MINIMUM_JVM_TARGET) { "Invalid JVM target '$major' in project $name" }
+
+  try {
+    return JvmTarget.fromTarget(major.toString())
+  } catch (err: IllegalArgumentException) {
+    logger.warn("Invalid JVM target '$major' in project $name, falling back to supported target")
+    var effective = major
+    while (effective > MINIMUM_INFERRED_JVM_TARGET) {
+      try {
+        val out = JvmTarget.fromTarget(effective.toString())
+        logger.warn("Effective JVM became '$out'")
+        return out
+      } catch (err: IllegalArgumentException) {
+        effective--
+      }
+    }
+    error("Failed to resolve JVM target '$major' in project $name")
+  }
+}
+
 /**
  * Resolve the configured Java bytecode target.
  *
@@ -40,13 +66,17 @@ public fun Project.resolveJavaBytecodeTarget(
   conventions: ElideBuild.ElideBuildDsl,
 ): JvmTarget {
   // regular java target compatibility
-  val javaTarget = java?.targetCompatibility?.majorVersion?.let { JvmTarget.fromTarget(it) }
+  val javaTarget = java?.targetCompatibility?.majorVersion?.let {
+    assignedOrMaximalTarget(requireNotNull(it.toUIntOrNull()?.toInt()) {
+      "Invalid major Java version set for `targetCompatibility`"
+    })
+  }
 
   // resolve the maximum bytecode level
   val target = (findProperty(BuildConstants.Properties.JVM_TARGET) as? String)
     ?.ifBlank { null }
     ?.toIntOrNull()
-    ?.let { JvmTarget.fromTarget(it.toString()) }
+    ?.let { assignedOrMaximalTarget(it) }
     ?: conventions.jvm.target.orNull
     ?: javaTarget?.let { JvmTarget.fromTarget(it.target) }
     ?: toolchain.languageVersion.orNull?.let { JvmTarget.fromTarget(it.asInt().toString()) }

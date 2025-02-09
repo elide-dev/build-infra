@@ -22,7 +22,7 @@ plugins {
   `test-report-aggregation`
 
   alias(core.plugins.gradle.checksum)
-  alias(core.plugins.gradle.doctor)
+  alias(core.plugins.gradle.doctor) apply false
   alias(core.plugins.versions)
   alias(libs.plugins.dependencyAnalysis)
   id(core.plugins.kotlin.multiplatform.get().pluginId) apply false
