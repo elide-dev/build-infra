@@ -293,8 +293,8 @@ jobs:
           cache-read-only: ${{ inputs.cache_read_only || false }}
           dependency-graph: ${{ inputs.graph }}
           build-scan-publish: ${{ inputs.scan }}
-          build-scan-terms-of-service-url: "https://gradle.com/terms-of-service"
-          build-scan-terms-of-service-agree: ${{ inputs.scan && 'yes' || 'no' }}
+          build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
+          build-scan-terms-of-use-agree: ${{ inputs.scan && 'yes' || 'no' }}
       - name: "Build: Gradle"
         run: |
           ./gradlew \
