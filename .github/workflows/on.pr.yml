@@ -1,0 +1,36 @@
+name: "PR"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  ## Triage: Determine checks to run for this changeset
+  triage:
+    name: "Triage"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup: Checkout"
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: 'false'
+          submodules: 'false'
+          fetch-depth: 1
+
+  ## Build Gradle tooling.
+  build-gradle:
+    name: "Build"
+    uses: ./.github/workflows/jvm.gradle.yml
+    if: true
+    with:
+      action: check
+      runner: ubuntu-latest
+      checks: 'true'
+      scan: 'true'
+      graph: 'disabled'
+      label: 'Gradle Plugins'
+      install_gvm: 'true'
+      jvm: '21'
+      gvm: '21'
