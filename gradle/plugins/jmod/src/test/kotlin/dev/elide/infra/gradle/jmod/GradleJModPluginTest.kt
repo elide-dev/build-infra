@@ -42,6 +42,28 @@ class GradleJModPluginTest : AbstractPluginTest() {
     assertEquals(TaskOutcome.SUCCESS, result.task(":tasks")?.outcome)
   }
 
+  @Test fun `apply jmod plugin and disable it`() {
+    writeFile(settingsFile, "rootProject.name = \"hello-world\"")
+    val buildFileContent = "plugins {\n" +
+      "    java\n" +
+      "    `java-library`\n" +
+      "    id(\"dev.elide.jmod\")\n" +
+      "}\n" +
+      "\n" +
+      "jmod {\n" +
+      "    enabled = false\n" +
+      "}\n"
+    writeFile(buildFile, buildFileContent)
+
+    val result: BuildResult = GradleRunner.create()
+      .withProjectDir(testProjectDir)
+      .withArguments("tasks")
+      .withPluginClasspath()
+      .build()
+
+    assertEquals(TaskOutcome.SUCCESS, result.task(":tasks")?.outcome)
+  }
+
   @Test fun `jmod task name should be listed in tasks output`() {
     writeFile(settingsFile, "rootProject.name = \"hello-world\"")
     val buildFileContent = "plugins {\n" +
