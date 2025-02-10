@@ -15,7 +15,6 @@ plugins {
   `kotlin-dsl`
   id("infra.root")
   id("infra.gradle.plugin")
-  id("infra.multi-jvm-testing")
 }
 
 description = "Gradle Plugin for producing bytecode-optimized Multi-Release JARs (MRJARs)"

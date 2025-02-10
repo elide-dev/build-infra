@@ -15,6 +15,8 @@
 
 pluginManagement {
   includeBuild("../build-infra")
+  includeBuild("../libs")
+  includeBuild("../platforms")
   includeBuild("../plugins/base")
   includeBuild("../plugins/gha")
   includeBuild("../plugins/graalvm")
@@ -26,6 +28,22 @@ pluginManagement {
 
 plugins {
   id("infra.settings")
+}
+
+listOf(
+  "base",
+  "gha",
+  "graalvm",
+  "jlink",
+  "jmod",
+  "jpms",
+  "mrjar",
+).forEach {
+  includeBuild("../plugins/$it") {
+      dependencySubstitution {
+          substitute(module("dev.elide.infra:$it")).using(project(":"))
+      }
+  }
 }
 
 listOf(

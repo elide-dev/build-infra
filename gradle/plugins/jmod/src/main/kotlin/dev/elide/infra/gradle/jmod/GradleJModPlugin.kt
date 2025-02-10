@@ -18,12 +18,17 @@ import dev.elide.infra.gradle.api.projectRelative
 import dev.elide.infra.gradle.jpms.GradleJpmsPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.JavaApplication
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.jvm.tasks.Jar
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.named
+import org.gradle.kotlin.dsl.property
 import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+import javax.inject.Inject
 
 /**
  * # Gradle JMod Plugin
@@ -56,16 +61,32 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
  * ```
  */
 public abstract class GradleJModPlugin : Plugin<Project> {
+  // Implementation for DSL configuration related to jmod.
+  internal abstract class ConfiguredJModExtension @Inject constructor (factory: ObjectFactory) : GradleJModExtension {
+    // Defaults to enablement.
+    override val enabled: Property<Boolean> = factory.property(Boolean::class).convention(true)
+  }
+
   override fun apply(target: Project) {
     // always apply the JPMS plugin
     if (!target.plugins.hasPlugin(GradleJpmsPlugin::class.java))
       target.pluginManager.apply(GradleJpmsPlugin::class.java)
+
+    // create the extension
+    target.extensions.create(
+      GradleJModExtension::class.java,
+      GradleJModExtension.NAME,
+      ConfiguredJModExtension::class.java,
+    )
 
     // register jmod task
     val modulepath = requireNotNull(target.configurations.named("modulepath").get()).asPath
     target.tasks.register("jmod", JModTask::class.java) {
       group = "build"
       description = "Build a jmod artifact from this JVM project"
+
+      val jmodConfig = target.extensions.getByType<GradleJModExtension>()
+      enabled = jmodConfig.enabled.get()
 
       val dirOut = project.layout.buildDirectory.dir("jmod")
       val jmodOut = project.layout.buildDirectory.file("jmod/${project.name}.jmod").get().asFile
@@ -104,13 +125,13 @@ public abstract class GradleJModPlugin : Plugin<Project> {
         },
       )
 
-      // the JAR is an input to force Gradle to write outputs, including `module-info.class`. the `module-info.class` file
-      // is always required for a jmod build.
+      // the JAR is an input to force Gradle to write outputs, including `module-info.class`. the `module-info.class`
+      // file is always required for a jmod build.
       inputs.files(outputClasses, jar.outputs.files, javac.destinationDirectory.get().file("module-info.class"))
 
       doFirst {
-        // before running, delete any previous output, otherwise jmod will complain. it does not appear that jmod provides
-        // any `--force` or `--overwrite` flag.
+        // before running, delete any previous output, otherwise jmod will complain. it does not appear that jmod
+        // provides any `--force` or `--overwrite` flag.
         if (jmodOut.exists()) jmodOut.delete()
 
         // additionally, jmod will complain if anything specified on the classpath is a non-existent directory; in rare

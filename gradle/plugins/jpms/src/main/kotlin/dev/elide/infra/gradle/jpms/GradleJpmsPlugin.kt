@@ -17,8 +17,18 @@ import dev.elide.infra.gradle.GradleBaselinePlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
+import org.gradle.api.model.ObjectFactory
+import org.gradle.api.plugins.JavaApplication
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.kotlin.dsl.creating
+import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getValue
+import org.gradle.kotlin.dsl.property
+import javax.inject.Inject
+
+// Valid module versions are set as `N.N` where `N` is a positive integer.
+private val moduleVersionRegex = Regex("^(\\d+\\.\\d+)$")
 
 /**
  * # Gradle JPMS Plugin
@@ -47,14 +57,73 @@ import org.gradle.kotlin.dsl.getValue
  * @see GradleBaselinePlugin for baselines applied through this plugin
  */
 public abstract class GradleJpmsPlugin : Plugin<Project> {
+  // Implements the Gradle plugin configuration extension.
+  internal abstract class ConfiguredJpmsExtension @Inject constructor (factory: ObjectFactory) : GradleJpmsExtension {
+    // Default to `true` for enablement.
+    override val enabled: Property<Boolean> = factory.property(Boolean::class).convention(true)
+
+    // Align versions by default.
+    override val alignModuleVersion: Property<Boolean> = factory.property(Boolean::class).convention(true)
+
+    // Align main class by default.
+    override val alignMainClass: Property<Boolean> = factory.property(Boolean::class).convention(true)
+  }
+
   override fun apply(target: Project) {
     target.pluginManager.apply(GradleBaselinePlugin::class.java)
 
-    // create a dedicated module-path configuration. it should inject into the compile classpath, which should also
+    // create a dedicated module-path configuration. it should inject into the compiler classpath, which should also
     // include members on the runtime classpath.
-    val modulepath: Configuration by target.configurations.creating
+    val modulepath: Configuration by target.configurations.creating {
+      isCanBeResolved = true
+    }
+
+    // factory the extension which provides configurability of jpms
+    target.extensions.create(
+      GradleJpmsExtension::class.java,
+      GradleJpmsExtension.NAME,
+      ConfiguredJpmsExtension::class.java,
+    )
+
+    // mount the special `modulepath` configuration into the compiler classpath
     target.configurations.named("compileClasspath").configure {
-      extendsFrom(modulepath)
+      val ext = target.extensions.getByType(GradleJpmsExtension::class.java)
+      if (ext.enabled.get()) {
+        extendsFrom(modulepath)
+      }
+    }
+
+    // configure compile tasks for modularity awareness
+    target.tasks.withType(JavaCompile::class.java).configureEach {
+      val ext = target.extensions.getByType(GradleJpmsExtension::class.java)
+      if (!ext.enabled.get()) { return@configureEach }
+
+      // activate modularity conventions
+      modularity.inferModulePath.convention(true)
+
+      // assign aligned version
+      if (ext.alignModuleVersion.get()) {
+        (target.version as? String)?.let {
+          when (it) {
+            // do not set the module version for unspecified project versions
+            "unspecified" -> target.logger.debug("Project version is unspecified; skipping module version")
+            else -> if (it.isNotEmpty() && it.isNotBlank() && it.matches(moduleVersionRegex)) {
+              options.javaModuleVersion.convention(it)
+            } else {
+              target.logger.warn("Project version '$it' is not a valid JPMS module version; discarding")
+            }
+          }
+        }
+      }
+
+      // assign the main class within compiled module-info, but only for the main source set
+      if (name == "compileJava" && ext.alignMainClass.get()) {
+        target.extensions.findByType(JavaApplication::class)?.apply {
+          if (mainClass.isPresent) {
+            options.javaModuleMainClass.convention(mainClass.get())
+          }
+        }
+      }
     }
   }
 }

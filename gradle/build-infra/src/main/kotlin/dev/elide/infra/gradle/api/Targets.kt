@@ -35,6 +35,7 @@ public val jvmOrdinalIdentity: Map<Int, JvmTarget> = listOf(
   JvmTarget.JVM_19,
   JvmTarget.JVM_20,
   JvmTarget.JVM_21,
+  JvmTarget.JVM_22,
 ).associateBy {
   it.ordinal
 }
@@ -167,6 +168,7 @@ public fun JvmTarget.toJavaVersion(): JavaVersion = when (this) {
   JvmTarget.JVM_19 -> JavaVersion.VERSION_19
   JvmTarget.JVM_20 -> JavaVersion.VERSION_20
   JvmTarget.JVM_21 -> JavaVersion.VERSION_21
+  JvmTarget.JVM_22 -> JavaVersion.VERSION_22
 }
 
 // Holds a range of JVM targets, from a minimum to a maximum.

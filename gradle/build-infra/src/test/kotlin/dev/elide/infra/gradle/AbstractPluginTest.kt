@@ -437,6 +437,9 @@ private fun Path.toZipPath(fs: FileSystem): Path = pathString.split("/").let {
     /** Retrieve the list of paths which are classes that are compatible with the provided [target] */
     fun classesFor(target: JvmTarget): List<Classfile.ClassfileInfo>
 
+    /** Retrieve the list of paths which are classes that are specifically built at a given JVM target. */
+    fun classesFor(target: JvmTarget, strict: Boolean): List<Classfile.ClassfileInfo>
+
     /** Retrieve the list of paths which provide non-class-files */
     fun resources(): List<Path>
 
@@ -617,9 +620,17 @@ private fun Path.toZipPath(fs: FileSystem): Path = pathString.split("/").let {
 
     override fun classes(): List<Classfile.ClassfileInfo> = parsedClasses
 
-    override fun classesFor(target: JvmTarget): List<Classfile.ClassfileInfo> = classes().filter {
+    override fun classesFor(target: JvmTarget): List<Classfile.ClassfileInfo> = classesFor(
+      target,
+      strict = false,
+    )
+
+    override fun classesFor(target: JvmTarget, strict: Boolean): List<Classfile.ClassfileInfo> = classes().filter {
       val subj = it.target
-      subj != null && subj.compatibleWith(target)
+      subj != null && when (strict) {
+        true -> subj == target
+        false -> subj.compatibleWith(target)
+      }
     }
 
     override fun resources(): List<Path> = files().filter {
