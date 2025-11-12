@@ -1,0 +1,22 @@
+name = "elide-devops-reports"
+main = "worker.mts"
+compatibility_date = "2025-03-14"
+
+preview_urls = true
+workers_dev = true
+
+routes = [
+  { pattern = "reports.devops.elide.cloud", custom_domain = true },
+]
+
+[observability.logs]
+enabled = true
+
+[[d1_databases]]
+binding = "REPORTS_DB"
+database_name = "devreports"
+database_id = "5402ec9f-a563-48d1-bcbb-7c6c4e8b4edf"
+
+[[r2_buckets]]
+binding = "REPORTS_BUCKET"
+bucket_name = "elide-devops-reports"

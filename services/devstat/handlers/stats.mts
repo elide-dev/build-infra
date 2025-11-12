@@ -1,5 +1,5 @@
 import { BinstatInfo, BinstatInfoRecord } from "../api.mjs";
-import { decodeJsonAndValidate } from "./base.mjs";
+import { decodeJsonAndValidate } from "../../commons/handler.mjs";
 import { nanoid } from "nanoid";
 
 function buildRecordKey(_record: BinstatInfo): string {
@@ -62,12 +62,6 @@ export default async function handler(
   const payload = await decodeJsonAndValidate<BinstatInfo>(request, (data) =>
     BinstatInfoRecord.parse(data),
   );
-  console.log(
-    "received binstat info: ",
-    typeof payload,
-    JSON.stringify(payload, null, 2),
-  );
-
   ctx.waitUntil(
     Promise.all([
       writeToAnalyticsEngine(payload, env),

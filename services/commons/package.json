@@ -1,0 +1,13 @@
+{
+  "name": "@elide-dev/build-infra-service-commons",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    "./auth": "./auth.mts",
+    "./handler": "./handler.mts"
+  },
+  "dependencies": {
+    "nanoid": "5.1.6",
+    "zod": "4.1.12"
+  }
+}

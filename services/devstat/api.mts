@@ -1,28 +1,26 @@
-// Active model version.
-export const modelVersion = "v1";
 import * as z from "zod";
+
+import {
+  modelVersion,
+  OperatingSystem,
+  Architecture,
+  PlatformTag,
+  LibCTarget,
+} from "../commons/api.mjs"
+
+export {
+  modelVersion,
+  OperatingSystem,
+  Architecture,
+  PlatformTag,
+  LibCTarget,
+}
 
 // Information about the binstat service.
 export const binstatService = {
-  name: "binstat",
+  name: "devstat",
   version: modelVersion,
 };
-
-// Operating system tag values.
-export type OperatingSystem = "linux" | "macos" | "windows";
-
-// Architecture tag values.
-export type Architecture = "amd64" | "arm64";
-
-// Combined platform tag values.
-export type PlatformTag =
-  | "linux-amd64"
-  | "linux-arm64"
-  | "macos-amd64"
-  | "macos-arm64";
-
-// LibC target tag values.
-export type LibCTarget = "glibc" | "musl";
 
 // Information posted to the bin-stat endpoint.
 export type BinstatInfo = {

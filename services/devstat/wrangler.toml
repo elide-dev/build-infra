@@ -1,4 +1,4 @@
-name = "elide-binstat"
+name = "elide-devops-stats"
 main = "worker.mts"
 compatibility_date = "2025-03-14"
 

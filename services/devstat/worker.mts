@@ -1,19 +1,21 @@
 import { ExecutionContext } from "@cloudflare/workers-types";
 import * as api from "./api.mjs";
-import auth from "./auth.mjs";
+import auth from "../commons/auth.mjs";
+import { errorResponse, handleErrors } from "../commons/handler.mjs";
+
+// Handlers.
 import stats from "./handlers/stats.mjs";
-import { errorResponse, handleErrors } from "./handlers/base.mjs";
 
 function versionedUrl(path: string): string {
   return `/${api.binstatService.name}/${api.binstatService.version}${path}`;
 }
 
 const routingTable = {
-  // GET /binstat/v1/stat - Check health.
-  [`GET ${versionedUrl("/stat")}`]: async () => new Response("ok"),
+  // GET /devstat/v1/health - Check health.
+  [`GET ${versionedUrl("/health")}`]: async () => new Response("ok"),
 
-  // POST /binstat/v1/stat - Receive binary statistics at build time.
-  [`POST ${versionedUrl("/stat")}`]: stats,
+  // POST /devstat/v1/bin - Receive binary statistics at build time.
+  [`POST ${versionedUrl("/bin")}`]: stats,
 };
 
 export default {
@@ -23,7 +25,7 @@ export default {
     ctx: ExecutionContext,
   ): Promise<Response> {
     const url = new URL(request.url);
-    if (!(await auth(request, env))) {
+    if (!(await auth(request, env.SHARED_AUTH_TOKEN))) {
       return new Response("unauthorized", {
         status: 401,
         statusText: "Unauthorized",

@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "size": 100,
+  "gzip": 100,
+  "zip": 100,
+  "xz": 100,
+  "sha256": "c281f3e9808bad2968ec30445dec73ccca71760c450f840ebf95247583c57c44",
+  "revision": "2afd3163d8540103fe64a75fa033b817aaae0b13",
+  "os": "linux",
+  "arch": "amd64",
+  "libc": "glibc",
+  "timestamp": 1762908124936
+}

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "lib": ["es2024"],
+    "esModuleInterop": true,
+    "noEmit": true,
+    "types": ["./worker-configuration.d.ts"]
+  }
+}
