@@ -1,0 +1,22 @@
+name = "elide-binstat"
+main = "worker.mts"
+compatibility_date = "2025-03-14"
+
+preview_urls = true
+workers_dev = true
+
+routes = [
+  { pattern = "stats.devops.elide.cloud", custom_domain = true },
+]
+
+analytics_engine_datasets = [
+  { binding = "BINSTAT_ANALYTICS", dataset = "elide_binstats_v1" },
+]
+
+[observability.logs]
+enabled = true
+
+[[d1_databases]]
+binding = "BINSTAT_DB"
+database_name = "buildstat"
+database_id = "194a176d-5198-4c05-b97c-8f09c269b609"

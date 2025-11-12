@@ -24,6 +24,8 @@ For an exhaustive list of build profiles and their use, see the table further do
 - **[Gradle](./gradle): Gradle build conventions** which are re-usable across projects, as a suite of easily applicable build convention
   plugins and version catalogs.
 
+- **[Services](./services): Online services** which augment e.g. CI or deployment systems with various abilities; for example, the ability to publish reports or track stats across revisions.
+
 ## Workflows
 
 In a `.github/workflows/<x>.yml`:
