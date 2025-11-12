@@ -1,5 +1,5 @@
 import { ExecutionContext } from "@cloudflare/workers-types";
-import * as api from "./api.mjs";
+import * as api from "../commons/api.mjs";
 import auth from "../commons/auth.mjs";
 import { errorResponse, handleErrors } from "../commons/handler.mjs";
 

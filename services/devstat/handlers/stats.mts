@@ -1,4 +1,4 @@
-import { BinstatInfo, BinstatInfoRecord } from "../api.mjs";
+import { BinstatInfo, BinstatInfoRecord } from "../../commons/api.mjs";
 import { decodeJsonAndValidate } from "../../commons/handler.mjs";
 import { nanoid } from "nanoid";
 

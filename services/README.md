@@ -2,7 +2,7 @@
 
 Each sub-directory defines an API service handler which is used as part of Elide's internal Devops Services. These online (but private) services augment regular developer activities.
 
-In addition to the services themselves, each implemented with a Cloudflare Worker, there is the [`commons`](./commons) module, where shared code is held.
+In addition to the services themselves, each implemented with a Cloudflare Worker, there are the [`commons`](./commons) and [`client`](./client) modules, where shared code is held and where the CLI client is defined, respectively.
 
 ### Available services
 

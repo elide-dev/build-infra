@@ -1,5 +1,5 @@
 {
-  "name": "@elide-dev/build-infra-reports",
+  "name": "@elide-build-infra/reports",
   "version": "1.0.0",
   "private": true,
   "type": "module",

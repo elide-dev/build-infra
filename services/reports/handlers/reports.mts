@@ -1,4 +1,4 @@
-import { ReportMetadata, ReportMetadataRecord } from "../api.mjs";
+import { ReportMetadata, ReportMetadataRecord } from "../../commons/api.mjs";
 import { decodeJsonAndValidate } from "../../commons/handler.mjs";
 import { nanoid } from "nanoid";
 
@@ -13,15 +13,19 @@ async function writeToR2(
 ): Promise<void> {
   try {
     // nothing yet
-    console.log('would write to r2')
+    console.log("would write to r2");
   } catch (err) {
     console.error("Failed to write to R2", err);
   }
 }
 
-async function writeToD1(key: string, record: ReportMetadata, env: Env): Promise<void> {
+async function writeToD1(
+  key: string,
+  record: ReportMetadata,
+  env: Env,
+): Promise<void> {
   try {
-    console.log('would write to d1')
+    console.log("would write to d1");
     // await env.BINSTAT_DB.prepare(
     //   `INSERT INTO 'binstats-v1' (key, name, sha256, revision, size, gzip, zip, xz, os, arch, timestamp) ` +
     //     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
