@@ -1,7 +1,7 @@
 {
   "name": "@elide-build-infra/client",
   "description": "Elide devops utility CLI",
-  "version": "0.1.0-alpha3",
+  "version": "0.1.0",
   "type": "module",
   "module": "dist/client/client.mjs",
   "bin": {
