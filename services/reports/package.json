@@ -1,0 +1,25 @@
+{
+  "name": "@elide-build-infra/reports",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "worker.mts",
+  "scripts": {
+    "build": "pnpm run type-check && wrangler deploy --dry-run",
+    "generate-types": "wrangler types",
+    "type-check": "tsc",
+    "deploy": "wrangler deploy",
+    "fmt": "biome format --write package.json handlers ./*.mts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.5",
+    "@cloudflare/workers-types": "4.20251111.0",
+    "@types/node": "^24.10.1",
+    "wrangler": "latest"
+  },
+  "dependencies": {
+    "@elide-build-infra/commons": "workspace:*",
+    "nanoid": "5.1.6",
+    "zod": "4.1.12"
+  }
+}

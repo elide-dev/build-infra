@@ -1,1 +1,10 @@
-packages: []
+packages:
+  - services/client
+  - services/commons
+  - services/binstat
+  - services/reports
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd
