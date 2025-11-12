@@ -1,11 +1,17 @@
 {
   "name": "@elide-build-infra/client",
   "description": "Elide devops utility CLI",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha3",
   "type": "module",
-  "module": "client.mts",
+  "module": "dist/client/client.mjs",
+  "bin": {
+    "elide-devops": "dist/client/client.mjs"
+  },
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
-    "client": "bun run ./client.mts",
+    "client": "node ./dist/client/client.mjs",
     "client:bin": "./dist/elide-devops",
     "build": "bun run type-check && bun build --minify --compile --outfile=dist/elide-devops ./client.mts",
     "type-check": "tsc",
@@ -15,12 +21,15 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.5",
     "@cloudflare/workers-types": "4.20251111.0",
+    "@types/byte-size": "8.1.2",
     "@types/node": "^24.10.1",
     "wrangler": "latest"
   },
   "dependencies": {
-    "@elide-dev/build-infra-service-commons": "workspace:*",
+    "byte-size": "9.0.1",
     "commander": "14.0.2",
-    "glob": "11.0.3"
+    "glob": "11.0.3",
+    "simple-git": "3.30.0",
+    "zod": "4.1.12"
   }
 }

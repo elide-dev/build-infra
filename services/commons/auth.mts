@@ -9,8 +9,12 @@ export default async function authorized(
   const tokenType = authHeader ? authHeader.split(" ")[0] : null;
   const tokenValue = authHeader ? authHeader.split(" ")[1] : null;
   if (tokenType === "Bearer" && !!tokenValue) {
-    console.error(`Authorization token invalid; rejecting (length: ${tokenValue.length})`)
-    return tokenValue === token
+    const valid = tokenValue === token;
+    if (!valid)
+      console.error(
+        `Authorization token invalid; rejecting (length: ${tokenValue.length})`,
+      );
+    return valid;
   }
   return false;
 }

@@ -12,14 +12,18 @@ async function writeToAnalyticsEngine(
 ): Promise<void> {
   try {
     env.BINSTAT_ANALYTICS.writeDataPoint({
-      blobs: [record.os, record.arch, record.revision], // City, State
+      blobs: [
+        record.os || "unknown-os",
+        record.arch || "unknown-arch",
+        record.revision || "unknown-revision",
+      ],
       doubles: [
         record.size || 0,
         record.gzip || 0,
         record.zip || 0,
         record.xz || 0,
       ],
-      indexes: [record.name],
+      indexes: [record.name || "unknown-name"],
     });
     console.log("Wrote to analytics engine");
   } catch (err) {
@@ -31,21 +35,23 @@ async function writeToD1(record: BinstatInfo, env: Env): Promise<void> {
   try {
     const recordKey = buildRecordKey(record);
     await env.BINSTAT_DB.prepare(
-      `INSERT INTO 'binstats-v1' (key, name, sha256, revision, size, gzip, zip, xz, os, arch, timestamp) ` +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+      `INSERT INTO 'binstats-v1' (key, name, sha256, revision, size, gzip, zip, xz, os, arch, branch, tag, timestamp) ` +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
     )
       .bind(
         recordKey,
         record.name,
         record.sha256,
-        record.revision,
-        record.size,
-        record.gzip,
-        record.zip,
-        record.xz,
-        record.os,
-        record.arch,
-        record.timestamp,
+        record.revision || "",
+        record.size || 0,
+        record.gzip || 0,
+        record.zip || 0,
+        record.xz || 0,
+        record.os || "",
+        record.arch || "",
+        record.branch || "",
+        record.tag || "",
+        record.timestamp || +new Date(),
       )
       .run();
     console.log(`Wrote to D1 at key: '${recordKey}'`);

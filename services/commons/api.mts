@@ -23,53 +23,79 @@ export type LibCTarget = "glibc" | "musl";
 export const binstatService = {
   name: "devstat",
   version: modelVersion,
+  endpoint: "stats.devops.elide.cloud",
+  methods: {
+    binstat: "binstat",
+  },
 };
 
-// Information posted to the bin-stat endpoint.
-export type BinstatInfo = {
-  // Name of the binary.
-  name: string;
-
-  // Size of the binary in bytes.
-  size: number;
-
-  // Gzipped size of the binary in bytes.
-  gzip: number;
-
-  // Zipped size of the binary in bytes.
-  zip: number;
-
-  // Xzipped size of the binary in bytes.
-  xz: number;
-
-  // SHA256 hash of the binary, hex-encoded.
-  sha256: string;
-
+// Git state information.
+export type GitState = {
   // Git revision that produced this binary.
   revision: string;
 
-  // Operating system the binary was built for.
-  os: OperatingSystem;
+  // Branch which was active when the binary was built.
+  branch?: string;
 
-  // CPU architecture the binary was built for.
-  arch: Architecture;
-
-  // LibC target the binary was built against.
-  libc?: LibCTarget;
-
-  // Timestamp from the sender, as a Unix timestamp in seconds.
-  timestamp: number;
+  // Tag which was active when the binary was built.
+  tag?: string;
 };
+
+// Basic size information.
+export type SizeInfo = {
+  // Size of the binary in bytes.
+  size: number;
+};
+
+// Compressed size information.
+export type CompressedSizes = {
+  // Gzipped size of the binary in bytes.
+  gzip?: number;
+
+  // Zipped size of the binary in bytes.
+  zip?: number;
+
+  // Xzipped size of the binary in bytes.
+  xz?: number;
+};
+
+// Information posted to the bin-stat endpoint.
+export type BinstatInfo = GitState &
+  SizeInfo &
+  CompressedSizes & {
+    // Name of the binary.
+    name: string;
+
+    // Size of the binary in bytes.
+    size: number;
+
+    // SHA256 hash of the binary, hex-encoded.
+    sha256: string;
+
+    // Operating system the binary was built for.
+    os: OperatingSystem;
+
+    // CPU architecture the binary was built for.
+    arch: Architecture;
+
+    // LibC target the binary was built against.
+    libc?: LibCTarget;
+
+    // Timestamp from the sender, as a Unix timestamp in seconds.
+    timestamp: number;
+  };
 
 // Zod schema for validating binstat info records.
 export const BinstatInfoRecord = z.object({
   name: z.string(),
   size: z.number(),
-  gzip: z.number(),
-  zip: z.number(),
-  xz: z.number(),
+  gzip: z.optional(z.number()),
+  zip: z.optional(z.number()),
+  xz: z.optional(z.number()),
   sha256: z.hash("sha256", { enc: "hex" }),
-  revision: z.string(),
+  revision: z.hash("sha1", { enc: "hex" }),
+  branch: z.optional(z.string()),
+  tag: z.optional(z.string()),
   os: z.enum(["linux", "macos", "windows"]),
   arch: z.enum(["amd64", "arm64"]),
   libc: z.optional(z.enum(["glibc", "musl"])),
@@ -90,7 +116,7 @@ export const reportService = {
 };
 
 // Enumerates known types of reports.
-export enum ReportType {}
+export type ReportType = "native-image-build-report" | string;
 
 // Schema for report metadata.
 export type ReportMetadata = {};

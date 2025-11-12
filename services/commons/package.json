@@ -1,6 +1,22 @@
 {
   "name": "@elide-build-infra/commons",
   "version": "1.0.0",
+  "devDependencies": {
+    "@biomejs/biome": "2.3.5"
+  },
+  "scripts": {
+    "fmt": "biome format --write package.json ./*.mts",
+    "type-check": "tsc",
+    "build": "bun run type-check"
+  },
+  "exports": {
+    "./api.mjs": "./api.mjs",
+    "./api.mts": "./api.mts",
+    "./auth.mjs": "./auth.mjs",
+    "./auth.mts": "./auth.mts",
+    "./handler.mjs": "./handler.mjs",
+    "./handler.mts": "./handler.mts"
+  },
   "dependencies": {
     "nanoid": "5.1.6",
     "zod": "4.1.12"

@@ -18,7 +18,7 @@
     "wrangler": "latest"
   },
   "dependencies": {
-    "@elide-dev/build-infra-service-commons": "workspace:*",
+    "@elide-build-infra/commons": "workspace:*",
     "nanoid": "5.1.6",
     "zod": "4.1.12"
   }

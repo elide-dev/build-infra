@@ -15,7 +15,7 @@ const routingTable = {
   [`GET ${versionedUrl("/health")}`]: async () => new Response("ok"),
 
   // POST /devstat/v1/bin - Receive binary statistics at build time.
-  [`POST ${versionedUrl("/bin")}`]: stats,
+  [`POST ${versionedUrl(`/${api.binstatService.methods.binstat}`)}`]: stats,
 };
 
 export default {
