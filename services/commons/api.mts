@@ -109,6 +109,13 @@ export type BinstatInfoRequest = {
   data: BinstatInfo;
 };
 
+// Response payload from the binstat query endpoint.
+export type BinstatQueryResponse = {
+  version: "v1";
+  revision: string;
+  results: BinstatInfo[];
+};
+
 // Information about the reports service.
 export const reportService = {
   name: "reports",
