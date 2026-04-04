@@ -68,12 +68,8 @@ export default async function handler(
   const payload = await decodeJsonAndValidate<BinstatInfo>(request, (data) =>
     BinstatInfoRecord.parse(data),
   );
-  ctx.waitUntil(
-    Promise.all([
-      writeToAnalyticsEngine(payload, env),
-      writeToD1(payload, env),
-    ]),
-  );
+  await writeToD1(payload, env);
+  ctx.waitUntil(writeToAnalyticsEngine(payload, env));
   return new Response(null, {
     status: 202,
     statusText: "accepted",

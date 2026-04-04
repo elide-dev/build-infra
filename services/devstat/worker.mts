@@ -5,6 +5,7 @@ import { errorResponse, handleErrors } from "../commons/handler.mjs";
 
 // Handlers.
 import stats from "./handlers/stats.mjs";
+import query from "./handlers/query.mjs";
 
 function versionedUrl(path: string): string {
   return `/${api.binstatService.name}/${api.binstatService.version}${path}`;
@@ -14,7 +15,10 @@ const routingTable = {
   // GET /devstat/v1/health - Check health.
   [`GET ${versionedUrl("/health")}`]: async () => new Response("ok"),
 
-  // POST /devstat/v1/bin - Receive binary statistics at build time.
+  // GET /devstat/v1/binstat - Query binary statistics by revision.
+  [`GET ${versionedUrl(`/${api.binstatService.methods.binstat}`)}`]: query,
+
+  // POST /devstat/v1/binstat - Receive binary statistics at build time.
   [`POST ${versionedUrl(`/${api.binstatService.methods.binstat}`)}`]: stats,
 };
 

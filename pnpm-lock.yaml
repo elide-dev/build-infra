@@ -56,9 +56,6 @@ importers:
 
   services/client:
     dependencies:
-      '@elide-build-infra/commons':
-        specifier: workspace:*
-        version: link:../commons
       byte-size:
         specifier: 9.0.1
         version: 9.0.1

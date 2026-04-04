@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import binstats, { type BinstatOptions } from "./actions/binstats.mjs";
+import bincompare, { type BincompareOptions } from "./actions/bincompare.mjs";
 import reportUpload from "./actions/report-upload.mjs";
 import pkg from "./package.json" with { type: "json" };
 
@@ -36,6 +37,16 @@ program
   .action(async (name: string, path: string, options: BinstatOptions) =>
     binstats(name, path, options),
   );
+
+program
+  .command("bincompare")
+  .description("Compare binary sizes between two revisions")
+  .requiredOption("--base <string>", "Base revision (full 40-char SHA)")
+  .requiredOption("--pr <string>", "PR revision (full 40-char SHA)")
+  .option("--name <string>", "Binary name to compare", "whiplash")
+  .option("--output <string>", "Write markdown to file instead of stdout")
+  .option("--debug", "Enable debug logging")
+  .action(async (options: BincompareOptions) => bincompare(options));
 
 program
   .command("report-upload")
