@@ -7,5 +7,6 @@
         "noEmit": true,
         "moduleResolution": "bundler",
         "resolveJsonModule": true
-    }
+    },
+    "exclude": ["**/*.test.mts"]
 }

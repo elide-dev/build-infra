@@ -35,8 +35,8 @@ async function writeToD1(record: BinstatInfo, env: Env): Promise<void> {
   try {
     const recordKey = buildRecordKey(record);
     await env.BINSTAT_DB.prepare(
-      `INSERT INTO 'binstats-v1' (key, name, sha256, revision, size, gzip, zip, xz, os, arch, branch, tag, timestamp) ` +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+      `INSERT INTO 'binstats-v1' (key, name, sha256, revision, size, gzip, zip, xz, os, arch, branch, tag, mode, timestamp) ` +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
     )
       .bind(
         recordKey,
@@ -51,6 +51,7 @@ async function writeToD1(record: BinstatInfo, env: Env): Promise<void> {
         record.arch || "",
         record.branch || "",
         record.tag || "",
+        record.mode || null,
         record.timestamp || +new Date(),
       )
       .run();
