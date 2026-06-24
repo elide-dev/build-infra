@@ -1,7 +1,7 @@
 {
   "name": "@elide-build-infra/client",
   "description": "Elide devops utility CLI",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "module": "dist/client/client.mjs",
   "bin": {
@@ -15,6 +15,7 @@
     "client:bin": "./dist/elide-devops",
     "build": "bun run type-check && bun build --minify --compile --outfile=dist/elide-devops ./client.mts",
     "type-check": "tsc",
+    "test": "bun test",
     "deploy": "wrangler deploy",
     "fmt": "biome format --write package.json actions ./*.mts"
   },

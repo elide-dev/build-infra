@@ -34,6 +34,10 @@ program
     "--libc <string>",
     "Intended target libc variant (one of `glibc`, `musl`), if applicable",
   )
+  .option(
+    "--mode <string>",
+    "Build mode the binary was produced with (one of `release`, `dev`)",
+  )
   .action(async (name: string, path: string, options: BinstatOptions) =>
     binstats(name, path, options),
   );
@@ -44,6 +48,10 @@ program
   .requiredOption("--base <string>", "Base revision (full 40-char SHA)")
   .requiredOption("--pr <string>", "PR revision (full 40-char SHA)")
   .option("--name <string>", "Binary name to compare", "whiplash")
+  .option(
+    "--mode <string>",
+    "Restrict comparison to a single build mode (one of `release`, `dev`)",
+  )
   .option("--output <string>", "Write markdown to file instead of stdout")
   .option("--debug", "Enable debug logging")
   .action(async (options: BincompareOptions) => bincompare(options));

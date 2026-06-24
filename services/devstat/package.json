@@ -8,6 +8,7 @@
     "build": "pnpm run type-check && wrangler deploy --dry-run",
     "generate-types": "wrangler types",
     "type-check": "tsc",
+    "test": "bun test",
     "deploy": "wrangler deploy",
     "fmt": "biome format --write package.json handlers ./*.mts"
   },

@@ -1,6 +1,7 @@
 import {
   type Architecture,
   type BinstatInfo,
+  type BuildMode,
   type OperatingSystem,
   type LibCTarget,
   binstatService as api,
@@ -25,6 +26,7 @@ export type BinstatOptions = {
   os?: string;
   arch?: string;
   libc?: string;
+  mode?: string;
 };
 
 async function generateSourceControlState(
@@ -169,6 +171,12 @@ export default async function binstats(
     sha256: digest,
     timestamp: +new Date(),
   };
+  if (options.mode) {
+    if (!["release", "dev"].includes(options.mode)) {
+      throw new Error(`Invalid mode specified: ${options.mode}`);
+    }
+    binstats.mode = options.mode as BuildMode;
+  }
   if (options.debug) {
     console.debug("Generated binstats:", JSON.stringify(binstats, null, 2));
   }
