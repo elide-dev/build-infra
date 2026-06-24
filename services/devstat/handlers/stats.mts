@@ -51,8 +51,8 @@ async function writeToD1(record: BinstatInfo, env: Env): Promise<void> {
         record.arch || "",
         record.branch || "",
         record.tag || "",
-        record.mode || null,
-        record.timestamp || +new Date(),
+        record.mode ?? null,
+        record.timestamp ?? +new Date(),
       )
       .run();
     console.log(`Wrote to D1 at key: '${recordKey}'`);

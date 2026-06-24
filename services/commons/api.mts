@@ -88,7 +88,7 @@ export type BinstatInfo = GitState &
     // for backwards compatibility with records written before this dimension.
     mode?: BuildMode;
 
-    // Timestamp from the sender, as a Unix timestamp in seconds.
+    // Timestamp from the sender, as a Unix timestamp in milliseconds.
     timestamp: number;
   };
 

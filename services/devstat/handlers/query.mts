@@ -41,6 +41,15 @@ export function buildBinstatQuery(filters: BinstatQueryFilters): {
   return { sql, params };
 }
 
+// Legacy rows predate the `mode` column and come back as NULL. Drop it so the
+// response matches the optional (not nullable) `mode` contract: JSON omits the
+// field rather than emitting `mode: null`.
+export function omitNullMode(rows: BinstatInfo[]): BinstatInfo[] {
+  return rows.map((row) =>
+    row.mode == null ? { ...row, mode: undefined } : row,
+  );
+}
+
 export default async function handler(
   request: Request,
   env: Env,
@@ -70,7 +79,7 @@ export default async function handler(
   const response: BinstatQueryResponse = {
     version: "v1",
     revision,
-    results: result.results || [],
+    results: omitNullMode(result.results || []),
   };
 
   return new Response(JSON.stringify(response), {
