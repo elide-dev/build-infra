@@ -64,3 +64,20 @@ revokes it at job teardown.
     writable: 'true'
     ttl-seconds: '900'
 ```
+
+## Claude and OpenAI
+
+Run `elide-dev/build-infra/actions/model-identity@COMMIT_SHA` immediately
+before the API call, in a job with `id-token: write`. Rerun the step if a
+long-running job needs a fresh token. Store the provider identifiers as ordinary
+repository or environment variables.
+
+| Provider | Inputs | Environment for subsequent steps |
+| --- | --- | --- |
+| `openai` | `provider`, `service-account`, `identity-provider` | `OPENAI_API_KEY` holds the short-lived bearer token |
+| `claude` | `provider`, `service-account`, `federation-rule`, `organization`, and `workspace` for multi-workspace rules | `ANTHROPIC_AUTH_TOKEN` holds the short-lived bearer token |
+
+Configure the provider to trust the exact protected job and its audience:
+`https://api.openai.com/v1` or `https://api.anthropic.com`.
+[OpenAI setup](https://developers.openai.com/api/docs/guides/workload-identity-federation/github-actions) ·
+[Claude setup](https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions)

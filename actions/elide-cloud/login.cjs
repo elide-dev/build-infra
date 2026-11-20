@@ -1,16 +1,10 @@
 const fs = require('node:fs/promises');
 
+const {githubIdentity} = require('../../lib/github-oidc.cjs');
+
 async function login() {
   const endpoint = 'https://auth.elide.cloud/token';
-  const url = new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
-  url.searchParams.set('audience', endpoint);
-  const identity = await fetch(url, {
-    redirect: 'error',
-    headers: {authorization: 'Bearer ' + process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},
-  });
-  if (!identity.ok) throw new Error('GitHub OIDC request failed: ' + identity.status);
-  const {value} = await identity.json();
-  if (typeof value !== 'string' || !value) throw new Error('Missing GitHub identity token');
+  const value = await githubIdentity(endpoint, process.env, fetch);
   const response = await fetch(endpoint, {
     method: 'POST', redirect: 'error',
     body: new URLSearchParams({
