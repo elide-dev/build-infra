@@ -306,7 +306,7 @@ jobs:
         run: |
           echo "hashes=$(sha256sum ${{ inputs.outputs }} | base64 -w0)" >> "$GITHUB_OUTPUT"
       - name: "Report: Codecov"
-        uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3 # v5.3.1
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         if: inputs.coverage
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
