@@ -24,6 +24,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm -r --if-present run type-check
       - run: bun test services
-      - run: node --test actions/buildcache/*.test.cjs
+      - run: node --test actions/*/*.test.cjs
       - run: pnpm --dir services/client run build
       - run: node services/client/dist/client/client.mjs binstats --help && node services/client/dist/client/client.mjs bincompare --help

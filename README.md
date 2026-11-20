@@ -4,7 +4,7 @@
 [![Actionlint](https://github.com/elide-dev/build-infra/actions/workflows/check.actions-lint.ci.yml/badge.svg?branch=main)](https://github.com/elide-dev/build-infra/actions/workflows/check.actions-lint.ci.yml)
 [![License](https://img.shields.io/github/license/elide-dev/build-infra)](LICENSE)
 
-Use the [action catalog](actions/README.md) for Google Cloud identity, Renovate,
+Use the [action catalog](actions/README.md) for Elide Cloud login, cache and artifact leases, Google Cloud identity, Renovate,
 and Bun/Turbo caching. The [shared build cache](actions/buildcache/README.md)
 connects sccache and Gradle builds to Elide’s OIDC-authenticated Buildbarn cache.
 Pin consumers to a full commit SHA. Each action documents its required permissions.
@@ -25,7 +25,7 @@ With Node 24, pnpm 10.34.9 and Bun 1.4.4 installed:
 pnpm install --frozen-lockfile
 pnpm -r --if-present run type-check
 bun test services
-node --test actions/buildcache/*.test.cjs
+node --test actions/*/*.test.cjs
 pnpm --dir services/client run build
 ```
 

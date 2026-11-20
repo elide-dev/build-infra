@@ -1,0 +1,16 @@
+name: Elide Cloud build lease
+description: Obtain a short-lived org-shared cache and artifact credential after Elide Cloud login.
+inputs:
+  project:
+    description: Cloud build storage project
+    required: true
+  writable:
+    description: Request cache and artifact write access
+    default: 'false'
+  ttl-seconds:
+    description: Lease lifetime in seconds (60 to 21600)
+    default: '300'
+runs:
+  using: node24
+  main: lease.cjs
+  post: revoke.cjs

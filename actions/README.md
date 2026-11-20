@@ -43,3 +43,24 @@ jobs:
 
 The diagnostic prints selected claims for its own audience and workflow.
 Use the actual production job's audience and workflow when configuring trust.
+
+## Elide Cloud caches, artifacts and ledger
+
+Run `actions/elide-cloud` in a registered protected environment. The CLI reads
+the resulting account token for ledger operations. Grant `ledger:write` for
+recording events and `ledger:read` if the job also reads ledger history.
+
+For the Cloud build service, follow login with a lease. The job needs
+`build:read` and, for uploads, `build:write`. This lease is organization-shared.
+The project selects the storage namespace within the organization. The action
+exports `ELIDE_CLOUD_BUILD_LEASE` for CLI cache and artifact commands and
+revokes it at job teardown.
+
+```yaml
+- uses: elide-dev/build-infra/actions/elide-cloud@COMMIT_SHA
+- uses: elide-dev/build-infra/actions/build-lease@COMMIT_SHA
+  with:
+    project: runtime
+    writable: 'true'
+    ttl-seconds: '900'
+```
