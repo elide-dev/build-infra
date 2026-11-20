@@ -1,7 +1,7 @@
 # Security model
 
 This public repository contains the client action, not infrastructure credentials.
-Pin `elide-tools/buildcache` to a reviewed full commit SHA. The gateway and its
+Pin `elide-dev/build-infra/actions/buildcache` to a reviewed full commit SHA. The gateway and its
 Pulumi deployment remain in `elide-dev/cloud`; moving the client does not grant
 the tools organization or this repository access to the cache.
 

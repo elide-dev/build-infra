@@ -23,10 +23,12 @@ describe("deduplicateByPlatform", () => {
     const rows = [
       { os: "linux", arch: "amd64", size: 10 },
       { os: "linux", arch: "amd64", size: 20 },
+      { os: "linux", arch: "amd64", size: 40, mode: "dev" },
       { os: "macos", arch: "arm64", size: 30 },
     ] as unknown as BinstatInfo[];
     const map = deduplicateByPlatform(rows);
-    expect(map.size).toBe(2);
+    expect(map.size).toBe(3);
+    expect(map.get("linux-amd64 (dev)")?.size).toBe(40);
     expect(map.get("linux-amd64")?.size).toBe(10);
     expect(map.get("macos-arm64")?.size).toBe(30);
   });

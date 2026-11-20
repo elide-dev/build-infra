@@ -63,7 +63,8 @@ export function deduplicateByPlatform(
 ): Map<PlatformKey, BinstatInfo> {
   const map = new Map<PlatformKey, BinstatInfo>();
   for (const row of results) {
-    const key = `${row.os}-${row.arch}`;
+    const platform = `${row.os}-${row.arch}`;
+    const key = row.mode ? `${platform} (${row.mode})` : platform;
     if (!map.has(key)) {
       map.set(key, row); // results are ordered by timestamp DESC, first wins
     }
