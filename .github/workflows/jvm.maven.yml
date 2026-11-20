@@ -162,7 +162,7 @@ jobs:
           path: |
             ./target
           key: ${{ runner.os }}-mavenbuild-${{ hashFiles('**/*.pom.xml') }}
-          restore-keys: ${{ runner.os }}-gradlebuild-
+          restore-keys: ${{ runner.os }}-mavenbuild-
       - name: "Setup: JDK ${{ env.JVM_VERSION }}"
         uses: buildless/setup-java@3232623d9c428cc5f228a01a2ae8d2d70f79775e # v4.0.0
         if: inputs.install_jvm

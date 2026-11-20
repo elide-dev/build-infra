@@ -1,0 +1,40 @@
+name: Inspect workload identity
+"on":
+  workflow_call:
+    inputs:
+      environment:
+        description: GitHub environment whose OIDC claims should be inspected
+        required: true
+        type: string
+
+jobs:
+  identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: ${{ inputs.environment }}
+    permissions:
+      id-token: write
+    steps:
+      - name: Show identity attributes for federation setup
+        shell: python
+        run: |
+          import base64
+          import json
+          import os
+          import urllib.parse
+          import urllib.request
+
+          # This diagnostic audience is distinct from the model and cloud audiences.
+          parts = urllib.parse.urlsplit(os.environ["ACTIONS_ID_TOKEN_REQUEST_URL"])
+          query = urllib.parse.parse_qsl(parts.query)
+          query.append(("audience", "urn:elide:workload-identity:inspect"))
+          url = parts._replace(query=urllib.parse.urlencode(query)).geturl()
+          request = urllib.request.Request(url, headers={
+              "Authorization": "Bearer " + os.environ["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]
+          })
+          with urllib.request.urlopen(request, timeout=15) as response:
+              payload = json.load(response)["value"].split(".")[1]
+          claims = json.loads(base64.urlsafe_b64decode(payload + "=" * (-len(payload) % 4)))
+          fields = ("iss", "aud", "sub", "repository_owner_id", "repository_id",
+                    "ref", "environment", "workflow_ref", "job_workflow_ref", "job_workflow_sha")
+          print(json.dumps({key: claims.get(key) for key in fields}, indent=2))
