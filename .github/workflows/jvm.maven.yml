@@ -146,7 +146,7 @@ jobs:
       pull-requests: "read"
     steps:
       - name: "Setup: Harden Runner"
-        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: ${{ inputs.network || 'audit' }}
       - name: "Setup: Checkout"
