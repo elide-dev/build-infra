@@ -19,6 +19,9 @@ export type PlatformTag =
 // LibC target tag values.
 export type LibCTarget = "glibc" | "musl";
 
+// Build mode (optimization profile) the binary was produced with.
+export type BuildMode = "release" | "dev";
+
 // Information about the binstat service.
 export const binstatService = {
   name: "devstat",
@@ -81,7 +84,11 @@ export type BinstatInfo = GitState &
     // LibC target the binary was built against.
     libc?: LibCTarget;
 
-    // Timestamp from the sender, as a Unix timestamp in seconds.
+    // Build mode (optimization profile) the binary was produced with. Optional
+    // for backwards compatibility with records written before this dimension.
+    mode?: BuildMode;
+
+    // Timestamp from the sender, as a Unix timestamp in milliseconds.
     timestamp: number;
   };
 
@@ -99,6 +106,7 @@ export const BinstatInfoRecord = z.object({
   os: z.enum(["linux", "macos", "windows"]),
   arch: z.enum(["amd64", "arm64"]),
   libc: z.optional(z.enum(["glibc", "musl"])),
+  mode: z.optional(z.enum(["release", "dev"])),
   timestamp: z.number(),
 });
 

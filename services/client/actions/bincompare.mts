@@ -14,13 +14,22 @@ export type BincompareOptions = {
   base: string;
   pr: string;
   name?: string;
+  mode?: string;
   output?: string;
 };
 
 const REVISION_RE = /^[0-9a-f]{40}$/;
 
-function buildQueryUrl(revision: string, name: string): string {
-  return `https://${api.endpoint}/${api.name}/${api.version}/${api.methods.binstat}?revision=${revision}&name=${encodeURIComponent(name)}`;
+export function buildQueryUrl(
+  revision: string,
+  name: string,
+  mode?: string,
+): string {
+  let url = `https://${api.endpoint}/${api.name}/${api.version}/${api.methods.binstat}?revision=${revision}&name=${encodeURIComponent(name)}`;
+  if (mode) {
+    url += `&mode=${encodeURIComponent(mode)}`;
+  }
+  return url;
 }
 
 function buildHeaders(token: string): Headers {
@@ -35,8 +44,9 @@ async function fetchStats(
   revision: string,
   name: string,
   token: string,
+  mode?: string,
 ): Promise<BinstatQueryResponse> {
-  const url = buildQueryUrl(revision, name);
+  const url = buildQueryUrl(revision, name, mode);
   const resp = await fetch(url, { headers: buildHeaders(token) });
   if (!resp.ok) {
     throw new Error(
@@ -48,7 +58,7 @@ async function fetchStats(
 
 type PlatformKey = string; // e.g. "linux-amd64"
 
-function deduplicateByPlatform(
+export function deduplicateByPlatform(
   results: BinstatInfo[],
 ): Map<PlatformKey, BinstatInfo> {
   const map = new Map<PlatformKey, BinstatInfo>();
@@ -126,7 +136,7 @@ export default async function bincompare(
     );
   }
 
-  const { base, pr, name = "whiplash", output, debug } = options;
+  const { base, pr, name = "whiplash", mode, output, debug } = options;
 
   if (!REVISION_RE.test(base)) {
     throw new Error(`Invalid base revision (expected 40-char hex SHA): ${base}`);
@@ -134,14 +144,19 @@ export default async function bincompare(
   if (!REVISION_RE.test(pr)) {
     throw new Error(`Invalid PR revision (expected 40-char hex SHA): ${pr}`);
   }
+  if (mode && !["release", "dev"].includes(mode)) {
+    throw new Error(`Invalid mode specified: ${mode}`);
+  }
 
   if (debug) {
-    console.debug(`Fetching stats for base=${base}, pr=${pr}, name=${name}`);
+    console.debug(
+      `Fetching stats for base=${base}, pr=${pr}, name=${name}, mode=${mode ?? "any"}`,
+    );
   }
 
   const [baseResponse, prResponse] = await Promise.all([
-    fetchStats(base, name, token),
-    fetchStats(pr, name, token),
+    fetchStats(base, name, token, mode),
+    fetchStats(pr, name, token, mode),
   ]);
 
   if (baseResponse.results.length === 0) {
