@@ -30,5 +30,7 @@ pnpm --dir services/client run build
 ```
 
 Existing workflow callers can continue using the [JVM Gradle workflow](.github/workflows/jvm.gradle.yml).
-The retired convention plugins and wrapper are available on the
+Its optional provenance job uses GitHub artifact attestations and requires the caller to grant
+`attestations: write` and `id-token: write`. The retired convention plugins, legacy image
+builds, Bazel workflows and wrapper are available on the
 [archive branch](https://github.com/elide-dev/build-infra/tree/archive/pre-shared-actions).

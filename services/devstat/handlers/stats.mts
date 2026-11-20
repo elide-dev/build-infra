@@ -6,10 +6,10 @@ function buildRecordKey(_record: BinstatInfo): string {
   return nanoid();
 }
 
-async function writeToAnalyticsEngine(
+function writeToAnalyticsEngine(
   record: BinstatInfo,
   env: Env,
-): Promise<void> {
+): void {
   try {
     env.BINSTAT_ANALYTICS.writeDataPoint({
       blobs: [
@@ -70,7 +70,7 @@ export default async function handler(
     BinstatInfoRecord.parse(data),
   );
   await writeToD1(payload, env);
-  ctx.waitUntil(writeToAnalyticsEngine(payload, env));
+  writeToAnalyticsEngine(payload, env);
   return new Response(null, {
     status: 202,
     statusText: "accepted",

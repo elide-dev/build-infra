@@ -1,6 +1,6 @@
 import { Command } from "commander";
 
-export default async function reportUpload(context: Command) {
+export default function reportUpload(context: Command) {
   const token = process.env["ELIDE_DEVOPS_API_TOKEN"];
   if (!token) {
     throw new Error(

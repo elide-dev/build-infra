@@ -62,14 +62,14 @@ async function calculateSha256Digest(path: string): Promise<string> {
   });
 }
 
-async function resolveBinaryOrHostInfo(
+function resolveBinaryOrHostInfo(
   path: string,
   options: BinstatOptions,
-): Promise<{
+): {
   os: OperatingSystem;
   arch: Architecture;
   libc?: LibCTarget;
-}> {
+} {
   let os: OperatingSystem;
   let arch: Architecture;
   let libc: LibCTarget | undefined;

@@ -14,7 +14,7 @@ function input(name, fallback = '') {return process.env[`INPUT_${name.toUpperCas
 function validateOrigin(raw) {
   const origin = new URL(raw);
   const privateIPv4 = net.isIP(origin.hostname) === 4 && (origin.hostname.startsWith('10.') || origin.hostname === '127.0.0.1');
-  if (origin.username || origin.password || origin.search || origin.hash || origin.pathname !== '/' || (origin.protocol !== 'https:' && !(origin.protocol === 'http:' && privateIPv4))) throw Error('Use an HTTPS or private GCP cache origin');
+  if (origin.username || origin.password || origin.search || origin.hash || origin.pathname !== '/' || (origin.protocol !== 'https:' && !(origin.protocol === 'http:' && privateIPv4))) throw new Error('Use an HTTPS or private GCP cache origin');
   return origin;
 }
 function gradleScript() {return `import org.gradle.caching.http.HttpBuildCache
@@ -39,12 +39,12 @@ async function setup() {
   const output = (k, v) => emit(process.env.GITHUB_OUTPUT, k, v);
   let state, child, init;
   try {
-    if (!process.env.ACTIONS_ID_TOKEN_REQUEST_URL || !process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN) throw Error('Job needs permissions: id-token: write');
+    if (!process.env.ACTIONS_ID_TOKEN_REQUEST_URL || !process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN) throw new Error('Job needs permissions: id-token: write');
     const origin = validateOrigin(input('endpoint'));
     const namespace = input('namespace', 'v1');
-    if (!/^[A-Za-z0-9_-]{1,64}$/.test(namespace)) throw Error('Invalid namespace');
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(namespace)) throw new Error('Invalid namespace');
     const response = await fetch(new URL('/_health', origin), {signal: AbortSignal.timeout(2000), redirect: 'error'});
-    if (!response.ok) throw Error('Cache health check failed');
+    if (!response.ok) throw new Error('Cache health check failed');
     const root = fs.mkdtempSync(path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'elide-build-cache-'));
     fs.chmodSync(root, 0o700);
     const password = crypto.randomBytes(32).toString('hex');
@@ -63,14 +63,14 @@ async function setup() {
       if (fs.existsSync(`${state}.ready`)) {ready = JSON.parse(fs.readFileSync(`${state}.ready`));break;}
       await new Promise(resolve => setTimeout(resolve, 100));
     }
-    if (!ready) throw Error('Cache relay did not become ready');
+    if (!ready) throw new Error('Cache relay did not become ready');
     const endpoint = `http://127.0.0.1:${ready.port}`;
     // Check signed identity against the gateway before changing client settings.
     const preflight = await fetch(`${endpoint}/sccache/setup-probe-not-present`, {
       headers: {Authorization: `Basic ${Buffer.from(`elide:${password}`).toString('base64')}`}, signal: AbortSignal.timeout(10000),
     });
-    if (preflight.headers.get('x-elide-relay-error')) throw Error('Cache became unreachable during identity check');
-    if (![200,404].includes(preflight.status)) throw Error('Cache rejected this job identity');
+    if (preflight.headers.get('x-elide-relay-error')) throw new Error('Cache became unreachable during identity check');
+    if (![200,404].includes(preflight.status)) throw new Error('Cache rejected this job identity');
     const values = {
       ELIDE_BUILD_CACHE_ENABLED: 'true', ELIDE_BUILD_CACHE_PASSWORD: password,
       ELIDE_GRADLE_CACHE_URL: `${endpoint}/gradle/`,

@@ -1,7 +1,7 @@
-export default async function authorized(
+export default function authorized(
   request: Request,
   token: string,
-): Promise<boolean> {
+): boolean {
   if (!token) {
     throw new Error("no auth token configured");
   }
