@@ -13,7 +13,8 @@
     "rootDir": "..",
     "types": [
       "node"
-    ]
+    ],
+    "noEmit": true
   },
   "exclude": [
     "**/*.test.mts"
