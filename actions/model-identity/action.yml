@@ -1,0 +1,20 @@
+name: Model API workload identity
+description: Exchange the GitHub job identity for a short-lived Claude or OpenAI API access token.
+inputs:
+  provider:
+    description: claude or openai
+    required: true
+  service-account:
+    description: Provider service account ID
+    required: true
+  identity-provider:
+    description: OpenAI workload identity provider ID
+  federation-rule:
+    description: Claude federation rule ID
+  organization:
+    description: Anthropic organization ID
+  workspace:
+    description: Anthropic workspace ID for multi-workspace rules
+runs:
+  using: node24
+  main: login.cjs
