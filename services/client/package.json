@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
-    "@cloudflare/workers-types": "5.20261120.1",
+    "@cloudflare/workers-types": "5.20261113.1",
     "@types/byte-size": "8.1.2",
-    "@types/node": "^24.10.1"
+    "@types/node": "24.19.2"
   },
   "dependencies": {
     "byte-size": "9.0.2",
