@@ -44,7 +44,12 @@ function createRelay({endpoint, password, namespace, getToken, timeout = 120000,
     // to caller-selected hosts. Redirects are returned, never followed.
     const headers = {'authorization': `Bearer ${token}`, 'x-elide-cache-namespace': namespace};
     for (const name of ['content-length', 'content-type', 'depth']) if (req.headers[name]) headers[name] = req.headers[name];
-    const upstream = transport.request(target, {path: req.url, method: req.method, headers}, response => {
+    const destination = new URL(target);
+    destination.pathname = req.url;
+    if (destination.origin !== target.origin || destination.pathname !== req.url) {
+      res.writeHead(400);res.end();return;
+    }
+    const upstream = transport.request(destination, {method: req.method, headers}, response => {
       if (response.statusCode >= 300 && response.statusCode < 400) {response.resume();res.writeHead(502);res.end('Cache redirects are forbidden');return;}
       const outbound = {};
       for (const name of ['content-length', 'content-type', 'etag', 'cache-control']) if (response.headers[name]) outbound[name] = response.headers[name];
