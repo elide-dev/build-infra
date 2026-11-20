@@ -1,7 +1,6 @@
 packages:
   - services/client
   - services/commons
-  - services/binstat
   - services/devstat
   - services/reports
 

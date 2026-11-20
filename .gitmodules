@@ -1,4 +1,0 @@
-[submodule "gradle"]
-	path = third_party/gradle
-	url = git@github.com:elide-dev/gradle.git
-	branch = master

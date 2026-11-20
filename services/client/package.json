@@ -1,7 +1,7 @@
 {
   "name": "@elide-build-infra/client",
   "description": "Elide devops utility CLI",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "module": "dist/client/client.mjs",
   "bin": {
@@ -13,23 +13,22 @@
   "scripts": {
     "client": "node ./dist/client/client.mjs",
     "client:bin": "./dist/elide-devops",
-    "build": "bun run type-check && bun build --minify --compile --outfile=dist/elide-devops ./client.mts",
+    "build": "tsc && bun build --target=node --format=esm --packages=bundle --outfile=dist/client/client.mjs client.mts && bun build --compile --outfile=dist/elide-devops client.mts",
     "type-check": "tsc",
+    "test": "bun test",
     "deploy": "wrangler deploy",
     "fmt": "biome format --write package.json actions ./*.mts"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.5",
-    "@cloudflare/workers-types": "4.20251111.0",
+    "@biomejs/biome": "2.6.8",
+    "@cloudflare/workers-types": "5.20261120.1",
     "@types/byte-size": "8.1.2",
-    "@types/node": "^24.10.1",
-    "wrangler": "latest"
+    "@types/node": "^24.10.1"
   },
   "dependencies": {
-    "byte-size": "9.0.1",
-    "commander": "14.0.2",
-    "glob": "11.0.3",
-    "simple-git": "3.30.0",
-    "zod": "4.1.12"
+    "byte-size": "9.0.2",
+    "commander": "15.1.0",
+    "simple-git": "4.1.0",
+    "zod": "4.6.7"
   }
 }

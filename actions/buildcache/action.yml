@@ -1,0 +1,25 @@
+name: Shared build cache
+description: Connect sccache and Gradle HTTP caching to a nearby shared cache using renewable GitHub OIDC.
+inputs:
+  endpoint:
+    description: Private HTTP cache URL reachable from this runner
+    required: true
+  namespace:
+    description: Cache format/version namespace within this repository and ref
+    default: v1
+  gradle:
+    description: Install a temporary Gradle init script, preserving the existing Gradle user home
+    default: 'true'
+  required:
+    description: Fail setup if the private cache or GitHub OIDC is unavailable
+    default: 'false'
+outputs:
+  enabled:
+    description: Whether the runner connected successfully
+  endpoint:
+    description: Job-local authenticated HTTP relay URL
+runs:
+  using: node24
+  main: setup.cjs
+  post: cleanup.cjs
+  post-if: always()

@@ -4,5 +4,6 @@
     "esModuleInterop": true,
     "noEmit": true,
     "types": ["./worker-configuration.d.ts"]
-  }
+  },
+  "exclude": ["**/*.test.mts"]
 }

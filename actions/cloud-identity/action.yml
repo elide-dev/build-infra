@@ -1,0 +1,16 @@
+name: Google Cloud workload identity
+description: Configure Application Default Credentials for subsequent steps using GitHub OIDC.
+inputs:
+  provider:
+    description: Full Google workload identity provider resource name
+    required: true
+  service-account:
+    description: Google service account email for this workload
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+      with:
+        workload_identity_provider: ${{ inputs.provider }}
+        service_account: ${{ inputs.service-account }}
