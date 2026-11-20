@@ -107,7 +107,7 @@ function renderMarkdown(
   lines.push(`| Platform | Base | PR | Delta | % |`);
   lines.push(`|---|---|---|---|---|`);
 
-  const platforms = [...prMap.keys()].sort();
+  const platforms = [...prMap.keys()].sort((left, right) => left.localeCompare(right));
   for (const platform of platforms) {
     const baseRow = baseMap.get(platform);
     const prRow = prMap.get(platform)!;

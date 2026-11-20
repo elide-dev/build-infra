@@ -6,11 +6,11 @@ function buildRecordKey(_record: ReportMetadata): string {
   return nanoid();
 }
 
-async function writeToR2(
+function writeToR2(
   key: string,
   record: ReportMetadata,
   env: Env,
-): Promise<void> {
+): void {
   try {
     // nothing yet
     console.log("would write to r2");
@@ -19,11 +19,11 @@ async function writeToR2(
   }
 }
 
-async function writeToD1(
+function writeToD1(
   key: string,
   record: ReportMetadata,
   env: Env,
-): Promise<void> {
+): void {
   try {
     console.log("would write to d1");
     // await env.BINSTAT_DB.prepare(
@@ -67,12 +67,8 @@ export default async function handler(
     JSON.stringify(payload, null, 2),
   );
 
-  ctx.waitUntil(
-    Promise.all([
-      writeToR2(recordKey, payload, env),
-      writeToD1(recordKey, payload, env),
-    ]),
-  );
+  writeToR2(recordKey, payload, env);
+  writeToD1(recordKey, payload, env);
   return new Response(null, {
     status: 202,
     statusText: "accepted",

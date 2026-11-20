@@ -9,16 +9,16 @@ function tokenSource(env, fetcher = fetch) {
     if (cached && cached.expires > Date.now() + 60000) return cached.token;
     if (!pending) pending = (async () => {
       const url = new URL(env.ACTIONS_ID_TOKEN_REQUEST_URL);
-      if (url.protocol !== 'https:' || !url.hostname.endsWith('.actions.githubusercontent.com') || url.username || url.password) throw Error('OIDC transport must use TLS');
+      if (url.protocol !== 'https:' || !url.hostname.endsWith('.actions.githubusercontent.com') || url.username || url.password) throw new Error('OIDC transport must use TLS');
       url.searchParams.set('audience', 'elide-build-cache');
       const response = await fetcher(url, {
         headers: {Authorization: `Bearer ${env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}`},
         signal: AbortSignal.timeout(10000), redirect: 'error',
       });
-      if (!response.ok) throw Error('GitHub OIDC request failed');
+      if (!response.ok) throw new Error('GitHub OIDC request failed');
       const {value} = await response.json();
       const payload = JSON.parse(Buffer.from(value.split('.')[1], 'base64url'));
-      if (!Number.isFinite(payload.exp) || payload.exp * 1000 <= Date.now() + 30000) throw Error('Expired OIDC token');
+      if (!Number.isFinite(payload.exp) || payload.exp * 1000 <= Date.now() + 30000) throw new Error('Expired OIDC token');
       cached = {token: value, expires: payload.exp * 1000};
       return value;
     })().finally(() => {pending = undefined;});
@@ -28,7 +28,7 @@ function tokenSource(env, fetcher = fetch) {
 
 function createRelay({endpoint, password, namespace, getToken, timeout = 120000, shutdown = () => {}}) {
   const target = new URL(endpoint);
-  if (!['http:', 'https:'].includes(target.protocol) || target.username || target.password || target.search || target.hash || target.pathname !== '/') throw Error('Invalid cache origin');
+  if (!['http:', 'https:'].includes(target.protocol) || target.username || target.password || target.search || target.hash || target.pathname !== '/') throw new Error('Invalid cache origin');
   const transport = target.protocol === 'https:' ? require('node:https') : http;
   const expected = Buffer.from(`Basic ${Buffer.from(`elide:${password}`).toString('base64')}`);
   return http.createServer(async (req, res) => {

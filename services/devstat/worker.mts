@@ -13,7 +13,7 @@ function versionedUrl(path: string): string {
 
 const routingTable = {
   // GET /devstat/v1/health - Check health.
-  [`GET ${versionedUrl("/health")}`]: async () => new Response("ok"),
+  [`GET ${versionedUrl("/health")}`]: () => new Response("ok"),
 
   // GET /devstat/v1/binstat - Query binary statistics by revision.
   [`GET ${versionedUrl(`/${api.binstatService.methods.binstat}`)}`]: query,
@@ -29,7 +29,7 @@ export default {
     ctx: ExecutionContext,
   ): Promise<Response> {
     const url = new URL(request.url);
-    if (!(await auth(request, env.SHARED_AUTH_TOKEN))) {
+    if (!auth(request, env.SHARED_AUTH_TOKEN)) {
       return new Response("unauthorized", {
         status: 401,
         statusText: "Unauthorized",
