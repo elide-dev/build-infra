@@ -2,7 +2,7 @@
   "name": "@elide-build-infra/commons",
   "version": "1.0.0",
   "devDependencies": {
-    "@biomejs/biome": "2.3.5"
+    "@biomejs/biome": "2.6.8"
   },
   "scripts": {
     "fmt": "biome format --write package.json ./*.mts",
@@ -19,7 +19,7 @@
     "./handler.mts": "./handler.mts"
   },
   "dependencies": {
-    "nanoid": "5.1.6",
-    "zod": "4.1.12"
+    "nanoid": "6.0.2",
+    "zod": "4.6.7"
   }
 }
