@@ -55,7 +55,7 @@ async function setup() {
     fs.writeFileSync(state, JSON.stringify({endpoint: origin.origin, password, namespace}), {mode: 0o600});
     const env = {};
     for (const key of ['PATH','Path','SystemRoot','TEMP','TMP','HOME','USERPROFILE','NODE_EXTRA_CA_CERTS','HTTPS_PROXY','HTTP_PROXY','NO_PROXY','RUNNER_TRACKING_ID','ACTIONS_ID_TOKEN_REQUEST_URL','ACTIONS_ID_TOKEN_REQUEST_TOKEN']) if (process.env[key]) env[key] = process.env[key];
-    child = spawn(process.execPath, [path.join(__dirname, 'relay.cjs'), state], {env, detached: true, stdio: 'ignore', windowsHide: true});
+    child = spawn(process.execPath, [path.join(__dirname, 'relay.cjs')], {cwd: root, env, detached: true, stdio: 'ignore', windowsHide: true});
     child.unref();
     emit(process.env.GITHUB_STATE, 'relayState', state);
     let ready;
@@ -98,5 +98,5 @@ async function setup() {
     else console.log('::notice::Shared build cache unavailable; existing cache configuration is preserved.');
   }
 }
-if (require.main === module) setup();
+if (require.main === module) setup().catch(error => { console.error(error.message); process.exitCode = 1; });
 module.exports = {emit, gradleScript, validateOrigin};

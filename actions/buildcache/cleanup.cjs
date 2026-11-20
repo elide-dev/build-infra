@@ -16,5 +16,5 @@ async function cleanup() {
   const init = process.env.STATE_gradleInit;
   if (init && /^elide-build-cache-[a-f0-9]+\.gradle$/.test(path.basename(init))) fs.rmSync(init, {force: true});
 }
-if (require.main === module) cleanup();
+if (require.main === module) cleanup().catch(error => { console.error(error.message); process.exitCode = 1; });
 module.exports = {cleanup};
