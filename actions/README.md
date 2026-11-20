@@ -5,6 +5,7 @@ Consumers pin each action to a reviewed commit in this repository. Replace
 
 | Action | Caller setup |
 | --- | --- |
+| `elide-dev/build-infra/actions/elide-cloud@COMMIT_SHA` | Grant the job `id-token: write` and use its registered environment, branch and workflow. Exports `ELIDE_CLOUD_ACCESS_TOKEN` to subsequent steps. |
 | `elide-dev/build-infra/actions/cloud-identity@COMMIT_SHA` | Check out the repo first. Grant the job `id-token: write` and pass the Google provider resource name and service account email. Subsequent steps use Application Default Credentials. Exclude `gha-creds-*.json` from artifacts and container build contexts. |
 | `elide-dev/build-infra/actions/cache-build@COMMIT_SHA` | Check out a Bun/Turbo repo with a root bun.lock, install Bun and Node, then pass a stable job name as `scope`. Caches Bun downloads and Turbo outputs. |
 | `elide-dev/build-infra/actions/renovate@COMMIT_SHA` | Run on a trusted schedule or manual dispatch on a Linux Docker runner. Targets the calling repository. Defaults to the job token. Grant contents and pull-requests write and enable Actions-created PRs. Pass a short-lived installation token as `token` when downstream PR workflows must run. |

@@ -1,0 +1,5 @@
+name: Elide Cloud workload identity
+description: Exchange the GitHub job identity for a short-lived Elide Cloud CLI credential.
+runs:
+  using: node24
+  main: login.cjs
